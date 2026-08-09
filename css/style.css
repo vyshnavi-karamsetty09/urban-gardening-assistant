@@ -1,0 +1,124 @@
+:root {
+--primary-green: #2E7D32;
+--dark-green: #1B5E20;
+--light-green: #E8F5E9;
+--background: #F8FBF7;
+--white: #FFFFFF;
+--text-dark: #263238;
+--text-gray: #607D66;
+--success: #43A047;
+--warning: #FB8C00;
+--danger: #E53935;
+--border: #E0E8E0;
+--radius: 12px;
+--shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: Arial, sans-serif;
+background: var(--background);
+color: var(--text-dark);
+line-height: 1.6;
+}
+.btn {
+display: inline-block;
+padding: 12px 22px;
+border: none;
+border-radius: var(--radius);
+font-size: 15px;
+font-weight: 600;
+cursor: pointer;
+text-decoration: none;
+transition: 0.3s ease;
+}
+.btn-primary {
+background: var(--primary-green);
+color: var(--white);
+}
+.btn-primary:hover {
+background: var(--dark-green);
+}
+.btn-secondary {
+background: var(--white);
+color: var(--primary-green);
+border: 1px solid var(--primary-green);
+}
+.card {
+background: var(--white);
+border: 1px solid var(--border);
+border-radius: var(--radius);
+padding: 20px;
+box-shadow: var(--shadow);
+}
+.card:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+}
+.container {
+width: 90%;
+max-width: 1200px;
+margin: 0 auto;
+}
+.page-title {
+font-size: 32px;
+font-weight: 700;
+color: var(--dark-green);
+margin-bottom: 10px;
+}
+.page-subtitle {
+font-size: 16px;
+color: var(--text-gray);
+margin-bottom: 25px;
+}
+.form-group {
+margin-bottom: 18px;
+}
+.form-group label {
+display: block;
+margin-bottom: 7px;
+font-weight: 600;
+}
+.form-control {
+width: 100%;
+padding: 12px 14px;
+border: 1px solid var(--border);
+border-radius: 8px;
+font-size: 15px;
+outline: none;
+background: var(--white);
+}
+.form-control:focus {
+border-color: var(--primary-green);
+}
+.navbar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar-brand {
+    color: var(--dark-green);
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
+}
+.navbar-links {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+.navbar-links a {
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+}
+.navbar-links a:hover {
+    color: var(--primary-green);
+}
