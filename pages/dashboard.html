@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Urban Gardening Assistant</title>
+  <link rel="stylesheet" href="/home/user/urban-gardening-assistant/css/style.css">
+</head>
+<body>
+
+  <!-- Shared navigation required by the team design guide -->
+  <nav class="navbar">
+    <a class="navbar-brand" href="../index.html">🌱 Urban Gardening Assistant</a>
+
+    <div class="navbar-links">
+      <a href="../index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="my-garden.html">My Garden</a>
+      <a href="ai-assistant.html">Assistant</a>
+      <a href="knowledge-hub.html">Knowledge Hub</a>
+      <a href="profile.html">Profile</a>
+    </div>
+  </nav>
+
+  <div class="container dashboard-shell">
+
+    <!-- Dashboard-only sidebar for the look shown in the reference design -->
+    <aside class="dashboard-sidebar">
+      <a class="active" href="dashboard.html">🏠 Dashboard</a>
+      <a href="#recommendations">🌱 Smart Recommendation</a>
+      <a href="garden-planner.html">🪴 Garden Planner</a>
+      <a href="my-garden.html">🌿 My Garden</a>
+      <a href="disease-detection.html">🔍 Disease Detection</a>
+      <a href="care-scheduler.html">📅 Care Scheduler</a>
+      <a href="ai-assistant.html">🤖 AI Gardening Assistant</a>
+      <a href="knowledge-hub.html">📚 Knowledge Hub</a>
+      <a href="profile.html">👤 Profile & Settings</a>
+    </aside>
+
+    <main class="dashboard-main">
+
+      <div class="dashboard-topbar">
+        <div>
+          <h1 class="page-title">Good morning, Vyshnavi! 🌱</h1>
+          <p class="page-subtitle">Here's what's happening in your garden today.</p>
+        </div>
+
+        <div class="dashboard-date">
+          <strong>9 August 2025</strong><br>
+          Saturday
+        </div>
+      </div>
+
+      <!-- Four summary cards requested for Member 3 -->
+      <section class="dashboard-summary">
+
+        <article class="card summary-card">
+          <h3>🌱 My Plants</h3>
+          <div class="summary-value">6</div>
+          <div class="summary-label">Plants in your garden</div>
+          <a href="my-garden.html" class="btn btn-secondary">View All</a>
+        </article>
+
+        <article class="card summary-card">
+          <h3>💧 Upcoming Care Tasks</h3>
+          <div class="summary-value">2</div>
+          <div class="summary-label">Due for watering</div>
+          <a href="care-scheduler.html" class="btn btn-secondary">View</a>
+        </article>
+
+        <article class="card summary-card">
+          <h3>⚠️ Garden Health</h3>
+          <div class="summary-value">1</div>
+          <div class="summary-label">Plant needs attention</div>
+          <a href="disease-detection.html" class="btn btn-secondary">Check Now</a>
+        </article>
+
+        <article class="card summary-card">
+          <h3>☀️ Weather / Environment</h3>
+          <div class="summary-value">24°C</div>
+          <div class="summary-label">Sunny · Hyderabad</div>
+          <a href="environment-setup.html" class="btn btn-secondary">View</a>
+        </article>
+
+      </section>
+
+      <!-- Upcoming care snapshot -->
+      <section class="dashboard-section">
+        <div class="section-heading">
+          <h2>Upcoming Care Tasks</h2>
+          <a href="care-scheduler.html">View all →</a>
+        </div>
+
+        <div class="card task-list">
+          <div class="task-row">
+            <div>
+              <strong>Water Basil</strong>
+              <p>Keep the soil lightly moist.</p>
+            </div>
+            <span class="status-success">Today · 07:00 AM</span>
+          </div>
+
+          <div class="task-row">
+            <div>
+              <strong>Water Aloe Vera</strong>
+              <p>Check the soil before watering.</p>
+            </div>
+            <span class="status-warning">Today · 06:00 AM</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Smart Plant Recommendation: main feature assigned to Member 3 -->
+      <section class="dashboard-section" id="recommendations">
+        <div class="section-heading">
+          <div>
+            <h2>Smart Plant Recommendation</h2>
+            <p class="page-subtitle">Plants matched to your current environment and space.</p>
+          </div>
+          <a href="garden-planner.html">Explore more →</a>
+        </div>
+
+        <div class="recommendation-grid">
+
+          <article class="card plant-card">
+            <div class="plant-image">🌿</div>
+            <div class="plant-content">
+              <h3>Mint</h3>
+              <p>Easy to grow and suitable for containers.</p>
+              <a href="my-garden.html" class="btn btn-secondary">View Details</a>
+            </div>
+          </article>
+
+          <article class="card plant-card">
+            <div class="plant-image">🍅</div>
+            <div class="plant-content">
+              <h3>Tomato</h3>
+              <p>Great choice for a sunny balcony or terrace.</p>
+              <a href="my-garden.html" class="btn btn-secondary">View Details</a>
+            </div>
+          </article>
+
+          <article class="card plant-card">
+            <div class="plant-image">🌱</div>
+            <div class="plant-content">
+              <h3>Basil</h3>
+              <p>A beginner-friendly herb that likes good sunlight.</p>
+              <a href="my-garden.html" class="btn btn-secondary">View Details</a>
+            </div>
+          </article>
+
+          <article class="card plant-card">
+            <div class="plant-image">🌵</div>
+            <div class="plant-content">
+              <h3>Aloe Vera</h3>
+              <p>Low-maintenance and suitable for bright indoor spaces.</p>
+              <a href="my-garden.html" class="btn btn-secondary">View Details</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+</body>
+</html>
