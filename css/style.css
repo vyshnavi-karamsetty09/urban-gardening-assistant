@@ -122,125 +122,240 @@ border-color: var(--primary-green);
 .navbar-links a:hover {
     color: var(--primary-green);
 }
-/* Dashboard Layout */
-.dashboard-shell {
-  display: grid;
-  grid-template-columns: 210px 1fr;
-  gap: 24px;
-  padding: 28px 0 40px;
+
+/* ==========================================================
+   Disease Detection / Disease Report (Member 5)
+   Uses only existing CSS variables, .card, .btn from above.
+   ========================================================== */
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
-.dashboard-sidebar {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 16px;
-  height: fit-content;
+.upload-card {
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-.dashboard-sidebar a {
-  display: block;
-  padding: 11px 12px;
-  margin-bottom: 5px;
-  border-radius: 8px;
-  color: var(--text-dark);
-  text-decoration: none;
-  font-size: 14px;
+.upload-empty-state {
+    padding: 30px 10px;
 }
 
-.dashboard-sidebar a:hover,
-.dashboard-sidebar a.active {
-  background: var(--light-green);
-  color: var(--dark-green);
-  font-weight: 600;
+.upload-icon {
+    font-size: 42px;
+    margin-bottom: 10px;
 }
 
-.dashboard-main {
-  min-width: 0;
+.upload-label {
+    cursor: pointer;
 }
 
-.dashboard-summary {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 28px;
+.upload-help {
+    font-size: 13px;
+    color: var(--text-gray);
+    margin-top: 10px;
 }
 
-.summary-card {
-  min-height: 185px;
-  display: flex;
-  flex-direction: column;
+.upload-error {
+    margin-top: 14px;
+    color: var(--danger);
+    font-weight: 600;
+    font-size: 14px;
 }
 
-.summary-card h3 {
-  min-height: 48px;
-  margin-bottom: 6px;
+.upload-preview-state {
+    padding: 10px 10px 20px;
 }
 
-.summary-value {
-  font-size: 30px;
-  font-weight: 700;
-  color: var(--dark-green);
-  margin: 4px 0 2px;
+.image-preview {
+    max-width: 100%;
+    max-height: 320px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    object-fit: contain;
+    background: var(--light-green);
 }
 
-.summary-label {
-  color: var(--text-gray);
-  font-size: 14px;
-  min-height: 24px;
-  margin-bottom: 8px;
+.preview-filename {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--text-gray);
+    word-break: break-all;
 }
 
-.summary-card .btn {
-  align-self: flex-start;
-  margin-top: auto;
-}
-.recommendation-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+.preview-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
 }
 
-.plant-card {
-  padding: 0;
-  overflow: hidden;
+.analyze-btn {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 320px;
 }
 
-.plant-image {
-  height: 125px;
-  background: var(--light-green);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
+.analyze-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
 }
 
-.plant-content {
-  padding: 16px;
+.tips-card ul.tips-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
 }
 
-.plant-content h3 {
-  color: var(--dark-green);
-  margin-bottom: 4px;
+.tips-list li {
+    padding: 8px 0 8px 26px;
+    position: relative;
+    color: var(--text-dark);
 }
 
-.plant-content p {
-  color: var(--text-gray);
-  font-size: 13px;
-  margin-bottom: 14px;
+.tips-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: 700;
 }
 
-@media (max-width: 1000px) {
-  .dashboard-summary,
-  .recommendation-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* Report page */
+.report-card {
+    margin-bottom: 20px;
 }
 
-@media (max-width: 650px) {
-  .dashboard-summary,
-  .recommendation-grid {
-    grid-template-columns: 1fr;
-  }
+.report-summary {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.report-image {
+    width: 260px;
+    max-width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    object-fit: cover;
+}
+
+.report-details {
+    flex: 1;
+    min-width: 220px;
+}
+
+.report-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+}
+
+.report-row:last-child {
+    border-bottom: none;
+}
+
+.report-label {
+    color: var(--text-gray);
+    font-weight: 600;
+}
+
+.report-value {
+    font-weight: 700;
+    color: var(--dark-green);
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-healthy {
+    background: var(--light-green);
+    color: var(--success);
+}
+.status-healthy .status-dot {
+    background: var(--success);
+}
+
+.status-moderate {
+    background: #FFF3E0;
+    color: var(--warning);
+}
+.status-moderate .status-dot {
+    background: var(--warning);
+}
+
+.status-severe {
+    background: #FDECEA;
+    color: var(--danger);
+}
+.status-severe .status-dot {
+    background: var(--danger);
+}
+
+.report-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 25px 0 40px;
+}
+
+/* Focus states for keyboard accessibility */
+.btn:focus-visible,
+.navbar-links a:focus-visible,
+input[type="file"]:focus + .upload-label,
+#removeImageBtn:focus-visible {
+    outline: 2px solid var(--primary-green);
+    outline-offset: 2px;
+}
+
+/* Responsive behavior for the disease module */
+@media (max-width: 768px) {
+    .report-summary {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .report-image {
+        width: 100%;
+    }
+
+    .preview-actions {
+        flex-direction: column;
+    }
+
+    .report-actions {
+        flex-direction: column;
+    }
+
+    .report-actions .btn {
+        text-align: center;
+    }
 }

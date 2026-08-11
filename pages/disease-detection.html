@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Detection | Urban Gardening Assistant</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="navbar-brand">
+            🌱 Urban Gardening Assistant
+        </a>
+
+        <div class="navbar-links">
+            <a href="../index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="my-garden.html">My Garden</a>
+            <a href="ai-assistant.html">Assistant</a>
+            <a href="knowledge-hub.html">Knowledge Hub</a>
+            <a href="profile.html">Profile</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1 class="page-title">Plant Disease Detection 🔎</h1>
+        <p class="page-subtitle">Upload a clear image of your plant or leaf to analyze it for possible diseases.</p>
+
+        <!-- Upload card -->
+        <section class="card upload-card">
+            <div class="upload-empty-state" id="uploadEmptyState">
+                <div class="upload-icon" aria-hidden="true">📤</div>
+                <h2>Upload Plant Image</h2>
+                <p class="page-subtitle" style="margin-bottom: 18px;">
+                    Upload a clear photo of the affected leaf or plant.
+                </p>
+
+                <label for="plantImageInput" class="btn btn-secondary upload-label">
+                    Choose Image
+                </label>
+                <input
+                    type="file"
+                    id="plantImageInput"
+                    name="plantImage"
+                    accept="image/*"
+                    class="visually-hidden"
+                    aria-describedby="uploadHelp"
+                >
+                <p id="uploadHelp" class="upload-help">JPG or PNG, up to 5MB</p>
+
+                <p id="uploadError" class="upload-error" role="alert" hidden></p>
+            </div>
+
+            <!-- Preview state (hidden until an image is chosen) -->
+            <div class="upload-preview-state" id="uploadPreviewState" hidden>
+                <img id="imagePreview" class="image-preview" src="" alt="Preview of selected plant image">
+                <p class="preview-filename" id="previewFilename"></p>
+                <div class="preview-actions">
+                    <label for="plantImageInput" class="btn btn-secondary">Change Image</label>
+                    <button type="button" id="removeImageBtn" class="btn btn-secondary">Remove</button>
+                </div>
+            </div>
+
+            <button type="button" id="analyzeBtn" class="btn btn-primary analyze-btn" disabled>
+                Analyze Image
+            </button>
+        </section>
+
+        <!-- Helpful tips -->
+        <section class="card tips-card">
+            <h2>Tips for the Best Results</h2>
+            <ul class="tips-list">
+                <li>Use a clear, well-lit image.</li>
+                <li>Focus on the affected leaf or area.</li>
+                <li>Avoid blurry or shadowed images.</li>
+                <li>Fill the frame with the plant so details are visible.</li>
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        // --- Disease Detection: frontend-only demo flow ---
+        // NOTE: There is no ML/backend model wired into this repository yet.
+        // Selecting "Analyze" below generates a labeled DEMO result and
+        // forwards it to disease-report.html via sessionStorage. Replace
+        // the DEMO_RESULTS logic with a real API call once a backend exists.
+
+        const fileInput = document.getElementById('plantImageInput');
+        const emptyState = document.getElementById('uploadEmptyState');
+        const previewState = document.getElementById('uploadPreviewState');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewFilename = document.getElementById('previewFilename');
+        const uploadError = document.getElementById('uploadError');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const removeImageBtn = document.getElementById('removeImageBtn');
+
+        let selectedImageDataUrl = null;
+
+        fileInput.addEventListener('change', function (event) {
+            const file = event.target.files && event.target.files[0];
+            uploadError.hidden = true;
+            uploadError.textContent = '';
+
+            if (!file) {
+                return;
+            }
+
+            if (!file.type.startsWith('image/')) {
+                uploadError.textContent = 'Please select a valid image file (JPG or PNG).';
+                uploadError.hidden = false;
+                fileInput.value = '';
+                resetToEmptyState();
+                return;
+            }
+
+            const maxSizeBytes = 5 * 1024 * 1024;
+            if (file.size > maxSizeBytes) {
+                uploadError.textContent = 'That image is larger than 5MB. Please choose a smaller file.';
+                uploadError.hidden = false;
+                fileInput.value = '';
+                resetToEmptyState();
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                selectedImageDataUrl = e.target.result;
+                imagePreview.src = selectedImageDataUrl;
+                previewFilename.textContent = file.name;
+
+                emptyState.hidden = true;
+                previewState.hidden = false;
+                analyzeBtn.disabled = false;
+            };
+            reader.onerror = function () {
+                uploadError.textContent = 'Something went wrong reading that file. Please try again.';
+                uploadError.hidden = false;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        removeImageBtn.addEventListener('click', function () {
+            fileInput.value = '';
+            selectedImageDataUrl = null;
+            resetToEmptyState();
+        });
+
+        function resetToEmptyState() {
+            previewState.hidden = true;
+            emptyState.hidden = false;
+            analyzeBtn.disabled = true;
+            imagePreview.src = '';
+            previewFilename.textContent = '';
+        }
+
+        // Clearly-labeled demo results (no real AI model wired in yet)
+        const DEMO_RESULTS = [
+            {
+                disease: 'Leaf Spot',
+                confidence: 92,
+                severity: 'Moderate',
+                treatment: 'Remove affected leaves, improve air circulation, avoid overhead watering, and monitor the plant for further spread.'
+            },
+            {
+                disease: 'Powdery Mildew',
+                confidence: 87,
+                severity: 'Mild',
+                treatment: 'Trim overcrowded growth for airflow, apply a diluted neem oil spray, and water at the base rather than on the leaves.'
+            },
+            {
+                disease: 'Healthy Leaf',
+                confidence: 96,
+                severity: 'Healthy',
+                treatment: 'No treatment needed. Keep up your current watering and light routine, and check back weekly for changes.'
+            }
+        ];
+
+        analyzeBtn.addEventListener('click', function () {
+            if (!selectedImageDataUrl) {
+                return;
+            }
+
+            analyzeBtn.disabled = true;
+            analyzeBtn.textContent = 'Analyzing...';
+
+            // Simulated processing delay for a real-feeling demo flow.
+            setTimeout(function () {
+                const demoResult = DEMO_RESULTS[Math.floor(Math.random() * DEMO_RESULTS.length)];
+                const reportData = Object.assign({ isDemo: true, image: selectedImageDataUrl }, demoResult);
+
+                try {
+                    sessionStorage.setItem('diseaseReport', JSON.stringify(reportData));
+                } catch (err) {
+                    // sessionStorage may be unavailable; report page falls back to its own demo data.
+                }
+
+                window.location.href = 'disease-report.html';
+            }, 900);
+        });
+    </script>
+</body>
+</html>

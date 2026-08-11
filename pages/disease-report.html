@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Detection Report | Urban Gardening Assistant</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="navbar-brand">
+            🌱 Urban Gardening Assistant
+        </a>
+
+        <div class="navbar-links">
+            <a href="../index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="my-garden.html">My Garden</a>
+            <a href="ai-assistant.html">Assistant</a>
+            <a href="knowledge-hub.html">Knowledge Hub</a>
+            <a href="profile.html">Profile</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1 class="page-title">Disease Detection Report 📋</h1>
+        <p class="page-subtitle" id="demoNotice">
+            Demo result — this app does not yet have a connected AI model. Values shown below are sample data.
+        </p>
+
+        <!-- Result summary card -->
+        <section class="card report-card">
+            <h2>Detected Disease</h2>
+            <div class="report-summary">
+                <img id="reportImage" class="report-image" src="" alt="Analyzed plant image">
+
+                <div class="report-details">
+                    <div class="report-row">
+                        <span class="report-label">Disease</span>
+                        <span class="report-value" id="diseaseName">Leaf Spot</span>
+                    </div>
+                    <div class="report-row">
+                        <span class="report-label">Confidence Score</span>
+                        <span class="report-value" id="confidenceValue">92%</span>
+                    </div>
+                    <div class="report-row">
+                        <span class="report-label">Severity</span>
+                        <span class="status-badge status-moderate" id="severityBadge">
+                            <span class="status-dot" aria-hidden="true"></span>
+                            <span id="severityText">Moderate</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Treatment card -->
+        <section class="card">
+            <h2>Recommended Treatment</h2>
+            <p id="treatmentText">
+                Remove affected leaves, improve air circulation, avoid overhead watering, and monitor the plant for further spread.
+            </p>
+        </section>
+
+        <!-- Prevention / next steps -->
+        <section class="card">
+            <h2>Prevention &amp; Next Steps</h2>
+            <ul class="tips-list">
+                <li>Re-check the plant in 3–5 days for signs of improvement.</li>
+                <li>Water at the soil line rather than on the leaves.</li>
+                <li>Keep affected plants spaced apart to limit spread.</li>
+                <li>If symptoms worsen, consider consulting a local nursery.</li>
+            </ul>
+        </section>
+
+        <div class="report-actions">
+            <a href="disease-detection.html" class="btn btn-primary">Analyze Another Image</a>
+            <a href="dashboard.html" class="btn btn-secondary">Back to Dashboard</a>
+        </div>
+    </main>
+
+    <script>
+        // --- Disease Report: reads the demo result saved by disease-detection.html ---
+        // If a user lands here directly (no sessionStorage data), a labeled
+        // fallback demo result is shown so the page still renders sensibly.
+
+        const FALLBACK_RESULT = {
+            disease: 'Leaf Spot',
+            confidence: 92,
+            severity: 'Moderate',
+            treatment: 'Remove affected leaves, improve air circulation, avoid overhead watering, and monitor the plant for further spread.',
+            image: null,
+            isDemo: true
+        };
+
+        function getReportData() {
+            try {
+                const stored = sessionStorage.getItem('diseaseReport');
+                if (stored) {
+                    return JSON.parse(stored);
+                }
+            } catch (err) {
+                // Fall through to the default demo result.
+            }
+            return FALLBACK_RESULT;
+        }
+
+        function severityToStatusClass(severity) {
+            const normalized = (severity || '').toLowerCase();
+            if (normalized === 'healthy' || normalized === 'mild') {
+                return 'status-healthy';
+            }
+            if (normalized === 'severe') {
+                return 'status-severe';
+            }
+            return 'status-moderate';
+        }
+
+        const data = getReportData();
+
+        const reportImage = document.getElementById('reportImage');
+        if (data.image) {
+            reportImage.src = data.image;
+        } else {
+            // No image was passed in (e.g. direct page visit) — use a neutral placeholder.
+            reportImage.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+                '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300">' +
+                '<rect width="100%" height="100%" fill="%23E8F5E9"/>' +
+                '<text x="50%" y="50%" font-family="Arial" font-size="18" fill="%23607D66" text-anchor="middle" dy=".3em">No image available</text>' +
+                '</svg>'
+            );
+        }
+        reportImage.alt = 'Analyzed image of the plant showing ' + data.disease;
+
+        document.getElementById('diseaseName').textContent = data.disease;
+        document.getElementById('confidenceValue').textContent = data.confidence + '%';
+        document.getElementById('severityText').textContent = data.severity;
+
+        const severityBadge = document.getElementById('severityBadge');
+        severityBadge.classList.add(severityToStatusClass(data.severity));
+
+        document.getElementById('treatmentText').textContent = data.treatment;
+
+        const demoNotice = document.getElementById('demoNotice');
+        if (!data.isDemo) {
+            demoNotice.hidden = true;
+        }
+    </script>
+</body>
+</html>
