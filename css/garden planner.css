@@ -1,0 +1,470 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f7f9f5;
+    color: #183b20;
+}
+
+/* HEADER */
+.topbar {
+    height: 65px;
+    background: white;
+    border-bottom: 1px solid #e4e9e1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #27732e;
+    font-weight: bold;
+}
+
+.logo-icon {
+    font-size: 26px;
+}
+
+.logo small {
+    display: block;
+    color: #819181;
+    font-size: 9px;
+    font-weight: normal;
+}
+
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search {
+    width: 220px;
+    height: 34px;
+    border: 1px solid #dfe6dc;
+    border-radius: 7px;
+    padding: 0 12px;
+    outline: none;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.profile-img {
+    width: 32px;
+    height: 32px;
+    background: #e5f0df;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* MAIN */
+.main {
+    display: flex;
+    min-height: calc(100vh - 65px);
+}
+
+
+/* SIDEBAR */
+.sidebar {
+    width: 210px;
+    background: white;
+    border-right: 1px solid #e4e9e1;
+    padding: 22px 13px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px;
+    margin-bottom: 4px;
+    border-radius: 7px;
+    font-size: 12px;
+    color: #506050;
+}
+
+.menu:hover {
+    background: #f0f6ec;
+    color: #27732e;
+}
+
+.menu.active {
+    background: #e9f3df;
+    color: #246c2c;
+    font-weight: bold;
+}
+
+.menu-icon {
+    width: 20px;
+    text-align: center;
+}
+
+
+/* CONTENT */
+.content {
+    flex: 1;
+    padding: 28px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.page-header h1 {
+    font-size: 23px;
+    margin-bottom: 5px;
+}
+
+.page-header p {
+    font-size: 12px;
+    color: #7c887c;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 9px 15px;
+    font-size: 11px;
+}
+
+.btn-green {
+    background: #287b31;
+    color: white;
+}
+
+.btn-light {
+    background: white;
+    color: #287b31;
+    border: 1px solid #dce5d9;
+}
+
+
+/* MAIN PLANNER AREA */
+.planner-layout {
+    display: grid;
+    grid-template-columns: 520px 1fr;
+    gap: 18px;
+    align-items: start;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e2e8df;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(40, 75, 40, 0.05);
+}
+
+
+/* SMALL GARDEN LAYOUT BLOCK */
+.planner-card {
+    padding: 18px;
+    width: 520px;
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.card-title h2 {
+    font-size: 15px;
+    color: #29482e;
+}
+
+.card-title span {
+    font-size: 10px;
+    color: #899589;
+}
+
+
+/* SMALL GARDEN CANVAS */
+.garden-area {
+    background: #fafcf9;
+    border: 1px solid #e0e7dc;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.garden-grid {
+    width: 100%;
+    height: 330px;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+
+    background-color: white;
+
+    background-image:
+        linear-gradient(#e6ede3 1px, transparent 1px),
+        linear-gradient(90deg, #e6ede3 1px, transparent 1px);
+
+    background-size: 20% 25%;
+
+    border: 1px solid #d8e2d5;
+    border-radius: 7px;
+    padding: 10px;
+}
+
+
+/* PLANTS IN GARDEN */
+.plant {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.plant:hover {
+    transform: scale(1.08);
+}
+
+.plant-icon {
+    width: 48px;
+    height: 48px;
+    background: #f1ead7;
+    border-radius: 50%;
+    border: 2px solid #dfd4b4;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+}
+
+.plant span {
+    margin-top: 3px;
+    font-size: 9px;
+    font-weight: bold;
+    color: #506050;
+}
+
+
+/* CONTROLS */
+.planner-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.tools {
+    display: flex;
+    gap: 5px;
+}
+
+.tool {
+    padding: 7px 10px;
+    background: white;
+    border: 1px solid #dce5d9;
+    color: #557055;
+    font-size: 10px;
+}
+
+
+/* PLANTS PANEL */
+.plants-card {
+    padding: 18px;
+}
+
+.plants-card h2 {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.plants-card > p {
+    font-size: 10px;
+    color: #899489;
+    margin-bottom: 13px;
+}
+
+
+/* PLANT ITEM */
+.plant-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px;
+    margin-bottom: 8px;
+
+    border: 1px solid #e4eae1;
+    border-radius: 8px;
+
+    background: #fff;
+}
+
+.plant-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.plant-small {
+    width: 43px;
+    height: 43px;
+    background: #eef5e9;
+    border-radius: 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+.plant-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: #29452e;
+}
+
+.plant-type {
+    font-size: 9px;
+    color: #899489;
+    margin-top: 2px;
+}
+
+
+/* SUNLIGHT + WATERING */
+.requirements {
+    display: flex;
+    gap: 7px;
+    margin-top: 5px;
+}
+
+.requirement {
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 8px;
+    white-space: nowrap;
+}
+
+.sun {
+    background: #fff5d9;
+    color: #a16b00;
+}
+
+.water {
+    background: #e4f3f7;
+    color: #23728a;
+}
+
+.drag {
+    color: #a0aaa0;
+    font-size: 15px;
+}
+
+
+/* BOTTOM INFORMATION */
+.bottom-section {
+    margin-top: 18px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.info-card {
+    background: white;
+    border: 1px solid #e2e8df;
+    border-radius: 9px;
+    padding: 15px;
+}
+
+.info-card h3 {
+    font-size: 12px;
+    color: #2d5431;
+    margin-bottom: 6px;
+}
+
+.info-card p {
+    font-size: 10px;
+    color: #7d887d;
+    line-height: 1.5;
+}
+
+.tip {
+    background: #f3f8ed;
+}
+
+
+/* RESPONSIVE */
+@media(max-width: 1100px) {
+
+    .planner-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .planner-card {
+        width: 100%;
+    }
+
+    .plants-card {
+        width: 100%;
+    }
+}
+
+@media(max-width: 700px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .content {
+        padding: 18px;
+    }
+
+    .topbar {
+        padding: 0 15px;
+    }
+
+    .search {
+        display: none;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .bottom-section {
+        grid-template-columns: 1fr;
+    }
+
+    .requirements {
+        flex-direction: column;
+        gap: 3px;
+    }
+}

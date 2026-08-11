@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garden Planner</title>
+<link rel="stylesheet" href="../css/garden planner.css">
+</head>
+
+
+<body>
+
+<!-- HEADER -->
+<header class="topbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">🌱</div>
+
+        <div>
+            Urban Gardening
+            <small>Assistant</small>
+        </div>
+
+    </div>
+
+
+    <div class="top-right">
+
+        <input
+            class="search"
+            type="text"
+            placeholder="Search anything..."
+        >
+
+        <div class="profile">
+            🔔
+            <div class="profile-img">👩</div>
+            <span>Hi, Vyshnavi⌄</span>
+        </div>
+
+    </div>
+
+</header>
+
+
+<div class="main">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="menu">
+        <span class="menu-icon">🏠</span>
+        Dashboard
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">🌱</span>
+        Smart Recommendation
+    </div>
+
+    <div class="menu active">
+        <span class="menu-icon">▦</span>
+        Garden Planner
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">🌿</span>
+        My Garden
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">🩺</span>
+        Disease Detection
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">📅</span>
+        Care Scheduler
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">💡</span>
+        AI Gardening Assistant
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">📖</span>
+        Plant Knowledge Hub
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">⚙</span>
+        Profile & Settings
+    </div>
+
+</aside>
+
+
+<!-- CONTENT -->
+<main class="content">
+
+    <div class="page-header">
+
+        <div>
+            <h1>Garden Planner</h1>
+            <p>Plan your garden layout easily.</p>
+        </div>
+
+        <div class="header-buttons">
+            <button class="btn-light">↶ Undo</button>
+            <button class="btn-light">↷ Redo</button>
+            <button class="btn-green" onclick="savePlan()">
+                Save Plan
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- PLANNER -->
+    <div class="planner-layout">
+
+
+        <!-- SMALL GARDEN LAYOUT -->
+        <section class="card planner-card">
+
+            <div class="card-title">
+
+                <h2>🌱 Garden Layout</h2>
+
+                <span>5 × 4 Grid</span>
+
+            </div>
+
+
+            <div class="garden-area">
+
+                <div class="garden-grid">
+
+                    <div class="plant">
+                        <div class="plant-icon">🍅</div>
+                        <span>Tomato</span>
+                    </div>
+
+                    <div></div>
+
+                    <div class="plant">
+                        <div class="plant-icon">🌿</div>
+                        <span>Basil</span>
+                    </div>
+
+                    <div></div>
+
+                    <div class="plant">
+                        <div class="plant-icon">🌱</div>
+                        <span>Mint</span>
+                    </div>
+
+
+                    <div class="plant">
+                        <div class="plant-icon">🌵</div>
+                        <span>Aloe Vera</span>
+                    </div>
+
+                    <div></div>
+
+                    <div class="plant">
+                        <div class="plant-icon">🌶️</div>
+                        <span>Chilli</span>
+                    </div>
+
+                    <div></div>
+
+                    <div class="plant">
+                        <div class="plant-icon">🌿</div>
+                        <span>Coriander</span>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <div class="planner-controls">
+
+                <div class="tools">
+                    <button class="tool">＋ Add Plant</button>
+                    <button class="tool">− Remove</button>
+                    <button class="tool">↻ Reset</button>
+                </div>
+
+                <span style="font-size:9px;color:#899689;">
+                    Drag & Drop
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- PLANTS -->
+        <section class="card plants-card">
+
+            <h2>Plants</h2>
+
+            <p>
+                Plant requirements for your garden
+            </p>
+
+
+            <!-- TOMATO -->
+            <div class="plant-item">
+
+                <div class="plant-info">
+
+                    <div class="plant-small">
+                        🍅
+                    </div>
+
+                    <div>
+
+                        <div class="plant-name">
+                            Tomato
+                        </div>
+
+                        <div class="plant-type">
+                            Vegetable
+                        </div>
+
+                        <div class="requirements">
+
+                            <span class="requirement sun">
+                                ☀️ 6–8 hrs
+                            </span>
+
+                            <span class="requirement water">
+                                💧 Daily
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="drag">⋮⋮</div>
+
+            </div>
+
+
+            <!-- BASIL -->
+            <div class="plant-item">
+
+                <div class="plant-info">
+
+                    <div class="plant-small">
+                        🌿
+                    </div>
+
+                    <div>
+
+                        <div class="plant-name">
+                            Basil
+                        </div>
+
+                        <div class="plant-type">
+                            Herb
+                        </div>
+
+                        <div class="requirements">
+
+                            <span class="requirement sun">
+                                ☀️ 6–8 hrs
+                            </span>
+
+                            <span class="requirement water">
+                                💧 Daily
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="drag">⋮⋮</div>
+
+            </div>
+
+
+            <!-- MINT -->
+            <div class="plant-item">
+
+                <div class="plant-info">
+
+                    <div class="plant-small">
+                        🌱
+                    </div>
+
+                    <div>
+
+                        <div class="plant-name">
+                            Mint
+                        </div>
+
+                        <div class="plant-type">
+                            Herb
+                        </div>
+
+                        <div class="requirements">
+
+                            <span class="requirement sun">
+                                ☀️ 3–6 hrs
+                            </span>
+
+                            <span class="requirement water">
+                                💧 3–4×/week
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="drag">⋮⋮</div>
+
+            </div>
+
+
+            <!-- ALOE VERA -->
+            <div class="plant-item">
+
+                <div class="plant-info">
+
+                    <div class="plant-small">
+                        🌵
+                    </div>
+
+                    <div>
+
+                        <div class="plant-name">
+                            Aloe Vera
+                        </div>
+
+                        <div class="plant-type">
+                            Medicinal
+                        </div>
+
+                        <div class="requirements">
+
+                            <span class="requirement sun">
+                                ☀️ 6+ hrs
+                            </span>
+
+                            <span class="requirement water">
+                                💧 1×/2 weeks
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="drag">⋮⋮</div>
+
+            </div>
+
+
+            <!-- CHILLI -->
+            <div class="plant-item">
+
+                <div class="plant-info">
+
+                    <div class="plant-small">
+                        🌶️
+                    </div>
+
+                    <div>
+
+                        <div class="plant-name">
+                            Chilli
+                        </div>
+
+                        <div class="plant-type">
+                            Vegetable
+                        </div>
+
+                        <div class="requirements">
+
+                            <span class="requirement sun">
+                                ☀️ 6–8 hrs
+                            </span>
+
+                            <span class="requirement water">
+                                💧 2–3×/week
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="drag">⋮⋮</div>
+
+            </div>
+
+
+            <!-- CORIANDER -->
+            <div class="plant-item">
+
+                <div class="plant-info">
+
+                    <div class="plant-small">
+                        🌿
+                    </div>
+
+                    <div>
+
+                        <div class="plant-name">
+                            Coriander
+                        </div>
+
+                        <div class="plant-type">
+                            Herb
+                        </div>
+
+                        <div class="requirements">
+
+                            <span class="requirement sun">
+                                ☀️ 4–6 hrs
+                            </span>
+
+                            <span class="requirement water">
+                                💧 3×/week
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="drag">⋮⋮</div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- INFORMATION -->
+    <div class="bottom-section">
+
+        <div class="info-card">
+
+            <h3>☀️ Sunlight Guide</h3>
+
+            <p>
+                Full sun plants need around 6–8 hours of sunlight.
+                Partial sun plants generally need around 3–6 hours.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>💧 Watering Guide</h3>
+
+            <p>
+                Water requirements depend on plant type, soil,
+                temperature and weather conditions.
+            </p>
+
+        </div>
+
+
+        <div class="info-card tip">
+
+            <h3>💡 Garden Tip</h3>
+
+            <p>
+                Place plants with similar sunlight and watering
+                requirements together.
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+</div>
+
+
+<script>
+
+function savePlan() {
+    alert("Garden plan saved successfully! 🌱");
+}
+
+</script>
+
+</body>
+</html>
