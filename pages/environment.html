@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Gardening Assistant - Environment Setup</title>
+  <link rel="stylesheet" href="./style2.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="top-header">
+    <div class="header-left">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M7 20h10M10 20c0-3 1.5-5 5-5M14 20c0-3-1.5-5-5-5M12 15V4M12 4L8 8M12 4l4 4"/>
+        </svg>
+        <span class="logo-text">Urban Gardening <span class="accent">Assistant</span></span>
+      </div>
+    </div>
+
+    <!-- Search Input -->
+    <div class="search-bar">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" placeholder="Search anything...">
+    </div>
+
+    <!-- Notification Bell -->
+    <div class="header-right">
+      <div class="notification-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        <span class="badge">2</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3-Column Dashboard Layout -->
+  <div class="dashboard-container">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <nav class="nav-menu">
+        <a href="#" class="nav-item"><span class="icon">🏠</span> Dashboard</a>
+        <a href="#" class="nav-item"><span class="icon">💡</span> Smart Recommendation</a>
+        <a href="#" class="nav-item"><span class="icon">📅</span> Garden Planner</a>
+        <a href="#" class="nav-item"><span class="icon">🪴</span> My Garden</a>
+        <a href="#" class="nav-item"><span class="icon">🩺</span> Disease Detection</a>
+        <a href="#" class="nav-item"><span class="icon">⏰</span> Care Scheduler</a>
+        <a href="#" class="nav-item"><span class="icon">🤖</span> AI Gardening Assistant</a>
+        <a href="#" class="nav-item"><span class="icon">📖</span> Plant Knowledge Hub</a>
+        <a href="#" class="nav-item active"><span class="icon">🌱</span> Environment Setup</a>
+        <a href="#" class="nav-item"><span class="icon">⚙️</span> Profile & Settings</a>
+      </nav>
+
+      <!-- Bottom Promo Card -->
+      <div class="promo-card">
+        <div class="promo-icon">🪴</div>
+        <h4>Healthy Environment, Happy Plants!</h4>
+        <p>Set up your garden environment for the best growth. 🌱</p>
+      </div>
+    </aside>
+
+    <!-- MAIN FORM SECTION -->
+    <main class="main-content">
+      <div class="content-header">
+        <div>
+          <h2>Environment Setup 🌱</h2>
+          <p class="subtitle">Tell us about your gardening environment so we can give you personalized plant recommendations and care tips.</p>
+        </div>
+
+        <!-- Progress Box -->
+        <div class="progress-box">
+          <div class="progress-circle">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+              <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              <path class="circle" stroke-dasharray="60, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            </svg>
+          </div>
+          <div>
+            <span class="progress-label">SETUP PROGRESS</span>
+            <strong class="progress-text">60% Complete</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1: Location -->
+      <section class="form-section">
+        <h3>1. Where is your garden?</h3>
+        <div class="cards-grid">
+          <label class="option-card selected">
+            <input type="radio" name="location" checked hidden>
+            <div class="check-badge">✓</div>
+            <div class="card-icon">🏡</div>
+            <h4>Balcony</h4>
+            <p>Small outdoor space</p>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="location" hidden>
+            <div class="card-icon">🪴</div>
+            <h4>Terrace</h4>
+            <p>Open terrace garden</p>
+          </label>
+
+          <label class="option-card">
+    <input type="radio" name="location" hidden>
+
+    <div class="card-icon">🏡</div>
+
+    <h4>Balcony</h4>
+
+    <p>Small outdoor space</p>
+</label>
+
+          <label class="option-card">
+            <input type="radio" name="location" hidden>
+            <div class="card-icon">🪟</div>
+            <h4>Indoor</h4>
+            <p>Inside your home</p>
+          </label>
+        </div>
+      </section>
+
+      <!-- Step 2: Sunlight -->
+      <section class="form-section">
+        <h3>2. How much sunlight does your garden receive?</h3>
+        <div class="cards-grid">
+          <label class="option-card">
+            <input type="radio" name="sunlight" hidden>
+            <div class="card-icon">☁️</div>
+            <h4>Low Light</h4>
+            <p>0 - 2 hours</p>
+          </label>
+
+          <label class="option-card selected">
+            <input type="radio" name="sunlight" checked hidden>
+            <div class="check-badge">✓</div>
+            <div class="card-icon">⛅</div>
+            <h4>Medium Light</h4>
+            <p>3 - 5 hours</p>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="sunlight" hidden>
+            <div class="card-icon">☀️</div>
+            <h4>High Light</h4>
+            <p>6+ hours</p>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="sunlight" hidden>
+            <div class="card-icon">🌞</div>
+            <h4>Full Sun</h4>
+            <p>Direct sunlight</p>
+          </label>
+        </div>
+      </section>
+
+      <!-- Step 3: Local Climate Dropdowns -->
+      <section class="form-section">
+        <h3>3. What is your local climate like?</h3>
+        <div class="dropdowns-row">
+          <div class="dropdown-group">
+            <label>Temperature Range</label>
+            <select>
+              <option selected>20°C - 30°C</option>
+              <option>10°C - 20°C</option>
+              <option>30°C - 40°C</option>
+            </select>
+          </div>
+
+          <div class="dropdown-group">
+            <label>Climate Type</label>
+            <select>
+              <option selected>Tropical</option>
+              <option>Subtropical</option>
+              <option>Arid / Dry</option>
+              <option>Temperate</option>
+            </select>
+          </div>
+
+          <div class="dropdown-group">
+            <label>Humidity Level</label>
+            <select>
+              <option selected>Medium</option>
+              <option>Low</option>
+              <option>High</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 4: Growing Medium -->
+      <section class="form-section">
+        <h3>4. What is your growing medium?</h3>
+        <div class="cards-grid">
+          <label class="option-card selected">
+            <input type="radio" name="medium" checked hidden>
+            <div class="check-badge">✓</div>
+            <div class="card-icon">🍫</div>
+            <h4>Soil</h4>
+            <p>Traditional garden soil</p>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="medium" hidden>
+            <div class="card-icon">🪴</div>
+            <h4>Potting Mix</h4>
+            <p>Potting soil mix</p>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="medium" hidden>
+            <div class="card-icon">📦</div>
+            <h4>Cocopeat</h4>
+            <p>Coconut coir based</p>
+          </label>
+
+          <label class="option-card">
+            <input type="radio" name="medium" hidden>
+            <div class="card-icon">💧</div>
+            <h4>Hydroponics</h4>
+            <p>Soilless water culture</p>
+          </label>
+        </div>
+      </section>
+
+      <!-- Submit Button -->
+      <div class="form-footer">
+        <button class="btn-primary">Save & Continue &rarr;</button>
+      </div>
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="right-panel">
+      <!-- Tips Widget -->
+      <div class="widget-card">
+        <h3 class="widget-title">🌱 Environment Tips</h3>
+        <ul class="tips-list">
+          <li>
+            <span class="icon-sun">☀️</span>
+            <p>Most vegetable plants need 6+ hours of direct sunlight daily.</p>
+          </li>
+          <li>
+            <span class="icon-water">💧</span>
+            <p>Good drainage is essential to prevent root rot.</p>
+          </li>
+          <li>
+            <span class="icon-temp">🌡️</span>
+            <p>Ideal temperature for most plants is 18°C - 30°C.</p>
+          </li>
+          <li>
+            <span class="icon-wind">💨</span>
+            <p>Ensure proper air circulation for healthy growth.</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Checklist Widget -->
+      <div class="widget-card">
+        <h3 class="widget-title">✓ Setup Checklist</h3>
+        <ul class="checklist">
+          <li class="checked"><span class="check-icon">✓</span> Garden Location</li>
+          <li class="checked"><span class="check-icon">✓</span> Sunlight Exposure</li>
+          <li class="checked"><span class="check-icon">✓</span> Climate Information</li>
+          <li class="checked"><span class="check-icon">✓</span> Growing Medium</li>
+          <li class="unchecked"><span class="check-icon">○</span> Water Source</li>
+          <li class="unchecked"><span class="check-icon">○</span> Additional Notes</li>
+        </ul>
+        <div class="checklist-progress">
+          <div class="progress-text">4 of 6 completed</div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plant Photo Card -->
+      <div class="photo-card">
+        <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80" alt="Potted Houseplants">
+      </div>
+    </aside>
+
+  </div>
+<script src="/selected.js"></script>
+</body>
+</html>
