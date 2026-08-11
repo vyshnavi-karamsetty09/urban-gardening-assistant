@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Garden - Urban Gardening Assistant</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../css/my garden.css">
+</head>
+<body>
+<!-- ================= HEADER ================= -->
+<header class="topbar">
+    <div class="logo">
+        <div class="logo-icon">🌱</div>
+        <div>
+            Urban Gardening
+            <small>Assistant</small>
+        </div>
+    </div>
+    <div class="top-right">
+        <input
+            class="search"
+            type="text"
+            placeholder="Search anything..."
+        >
+        <div class="profile">
+            🔔
+            <div class="profile-img">
+                👩
+            </div>
+
+            <span>
+                Hi, Vyshnavi⌄
+            </span>
+        </div>
+
+    </div>
+
+</header>
+
+
+<div class="main">
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="menu">
+        <span class="menu-icon">🏠</span>
+        Dashboard
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">🌱</span>
+        Smart Recommendation
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">▦</span>
+        Garden Planner
+    </div>
+
+    <div class="menu active">
+        <span class="menu-icon">🌿</span>
+        My Garden
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">🩺</span>
+        Disease Detection
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">📅</span>
+        Care Scheduler
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">💡</span>
+        AI Gardening Assistant
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">📖</span>
+        Plant Knowledge Hub
+    </div>
+
+    <div class="menu">
+        <span class="menu-icon">⚙</span>
+        Profile & Settings
+    </div>
+
+</aside>
+
+
+<!-- ================= CONTENT ================= -->
+
+<main class="content">
+
+    <!-- PAGE HEADER -->
+
+    <div class="page-header">
+
+        <div>
+            <h1>My Garden</h1>
+
+            <p>
+                Manage and monitor all your plants in one place.
+            </p>
+        </div>
+
+        <div class="header-buttons">
+
+            <button class="btn-light">
+                🔍 Filter
+            </button>
+
+            <button
+                class="btn-green"
+                onclick="addPlant()"
+            >
+                + Add Plant
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SUMMARY ================= -->
+
+    <div class="summary">
+
+        <div class="summary-card">
+
+            <div class="summary-icon green-icon">
+                🌱
+            </div>
+
+            <div>
+                <div class="summary-number">
+                    6
+                </div>
+
+                <div class="summary-text">
+                    Total Plants
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon green-icon">
+                💚
+            </div>
+
+            <div>
+                <div class="summary-number">
+                    5
+                </div>
+
+                <div class="summary-text">
+                    Healthy Plants
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon blue-icon">
+                💧
+            </div>
+
+            <div>
+                <div class="summary-number">
+                    2
+                </div>
+
+                <div class="summary-text">
+                    Need Watering
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-icon yellow-icon">
+                ☀️
+            </div>
+
+            <div>
+                <div class="summary-number">
+                    6–8h
+                </div>
+
+                <div class="summary-text">
+                    Average Sunlight
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= GARDEN HEADING ================= -->
+
+    <div class="garden-heading">
+
+        <h2>My Plants</h2>
+
+        <span>
+            6 plants in your garden
+        </span>
+
+    </div>
+
+
+    <!-- ================= PLANTS ================= -->
+
+    <div class="plant-grid">
+
+
+        <!-- TOMATO -->
+
+        <div class="plant-card">
+
+            <div class="plant-image">
+
+                <span>🍅</span>
+
+                <div class="status warning">
+                    ⚠ Water in 1 day
+                </div>
+
+            </div>
+
+
+            <div class="plant-details">
+
+                <div class="plant-name">
+                    Tomato
+                </div>
+
+                <div class="plant-type">
+                    Vegetable
+                </div>
+
+
+                <div class="requirements">
+
+                    <div class="requirement sun">
+                        ☀️ 6–8 hrs
+                    </div>
+
+                    <div class="requirement water">
+                        💧 Daily
+                    </div>
+
+                </div>
+
+
+                <div class="plant-bottom">
+
+                    <span class="last-watered">
+                        Watered: Yesterday
+                    </span>
+
+                    <button
+                        class="view-btn"
+                        onclick="viewPlant('Tomato')"
+                    >
+                        View →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BASIL -->
+
+        <div class="plant-card">
+
+            <div class="plant-image">
+
+                <span>🌿</span>
+
+                <div class="status healthy">
+                    ✓ Healthy
+                </div>
+
+            </div>
+
+
+            <div class="plant-details">
+
+                <div class="plant-name">
+                    Basil
+                </div>
+
+                <div class="plant-type">
+                    Herb
+                </div>
+
+
+                <div class="requirements">
+
+                    <div class="requirement sun">
+                        ☀️ 6–8 hrs
+                    </div>
+
+                    <div class="requirement water">
+                        💧 Daily
+                    </div>
+
+                </div>
+
+
+                <div class="plant-bottom">
+
+                    <span class="last-watered">
+                        Watered: Today
+                    </span>
+
+                    <button
+                        class="view-btn"
+                        onclick="viewPlant('Basil')"
+                    >
+                        View →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ALOE VERA -->
+
+        <div class="plant-card">
+
+            <div class="plant-image">
+
+                <span>🌵</span>
+
+                <div class="status healthy">
+                    ✓ Healthy
+                </div>
+
+            </div>
+
+
+            <div class="plant-details">
+
+                <div class="plant-name">
+                    Aloe Vera
+                </div>
+
+                <div class="plant-type">
+                    Medicinal
+                </div>
+
+
+                <div class="requirements">
+
+                    <div class="requirement sun">
+                        ☀️ 6+ hrs
+                    </div>
+
+                    <div class="requirement water">
+                        💧 2 weeks
+                    </div>
+
+                </div>
+
+
+                <div class="plant-bottom">
+
+                    <span class="last-watered">
+                        Watered: 5 days ago
+                    </span>
+
+                    <button
+                        class="view-btn"
+                        onclick="viewPlant('Aloe Vera')"
+                    >
+                        View →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MINT -->
+
+        <div class="plant-card">
+
+            <div class="plant-image">
+
+                <span>🌱</span>
+
+                <div class="status healthy">
+                    ✓ Healthy
+                </div>
+
+            </div>
+
+
+            <div class="plant-details">
+
+                <div class="plant-name">
+                    Mint
+                </div>
+
+                <div class="plant-type">
+                    Herb
+                </div>
+
+
+                <div class="requirements">
+
+                    <div class="requirement sun">
+                        ☀️ 3–6 hrs
+                    </div>
+
+                    <div class="requirement water">
+                        💧 3–4×/week
+                    </div>
+
+                </div>
+
+
+                <div class="plant-bottom">
+
+                    <span class="last-watered">
+                        Watered: Yesterday
+                    </span>
+
+                    <button
+                        class="view-btn"
+                        onclick="viewPlant('Mint')"
+                    >
+                        View →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHILLI -->
+
+        <div class="plant-card">
+
+            <div class="plant-image">
+
+                <span>🌶️</span>
+
+                <div class="status warning">
+                    ⚠ Needs Water
+                </div>
+
+            </div>
+
+
+            <div class="plant-details">
+
+                <div class="plant-name">
+                    Chilli
+                </div>
+
+                <div class="plant-type">
+                    Vegetable
+                </div>
+
+
+                <div class="requirements">
+
+                    <div class="requirement sun">
+                        ☀️ 6–8 hrs
+                    </div>
+
+                    <div class="requirement water">
+                        💧 2–3×/week
+                    </div>
+
+                </div>
+
+
+                <div class="plant-bottom">
+
+                    <span class="last-watered">
+                        Watered: 3 days ago
+                    </span>
+
+                    <button
+                        class="view-btn"
+                        onclick="viewPlant('Chilli')"
+                    >
+                        View →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CORIANDER -->
+
+        <div class="plant-card">
+
+            <div class="plant-image">
+
+                <span>🌿</span>
+
+                <div class="status healthy">
+                    ✓ Healthy
+                </div>
+
+            </div>
+
+
+            <div class="plant-details">
+
+                <div class="plant-name">
+                    Coriander
+                </div>
+
+                <div class="plant-type">
+                    Herb
+                </div>
+
+
+                <div class="requirements">
+
+                    <div class="requirement sun">
+                        ☀️ 4–6 hrs
+                    </div>
+
+                    <div class="requirement water">
+                        💧 3×/week
+                    </div>
+
+                </div>
+
+
+                <div class="plant-bottom">
+
+                    <span class="last-watered">
+                        Watered: Today
+                    </span>
+
+                    <button
+                        class="view-btn"
+                        onclick="viewPlant('Coriander')"
+                    >
+                        View →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================= BOTTOM INFORMATION ================= -->
+
+    <div class="bottom-section">
+
+        <div class="info-card">
+
+            <h3>
+                💧 Today's Care
+            </h3>
+
+            <p>
+                Tomato and Chilli need watering soon.
+                Check the soil before watering and avoid
+                overwatering your plants.
+            </p>
+
+        </div>
+
+
+        <div class="info-card tip">
+
+            <h3>
+                💡 Garden Tip
+            </h3>
+
+            <p>
+                Keep plants that have similar sunlight
+                and watering requirements together for
+                easier garden maintenance.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</main>
+
+</div>
+
+
+<script>
+
+function addPlant() {
+
+    alert(
+        "Add Plant feature is ready to connect with your plant database."
+    );
+
+}
+
+
+function viewPlant(plantName) {
+
+    alert(
+        "Opening details for " + plantName
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Urban Gardening Assistant</title>
+    <link rel="stylesheet" href="/home/user/urban-gardening-assistant/css/d.css">
+</head>
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">🌱</div>
+            <div>
+                <h2>Urban Gardening</h2>
+                <span>Assistant</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Dashboard navigation">
+
+            <a href="d.html" class="nav-item active">
+                <span class="nav-icon">▦</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">🌿</span>
+                <span>Smart Recommendation</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">▣</span>
+                <span>Garden Planner</span>
+            </a>
+
+            <a href="my-garden.html" class="nav-item">
+                <span class="nav-icon">🪴</span>
+                <span>My Garden</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">⌕</span>
+                <span>Disease Detection</span>
+            </a>
+
+            <!-- NEW: Disease Report -->
+            <a href="#" class="nav-item">
+                <span class="nav-icon">📋</span>
+                <span>Disease Report</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">♧</span>
+                <span>Care Scheduler</span>
+            </a>
+
+            <a href="#" class="nav-item">
+                <span class="nav-icon">🤖</span>
+                <span>AI Assistant</span>
+            </a>
+
+            <a href="knowledge-hub.html" class="nav-item">
+                <span class="nav-icon">▤</span>
+                <span>Knowledge Hub</span>
+            </a>
+
+            <!-- NEW: Environment Setup -->
+            <a href="#" class="nav-item">
+                <span class="nav-icon">🌱</span>
+                <span>Environment Setup</span>
+            </a>
+
+            <a href="profile.html" class="nav-item">
+                <span class="nav-icon">⚙</span>
+                <span>Profile & Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-tip">
+            <div class="tip-plant">🌱</div>
+            <div>
+                <h3>Healthy Environment, Happy Plants!</h3>
+                <p>Set up your garden environment for better recommendations.</p>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+    <main class="main-content">
+
+        <div class="mobile-header">
+            <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+            <div class="mobile-brand">🌱 Urban Gardening</div>
+        </div>
+
+        <header class="topbar">
+
+            <div class="welcome">
+                <p class="eyebrow">YOUR GARDEN DASHBOARD</p>
+                <h1>Good Morning, <span id="userName">Gardener</span>! 🌿</h1>
+                <p>Let's make today a great day for your garden.</p>
+            </div>
+
+            <div class="top-actions">
+
+                <div class="weather-mini">
+                    <span class="weather-symbol">☀️</span>
+                    <div>
+                        <strong>28°C</strong>
+                        <small>Hyderabad</small>
+                    </div>
+                </div>
+
+                <button class="icon-button notification-button" id="notificationBtn">
+                    ♧
+                    <span class="notification-count">3</span>
+                </button>
+
+                <button class="profile-button" id="profileBtn">
+                    <span class="profile-avatar">👤</span>
+                    <span>Gardener</span>
+                    <span>⌄</span>
+                </button>
+
+            </div>
+        </header>
+
+
+        <!-- ================= STATS ================= -->
+        <section class="stats-grid">
+
+            <article class="stat-card">
+                <div class="stat-icon green">🌿</div>
+                <div>
+                    <span>Total Plants</span>
+                    <strong>12</strong>
+                    <small>In your garden</small>
+                </div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon green">✓</div>
+                <div>
+                    <span>Tasks Today</span>
+                    <strong id="taskCount">3</strong>
+                    <small>Pending tasks</small>
+                </div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon blue">💧</div>
+                <div>
+                    <span>Needs Water</span>
+                    <strong>4</strong>
+                    <small>Plants</small>
+                </div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon green">♡</div>
+                <div>
+                    <span>Plant Health</span>
+                    <strong>Good</strong>
+                    <small>Overall status</small>
+                </div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon green">🌱</div>
+                <div>
+                    <span>New Suggestions</span>
+                    <strong>5</strong>
+                    <small>For your garden</small>
+                </div>
+            </article>
+
+        </section>
+
+
+        <!-- ================= DASHBOARD GRID ================= -->
+        <section class="dashboard-grid">
+
+            <!-- Recommended Plant -->
+            <article class="dashboard-card recommendation-card">
+
+                <div class="card-header">
+                    <h2>Recommended For You</h2>
+                    <a href="#">View All</a>
+                </div>
+
+                <div class="recommendation-content">
+
+                    <div class="plant-image">
+                        <span>🌿</span>
+                    </div>
+
+                    <div class="recommendation-info">
+
+                        <div class="title-row">
+                            <h3>Snake Plant</h3>
+                            <span class="tag">Easy to Grow</span>
+                        </div>
+
+                        <p>Perfect for your environment. Low-light tolerant and easy to maintain.</p>
+
+                        <ul class="plant-details">
+                            <li>☀️ <span>Low Light</span></li>
+                            <li>💧 <span>Water 1–2 times/week</span></li>
+                            <li>🌡️ <span>20–30°C</span></li>
+                        </ul>
+
+                        <button class="btn btn-primary" id="addPlantBtn">
+                            Add to My Garden
+                        </button>
+
+                    </div>
+                </div>
+
+            </article>
+
+
+            <!-- Today's Tasks -->
+            <article class="dashboard-card tasks-card">
+
+                <div class="card-header">
+                    <h2>Today's Tasks</h2>
+                    <a href="#">View All</a>
+                </div>
+
+                <div class="task-list">
+
+                    <label class="task-item">
+                        <span class="task-icon blue">💧</span>
+                        <span class="task-text">
+                            <strong>Water 4 plants</strong>
+                            <small>Monstera, Tulsi, Aloe Vera & Mint</small>
+                        </span>
+                        <span class="task-time">9:00 AM</span>
+                        <input type="checkbox" class="task-checkbox">
+                    </label>
+
+                    <label class="task-item">
+                        <span class="task-icon brown">🌱</span>
+                        <span class="task-text">
+                            <strong>Fertilize your plants</strong>
+                            <small>Use organic fertilizer for better growth</small>
+                        </span>
+                        <span class="task-time">11:00 AM</span>
+                        <input type="checkbox" class="task-checkbox">
+                    </label>
+
+                    <label class="task-item">
+                        <span class="task-icon red">✂</span>
+                        <span class="task-text">
+                            <strong>Prune dead leaves</strong>
+                            <small>Remove yellow leaves from Peace Lily</small>
+                        </span>
+                        <span class="task-time">4:00 PM</span>
+                        <input type="checkbox" class="task-checkbox">
+                    </label>
+
+                </div>
+
+            </article>
+
+
+            <!-- Weather -->
+            <article class="dashboard-card weather-card">
+
+                <div class="card-header">
+                    <h2>Weather & Environment</h2>
+                    <a href="#">View Details</a>
+                </div>
+
+                <div class="weather-panel">
+                    <div class="weather-main">
+                        <span>⛅</span>
+                        <div>
+                            <strong>28°C</strong>
+                            <small>Partly Cloudy</small>
+                        </div>
+                    </div>
+
+                    <div class="weather-details">
+                        <p><span>Humidity</span><strong>65%</strong></p>
+                        <p><span>Sunlight</span><strong>Good</strong></p>
+                        <p><span>Wind</span><strong>12 km/h</strong></p>
+                    </div>
+                </div>
+
+                <div class="weather-tip">
+                    <div>
+                        <strong>Great weather for your plants!</strong>
+                        <p>Perfect time for watering in the morning.</p>
+                    </div>
+                    <span>🪴</span>
+                </div>
+
+            </article>
+
+
+            <!-- NEW: Environment Setup -->
+            <article class="dashboard-card environment-card">
+
+                <div class="card-header">
+                    <h2>Environment Setup 🌱</h2>
+                    <a href="#">Edit Setup</a>
+                </div>
+
+                <div class="environment-progress">
+
+                    <div class="progress-circle">
+                        <span>60%</span>
+                    </div>
+
+                    <div class="environment-summary">
+                        <strong>Setup in Progress</strong>
+                        <p>Complete your environment details for better plant recommendations.</p>
+                    </div>
+
+                </div>
+
+                <div class="environment-details">
+
+                    <div>
+                        <span>📍</span>
+                        <p><small>Garden</small><strong>Balcony</strong></p>
+                    </div>
+
+                    <div>
+                        <span>☀️</span>
+                        <p><small>Sunlight</small><strong>Medium Light</strong></p>
+                    </div>
+
+                    <div>
+                        <span>🌡️</span>
+                        <p><small>Climate</small><strong>Tropical</strong></p>
+                    </div>
+
+                    <div>
+                        <span>💧</span>
+                        <p><small>Humidity</small><strong>Medium</strong></p>
+                    </div>
+
+                </div>
+
+                <button class="btn btn-outline-green" id="environmentBtn">
+                    Complete Environment Setup →
+                </button>
+
+            </article>
+
+
+            <!-- NEW: Disease Report -->
+            <article class="dashboard-card disease-report-card">
+
+                <div class="card-header">
+                    <h2>Disease Report 🩺</h2>
+                    <a href="#">View Report</a>
+                </div>
+
+                <div class="disease-summary">
+
+                    <div class="disease-status">
+                        <div class="status-circle">
+                            <span>✓</span>
+                        </div>
+                        <div>
+                            <strong>Plant Health: Good</strong>
+                            <p>Last scan: Today, 9:20 AM</p>
+                        </div>
+                    </div>
+
+                    <div class="disease-stat-row">
+                        <div>
+                            <span class="dot healthy-dot"></span>
+                            <p><strong>4</strong> Healthy</p>
+                        </div>
+
+                        <div>
+                            <span class="dot attention-dot"></span>
+                            <p><strong>1</strong> Needs Attention</p>
+                        </div>
+
+                        <div>
+                            <span class="dot disease-dot"></span>
+                            <p><strong>0</strong> Disease Detected</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="disease-alert">
+                    <span>🔎</span>
+                    <div>
+                        <strong>Peace Lily needs attention</strong>
+                        <p>Check leaves for yellowing or signs of stress.</p>
+                    </div>
+                </div>
+
+                <button class="btn btn-outline-green" id="reportBtn">
+                    Open Disease Report →
+                </button>
+
+            </article>
+
+
+            <!-- My Garden -->
+            <article class="dashboard-card garden-card">
+
+                <div class="card-header">
+                    <h2>My Garden Overview</h2>
+                    <a href="my-garden.html">View Garden →</a>
+                </div>
+
+                <div class="garden-plants">
+
+                    <div class="garden-plant">
+                        <div class="plant-thumb">🌵</div>
+                        <strong>Aloe Vera</strong>
+                        <span class="health healthy">● Healthy</span>
+                    </div>
+
+                    <div class="garden-plant">
+                        <div class="plant-thumb">🌿</div>
+                        <strong>Tulsi</strong>
+                        <span class="health healthy">● Healthy</span>
+                    </div>
+
+                    <div class="garden-plant">
+                        <div class="plant-thumb">🍃</div>
+                        <strong>Monstera</strong>
+                        <span class="health needs-water">● Needs Water</span>
+                    </div>
+
+                    <div class="garden-plant">
+                        <div class="plant-thumb">🌱</div>
+                        <strong>Mint</strong>
+                        <span class="health healthy">● Healthy</span>
+                    </div>
+
+                    <div class="garden-plant">
+                        <div class="plant-thumb">🪴</div>
+                        <strong>Peace Lily</strong>
+                        <span class="health needs-care">● Needs Care</span>
+                    </div>
+
+                    <a href="#" class="add-plant-card" id="addPlantCard">
+                        <span>+</span>
+                        <strong>Add Plant</strong>
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- Notifications -->
+            <article class="dashboard-card notifications-card">
+
+                <div class="card-header">
+                    <h2>Recent Notifications</h2>
+                    <a href="#">View All</a>
+                </div>
+
+                <div class="notification-list">
+
+                    <div class="notification-item">
+                        <span class="notification-icon purple">♧</span>
+                        <div>
+                            <strong>Task Reminder</strong>
+                            <p>Water 4 plants</p>
+                        </div>
+                        <small>30 min ago</small>
+                    </div>
+
+                    <div class="notification-item">
+                        <span class="notification-icon green">🌿</span>
+                        <div>
+                            <strong>New Recommendation</strong>
+                            <p>5 new plants recommended</p>
+                        </div>
+                        <small>2 hours ago</small>
+                    </div>
+
+                    <div class="notification-item">
+                        <span class="notification-icon orange">✦</span>
+                        <div>
+                            <strong>Plant Care Tip</strong>
+                            <p>Tips to keep your plants healthy</p>
+                        </div>
+                        <small>1 day ago</small>
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- ================= BOTTOM CTA ================= -->
+        <section class="dashboard-cta">
+
+            <div class="cta-plants">🌿 🪴 💧</div>
+
+            <div class="cta-text">
+                <h2>Track, care and grow your plants all in one place.</h2>
+                <p>Your garden assistant is always ready to help.</p>
+            </div>
+
+            <div class="cta-features">
+                <span><b>🌱</b> Smart<br><small>Recommendations</small></span>
+                <span><b>◷</b> Timely<br><small>Reminders</small></span>
+                <span><b>♡</b> Plant<br><small>Health</small></span>
+                <span><b>☘</b> Expert<br><small>Guidance</small></span>
+            </div>
+
+        </section>
+
+    </main>
+</div>
+
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="/home/user/urban-gardening-assistant/js/d.js"></script>
+
+</body>
+</html>

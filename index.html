@@ -3,37 +3,426 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Urban Gardening Assistant</title>
-    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/land.css">
 </head>
+
+
 <body>
-    <nav class="navbar">
-    <a href="index.html" class="navbar-brand">
-        🌱 Urban Gardening Assistant
-    </a>
 
-    <div class="navbar-links">
-        <a href="index.html">Home</a>
-        <a href="pages/dashboard.html">Dashboard</a>
-        <a href="pages/my-garden.html">My Garden</a>
-        <a href="pages/knowledge-hub.html">Knowledge</a>
-        <a href="pages/profile.html">Profile</a>
-    </div>
-    </nav>
-    <main class="container">
-        <h1 class="page-title">Urban Gardening Assistant 🌱</h1>
-        <p class="page-subtitle">Grow smarter. Garden better.</p>
+    <!-- ================= NAVBAR ================= -->
 
-        <div class="card">
-            <h2>Smart Plant Recommendation</h2>
-            <p>Find plants that are suitable for your environment.</p>
+    <header class="navbar">
 
-            <br>
+        <div class="logo">
+            <span class="logo-icon">🌱</span>
 
-            <a href="#" class="btn btn-primary">Get Started</a>
-            <a href="#" class="btn btn-secondary">Learn More</a>
+            <div>
+                <h2>Urban Gardening</h2>
+                <span>Assistant</span>
+            </div>
         </div>
+
+        <nav>
+            <a href="#home" class="active">Home</a>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-buttons">
+            <a href="pages/login.html" class="btn btn-outline">Login</a>
+            <a href="pages/signup.html" class="btn btn-primary">Get Started</a>
+        </div>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main>
+
+        <section class="hero" id="home">
+
+            <div class="hero-content">
+
+                <span class="small-title">
+                    🌿 SMARTER URBAN GARDENING
+                </span>
+
+                <h1>
+                    Grow Smarter.<br>
+                    <span>Garden Better.</span>
+                </h1>
+
+                <p>
+                    Your smart companion for healthy plants,
+                    beautiful gardens, and a greener tomorrow.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="pages/signup.html" class="btn btn-primary hero-btn">
+                        Get Started →
+                    </a>
+
+                    <a href="#features" class="btn btn-outline hero-btn">
+                        Explore Features
+                    </a>
+
+                </div>
+
+                <div class="hero-note">
+                    🌱 Personalized gardening made simple for everyone.
+                </div>
+
+            </div>
+
+
+            <div class="hero-image">
+
+                <div class="plant-decoration">🌿</div>
+
+                <div class="plant-card large-plant">
+                    🪴
+                </div>
+
+                <div class="plant-card small-plant">
+                    🌱
+                </div>
+
+                <div class="plant-card tiny-plant">
+                    🌵
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FEATURES ================= -->
+
+        <section class="features-section" id="features">
+
+            <div class="section-heading">
+
+                <span>OUR FEATURES</span>
+
+                <h2>
+                    Everything You Need to
+                    <span>Grow</span>
+                </h2>
+
+                <p>
+                    Simple tools to help you plan, grow and maintain
+                    your urban garden.
+                </p>
+
+            </div>
+
+
+            <div class="features-grid">
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🌱</div>
+
+                    <h3>Smart Plant Recommendation</h3>
+
+                    <p>
+                        Get plant suggestions based on your
+                        environment, space and preferences.
+                    </p>
+
+                    <a href="#">Explore →</a>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">📅</div>
+
+                    <h3>Garden Planner</h3>
+
+                    <p>
+                        Plan your garden and organize your plants
+                        according to your available space.
+                    </p>
+
+                    <a href="#">Explore →</a>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🔍</div>
+
+                    <h3>Disease Detection</h3>
+
+                    <p>
+                        Detect common plant diseases and learn
+                        what steps you can take to care for them.
+                    </p>
+
+                    <a href="#">Explore →</a>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🔔</div>
+
+                    <h3>Care Scheduler</h3>
+
+                    <p>
+                        Keep track of watering, fertilizing and
+                        other important plant-care tasks.
+                    </p>
+
+                    <a href="#">Explore →</a>
+
+                </div>
+
+
+                <div class="feature-card">
+
+                    <div class="feature-icon">🤖</div>
+
+                    <h3>AI Gardening Assistant</h3>
+
+                    <p>
+                        Ask gardening questions and receive
+                        helpful AI-powered guidance.
+                    </p>
+
+                    <a href="#">Explore →</a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <section class="how-section" id="how-it-works">
+
+            <div class="section-heading">
+
+                <span>HOW IT WORKS</span>
+
+                <h2>
+                    Start Growing in
+                    <span>3 Simple Steps</span>
+                </h2>
+
+            </div>
+
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">01</div>
+
+                    <div class="step-icon">
+                        📋
+                    </div>
+
+                    <h3>Tell Us About Your Environment</h3>
+
+                    <p>
+                        Share information about your space,
+                        sunlight, climate and preferences.
+                    </p>
+
+                </div>
+
+
+                <div class="step-line"></div>
+
+
+                <div class="step">
+
+                    <div class="step-number">02</div>
+
+                    <div class="step-icon">
+                        🌱
+                    </div>
+
+                    <h3>Get Personalized Recommendations</h3>
+
+                    <p>
+                        Receive plant suggestions and useful
+                        care tips based on your environment.
+                    </p>
+
+                </div>
+
+
+                <div class="step-line"></div>
+
+
+                <div class="step">
+
+                    <div class="step-number">03</div>
+
+                    <div class="step-icon">
+                        🪴
+                    </div>
+
+                    <h3>Grow & Track Your Garden</h3>
+
+                    <p>
+                        Track your plants and stay updated with
+                        important care reminders.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ABOUT ================= -->
+
+        <section class="about-section" id="about">
+
+            <div class="about-content">
+
+                <span>WHY URBAN GARDENING ASSISTANT?</span>
+
+                <h2>
+                    Gardening Made
+                    <span>Simple.</span>
+                </h2>
+
+                <p>
+                    Growing plants in an urban environment can be
+                    challenging. Limited space, changing weather
+                    and lack of gardening knowledge can make it
+                    difficult to maintain healthy plants.
+                </p>
+
+                <p>
+                    Our Urban Gardening Assistant brings useful
+                    gardening tools together in one place.
+                </p>
+
+                <div class="benefits">
+
+                    <div>
+                        ✓ Personalized recommendations
+                    </div>
+
+                    <div>
+                        ✓ Easy garden planning
+                    </div>
+
+                    <div>
+                        ✓ Plant health assistance
+                    </div>
+
+                    <div>
+                        ✓ Smart care reminders
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CTA ================= -->
+
+        <section class="cta-section">
+
+            <div>
+
+                <h2>
+                    Ready to Start Your
+                    <span>Greener Journey?</span> 🌱
+                </h2>
+
+                <p>
+                    Start planning your urban garden today.
+                </p>
+
+            </div>
+
+            <a href="pages/signup.html" class="btn btn-primary">
+                Start Your Garden →
+            </a>
+
+        </section>
+
     </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer id="contact">
+
+        <div class="footer-logo">
+
+            <div class="logo">
+                <span class="logo-icon">🌱</span>
+
+                <div>
+                    <h2>Urban Gardening</h2>
+                    <span>Assistant</span>
+                </div>
+            </div>
+
+            <p>
+                Grow smarter. Garden better.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <h3>Quick Links</h3>
+
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <h3>Project</h3>
+
+            <a href="#about">About</a>
+            <a href="pages/login.html">Login</a>
+            <a href="pages/signup.html">Get Started</a>
+
+        </div>
+
+    </footer>
+
+
+    <div class="copyright">
+
+        <p>
+            © 2026 Urban Gardening Assistant.
+            Built for smarter and greener urban living.
+        </p>
+
+    </div>
+
 
 </body>
 </html>

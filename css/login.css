@@ -1,0 +1,646 @@
+/* ==========================================================================
+   URBAN GARDENING ASSISTANT - PURE CSS STYLESHEET
+   ========================================================================== */
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,600&display=swap');
+
+/* CSS Custom Properties (Variables) */
+:root {
+  /* Color Palette */
+  --bg-dark-overlay: rgba(10, 22, 10, 0.3);
+  --bg-card: rgba(248, 246, 240, 0.94);
+  --bg-input: #ffffff;
+  --bg-input-border: #dcd8cc;
+  --bg-input-focus: #2d5a27;
+
+  --color-primary: #2d5a27;
+  --color-primary-hover: #22451e;
+  --color-primary-active: #193416;
+  --color-accent-light: #e3ebd9;
+  
+  --color-text-dark: #1f2a1c;
+  --color-text-muted: #576353;
+  --color-text-light: #ffffff;
+  --color-text-light-subtle: #e2f0dc;
+
+  --color-error: #d93838;
+  --color-success: #2d5a27;
+
+  /* Typography */
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+
+  /* Shadows */
+  --shadow-card: 0 20px 40px rgba(15, 28, 14, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-button: 0 4px 14px rgba(45, 90, 39, 0.35);
+  --shadow-input-focus: 0 0 0 3px rgba(45, 90, 39, 0.15);
+
+  /* Border Radius */
+  --radius-card: 28px;
+  --radius-input: 12px;
+  --radius-button: 12px;
+  --radius-icon: 50%;
+
+  /* Transitions */
+  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Universal Rules */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: var(--font-main);
+  background-color: #0f1c0e;
+  color: var(--color-text-dark);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Main Container Layout */
+.app-container {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(var(--bg-dark-overlay), var(--bg-dark-overlay)), 
+                    url('/assets/garden.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 24px;
+}
+
+.signup-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1140px;
+  min-height: 680px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  background: transparent;
+  backdrop-filter: blur(2px);
+}
+
+/* ==========================================================================
+   LEFT PANEL - BRANDING & FEATURES
+   ========================================================================== */
+.brand-panel {
+  flex: 1;
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--color-text-light);
+  background: linear-gradient(135deg, rgba(14, 28, 14, 0.72) 0%, rgba(22, 44, 20, 0.65) 100%);
+  position: relative;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+  border-top-left-radius: var(--radius-card);
+  border-bottom-left-radius: var(--radius-card);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.18), 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.brand-header {
+  margin-bottom: 32px;
+}
+
+.brand-logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.brand-logo-icon {
+  width: 48px;
+  height: 48px;
+  color: #72ba5e;
+  flex-shrink: 0;
+}
+
+.brand-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.brand-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.divider-line {
+  height: 2px;
+  width: 48px;
+  background-color: #619a51;
+  border-radius: 2px;
+}
+
+.tagline {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #f0f7ec;
+  line-height: 1.4;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Features List */
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 32px 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.feature-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-icon);
+  background-color: #e3ebd9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #23471e;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon-box svg {
+  width: 24px;
+  height: 24px;
+}
+
+.feature-content h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.feature-content p {
+  font-size: 0.925rem;
+  color: #dbead7;
+  line-height: 1.4;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Footer Quote */
+.brand-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+}
+
+.quote-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #d6e8d1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quote-flourish {
+  width: 32px;
+  height: 24px;
+  color: #88c776;
+}
+
+/* ==========================================================================
+   RIGHT PANEL - CARD & FORM
+   ========================================================================== */
+.form-panel {
+  flex: 1.15;
+  background-color: var(--bg-card);
+  padding: 52px 56px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top-right-radius: var(--radius-card);
+  border-bottom-right-radius: var(--radius-card);
+}
+
+/* Top-Right Decorative Vine */
+.card-leaf-decoration {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  width: 90px;
+  height: 90px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* Form View Switcher Tabs */
+.form-tabs {
+  display: flex;
+  background-color: rgba(215, 210, 195, 0.55);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.tab-btn.active {
+  background-color: #ffffff;
+  color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.tab-btn:hover:not(.active) {
+  color: var(--color-primary-hover);
+}
+
+.form-view-container {
+  display: block;
+}
+
+.form-view-container.hidden {
+  display: none;
+}
+
+/* Form Header */
+.form-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.form-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.leaf-divider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 8px 0;
+  color: #538048;
+}
+
+.leaf-divider-wrapper .line {
+  width: 24px;
+  height: 1px;
+  background-color: #b5c4b1;
+}
+
+.form-subtitle {
+  font-size: 0.925rem;
+  color: var(--color-text-muted);
+}
+
+/* Form Grid & Elements */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #273625;
+}
+
+/* Input Fields with Icons */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  width: 18px;
+  height: 18px;
+  color: #72826e;
+  pointer-events: none;
+  transition: var(--transition-smooth);
+}
+
+.input-control {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: var(--color-text-dark);
+  background-color: var(--bg-input);
+  border: 1px solid var(--bg-input-border);
+  border-radius: var(--radius-input);
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.input-control::placeholder {
+  color: #a2ac9e;
+}
+
+.input-control:focus {
+  border-color: var(--bg-input-focus);
+  box-shadow: var(--shadow-input-focus);
+}
+
+.input-control:focus + .input-icon,
+.input-wrapper:focus-within .input-icon {
+  color: var(--color-primary);
+}
+
+/* Password Eye Toggle Button */
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  padding: 4px;
+  color: #72826e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+
+.password-toggle-btn:hover {
+  color: var(--color-primary);
+  background-color: #f0ede3;
+}
+
+.password-toggle-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Form Options Row (Remember Me + Forgot Password) */
+.form-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.link-forgot {
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.link-forgot:hover {
+  text-decoration: underline;
+  color: var(--color-primary-hover);
+}
+
+/* Custom Checkboxes */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-custom {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #9bb097;
+  border-radius: 4px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--transition-smooth);
+}
+
+.checkbox-custom svg {
+  width: 12px;
+  height: 12px;
+  color: #ffffff;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: var(--transition-smooth);
+}
+
+/* Hidden native checkbox input */
+.checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-input:checked + .checkbox-custom {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkbox-input:checked + .checkbox-custom svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.checkbox-input:focus-visible + .checkbox-custom {
+  box-shadow: var(--shadow-input-focus);
+}
+
+/* Primary Submit Button */
+.btn-submit {
+  width: 100%;
+  padding: 14px 24px;
+  margin-top: 8px;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: var(--shadow-button);
+  transition: var(--transition-smooth);
+}
+
+.btn-submit:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(45, 90, 39, 0.42);
+}
+
+.btn-submit:active {
+  background-color: var(--color-primary-active);
+  transform: translateY(0);
+}
+
+.btn-submit svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Footer Link */
+.form-footer {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.link-login {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: var(--transition-smooth);
+}
+
+.link-login:hover {
+  text-decoration: underline;
+  color: var(--color-primary-hover);
+}
+
+/* Modal / Toast Notification */
+.toast-notification {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #23471e;
+  color: #ffffff;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.toast-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+@media (max-width: 960px) {
+  .signup-wrapper {
+    flex-direction: column;
+    max-width: 600px;
+  }
+
+  .brand-panel {
+    border-radius: var(--radius-card) var(--radius-card) 0 0;
+    padding: 36px 32px;
+  }
+
+  .form-panel {
+    border-radius: 0 0 var(--radius-card) var(--radius-card);
+    padding: 36px 32px;
+  }
+
+  .brand-title {
+    font-size: 1.85rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .app-container {
+    padding: 12px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .brand-panel {
+    padding: 28px 20px;
+  }
+
+  .form-panel {
+    padding: 28px 20px;
+  }
+
+  .form-title {
+    font-size: 1.65rem;
+  }
+
+  .card-leaf-decoration {
+    width: 60px;
+    height: 60px;
+  }
+}

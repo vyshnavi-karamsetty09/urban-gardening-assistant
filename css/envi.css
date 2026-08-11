@@ -1,0 +1,483 @@
+/* Custom CSS Stylesheet for Environment Setup Dashboard */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background-color: #f7faf7;
+  color: #1f2d20;
+}
+
+/* Header Navbar */
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e8eee7;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1b421d;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  color: #2b6c30;
+}
+
+.logo-text .accent {
+  color: #2b6c30;
+  font-weight: 400;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f2f6f1;
+  padding: 8px 18px;
+  border-radius: 20px;
+  width: 600px;
+  border: 1px solid #e1e9e0;
+}
+
+.search-icon {
+  width: 16px;
+  height: 16px;
+  color: #8fa08e;
+}
+
+.search-bar input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+.notification-badge {
+  position: relative;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.notification-badge svg {
+  width: 22px;
+  height: 22px;
+  color: #435442;
+}
+
+.notification-badge .badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: #225227;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3-Column Layout */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 240px 1fr 300px;
+  gap: 24px;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Left Sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav-menu {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 12px;
+  border: 1px solid #e8eee7;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #4b5a4a;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  background-color: #f4f8f3;
+  color: #1b421d;
+}
+
+.nav-item.active {
+  background-color: #eaf3e9;
+  color: #1b421d;
+  font-weight: 700;
+}
+
+.promo-card {
+  background: linear-gradient(180deg, #f0f7ef 0%, #e3f0e1 100%);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #d8e6d6;
+}
+
+.promo-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.promo-card h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1b421d;
+  margin-bottom: 4px;
+}
+
+.promo-card p {
+  font-size: 0.75rem;
+  color: #556754;
+}
+
+/* Main Form Section */
+.main-content {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 32px;
+  border: 1px solid #e8eee7;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.content-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid #f0f4ef;
+  padding-bottom: 16px;
+}
+
+.content-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #162a17;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: #697a68;
+  margin-top: 4px;
+  max-width: 480px;
+  line-height: 1.4;
+}
+
+.progress-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #f7faf7;
+  padding: 8px 14px;
+  border-radius: 16px;
+  border: 1px solid #e5ede4;
+}
+
+.progress-circle {
+  width: 36px;
+  height: 36px;
+}
+
+.circular-chart {
+  transform: rotate(-90deg);
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #e2ede0;
+  stroke-width: 3.5;
+}
+
+.circle {
+  fill: none;
+  stroke: #255d29;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+
+.progress-label {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  color: #8fa08e;
+  letter-spacing: 0.5px;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  color: #162a17;
+}
+
+.form-section h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #162a17;
+  margin-bottom: 12px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.option-card {
+  position: relative;
+  border: 1.5px solid #e1e9e0;
+  border-radius: 16px;
+  padding: 18px 10px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #ffffff;
+  transition: all 0.2s ease;
+}
+
+.option-card:hover {
+  border-color: #225227;
+}
+
+.option-card.selected {
+  border-color: #225227;
+  background-color: #f4f9f3;
+  box-shadow: 0 2px 10px rgba(34, 82, 39, 0.08);
+}
+
+.check-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  background-color: #225227;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.card-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.option-card h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #162a17;
+}
+
+.option-card p {
+  font-size: 0.68rem;
+  color: #728371;
+  margin-top: 2px;
+}
+
+/* Climate Dropdowns */
+.dropdowns-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.dropdown-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #435442;
+  margin-bottom: 6px;
+}
+
+.dropdown-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #dbe5da;
+  background-color: #f9fbf9;
+  font-size: 0.8rem;
+  color: #162a17;
+  outline: none;
+}
+
+.form-footer {
+  padding-top: 8px;
+  border-top: 1px solid #f0f4ef;
+}
+
+.btn-primary {
+  background-color: #1f4d22;
+  color: #ffffff;
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #163a19;
+}
+
+/* Right Panel */
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.widget-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid #e8eee7;
+}
+
+.widget-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #162a17;
+  margin-bottom: 14px;
+}
+
+.tips-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.tips-list p {
+  font-size: 0.75rem;
+  color: #556754;
+  line-height: 1.4;
+}
+
+.checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.checklist li {
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checklist li.checked {
+  color: #1b421d;
+  font-weight: 600;
+}
+
+.checklist li.checked .check-icon {
+  color: #225227;
+  font-weight: 700;
+}
+
+.checklist li.unchecked {
+  color: #a0b09f;
+}
+
+.checklist-progress {
+  border-top: 1px solid #f0f4ef;
+  padding-top: 12px;
+}
+
+.checklist-progress .progress-text {
+  font-size: 0.7rem;
+  color: #728371;
+  margin-bottom: 6px;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 6px;
+  background-color: #eef4ed;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  width: 66%;
+  height: 100%;
+  background-color: #225227;
+  border-radius: 10px;
+}
+
+.photo-card {
+  border-radius: 16px;
+  overflow: hidden;
+  height: 140px;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive Rules */
+@media (max-width: 1024px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
