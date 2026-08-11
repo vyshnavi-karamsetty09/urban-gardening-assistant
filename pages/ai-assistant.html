@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PlantCare - AI Assistant</title>
+
+    <link rel="stylesheet" href="ai-assistant.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo-section">
+            <div class="logo-icon">🌿</div>
+            <div class="logo-text">PlantCare</div>
+        </div>
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-link">
+                Dashboard
+            </a>
+
+            <a href="#" class="nav-link active">
+                AI Assistant
+            </a>
+
+        </nav>
+
+        <div class="profile">
+            <div class="profile-circle">👤</div>
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-container">
+
+
+        <!-- ================= LEFT SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+
+                <div class="assistant-icon">
+                    🌱
+                </div>
+
+                <div>
+                    <h2>AI Assistant</h2>
+                    <p>Your plant companion</p>
+                </div>
+
+            </div>
+
+
+            <!-- Categories -->
+
+            <div class="category-section">
+
+                <p class="section-title">
+                    EXPLORE
+                </p>
+
+                <button class="category-btn"
+                    onclick="selectCategory('plant care')">
+
+                    <span>🌱</span>
+
+                    <div>
+                        <strong>Plant Care</strong>
+                        <small>General guidance</small>
+                    </div>
+
+                </button>
+
+
+                <button class="category-btn"
+                    onclick="selectCategory('watering')">
+
+                    <span>💧</span>
+
+                    <div>
+                        <strong>Watering</strong>
+                        <small>Watering tips</small>
+                    </div>
+
+                </button>
+
+
+                <button class="category-btn"
+                    onclick="selectCategory('sunlight')">
+
+                    <span>☀️</span>
+
+                    <div>
+                        <strong>Sunlight</strong>
+                        <small>Light requirements</small>
+                    </div>
+
+                </button>
+
+
+                <button class="category-btn"
+                    onclick="selectCategory('pests')">
+
+                    <span>🐛</span>
+
+                    <div>
+                        <strong>Pests</strong>
+                        <small>Identify problems</small>
+                    </div>
+
+                </button>
+
+
+                <button class="category-btn"
+                    onclick="selectCategory('soil')">
+
+                    <span>🪴</span>
+
+                    <div>
+                        <strong>Soil</strong>
+                        <small>Soil & nutrients</small>
+                    </div>
+
+                </button>
+
+
+                <button class="category-btn"
+                    onclick="selectCategory('diseases')">
+
+                    <span>🌿</span>
+
+                    <div>
+                        <strong>Diseases</strong>
+                        <small>Plant health</small>
+                    </div>
+
+                </button>
+
+            </div>
+
+
+            <!-- Recent Chats -->
+
+            <div class="recent-section">
+
+                <p class="section-title">
+                    RECENT CHATS
+                </p>
+
+                <div class="recent-chat">
+                    🍅 Tomato leaves turning yellow
+                </div>
+
+                <div class="recent-chat">
+                    🌱 Best soil for plants
+                </div>
+
+                <div class="recent-chat">
+                    💧 Watering schedule
+                </div>
+
+            </div>
+
+
+            <!-- Sidebar Bottom -->
+
+            <div class="sidebar-bottom">
+
+                <div class="plant-tip">
+
+                    <span>💡</span>
+
+                    <div>
+                        <strong>Plant Tip</strong>
+
+                        <p>
+                            Check soil moisture before watering.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================= CHAT AREA ================= -->
+
+        <section class="chat-section">
+
+
+            <!-- Chat Header -->
+
+            <div class="chat-header">
+
+                <div>
+
+                    <h1>
+                        🌱 Hello! I'm your Plant Care AI
+                    </h1>
+
+                    <p>
+                        Ask me anything about growing and caring for your plants.
+                    </p>
+
+                </div>
+
+                <div class="online-status">
+
+                    <span></span>
+
+                    Online
+
+                </div>
+
+            </div>
+
+
+            <!-- Conversation -->
+
+            <div
+                class="conversation"
+                id="conversation"
+            >
+
+                <!-- Welcome -->
+
+                <div class="welcome-message">
+
+                    <div class="welcome-icon">
+                        🌿
+                    </div>
+
+                    <h2>
+                        How can I help you today?
+                    </h2>
+
+                    <p>
+                        I can help you with watering,
+                        sunlight, soil, pests, diseases,
+                        fertilizers and general plant care.
+                    </p>
+
+                </div>
+
+
+                <!-- Suggested Questions -->
+
+                <div class="suggestions">
+
+                    <button
+                        onclick="askQuestion('Why are my plant leaves turning yellow?')">
+
+                        🍂
+
+                        <span>
+                            Why are my leaves turning yellow?
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        onclick="askQuestion('How often should I water my plants?')">
+
+                        💧
+
+                        <span>
+                            How often should I water my plants?
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        onclick="askQuestion('How much sunlight does my plant need?')">
+
+                        ☀️
+
+                        <span>
+                            How much sunlight does my plant need?
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        onclick="askQuestion('What soil is best for plants?')">
+
+                        🪴
+
+                        <span>
+                            What soil is best for plants?
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= INPUT ================= -->
+
+            <div class="input-area">
+
+                <div class="input-wrapper">
+
+                    <button
+                        class="attachment-btn"
+                        title="Coming soon">
+
+                        📎
+
+                    </button>
+
+                    <input
+                        type="text"
+                        id="userInput"
+                        placeholder="Ask about your plant..."
+                        autocomplete="off"
+                    >
+
+                    <button
+                        class="send-btn"
+                        onclick="sendMessage()">
+
+                        ➤
+
+                    </button>
+
+                </div>
+
+                <p class="input-note">
+                    🌱 Ask specific questions for more helpful plant-care advice.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script src="ai-assistant.js"></script>
+
+</body>
+
+</html>
+```
