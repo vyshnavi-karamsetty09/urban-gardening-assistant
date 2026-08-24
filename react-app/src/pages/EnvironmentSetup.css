@@ -1,0 +1,570 @@
+/* =========================================
+   ENVIRONMENT SETUP
+   ========================================= */
+
+.environment-page {
+  width: 100%;
+  max-width: 1200px;
+
+  min-height: 100vh;
+
+  margin: 0 auto;
+
+  padding: 30px 40px 55px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+
+  background: #f5f8f3;
+}
+
+
+/* =========================================
+   PAGE HEADING
+   ========================================= */
+
+.page-heading {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  padding: 0 5px 8px;
+}
+
+.heading-left {
+  min-width: 0;
+}
+
+.page-eyebrow {
+  margin: 0 0 7px;
+
+  color: #6e8974;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1.3px;
+}
+
+.heading-left h1 {
+  margin: 0;
+
+  color: #173c21;
+
+  font-size: 32px;
+  line-height: 1.15;
+
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+}
+
+.heading-left h1 span {
+  font-size: 29px;
+  margin-left: 5px;
+}
+
+.heading-description {
+  max-width: 720px;
+
+  margin: 8px 0 0;
+
+  color: #66756a;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* =========================================
+   PROGRESS
+   ========================================= */
+
+.progress-box {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-shrink: 0;
+
+  padding: 10px 16px;
+
+  background: #ffffff;
+
+  border: 1px solid #e1e9e0;
+
+  border-radius: 14px;
+}
+
+.progress-circle {
+  width: 38px;
+  height: 38px;
+}
+
+.circular-chart {
+  width: 38px;
+  height: 38px;
+
+  transform: rotate(-90deg);
+}
+
+.circle-bg {
+  fill: none;
+
+  stroke: #e2ede0;
+
+  stroke-width: 3.5;
+}
+
+.circle {
+  fill: none;
+
+  stroke: #255d29;
+
+  stroke-width: 3.5;
+
+  stroke-linecap: round;
+
+  transition: stroke-dasharray 0.3s ease;
+}
+
+.progress-label {
+  display: block;
+
+  color: #8fa08e;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+}
+
+.progress-text {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #162a17;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   FORM SECTION
+   ========================================= */
+
+.form-section {
+  width: 100%;
+
+  padding: 22px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5ece4;
+
+  border-radius: 17px;
+
+  box-shadow:
+    0 2px 8px rgba(31, 45, 32, 0.025);
+}
+
+.form-section h3 {
+  margin: 0 0 15px;
+
+  color: #162a17;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   SECTION HEADING
+   ========================================= */
+
+.section-heading {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+.section-number {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 11px;
+
+  background: #edf7ef;
+
+  font-size: 20px;
+}
+
+.section-heading h3 {
+  margin: 0 0 3px;
+}
+
+.section-heading p {
+  margin: 0;
+
+  color: #829087;
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   PINCODE
+   ========================================= */
+
+.pincode-group {
+  max-width: 620px;
+}
+
+.pincode-group label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #435442;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.pincode-group input {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border: 1px solid #dbe5da;
+
+  border-radius: 11px;
+
+  outline: none;
+
+  background: #f9fbf9;
+
+  color: #162a17;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.pincode-group input::placeholder {
+  color: #a0aaa2;
+}
+
+.pincode-group input:focus {
+  background: #ffffff;
+
+  border-color: #397646;
+
+  box-shadow:
+    0 0 0 3px rgba(34, 82, 39, 0.08);
+}
+
+.input-hint {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #8a968d;
+
+  font-size: 10px;
+}
+
+
+/* =========================================
+   OPTION CARDS
+   ========================================= */
+
+.cards-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.option-card {
+  position: relative;
+
+  min-height: 112px;
+
+  padding: 18px 10px;
+
+  border: 1.5px solid #e1e9e0;
+
+  border-radius: 15px;
+
+  background: #ffffff;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.option-card:hover {
+  border-color: #5c8b63;
+
+  background: #fafdf9;
+
+  transform: translateY(-1px);
+}
+
+.option-card.selected {
+  border-color: #225227;
+
+  background: #f4f9f3;
+
+  box-shadow:
+    0 3px 12px rgba(34, 82, 39, 0.08);
+}
+
+.check-badge {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  width: 19px;
+  height: 19px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #225227;
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.card-icon {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 25px;
+}
+
+.option-title {
+  display: block;
+
+  color: #162a17;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.option-description {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #728371;
+
+  font-size: 10px;
+}
+
+
+/* =========================================
+   DROPDOWNS
+   ========================================= */
+
+.dropdowns-row {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.dropdown-group label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #435442;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.dropdown-group select {
+  width: 100%;
+
+  padding: 11px 14px;
+
+  border: 1px solid #dbe5da;
+
+  border-radius: 11px;
+
+  background: #f9fbf9;
+
+  color: #162a17;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  outline: none;
+
+  cursor: pointer;
+}
+
+.dropdown-group select:focus {
+  border-color: #225227;
+
+  box-shadow:
+    0 0 0 3px rgba(34, 82, 39, 0.08);
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.form-footer {
+  display: flex;
+
+  justify-content: flex-end;
+
+  padding-top: 2px;
+}
+
+.btn-primary {
+  padding: 12px 28px;
+
+  border: none;
+
+  border-radius: 11px;
+
+  background: #1f4d22;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #163a19;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 14px rgba(31, 77, 34, 0.15);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1000px) {
+  .environment-page {
+    padding: 24px 28px 45px;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 750px) {
+  .environment-page {
+    padding: 20px 18px 40px;
+  }
+
+  .page-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .progress-box {
+    width: fit-content;
+  }
+
+  .dropdowns-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .heading-left h1 {
+    font-size: 27px;
+  }
+
+  .form-section {
+    padding: 17px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .form-footer {
+    justify-content: stretch;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+}

@@ -1,0 +1,145 @@
+/* =========================================
+   GLOBAL STYLES
+   Urban Gardening Assistant
+   ========================================= */
+
+:root {
+  --primary: #2e6b3a;
+  --primary-dark: #255b30;
+  --primary-light: #edf6ee;
+
+  --background: #f5f8f3;
+  --surface: #ffffff;
+
+  --text-primary: #19351f;
+  --text-secondary: #5c7a63;
+  --text-muted: #849187;
+
+  --border: #e3ebe4;
+
+  --success: #2e7d3f;
+  --success-bg: #edf7ef;
+
+  --warning: #b86b29;
+  --warning-bg: #fff4e7;
+
+  --shadow: 0 8px 24px rgba(35, 69, 42, 0.07);
+
+  font-family:
+    "Plus Jakarta Sans",
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  color: var(--text-primary);
+  background: var(--background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* RESET */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* ROOT */
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+
+/* TYPOGRAPHY */
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-primary);
+}
+
+
+/* TEXT SELECTION */
+
+::selection {
+  background: #dcefdc;
+  color: #19351f;
+}
+
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd8cd;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #aebfb1;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+}

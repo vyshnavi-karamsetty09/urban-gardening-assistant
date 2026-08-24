@@ -1,0 +1,176 @@
+/* =========================================
+   SHARED TOPBAR
+   ========================================= */
+
+.topbar {
+  width: 100%;
+  height: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 0 40px;
+
+  background: #f5f8f3;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   ACTIONS
+   ========================================= */
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+/* =========================================
+   NOTIFICATION
+   ========================================= */
+
+.notification-btn {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #e2e9e1;
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  color: #3d6243;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.notification-btn:hover {
+  background: #f4f8f3;
+  border-color: #cfdccf;
+
+  transform: translateY(-1px);
+}
+
+.notification-icon {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.notification-count {
+  position: absolute;
+
+  top: -3px;
+  right: -2px;
+
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #f5f8f3;
+  border-radius: 50%;
+
+  background: #2d8735;
+
+  color: #ffffff;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   PROFILE
+   ========================================= */
+
+.profile-btn {
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 0 13px 0 6px;
+
+  border: 1px solid #e2e9e1;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #243527;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.profile-btn:hover {
+  background: #f8fbf7;
+  border-color: #cfdccf;
+}
+
+.profile-avatar {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eef4eb;
+
+  font-size: 14px;
+}
+
+.profile-name {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.profile-arrow {
+  color: #637164;
+  font-size: 14px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 768px) {
+  .topbar {
+    height: 60px;
+
+    padding: 0 18px;
+  }
+}
+
+@media (max-width: 450px) {
+  .profile-name {
+    display: none;
+  }
+}

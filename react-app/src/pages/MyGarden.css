@@ -1,0 +1,782 @@
+/* =========================================
+   MY GARDEN
+   ========================================= */
+
+.my-garden-page {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 28px 40px 48px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.garden-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-bottom: 28px;
+}
+
+.garden-eyebrow {
+  margin: 0 0 6px;
+
+  color: #7b8b7e;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+.garden-header h1 {
+  margin: 0;
+
+  color: #19351f;
+
+  font-size: 30px;
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+}
+
+.garden-subtitle {
+  margin: 8px 0 0;
+
+  color: #718174;
+
+  font-size: 14px;
+}
+
+.add-garden-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border: none;
+  border-radius: 10px;
+
+  padding: 11px 17px;
+
+  background: #2e6b3a;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 12px rgba(46, 107, 58, 0.15);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.add-garden-btn span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.add-garden-btn:hover {
+  background: #255b30;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 16px rgba(46, 107, 58, 0.2);
+}
+
+
+/* =========================================
+   SUMMARY
+   ========================================= */
+
+.garden-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  min-height: 96px;
+
+  padding: 17px;
+
+  background: #ffffff;
+
+  border: 1px solid #e3ebe4;
+
+  border-radius: 14px;
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 22px rgba(35, 69, 42, 0.07);
+}
+
+.summary-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: #edf6ee;
+
+  font-size: 20px;
+}
+
+.summary-icon.healthy-icon {
+  background: #e9f5eb;
+
+  color: #2e7d3f;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.summary-icon.warning-icon {
+  background: #fff3e7;
+}
+
+.summary-number {
+  color: #19351f;
+
+  font-size: 24px;
+  line-height: 1;
+
+  font-weight: 700;
+
+  margin-bottom: 5px;
+}
+
+.summary-label {
+  color: #718174;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   GARDEN SECTION
+   ========================================= */
+
+.garden-section {
+  width: 100%;
+
+  background: #ffffff;
+
+  border: 1px solid #e3ebe4;
+
+  border-radius: 16px;
+
+  padding: 22px;
+
+  box-sizing: border-box;
+}
+
+.garden-heading {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+.garden-heading h2 {
+  margin: 0;
+
+  color: #19351f;
+
+  font-size: 18px;
+
+  line-height: 1.3;
+
+  font-weight: 650;
+}
+
+.garden-heading > div > p:last-child {
+  margin: 5px 0 0;
+
+  color: #89958c;
+
+  font-size: 11px;
+}
+
+
+/* =========================================
+   FILTERS
+   ========================================= */
+
+.filter-controls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.filter-btn {
+  padding: 8px 12px;
+
+  border: 1px solid #dce7dd;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #657669;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: #f5faf5;
+
+  border-color: #cbdccc;
+
+  color: #2e6b3a;
+}
+
+.filter-btn.active {
+  background: #eaf5eb;
+
+  border-color: #c9dfcc;
+
+  color: #2e6b3a;
+}
+
+
+/* =========================================
+   ADD PLANT PANEL
+   ========================================= */
+
+.add-plant-panel {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 20px;
+
+  padding: 16px;
+
+  background: #f7faf7;
+
+  border: 1px solid #dfe9df;
+
+  border-radius: 12px;
+}
+
+.add-plant-panel-content {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.add-plant-panel-content label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #435442;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+.add-plant-panel-content input {
+  width: 100%;
+
+  padding: 10px 12px;
+
+  border: 1px solid #d6e2d6;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #263b2a;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  outline: none;
+
+  box-sizing: border-box;
+}
+
+.add-plant-panel-content input:focus {
+  border-color: #5c8b63;
+
+  box-shadow:
+    0 0 0 3px rgba(46, 107, 58, 0.07);
+}
+
+.add-plant-actions {
+  display: flex;
+
+  gap: 7px;
+}
+
+.cancel-btn,
+.confirm-add-btn {
+  padding: 10px 14px;
+
+  border-radius: 9px;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.cancel-btn {
+  border: 1px solid #dce7dd;
+
+  background: #ffffff;
+
+  color: #657669;
+}
+
+.confirm-add-btn {
+  border: none;
+
+  background: #2e6b3a;
+
+  color: #ffffff;
+}
+
+.cancel-btn:hover {
+  background: #f5f8f5;
+}
+
+.confirm-add-btn:hover {
+  background: #255b30;
+}
+
+
+/* =========================================
+   PLANT GRID
+   ========================================= */
+
+.plant-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+.plant-card {
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #e3ebe4;
+
+  border-radius: 14px;
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.plant-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 22px rgba(35, 69, 42, 0.08);
+}
+
+
+/* =========================================
+   PLANT IMAGE
+   ========================================= */
+
+.plant-image {
+  position: relative;
+
+  min-height: 150px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #eef6ef;
+
+  border-bottom: 1px solid #e4ede4;
+}
+
+.plant-emoji {
+  font-size: 60px;
+
+  line-height: 1;
+}
+
+.plant-status {
+  position: absolute;
+
+  top: 10px;
+  right: 10px;
+
+  padding: 6px 9px;
+
+  border-radius: 20px;
+
+  font-size: 10px;
+
+  font-weight: 600;
+}
+
+.plant-status.healthy {
+  background: #e9f6eb;
+
+  color: #2e7d3f;
+}
+
+.plant-status.warning {
+  background: #fff3e6;
+
+  color: #b86b29;
+}
+
+
+/* =========================================
+   PLANT DETAILS
+   ========================================= */
+
+.plant-details {
+  padding: 16px;
+}
+
+.plant-name {
+  margin-bottom: 3px;
+
+  color: #263b2a;
+
+  font-size: 15px;
+
+  font-weight: 650;
+}
+
+.plant-type {
+  color: #89958c;
+
+  font-size: 11px;
+}
+
+.requirements {
+  display: flex;
+
+  gap: 7px;
+
+  margin-top: 13px;
+}
+
+.requirement {
+  padding: 6px 8px;
+
+  border-radius: 8px;
+
+  background: #f5f8f5;
+
+  color: #657669;
+
+  font-size: 10px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   PLANT BOTTOM
+   ========================================= */
+
+.plant-bottom {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 16px;
+
+  padding-top: 12px;
+
+  border-top: 1px solid #edf2ee;
+}
+
+.last-watered {
+  color: #89958c;
+
+  font-size: 10px;
+}
+
+.plant-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.view-btn {
+  padding: 5px 0;
+
+  border: none;
+
+  background: none;
+
+  color: #2e6b3a;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.view-btn:hover {
+  color: #204f2a;
+}
+
+.remove-btn {
+  width: 25px;
+  height: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #e2e8e3;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  color: #8b958d;
+
+  font-size: 15px;
+
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background: #fff2f0;
+
+  border-color: #efd3cf;
+
+  color: #b85c50;
+}
+
+
+/* =========================================
+   EMPTY STATE
+   ========================================= */
+
+.empty-garden {
+  padding: 45px 20px;
+
+  text-align: center;
+
+  border: 1px dashed #d9e5da;
+
+  border-radius: 13px;
+
+  background: #f9fbf9;
+}
+
+.empty-garden-icon {
+  margin-bottom: 10px;
+
+  font-size: 35px;
+}
+
+.empty-garden h3 {
+  margin: 0 0 5px;
+
+  color: #304233;
+
+  font-size: 15px;
+}
+
+.empty-garden p {
+  margin: 0 0 15px;
+
+  color: #89958c;
+
+  font-size: 11px;
+}
+
+.empty-add-btn {
+  padding: 9px 14px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #2e6b3a;
+
+  color: #ffffff;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.empty-add-btn:hover {
+  background: #255b30;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 1000px) {
+  .my-garden-page {
+    padding: 28px;
+  }
+
+  .plant-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 750px) {
+  .my-garden-page {
+    padding: 22px 18px 32px;
+  }
+
+  .garden-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .add-garden-btn {
+    width: 100%;
+  }
+
+  .garden-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .garden-heading {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .filter-controls {
+    width: 100%;
+  }
+
+  .filter-btn {
+    flex: 1;
+  }
+
+  .add-plant-panel {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .add-plant-actions {
+    justify-content: flex-end;
+  }
+
+  .plant-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 450px) {
+  .garden-section {
+    padding: 17px;
+  }
+
+  .plant-bottom {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .plant-actions {
+    width: 100%;
+
+    justify-content: space-between;
+  }
+}
