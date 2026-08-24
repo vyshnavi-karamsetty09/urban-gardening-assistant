@@ -33,7 +33,18 @@
     --radius: 14px;
 }
 
+.search {
+    padding: 9px 13px;
+    border: 1px solid var(--border, #e3e9e0);
+    border-radius: 12px;
+    font-size: 12px;
+    width: 220px;
+    outline: none;
+}
 
+.search:focus {
+    border-color: #2f7d32;
+}
 /* ================= RESET ================= */
 
 * {
@@ -88,40 +99,54 @@ a {
     bottom: 0;
 
     background: #ffffff;
-    border-right: 1px solid var(--border);
 
     padding: 28px 16px;
 
     display: flex;
     flex-direction: column;
 
-    /* Allow sidebar itself to scroll */
+    /* Allow sidebar itself to scroll, but hide the visible scrollbar */
     overflow-y: auto;
     overflow-x: hidden;
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* old Edge/IE */
 
     z-index: 100;
 }
+
+.sidebar::-webkit-scrollbar {
+    display: none;               /* Chrome, Safari, Edge */
+}
+
+/* ================= BRAND / SIDEBAR LOGO ================= */
 
 .brand {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 0 16px 28px;
+    padding: 0 4px 28px;
 }
 
 .brand-icon {
-    font-size: 38px;
+    font-size: 40px;
+    line-height: 1;
 }
 
 .brand h2 {
-    font-size: 19px;
-    line-height: 1.1;
-    color: var(--primary-dark);
+    margin: 0;
+    color: #176b2a;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.05;
 }
 
 .brand span {
-    color: var(--primary-dark);
-    font-size: 14px;
+    display: block;
+    margin-top: 4px;
+    color: #176b2a;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.1;
 }
 
 .sidebar-nav {
@@ -191,6 +216,15 @@ a {
     color: var(--text-light);
 }
 
+html, body {
+    scrollbar-width: none;       /* Firefox */
+    -ms-overflow-style: none;    /* old Edge/IE */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;               /* Chrome, Safari, Edge */
+}
 
 /* ================= MAIN ================= */
 

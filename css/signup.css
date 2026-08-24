@@ -1,15 +1,19 @@
 /* ==========================================================================
-   URBAN GARDENING ASSISTANT - PURE CSS STYLESHEET
+   URBAN GARDENING ASSISTANT - SIGN UP
+   Compact desktop layout - no page scrolling
    ========================================================================== */
 
-/* Google Fonts Import */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,600&display=swap');
 
-/* CSS Custom Properties (Variables) */
+
+/* ==========================================================================
+   VARIABLES
+   ========================================================================== */
+
 :root {
-  /* Color Palette */
   --bg-dark-overlay: rgba(10, 22, 10, 0.3);
   --bg-card: rgba(248, 246, 240, 0.94);
+
   --bg-input: #ffffff;
   --bg-input-border: #dcd8cc;
   --bg-input-focus: #2d5a27;
@@ -17,331 +21,511 @@
   --color-primary: #2d5a27;
   --color-primary-hover: #22451e;
   --color-primary-active: #193416;
-  --color-accent-light: #e3ebd9;
-  
+
   --color-text-dark: #1f2a1c;
   --color-text-muted: #576353;
   --color-text-light: #ffffff;
-  --color-text-light-subtle: #e2f0dc;
 
-  --color-error: #d93838;
-  --color-success: #2d5a27;
+  --font-main:
+    'Plus Jakarta Sans',
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 
-  /* Typography */
-  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-serif:
+    'Playfair Display',
+    Georgia,
+    serif;
 
-  /* Shadows */
-  --shadow-card: 0 20px 40px rgba(15, 28, 14, 0.18), 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-button: 0 4px 14px rgba(45, 90, 39, 0.35);
-  --shadow-input-focus: 0 0 0 3px rgba(45, 90, 39, 0.15);
+  --radius-card: 24px;
+  --radius-input: 10px;
+  --radius-button: 10px;
 
-  /* Border Radius */
-  --radius-card: 28px;
-  --radius-input: 12px;
-  --radius-button: 12px;
-  --radius-icon: 50%;
+  --shadow-card:
+    0 16px 35px rgba(15, 28, 14, 0.18),
+    0 4px 12px rgba(0, 0, 0, 0.08);
 
-  /* Transitions */
-  --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-button:
+    0 4px 12px rgba(45, 90, 39, 0.30);
+
+  --transition-smooth:
+    all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Reset & Universal Rules */
-*, *::before, *::after {
+
+/* ==========================================================================
+   RESET
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+
   margin: 0;
   padding: 0;
 }
 
-html, body {
-  height: 100%;
+html,
+body {
   width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
   font-family: var(--font-main);
+
   background-color: #0f1c0e;
+
   color: var(--color-text-dark);
-  line-height: 1.5;
+
+  line-height: 1.35;
+
   -webkit-font-smoothing: antialiased;
 }
 
-/* Main Container Layout */
-.app-container {
-  min-height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: linear-gradient(var(--bg-dark-overlay), var(--bg-dark-overlay)), 
-                    url('/assets/garden.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  padding: 24px;
-}
-
-.signup-wrapper {
-  display: flex;
-  width: 100%;
-  max-width: 1140px;
-  min-height: 680px;
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-  background: transparent;
-  backdrop-filter: blur(2px);
-}
 
 /* ==========================================================================
-   LEFT PANEL - BRANDING & FEATURES
+   APP CONTAINER
    ========================================================================== */
-.brand-panel {
-  flex: 1;
-  padding: 56px 48px;
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: var(--color-text-light);
-  background: linear-gradient(135deg, rgba(14, 28, 14, 0.72) 0%, rgba(22, 44, 20, 0.65) 100%);
-  position: relative;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-right: 1px solid rgba(255, 255, 255, 0.22);
-  border-top-left-radius: var(--radius-card);
-  border-bottom-left-radius: var(--radius-card);
-  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.18), 0 8px 32px rgba(0, 0, 0, 0.2);
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background-image:
+    linear-gradient(
+      var(--bg-dark-overlay),
+      var(--bg-dark-overlay)
+    ),
+    url('/assets/garden.png');
+
+  background-size: cover;
+
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  padding: 8px;
 }
 
+
+/* ==========================================================================
+   MAIN CARD
+   ========================================================================== */
+
+.signup-wrapper {
+  width: 100%;
+
+  max-width: 1140px;
+
+  height: min(
+    710px,
+    calc(100vh - 16px)
+  );
+
+  min-height: 0;
+
+  display: flex;
+
+  overflow: hidden;
+
+  border-radius: var(--radius-card);
+
+  box-shadow: var(--shadow-card);
+
+  background: transparent;
+}
+
+
+/* ==========================================================================
+   LEFT BRAND PANEL
+   ========================================================================== */
+
+.brand-panel {
+  flex: 1;
+  min-width: 0;
+
+  padding: 32px 38px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  color: var(--color-text-light);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(14, 28, 14, 0.72) 0%,
+      rgba(22, 44, 20, 0.65) 100%
+    );
+
+  position: relative;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-right:
+    1px solid rgba(255, 255, 255, 0.22);
+}
+/* Brand */
+
 .brand-header {
-  margin-bottom: 32px;
+  margin-bottom: 14px;
 }
 
 .brand-logo-wrapper {
   display: flex;
+
   align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
+
+  gap: 12px;
+
+  margin-bottom: 12px;
 }
 
 .brand-logo-icon {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
+
   color: #72ba5e;
+
   flex-shrink: 0;
 }
 
 .brand-title {
-  font-size: 2.25rem;
+  font-size: 1.9rem;
+
   font-weight: 700;
-  line-height: 1.15;
+
+  line-height: 1.05;
+
   letter-spacing: -0.02em;
+
   color: #ffffff;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 .brand-divider {
   display: flex;
+
   align-items: center;
-  gap: 12px;
-  margin: 18px 0;
+
+  gap: 9px;
+
+  margin: 11px 0;
 }
 
 .divider-line {
   height: 2px;
-  width: 48px;
+
+  width: 40px;
+
   background-color: #619a51;
+
   border-radius: 2px;
 }
 
 .tagline {
-  font-size: 1.25rem;
+  font-size: 1.02rem;
+
   font-weight: 500;
+
   color: #f0f7ec;
-  line-height: 1.4;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+
+  line-height: 1.3;
 }
 
-/* Features List */
+
+/* ==========================================================================
+   FEATURES
+   ========================================================================== */
+
+./* =========================================
+   FEATURES
+   ========================================= */
+
+/* =========================================
+   FEATURES
+   ========================================= */
+
 .features-list {
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  margin: 32px 0;
+
+  gap: 14px;
+
+  margin: 18px 0;
 }
 
 .feature-item {
   display: flex;
-  align-items: flex-start;
-  gap: 20px;
+  align-items: center;
+
+  gap: 16px;
+
+  min-height: 50px;
 }
 
 .feature-icon-box {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-icon);
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
   background-color: #e3ebd9;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+
   color: #23471e;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.12);
 }
 
 .feature-icon-box svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 
 .feature-content h3 {
-  font-size: 1.05rem;
+  font-size: 1rem;
+
   font-weight: 600;
+
   color: #ffffff;
+
   margin-bottom: 4px;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 
 .feature-content p {
-  font-size: 0.925rem;
+  font-size: 0.82rem;
+
   color: #dbead7;
+
   line-height: 1.4;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* Footer Quote */
+/* Quote */
+
 .brand-footer {
-  margin-top: 24px;
-  padding-top: 20px;
+  margin-top: 8px;
+
+  padding-top: 6px;
 }
 
 .quote-text {
   font-family: var(--font-serif);
+
   font-style: italic;
-  font-size: 1.2rem;
+
+  font-size: 0.88rem;
+
   color: #d6e8d1;
+
   display: flex;
+
   align-items: center;
-  gap: 10px;
+
+  gap: 7px;
 }
 
 .quote-flourish {
-  width: 32px;
-  height: 24px;
+  width: 26px;
+  height: 19px;
+
   color: #88c776;
 }
 
+
 /* ==========================================================================
-   RIGHT PANEL - CARD & FORM
+   RIGHT FORM PANEL
    ========================================================================== */
+
 .form-panel {
   flex: 1.15;
+
+  min-width: 0;
+
   background-color: var(--bg-card);
-  padding: 52px 56px;
+
+  padding: 20px 46px;
+
   position: relative;
+
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
-  border-top-right-radius: var(--radius-card);
-  border-bottom-right-radius: var(--radius-card);
+
+  overflow: hidden;
 }
 
-/* Top-Right Decorative Vine */
+
+/* Decorative Vine */
+
 .card-leaf-decoration {
   position: absolute;
-  top: 16px;
-  right: 20px;
-  width: 90px;
-  height: 90px;
-  opacity: 0.85;
+
+  top: 7px;
+
+  right: 12px;
+
+  width: 70px;
+
+  height: 70px;
+
+  opacity: 0.7;
+
   pointer-events: none;
 }
 
-/* Form Header */
+
+/* ==========================================================================
+   FORM HEADER
+   ========================================================================== */
+
 .form-header {
   text-align: center;
-  margin-bottom: 28px;
+
+  margin-bottom: 12px;
 }
 
 .form-title {
-  font-size: 2rem;
+  font-size: 1.65rem;
+
   font-weight: 700;
+
   color: var(--color-text-dark);
-  letter-spacing: -0.01em;
-  margin-bottom: 6px;
+
+  margin-bottom: 2px;
 }
 
 .leaf-divider-wrapper {
   display: flex;
+
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin: 8px 0;
-  color: #538048;
+
+  gap: 7px;
+
+  margin: 4px 0;
 }
 
 .leaf-divider-wrapper .line {
-  width: 24px;
+  width: 21px;
+
   height: 1px;
+
   background-color: #b5c4b1;
 }
 
 .form-subtitle {
-  font-size: 0.925rem;
+  font-size: 0.76rem;
+
   color: var(--color-text-muted);
 }
 
-/* Form Grid & Elements */
+
+/* ==========================================================================
+   FORM
+   ========================================================================== */
+
 .signup-form {
   display: flex;
+
   flex-direction: column;
-  gap: 18px;
+
+  gap: 8px;
 }
 
 .form-row {
   display: flex;
-  gap: 16px;
+
+  gap: 12px;
 }
 
 .form-group {
   display: flex;
+
   flex-direction: column;
-  gap: 6px;
+
+  gap: 3px;
+
   flex: 1;
 }
 
 .form-label {
-  font-size: 0.875rem;
+  font-size: 0.73rem;
+
   font-weight: 600;
+
   color: #273625;
 }
 
-/* Input Fields with Icons */
+
+/* ==========================================================================
+   INPUTS
+   ========================================================================== */
+
 .input-wrapper {
   position: relative;
+
   display: flex;
+
   align-items: center;
 }
 
 .input-icon {
   position: absolute;
-  left: 14px;
-  width: 18px;
-  height: 18px;
+
+  left: 12px;
+
+  width: 16px;
+  height: 16px;
+
   color: #72826e;
+
   pointer-events: none;
-  transition: var(--transition-smooth);
 }
 
 .input-control {
   width: 100%;
-  padding: 12px 16px 12px 42px;
+
+  height: 40px;
+
+  padding:
+    8px 13px 8px 38px;
+
   font-family: var(--font-main);
-  font-size: 0.95rem;
+
+  font-size: 0.76rem;
+
   color: var(--color-text-dark);
+
   background-color: var(--bg-input);
-  border: 1px solid var(--bg-input-border);
+
+  border:
+    1px solid var(--bg-input-border);
+
   border-radius: var(--radius-input);
+
   outline: none;
-  transition: var(--transition-smooth);
 }
 
 .input-control::placeholder {
@@ -350,235 +534,382 @@ html, body {
 
 .input-control:focus {
   border-color: var(--bg-input-focus);
-  box-shadow: var(--shadow-input-focus);
+
+  box-shadow:
+    0 0 0 3px rgba(45, 90, 39, 0.10);
 }
 
-.input-control:focus + .input-icon,
-.input-wrapper:focus-within .input-icon {
-  color: var(--color-primary);
-}
 
-/* Password Eye Toggle Button */
+/* Password */
+
 .password-toggle-btn {
   position: absolute;
-  right: 12px;
-  background: none;
-  border: none;
-  padding: 4px;
-  color: #72826e;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  transition: var(--transition-smooth);
-}
 
-.password-toggle-btn:hover {
-  color: var(--color-primary);
-  background-color: #f0ede3;
+  right: 9px;
+
+  background: none;
+
+  border: none;
+
+  padding: 4px;
+
+  color: #72826e;
+
+  cursor: pointer;
 }
 
 .password-toggle-btn svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
-/* Custom Checkboxes */
+
+/* ==========================================================================
+   CHECKBOXES
+   ========================================================================== */
+
 .checkbox-group {
   display: flex;
+
   flex-direction: column;
-  gap: 10px;
-  margin-top: 4px;
+
+  gap: 5px;
+
+  margin-top: 2px;
 }
 
 .checkbox-label {
   display: flex;
+
   align-items: center;
-  gap: 10px;
-  font-size: 0.875rem;
+
+  gap: 7px;
+
+  font-size: 0.72rem;
+
   color: var(--color-text-dark);
+
   cursor: pointer;
+
   user-select: none;
 }
 
 .checkbox-custom {
-  width: 18px;
-  height: 18px;
-  border: 1.5px solid #9bb097;
+  width: 16px;
+  height: 16px;
+
+  border:
+    1.5px solid #9bb097;
+
   border-radius: 4px;
+
   background-color: #ffffff;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   flex-shrink: 0;
-  transition: var(--transition-smooth);
 }
 
 .checkbox-custom svg {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
+
   color: #ffffff;
+
   opacity: 0;
-  transform: scale(0.6);
-  transition: var(--transition-smooth);
 }
 
-/* Hidden native checkbox input */
 .checkbox-input {
   position: absolute;
+
   opacity: 0;
+
   width: 0;
   height: 0;
 }
 
 .checkbox-input:checked + .checkbox-custom {
   background-color: var(--color-primary);
+
   border-color: var(--color-primary);
 }
 
 .checkbox-input:checked + .checkbox-custom svg {
   opacity: 1;
-  transform: scale(1);
 }
 
-.checkbox-input:focus-visible + .checkbox-custom {
-  box-shadow: var(--shadow-input-focus);
-}
 
-/* Primary Submit Button */
+/* ==========================================================================
+   SUBMIT BUTTON
+   ========================================================================== */
+
 .btn-submit {
   width: 100%;
-  padding: 14px 24px;
-  margin-top: 8px;
+
+  height: 43px;
+
+  margin-top: 3px;
+
+  padding: 8px 18px;
+
   font-family: var(--font-main);
-  font-size: 1rem;
+
+  font-size: 0.83rem;
+
   font-weight: 600;
+
   color: #ffffff;
+
   background-color: var(--color-primary);
+
   border: none;
+
   border-radius: var(--radius-button);
+
   cursor: pointer;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
-  gap: 10px;
+
+  gap: 8px;
+
   box-shadow: var(--shadow-button);
+
   transition: var(--transition-smooth);
 }
 
 .btn-submit:hover {
   background-color: var(--color-primary-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(45, 90, 39, 0.42);
-}
-
-.btn-submit:active {
-  background-color: var(--color-primary-active);
-  transform: translateY(0);
 }
 
 .btn-submit svg {
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
 }
 
-/* Footer Link */
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
 .form-footer {
   text-align: center;
-  margin-top: 18px;
-  font-size: 0.9rem;
+
+  margin-top: 2px;
+
+  font-size: 0.72rem;
+
   color: var(--color-text-muted);
 }
 
 .link-login {
   color: var(--color-primary);
+
   font-weight: 600;
+
   text-decoration: none;
-  margin-left: 4px;
-  transition: var(--transition-smooth);
+
+  margin-left: 3px;
 }
 
-.link-login:hover {
-  text-decoration: underline;
-  color: var(--color-primary-hover);
-}
 
-/* Modal / Toast Notification */
+/* ==========================================================================
+   TOAST
+   ========================================================================== */
+
 .toast-notification {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+
+  bottom: 16px;
+  right: 16px;
+
   background-color: #23471e;
+
   color: #ffffff;
-  padding: 16px 24px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-weight: 500;
+
+  padding: 10px 16px;
+
+  border-radius: 10px;
+
   opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  transform: translateY(15px);
+
   pointer-events: none;
+
   z-index: 1000;
 }
 
 .toast-notification.show {
   opacity: 1;
+
   transform: translateY(0);
-  pointer-events: auto;
 }
 
+
 /* ==========================================================================
-   RESPONSIVE DESIGN (MEDIA QUERIES)
+   SHORT SCREENS
    ========================================================================== */
-@media (max-width: 960px) {
+
+@media (max-height: 700px) {
+
+  .app-container {
+    padding: 5px;
+  }
+
   .signup-wrapper {
+    height: calc(100vh - 10px);
+  }
+
+  .brand-panel {
+    padding: 24px 30px;
+  }
+
+  .form-panel {
+    padding: 15px 38px;
+  }
+
+  .features-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin: 12px 0;
+}
+
+.feature-item {
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+}
+
+  .feature-icon-box {
+    width: 43px;
+    height: 43px;
+  }
+
+  .feature-icon-box svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .feature-content h3 {
+    font-size: 0.92rem;
+    margin-bottom: 3px;
+  }
+
+  .feature-content p {
+    font-size: 0.77rem;
+    line-height: 1.35;
+  }
+
+  .signup-form {
+    gap: 6px;
+  }
+
+  .input-control {
+    height: 37px;
+  }
+
+  .btn-submit {
+    height: 40px;
+  }
+
+  .form-header {
+    margin-bottom: 8px;
+  }
+}
+
+
+/* ==========================================================================
+   SMALLER SCREENS
+   ========================================================================== */
+
+@media (max-width: 960px) {
+
+  /*
+     On narrow screens the two-column layout becomes
+     a normal vertical layout. A full no-scroll layout
+     is not practical here because the form itself needs
+     vertical space.
+  */
+
+  html,
+  body {
+    overflow: auto;
+  }
+
+  .app-container {
+    min-height: 100vh;
+
+    height: auto;
+
+    padding: 8px;
+  }
+
+  .signup-wrapper {
+    height: auto;
+
+    min-height: 0;
+
     flex-direction: column;
+
     max-width: 600px;
   }
 
   .brand-panel {
-    border-radius: var(--radius-card) var(--radius-card) 0 0;
-    padding: 36px 32px;
+    padding: 26px;
+
+    border-radius:
+      var(--radius-card)
+      var(--radius-card)
+      0
+      0;
   }
 
   .form-panel {
-    border-radius: 0 0 var(--radius-card) var(--radius-card);
-    padding: 36px 32px;
-  }
+    padding: 26px;
 
-  .brand-title {
-    font-size: 1.85rem;
+    border-radius:
+      0
+      0
+      var(--radius-card)
+      var(--radius-card);
   }
 }
 
+
 @media (max-width: 540px) {
-  .app-container {
-    padding: 12px;
+
+  .brand-panel {
+    padding: 20px 16px;
+  }
+
+  .form-panel {
+    padding: 20px 16px;
   }
 
   .form-row {
     flex-direction: column;
-    gap: 18px;
+
+    gap: 8px;
   }
 
-  .brand-panel {
-    padding: 28px 20px;
-  }
-
-  .form-panel {
-    padding: 28px 20px;
-  }
-
-  .form-title {
+  .brand-title {
     font-size: 1.65rem;
   }
 
-  .card-leaf-decoration {
-    width: 60px;
-    height: 60px;
+  .form-title {
+    font-size: 1.45rem;
   }
 }
