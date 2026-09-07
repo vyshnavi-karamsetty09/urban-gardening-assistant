@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Sidebar from "./components/sidebar";
+import Topbar from "./components/Topbar";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -8,7 +9,7 @@ import EnvironmentSetup from "./pages/EnvironmentSetup";
 import MyGarden from "./pages/MyGarden";
 import SmartRecommendations from "./pages/SmartRecommendations";
 import CareScheduler from "./pages/CareScheduler";
-import PlantHealth from "./pages/PlantHealth";
+import DiseaseDetection from "./pages/DiseaseDetection";
 import GardenAssistant from "./pages/GardenAssistant";
 import { STORAGE_KEYS } from "./utils";
 import "./App.css";
@@ -32,7 +33,10 @@ function App() {
     }
   });
 
-  const handlePageChange = (page) => {
+  const [pagePayload, setPagePayload] = useState(null);
+
+  const handlePageChange = (page, payload = null) => {
+    setPagePayload(payload);
     const publicPages = ["landing", "login", "signup"];
     if (publicPages.includes(page)) {
       setActivePage(page);
@@ -66,8 +70,12 @@ function App() {
       case "environment": return <EnvironmentSetup onPageChange={handlePageChange} />;
       case "mygarden": return <MyGarden onPageChange={handlePageChange} />;
       case "recommendations": return <SmartRecommendations onPageChange={handlePageChange} />;
+      case "diseasedetection":
+      case "disease":
+        return <DiseaseDetection onPageChange={handlePageChange} initialSymptom={pagePayload?.symptom || ""} />;
       case "scheduler": return <CareScheduler />;
-      case "health": return <PlantHealth />;
+      case "health":
+        return <DiseaseDetection onPageChange={handlePageChange} initialSymptom={pagePayload?.symptom || ""} />;
       case "assistant": return <GardenAssistant />;
       default: return <Landing onNavigate={handlePageChange} />;
     }
@@ -81,6 +89,13 @@ function App() {
         <Sidebar activePage={activePage} onPageChange={handlePageChange} onLogout={handleLogout} />
       )}
       <main className={showSidebar ? "main-content" : "auth-or-landing-content"}>
+        {showSidebar && (
+          <Topbar
+            activePage={activePage}
+            onPageChange={handlePageChange}
+            onLogout={handleLogout}
+          />
+        )}
         {renderPage()}
       </main>
     </div>

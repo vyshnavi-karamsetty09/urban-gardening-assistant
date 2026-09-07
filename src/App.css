@@ -20,10 +20,11 @@
   min-height: 100vh;
 
   margin-left: 250px;
+  padding-top: 66px;
 
   background: #f5f8f3;
 
-  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 
@@ -157,6 +158,7 @@ a {
   .main-content {
     width: 100%;
     margin-left: 0;
+    padding-top: 60px;
   }
 }
 .auth-or-landing-content{width:100%;min-height:100vh;}

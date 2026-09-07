@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { STORAGE_KEYS, getSavedPlants, getSavedTasks, saveTasks, savePlants } from "../utils";
 import "./Dashboard.css";
+import earlyBlightThumb from "../assets/diseases/early-blight.jpg";
+import powderyMildewThumb from "../assets/diseases/powdery-mildew.jpg";
+import spiderMitesThumb from "../assets/diseases/spider-mites.jpg";
+import aphidsThumb from "../assets/diseases/aphids.jpg";
 
 function Dashboard({ onPageChange }) {
 
@@ -51,6 +55,12 @@ function Dashboard({ onPageChange }) {
   const goToEnvironment = () => {
     if (onPageChange) {
       onPageChange("environment");
+    }
+  };
+
+  const goToDiseaseDetection = (symptom = "") => {
+    if (onPageChange) {
+      onPageChange("diseasedetection", symptom ? { symptom } : null);
     }
   };
 
@@ -151,45 +161,25 @@ function Dashboard({ onPageChange }) {
 
 
         <div className="dashboard-header-actions">
-
-          <div className="weather-mini">
-
-            <span className="weather-mini-icon">
-              ☀️
-            </span>
-
-            <div>
-              <strong>28°C</strong>
-              <small>Today</small>
-            </div>
-
-          </div>
-
+          <button
+            type="button"
+            className="dash-action-btn scan"
+            onClick={() => goToDiseaseDetection()}
+            title="Scan a plant leaf with AI"
+          >
+            <span>📷</span>
+            <strong>Quick Scan Leaf</strong>
+          </button>
 
           <button
             type="button"
-            className="notification-button"
+            className="dash-action-btn add"
+            onClick={goToMyGarden}
+            title="Add or view garden plants"
           >
-            ♧
-            <span>3</span>
+            <span>➕</span>
+            <strong>Add Plant</strong>
           </button>
-
-
-          <button
-            type="button"
-            className="profile-button"
-          >
-            <span className="profile-icon">
-              👤
-            </span>
-
-            <strong>Gardener</strong>
-
-            <span className="profile-arrow">
-              ⌄
-            </span>
-          </button>
-
         </div>
 
       </header>
@@ -252,10 +242,14 @@ function Dashboard({ onPageChange }) {
         </article>
 
 
-        <article className="summary-card">
+        <article
+          className="summary-card summary-card-clickable"
+          onClick={() => goToDiseaseDetection()}
+          title="Open Disease Detection & Plant Health"
+        >
 
           <div className="summary-icon health">
-            ♡
+            🔍
           </div>
 
           <div>
@@ -263,7 +257,7 @@ function Dashboard({ onPageChange }) {
 
             <strong>Good</strong>
 
-            <small>Overall status</small>
+            <small className="summary-card-link">Diagnose →</small>
           </div>
 
         </article>
@@ -563,6 +557,172 @@ function Dashboard({ onPageChange }) {
           </div>
 
         </article>
+
+      </section>
+
+
+      {/* =========================================
+          DISEASE DETECTION & HEALTH CHECK
+          ========================================= */}
+
+      <section className="disease-dashboard-card">
+
+        <div className="disease-dashboard-header">
+
+          <div>
+
+            <span className="dashboard-eyebrow">
+              PLANT CARE & DIAGNOSTICS
+            </span>
+
+            <h2>
+              Disease Detection & Health Check 🔍
+            </h2>
+
+            <p>
+              Spot yellow leaves, brown spots, powdery mold, or pests? Run an AI leaf scan or select symptoms to get organic remedies.
+            </p>
+
+          </div>
+
+          <button
+            type="button"
+            className="disease-action-btn"
+            onClick={() => goToDiseaseDetection()}
+          >
+            📷 Open AI Scanner →
+          </button>
+
+        </div>
+
+
+        <div className="disease-dashboard-body">
+
+          {/* Visual disease preview thumbnails */}
+          <div className="dashboard-disease-gallery">
+            <button
+              type="button"
+              className="disease-thumb-card"
+              onClick={() => goToDiseaseDetection("Brown or black spots")}
+            >
+              <img src={earlyBlightThumb} alt="Early Blight" className="dash-disease-thumb" />
+              <div className="dash-disease-thumb-info">
+                <strong>Early Blight</strong>
+                <small>Leaf Spots</small>
+              </div>
+            </button>
+
+            <button
+              type="button"
+              className="disease-thumb-card"
+              onClick={() => goToDiseaseDetection("White powdery coating")}
+            >
+              <img src={powderyMildewThumb} alt="Powdery Mildew" className="dash-disease-thumb" />
+              <div className="dash-disease-thumb-info">
+                <strong>Powdery Mildew</strong>
+                <small>White Coating</small>
+              </div>
+            </button>
+
+            <button
+              type="button"
+              className="disease-thumb-card"
+              onClick={() => goToDiseaseDetection("Fine webbing on undersides")}
+            >
+              <img src={spiderMitesThumb} alt="Spider Mites" className="dash-disease-thumb" />
+              <div className="dash-disease-thumb-info">
+                <strong>Spider Mites</strong>
+                <small>Webs & Spots</small>
+              </div>
+            </button>
+
+            <button
+              type="button"
+              className="disease-thumb-card"
+              onClick={() => goToDiseaseDetection("Clusters of tiny green/black bugs")}
+            >
+              <img src={aphidsThumb} alt="Aphids" className="dash-disease-thumb" />
+              <div className="dash-disease-thumb-info">
+                <strong>Aphids & Pests</strong>
+                <small>Sap Suckers</small>
+              </div>
+            </button>
+          </div>
+
+          <div className="quick-symptoms-section">
+
+            <span className="quick-label">
+              Quick Diagnose by Symptom:
+            </span>
+
+            <div className="symptom-chips-row">
+
+              <button
+                type="button"
+                className="dashboard-symptom-chip"
+                onClick={() => goToDiseaseDetection("Yellowing leaves")}
+              >
+                🍃 Yellowing leaves
+              </button>
+
+              <button
+                type="button"
+                className="dashboard-symptom-chip"
+                onClick={() => goToDiseaseDetection("Brown or black spots")}
+              >
+                🟤 Brown or black spots
+              </button>
+
+              <button
+                type="button"
+                className="dashboard-symptom-chip"
+                onClick={() => goToDiseaseDetection("White powdery coating")}
+              >
+                ❄️ White powdery mold
+              </button>
+
+              <button
+                type="button"
+                className="dashboard-symptom-chip"
+                onClick={() => goToDiseaseDetection("Fine webbing on undersides")}
+              >
+                🕸️ Spider mite webbing
+              </button>
+
+              <button
+                type="button"
+                className="dashboard-symptom-chip"
+                onClick={() => goToDiseaseDetection("Clusters of tiny green/black bugs")}
+              >
+                🐛 Aphids & pests
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div className="disease-alert-badge">
+
+            <span className="alert-badge-icon">
+              💡
+            </span>
+
+            <div>
+
+              <strong>
+                Balcony Gardening Health Tip:
+              </strong>
+
+              <span>
+                Avoid overhead watering in the evening. Wet foliage overnight encourages fungal leaf spots and powdery mildew.
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
 
       </section>
 

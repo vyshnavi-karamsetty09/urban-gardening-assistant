@@ -6,6 +6,7 @@ function Sidebar({ activePage, onPageChange, onLogout }) {
     { key: "environment", label: "Environment Setup", icon: "☀" },
     { key: "mygarden", label: "My Garden", icon: "🌿" },
     { key: "recommendations", label: "Smart Recommendations", icon: "✦" },
+    { key: "diseasedetection", label: "Disease Detection", icon: "🔍" },
     { key: "scheduler", label: "Care Scheduler", icon: "✓" },
     { key: "health", label: "Plant Health", icon: "♡" },
     { key: "assistant", label: "Garden Assistant", icon: "🤖" },
