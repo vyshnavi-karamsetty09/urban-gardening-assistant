@@ -1,0 +1,29 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g opacity="0.4">
+    <!-- Main stem -->
+    <path d="M380 480C340 380 260 280 200 120C170 50 140 10 120 0" stroke="#7d9d83" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Leaf 1 -->
+    <path d="M210 150C160 140 110 180 90 230C120 235 170 215 210 150Z" fill="#9dbba4" opacity="0.85"/>
+    <path d="M210 150C160 180 120 210 90 230" stroke="#739379" stroke-width="1.2"/>
+
+    <!-- Leaf 2 -->
+    <path d="M245 220C280 180 340 170 380 180C370 220 320 245 245 220Z" fill="#adc7b3" opacity="0.9"/>
+    <path d="M245 220C300 200 345 190 380 180" stroke="#739379" stroke-width="1.2"/>
+
+    <!-- Leaf 3 -->
+    <path d="M270 290C220 290 170 340 160 390C200 390 240 360 270 290Z" fill="#91b098" opacity="0.8"/>
+    <path d="M270 290C230 330 190 370 160 390" stroke="#68876e" stroke-width="1.2"/>
+
+    <!-- Leaf 4 -->
+    <path d="M305 350C340 310 390 310 420 330C400 370 350 380 305 350Z" fill="#a4c2ab" opacity="0.85"/>
+    <path d="M305 350C355 335 390 330 420 330" stroke="#739379" stroke-width="1.2"/>
+
+    <!-- Leaf 5 top -->
+    <path d="M160 70C120 50 80 80 60 120C90 130 130 115 160 70Z" fill="#9dbba4" opacity="0.9"/>
+    <path d="M160 70C120 90 90 110 60 120" stroke="#739379" stroke-width="1.2"/>
+
+    <!-- Top leaf tip -->
+    <path d="M120 0C90 20 85 60 90 90C110 70 120 40 120 0Z" fill="#88a88f" opacity="0.95"/>
+  </g>
+</svg>

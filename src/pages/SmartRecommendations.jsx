@@ -2,12 +2,34 @@ import { useState, useMemo } from "react";
 import { LIBRARY_PLANTS, getPlantImage } from "../plantData";
 import { getSavedPlants, savePlants, STORAGE_KEYS } from "../utils";
 import PageHeaderBanner from "../components/PageHeaderBanner";
+import envBalconyImg from "../assets/env-balcony.jpg";
+import envTerraceImg from "../assets/env-terrace.jpg";
+import envIndoorImg from "../assets/env-indoor.jpg";
+import envWeatherSunnyImg from "../assets/env-weather-sunny.jpg";
 import "./SmartRecommendations.css";
 
 const LOCATION_OPTIONS = [
-  { value: "Balcony", icon: "🏡", desc: "Sunny or shaded outdoor balcony" },
-  { value: "Terrace", icon: "🪴", desc: "Spacious open rooftop or terrace" },
-  { value: "Indoor", icon: "🪟", desc: "Bright windowsill or room interior" },
+  {
+    value: "Balcony",
+    icon: "🏡",
+    desc: "Sunny or shaded outdoor balcony",
+    image: envBalconyImg,
+    tagline: "Railing planters, vertical racks & containers",
+  },
+  {
+    value: "Terrace",
+    icon: "🪴",
+    desc: "Spacious open rooftop or terrace",
+    image: envTerraceImg,
+    tagline: "Raised garden beds, large grow bags & full solar sky",
+  },
+  {
+    value: "Indoor",
+    icon: "🪟",
+    desc: "Bright windowsill or room interior",
+    image: envIndoorImg,
+    tagline: "Filtered ambient daylight & sheltered plant shelves",
+  },
 ];
 
 const SPACE_OPTIONS = [
@@ -93,6 +115,44 @@ function SmartRecommendations({ onPageChange, initialTab = "matches" }) {
       // ignore
     }
   };
+
+  // Current environment photo and dynamic insight based on user setup
+  const currentEnvImage = useMemo(() => {
+    if (environment.location === "Terrace") return envTerraceImg;
+    if (environment.location === "Indoor") return envIndoorImg;
+    return envBalconyImg;
+  }, [environment.location]);
+
+  const envInsight = useMemo(() => {
+    if (environment.location === "Indoor") {
+      return {
+        badge: "🪟 Sheltered Indoor Ecosystem",
+        title: "Indoor Windowsill & Plant Shelf Microclimate",
+        tag: "Protected Light Zone",
+        summary:
+          "Sheltered from outdoor thermal extremes and gusty winds. Excellent for humidity-tolerant culinary herbs (Spearmint), lush foliage (Ferns, Pothos), and drought-hardy succulents (Aloe Vera) receiving bright indirect daylight.",
+        bestPlants: "Spearmint, Aloe Vera, Ferns, Snake Plant",
+      };
+    }
+    if (environment.location === "Terrace") {
+      return {
+        badge: "🪴 Expansive Rooftop Terrace",
+        title: "High-Capacity Solar Growing Zone",
+        tag: "Unrestricted Sunlight Zone",
+        summary:
+          "Uninhibited 360° solar reception and broad aeration. Outstanding for high-demand fruiting vegetables (Tomatoes, Bell Peppers), vigorous climbing gourds, and heat-loving blooms (Marigolds, Roses). Deep morning watering recommended.",
+        bestPlants: "Tomato, Bell Pepper, Marigold, Rose",
+      };
+    }
+    return {
+      badge: "🏡 Urban Apartment Balcony",
+      title: "Potted Balcony & Railing Microclimate",
+      tag: "Optimized Container Space",
+      summary:
+        "Balanced urban microclimate with natural airflow. Optimal for compact container gardening: Sweet Basil, Cherry Tomatoes, Curry Leaf, and trailing climbers. Railing planters maximize morning sun effectively.",
+      bestPlants: "Cherry Tomato, Sweet Basil, Mint, Curry Leaf",
+    };
+  }, [environment.location]);
 
   // Compute AI Match Score and personalized reason for each library plant
   const scoredRecommendations = useMemo(() => {
@@ -466,11 +526,27 @@ function SmartRecommendations({ onPageChange, initialTab = "matches" }) {
         <div className="weather-env-view-container animate-slow-pop">
           {/* Live Microclimate Dashboard */}
           <section className="live-weather-card slow-popup">
+            {/* Visual Weather & Microclimate Header Banner */}
+            <div
+              className="weather-banner-visual"
+              style={{ backgroundImage: `url(${envWeatherSunnyImg})` }}
+            >
+              <div className="weather-banner-overlay"></div>
+              <div className="weather-banner-content">
+                <span className="weather-banner-badge">☀️ LIVE SOLAR MICROCLIMATE</span>
+                <h3>Sunny & Optimal Photosynthesis Conditions</h3>
+                <p>
+                  High ambient lumens detected across region {environment.pincode || "500081"}. 
+                  Container soil evaporation is elevated by ~30% today.
+                </p>
+              </div>
+            </div>
+
             <div className="weather-card-header">
               <div className="weather-header-text">
-                <span className="weather-kicker">LIVE MICROCLIMATE SENSOR</span>
-                <h2>Garden Weather Conditions</h2>
-                <p>Real-time atmospheric readings tailored to pincode {environment.pincode || "500081"}.</p>
+                <span className="weather-kicker">LIVE MICROCLIMATE SENSORS</span>
+                <h2>Garden Atmospheric Readings</h2>
+                <p>Continuous sensor telemetry calibrated for pincode {environment.pincode || "500081"}.</p>
               </div>
               <div className="weather-condition-tag">
                 <span>☀️ Sunny & Optimal Growing Day</span>
@@ -519,6 +595,43 @@ function SmartRecommendations({ onPageChange, initialTab = "matches" }) {
             </div>
           </section>
 
+          {/* Dynamic Growing Environment Visual Showcase Card */}
+          <section className="env-visual-showcase-card slow-popup">
+            <div className="env-showcase-image-wrap">
+              <img
+                src={currentEnvImage}
+                alt={environment.location}
+                className="env-showcase-img"
+              />
+              <div className="env-showcase-overlay">
+                <span className="env-showcase-badge">
+                  {envInsight.badge}
+                </span>
+              </div>
+            </div>
+
+            <div className="env-showcase-content">
+              <div className="env-showcase-tag">
+                <span>✦</span> {envInsight.tag}
+              </div>
+              <h3 className="env-showcase-title">{envInsight.title}</h3>
+
+              <div className="env-showcase-chips">
+                <span className="env-chip">📍 {environment.location}</span>
+                <span className="env-chip">📐 {environment.space} Space</span>
+                <span className="env-chip">☀️ {environment.sunlight}</span>
+                <span className="env-chip">🌡️ {environment.temperature}</span>
+                <span className="env-chip">🪴 {environment.medium}</span>
+              </div>
+
+              <p className="env-showcase-desc">{envInsight.summary}</p>
+
+              <div className="env-best-suited">
+                <strong>Recommended Plants for this Setup:</strong> {envInsight.bestPlants}
+              </div>
+            </div>
+          </section>
+
           {/* Interactive Environment Configurator */}
           <section className="env-configurator-card slow-popup">
             <div className="config-card-header">
@@ -557,23 +670,29 @@ function SmartRecommendations({ onPageChange, initialTab = "matches" }) {
               </div>
             </div>
 
-            {/* 1. Garden Location */}
+            {/* 1. Garden Location with Photo Cards */}
             <div className="config-group">
               <span className="config-label">1. Where is your garden located?</span>
-              <div className="options-selection-grid">
+              <div className="options-selection-grid cols-3">
                 {LOCATION_OPTIONS.map((opt) => (
                   <button
                     key={opt.value}
                     type="button"
-                    className={`env-opt-card ${environment.location === opt.value ? "selected" : ""}`}
+                    className={`env-opt-photo-card ${environment.location === opt.value ? "selected" : ""}`}
                     onClick={() => handleUpdateField("location", opt.value)}
                   >
                     {environment.location === opt.value && (
                       <span className="opt-check">✓</span>
                     )}
-                    <span className="opt-ico">{opt.icon}</span>
-                    <strong className="opt-title">{opt.value}</strong>
-                    <span className="opt-desc">{opt.desc}</span>
+                    <div className="env-opt-photo-wrap">
+                      <img src={opt.image} alt={opt.value} className="env-opt-thumb" />
+                      <span className="env-opt-icon-floating">{opt.icon}</span>
+                    </div>
+                    <div className="env-opt-photo-body">
+                      <strong className="opt-title">{opt.value}</strong>
+                      <span className="opt-desc">{opt.desc}</span>
+                      <small className="opt-tagline">{opt.tagline}</small>
+                    </div>
                   </button>
                 ))}
               </div>

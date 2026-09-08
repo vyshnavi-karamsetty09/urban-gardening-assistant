@@ -29,12 +29,15 @@ function App() {
 
   const [activePage, setActivePage] = useState(() => {
     try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const pageParam = urlParams.get("page");
+      if (pageParam) return pageParam;
       const raw = localStorage.getItem(STORAGE_KEYS.session);
       const session = raw ? JSON.parse(raw) : null;
-      if (session?.isLoggedIn === false) return "landing";
-      return "dashboard"; // Default to dashboard matching mockup
+      if (session?.activePage) return session.activePage;
+      return "landing"; // Default to index page
     } catch {
-      return "dashboard";
+      return "landing";
     }
   });
 
@@ -46,7 +49,7 @@ function App() {
       if (!localStorage.getItem(STORAGE_KEYS.session)) {
         localStorage.setItem(
           STORAGE_KEYS.session,
-          JSON.stringify({ name: "Dattu", email: "dattu@gardenguide.io", isLoggedIn: true })
+          JSON.stringify({ name: "Dattu", email: "dattu@gardenguide.io", isLoggedIn: true, activePage: "landing" })
         );
       }
     } catch {
@@ -59,6 +62,14 @@ function App() {
     setActivePage(page);
     setIsMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
+    try {
+      const raw = localStorage.getItem(STORAGE_KEYS.session);
+      const session = raw ? JSON.parse(raw) : {};
+      session.activePage = page;
+      localStorage.setItem(STORAGE_KEYS.session, JSON.stringify(session));
+    } catch {
+      // ignore
+    }
   };
 
   const handleLogin = (session) => {

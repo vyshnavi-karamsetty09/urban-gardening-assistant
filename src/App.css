@@ -193,3 +193,9 @@ a {
   min-height: 100vh;
 }
 
+.auth-or-landing-content .page-transition-container {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
