@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getSavedPlants, getSavedTasks, saveTasks } from "../utils";
+import PageHeaderBanner from "../components/PageHeaderBanner";
 import "./DiseaseDetection.css";
 
 // Import local disease leaf images
@@ -577,35 +578,38 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
   return (
     <main className="disease-detection-page">
       {/* Top Header */}
-      <header className="detection-header">
-        <div className="detection-heading">
-          <span className="detection-eyebrow">PLANT HEALTH & DIAGNOSIS</span>
-          <h1>Disease Detection 🔍</h1>
-          <p>
-            Scan affected leaves with AI, diagnose visible symptoms with reference images, and access highlighted treatment protocols to cure plant ailments.
-          </p>
-        </div>
-
-        <div className="detection-header-actions">
-          <button
-            type="button"
-            className="secondary-btn"
-            onClick={() => onPageChange && onPageChange("dashboard")}
-          >
-            ← Back to Dashboard
-          </button>
-          <button
-            type="button"
-            className="primary-btn"
-            onClick={() => {
-              setActiveTab("scanner");
-              window.scrollTo({ top: 300, behavior: "smooth" });
-            }}
-          >
-            📷 Scan Leaf
-          </button>
-        </div>
-      </header>
+      <PageHeaderBanner
+        eyebrow="AI PLANT HEALTH & SYMPTOM DIAGNOSIS"
+        title="Disease Detection"
+        titleAccent="🔍"
+        subtitle="Scan affected leaves with AI, diagnose visible symptoms with reference images, and access highlighted treatment protocols to cure plant ailments."
+        badgeIcon="🔬"
+        badgeTitle="AI Scanner Active"
+        badgeSubtitle="7 Pathogen Detectors • Instant Cures"
+        extraRight={
+          <div className="detection-header-actions">
+            {onPageChange && (
+              <button
+                type="button"
+                className="secondary-btn"
+                onClick={() => onPageChange("dashboard")}
+              >
+                ← Dashboard
+              </button>
+            )}
+            <button
+              type="button"
+              className="primary-btn"
+              onClick={() => {
+                setActiveTab("scanner");
+                window.scrollTo({ top: 300, behavior: "smooth" });
+              }}
+            >
+              📷 Scan Leaf
+            </button>
+          </div>
+        }
+      />
 
       {/* Feature Navigation Tabs */}
       <nav className="detection-nav-tabs" aria-label="Disease detection sections">

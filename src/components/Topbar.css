@@ -18,12 +18,9 @@
 
   padding: 0 34px;
 
-  background: rgba(246, 250, 246, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
+  background: #f2f7f2;
   border-bottom: 1px solid #dce8dd;
-  box-shadow: 0 2px 10px rgba(24, 52, 28, 0.04);
+  box-shadow: 0 2px 8px rgba(24, 52, 28, 0.03);
 
   box-sizing: border-box;
 }
@@ -105,23 +102,24 @@
 .topbar-search-wrapper {
   position: relative;
   width: 100%;
-  max-width: 380px;
-  margin: 0 18px;
+  max-width: 480px;
+  margin: 0 20px;
 }
 
 .topbar-search {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 
   width: 100%;
-  height: 38px;
+  height: 42px;
 
-  padding: 0 12px;
+  padding: 0 16px;
 
   background: #ffffff;
-  border: 1px solid #d8e5da;
-  border-radius: 20px;
+  border: 1px solid #dce8dd;
+  border-radius: 24px;
+  box-shadow: 0 2px 8px rgba(24, 52, 28, 0.04);
 
   transition: all 0.2s ease;
 }
@@ -134,7 +132,7 @@
 }
 
 .search-icon {
-  font-size: 13px;
+  font-size: 14px;
   color: #697d6d;
 }
 
@@ -146,7 +144,7 @@
   background: transparent;
   outline: none;
 
-  font-size: 12px;
+  font-size: 13px;
   color: #19351f;
 }
 
@@ -189,7 +187,7 @@
 
 .search-quick-panel {
   position: absolute;
-  top: 44px;
+  top: 48px;
   left: 0;
   right: 0;
 
@@ -197,7 +195,7 @@
 
   background: #ffffff;
   border: 1px solid #dce8dd;
-  border-radius: 12px;
+  border-radius: 14px;
   box-shadow: 0 10px 25px rgba(22, 48, 25, 0.09);
 
   z-index: 100;
@@ -246,7 +244,7 @@
 .topbar-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   flex-shrink: 0;
 }
 
@@ -256,19 +254,16 @@
   align-items: center;
   gap: 8px;
 
-  height: 38px;
-  padding: 0 12px;
+  height: 40px;
+  padding: 0 8px;
 
-  background: #ffffff;
-  border: 1px solid #dbe8dd;
-  border-radius: 19px;
-
-  font-size: 11px;
+  background: transparent;
+  font-size: 12px;
   cursor: default;
 }
 
 .weather-icon {
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .weather-info {
@@ -280,11 +275,11 @@
 .weather-temp {
   font-weight: 700;
   color: #17391f;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .weather-label {
-  font-size: 9px;
+  font-size: 10px;
   color: #637666;
 }
 
@@ -769,17 +764,61 @@
 }
 
 
+/* Hamburger Menu Button */
+.topbar-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4.5px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid #cfe0d3;
+  background: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: all 0.18s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.topbar-menu-btn:hover {
+  background: #edf7ef;
+  border-color: #a7cca9;
+}
+
+.topbar-menu-btn:active {
+  transform: scale(0.94);
+}
+
+.menu-btn-bar {
+  display: block;
+  width: 17px;
+  height: 2px;
+  background: #174220;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
 /* =========================================
    RESPONSIVE DESIGN
    ========================================= */
 
 @media (max-width: 1024px) {
   .topbar {
-    padding: 0 20px;
+    left: 0;
+    width: 100%;
+    padding: 0 16px;
+    height: 62px;
+  }
+
+  .topbar-menu-btn {
+    display: flex;
   }
 
   .topbar-search-wrapper {
-    max-width: 240px;
+    max-width: 220px;
   }
 
   .topbar-nav-pills {
@@ -791,12 +830,12 @@
   .topbar {
     left: 0;
     width: 100%;
-    height: 60px;
-    padding: 0 14px;
+    height: 58px;
+    padding: 0 12px;
   }
 
   .topbar-search-wrapper {
-    display: none; /* Can be revealed via mobile search button if needed */
+    display: none;
   }
 
   .topbar-weather-pill {
@@ -805,6 +844,10 @@
 
   .breadcrumb-title {
     font-size: 13px;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -822,11 +865,34 @@
   }
 
   .breadcrumb-home-link span {
-    font-size: 15px;
+    font-size: 14px;
+  }
+
+  .breadcrumb-home-link {
+    display: none; /* Keep Topbar super clean on small mobile */
+  }
+
+  .breadcrumb-separator {
+    display: none;
   }
 
   .notif-menu {
-    right: -50px;
-    width: 290px;
+    position: fixed;
+    top: 60px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-width: calc(100vw - 20px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .profile-menu {
+    position: fixed;
+    top: 60px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-width: calc(100vw - 20px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
   }
 }

@@ -1,0 +1,90 @@
+/* =========================================
+   MOBILE BOTTOM NAVIGATION BAR
+   Appears only on smaller displays (<= 768px)
+   ========================================= */
+
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: rgba(13, 40, 19, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+  z-index: 95;
+  box-sizing: border-box;
+}
+
+.mobile-bottom-nav-inner {
+  max-width: 500px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 10px;
+}
+
+.mobile-nav-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: transparent;
+  border: none;
+  color: #9cb8a2;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 12px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex: 1;
+}
+
+.mobile-nav-btn:active {
+  transform: scale(0.92);
+}
+
+.mobile-nav-icon {
+  font-size: 19px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.mobile-nav-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.mobile-nav-btn.active {
+  color: #ffffff;
+}
+
+.mobile-nav-btn.active .mobile-nav-icon {
+  transform: translateY(-2px) scale(1.12);
+  color: #52c46f;
+}
+
+.mobile-nav-indicator {
+  position: absolute;
+  top: 2px;
+  width: 18px;
+  height: 3px;
+  background: #43a047;
+  border-radius: 4px;
+  box-shadow: 0 0 8px #43a047;
+}
+
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: block;
+  }
+}
+

@@ -1,11 +1,23 @@
-/* =========================================
-   APP LAYOUT
-   ========================================= */
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(circle at 8% 12%, rgba(220, 240, 222, 0.45), transparent 35%),
+              radial-gradient(circle at 92% 85%, rgba(228, 243, 230, 0.55), transparent 45%),
+              #f5f8f3;
+  display: flex;
+}
+
+.page-transition-container {
+  width: 100%;
+  max-width: 1540px;
+  margin: 0 auto;
+  min-height: calc(100vh - 66px);
+  animation: pageFadeSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
 
 .app-layout {
   width: 100%;
   min-height: 100vh;
-
   background: #f5f8f3;
 }
 
@@ -22,8 +34,7 @@
   margin-left: 250px;
   padding-top: 66px;
 
-  background: #f5f8f3;
-
+  background: transparent;
   box-sizing: border-box;
 }
 
@@ -70,6 +81,8 @@
 html {
   width: 100%;
   min-height: 100%;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -89,6 +102,7 @@ body {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 #root {
@@ -105,6 +119,7 @@ textarea {
 
 button {
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 a {
@@ -147,18 +162,34 @@ a {
 
 
 /* =========================================
-   RESPONSIVE
+   RESPONSIVE BREAKPOINTS (MULTI-DISPLAY)
    ========================================= */
 
-@media (max-width: 768px) {
-  body {
-    overflow-x: hidden;
-  }
-
+/* Tablets & Small Laptops (<= 1024px) */
+@media (max-width: 1024px) {
   .main-content {
     width: 100%;
     margin-left: 0;
-    padding-top: 60px;
+    padding-top: 62px;
   }
 }
-.auth-or-landing-content{width:100%;min-height:100vh;}
+
+/* Phones & Small Tablets (<= 768px) */
+@media (max-width: 768px) {
+  .main-content {
+    width: 100%;
+    margin-left: 0;
+    padding-top: 58px;
+    padding-bottom: 74px; /* Space for MobileBottomNav */
+  }
+
+  .page-transition-container {
+    min-height: calc(100vh - 132px);
+  }
+}
+
+.auth-or-landing-content {
+  width: 100%;
+  min-height: 100vh;
+}
+

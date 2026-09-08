@@ -1,64 +1,78 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "./components/sidebar";
 import Topbar from "./components/Topbar";
+import MobileBottomNav from "./components/MobileBottomNav";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-import EnvironmentSetup from "./pages/EnvironmentSetup";
 import MyGarden from "./pages/MyGarden";
+import PlantLibrary from "./pages/PlantLibrary";
 import SmartRecommendations from "./pages/SmartRecommendations";
 import CareScheduler from "./pages/CareScheduler";
 import DiseaseDetection from "./pages/DiseaseDetection";
 import GardenAssistant from "./pages/GardenAssistant";
+import Settings from "./pages/Settings";
 import { STORAGE_KEYS } from "./utils";
 import "./App.css";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+  const [_isAuthenticated, setIsAuthenticated] = useState(() => {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEYS.session) || "null")?.isLoggedIn === true;
+      const raw = localStorage.getItem(STORAGE_KEYS.session);
+      if (!raw) return true; // Default to true so user sees full dashboard on initial open
+      return JSON.parse(raw)?.isLoggedIn !== false;
     } catch {
-      return false;
+      return true;
     }
   });
 
   const [activePage, setActivePage] = useState(() => {
     try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEYS.session) || "null")?.isLoggedIn === true
-        ? "dashboard"
-        : "landing";
+      const raw = localStorage.getItem(STORAGE_KEYS.session);
+      const session = raw ? JSON.parse(raw) : null;
+      if (session?.isLoggedIn === false) return "landing";
+      return "dashboard"; // Default to dashboard matching mockup
     } catch {
-      return "landing";
+      return "dashboard";
     }
   });
 
   const [pagePayload, setPagePayload] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem(STORAGE_KEYS.session)) {
+        localStorage.setItem(
+          STORAGE_KEYS.session,
+          JSON.stringify({ name: "Dattu", email: "dattu@gardenguide.io", isLoggedIn: true })
+        );
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
 
   const handlePageChange = (page, payload = null) => {
     setPagePayload(payload);
-    const publicPages = ["landing", "login", "signup"];
-    if (publicPages.includes(page)) {
-      setActivePage(page);
-      return;
-    }
-    if (!isAuthenticated) {
-      setActivePage("login");
-      return;
-    }
     setActivePage(page);
+    setIsMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleLogin = (session) => {
     localStorage.setItem(STORAGE_KEYS.session, JSON.stringify(session));
     setIsAuthenticated(true);
     setActivePage("dashboard");
+    setIsMobileMenuOpen(false);
   };
 
   const handleLogout = () => {
     localStorage.removeItem(STORAGE_KEYS.session);
     setIsAuthenticated(false);
     setActivePage("landing");
+    setIsMobileMenuOpen(false);
   };
 
   const renderPage = () => {
@@ -67,9 +81,16 @@ function App() {
       case "login": return <Login onNavigate={handlePageChange} onLogin={handleLogin} />;
       case "signup": return <Signup onNavigate={handlePageChange} />;
       case "dashboard": return <Dashboard onPageChange={handlePageChange} />;
-      case "environment": return <EnvironmentSetup onPageChange={handlePageChange} />;
+      case "environment":
+      case "recommendations":
+        return (
+          <SmartRecommendations
+            onPageChange={handlePageChange}
+            initialTab={activePage === "environment" ? "environment" : "recommendations"}
+          />
+        );
       case "mygarden": return <MyGarden onPageChange={handlePageChange} />;
-      case "recommendations": return <SmartRecommendations onPageChange={handlePageChange} />;
+      case "library": return <PlantLibrary onPageChange={handlePageChange} />;
       case "diseasedetection":
       case "disease":
         return <DiseaseDetection onPageChange={handlePageChange} initialSymptom={pagePayload?.symptom || ""} />;
@@ -77,16 +98,23 @@ function App() {
       case "health":
         return <DiseaseDetection onPageChange={handlePageChange} initialSymptom={pagePayload?.symptom || ""} />;
       case "assistant": return <GardenAssistant />;
+      case "settings": return <Settings onPageChange={handlePageChange} onLogout={handleLogout} />;
       default: return <Landing onNavigate={handlePageChange} />;
     }
   };
 
-  const showSidebar = isAuthenticated && !["landing", "login", "signup"].includes(activePage);
+  const showSidebar = !["landing", "login", "signup"].includes(activePage);
 
   return (
     <div className="app">
       {showSidebar && (
-        <Sidebar activePage={activePage} onPageChange={handlePageChange} onLogout={handleLogout} />
+        <Sidebar
+          activePage={activePage}
+          onPageChange={handlePageChange}
+          onLogout={handleLogout}
+          isMobileOpen={isMobileMenuOpen}
+          onCloseMobile={() => setIsMobileMenuOpen(false)}
+        />
       )}
       <main className={showSidebar ? "main-content" : "auth-or-landing-content"}>
         {showSidebar && (
@@ -94,12 +122,24 @@ function App() {
             activePage={activePage}
             onPageChange={handlePageChange}
             onLogout={handleLogout}
+            onToggleSidebar={() => setIsMobileMenuOpen((prev) => !prev)}
           />
         )}
-        {renderPage()}
+        <div key={activePage} className="page-transition-container">
+          {renderPage()}
+        </div>
       </main>
+
+      {/* Mobile Bottom Navigation for phone screens */}
+      {showSidebar && (
+        <MobileBottomNav
+          activePage={activePage}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 }
 
 export default App;
+

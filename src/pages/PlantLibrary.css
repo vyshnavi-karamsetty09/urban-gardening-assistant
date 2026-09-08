@@ -1,0 +1,536 @@
+/* =========================================
+   URBAN GARDENING ASSISTANT - PLANT LIBRARY
+   Botanical Encyclopedia & Care Guides
+   ========================================= */
+
+.plant-library-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 22px 28px 45px;
+  background: #f2f7f2;
+  color: #16321b;
+  box-sizing: border-box;
+}
+
+/* Header */
+.library-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 26px;
+  background: #ffffff;
+  border: 1px solid #dce8dd;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 14px rgba(22, 48, 25, 0.035);
+}
+
+.library-header-text {
+  min-width: 0;
+}
+
+.library-eyebrow {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  color: #2e7d32;
+  letter-spacing: 1.2px;
+  margin-bottom: 4px;
+}
+
+.library-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  color: #15381f;
+  letter-spacing: -0.4px;
+}
+
+.library-subtitle {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: #627766;
+  max-width: 600px;
+  line-height: 1.4;
+}
+
+/* Search Box */
+.library-search-box {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f6faf6;
+  border: 1px solid #d4e4d7;
+  border-radius: 24px;
+  padding: 0 14px;
+  height: 40px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.library-search-box:focus-within {
+  background: #ffffff;
+  border-color: #235e2e;
+  box-shadow: 0 0 0 3px rgba(35, 94, 46, 0.12);
+}
+
+.library-search-ico {
+  font-size: 14px;
+  color: #697d6d;
+}
+
+.library-search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 12px;
+  color: #16321b;
+}
+
+.library-search-box input::placeholder {
+  color: #8c9f90;
+}
+
+/* Filters Bar */
+.library-filters-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 18px;
+  background: #ffffff;
+  border: 1px solid #e1ebe2;
+  border-radius: 14px;
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-group-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #556c59;
+}
+
+.filter-pills-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.library-pill-btn {
+  padding: 5px 12px;
+  border-radius: 16px;
+  border: 1px solid #dce8dd;
+  background: #fbfdfb;
+  color: #3b5641;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.library-pill-btn:hover {
+  background: #eef7f0;
+  color: #1a4d25;
+}
+
+.library-pill-btn.active {
+  background: #184824;
+  color: #ffffff;
+  border-color: #184824;
+}
+
+/* Catalog Grid */
+.library-catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.library-plant-card {
+  background: #ffffff;
+  border: 1px solid #dde7df;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 14px rgba(22, 48, 25, 0.035);
+}
+
+.lib-card-media {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  background: #f3f7f3;
+  overflow: hidden;
+}
+
+.lib-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.library-plant-card:hover .lib-card-img {
+  transform: scale(1.05);
+}
+
+.lib-diff-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 9px;
+  border-radius: 10px;
+  font-size: 9px;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.lib-diff-badge.very-easy {
+  background: #ebf8ec;
+  color: #1b6d31;
+  border: 1px solid #c8eccd;
+}
+
+.lib-diff-badge.easy {
+  background: #e9f5fd;
+  color: #1c75b2;
+  border: 1px solid #cfe6fb;
+}
+
+.lib-diff-badge.moderate {
+  background: #fef4e8;
+  color: #b45309;
+  border: 1px solid #fde3c5;
+}
+
+.lib-card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.lib-card-names {
+  margin-bottom: 6px;
+}
+
+.lib-plant-name {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #15361d;
+}
+
+.lib-botanical-name {
+  display: block;
+  font-size: 10px;
+  font-style: italic;
+  color: #728876;
+}
+
+.lib-desc-snippet {
+  margin: 6px 0 12px;
+  font-size: 11px;
+  color: #5c7261;
+  line-height: 1.45;
+}
+
+.lib-specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #f7faf7;
+  border: 1px solid #e7eee8;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
+
+.lib-spec-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lib-spec-item small {
+  display: block;
+  font-size: 8.5px;
+  color: #7b8f80;
+}
+
+.lib-spec-item strong {
+  display: block;
+  font-size: 10px;
+  color: #183a20;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lib-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.lib-details-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #d6e6d8;
+  border-radius: 10px;
+  background: #f1f7f2;
+  color: #1c572a;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+}
+
+.lib-details-btn:hover {
+  background: #1c572a;
+  color: #ffffff;
+}
+
+.lib-add-btn {
+  padding: 8px 14px;
+  border: 1px solid #235e2e;
+  border-radius: 10px;
+  background: #235e2e;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.lib-add-btn:hover {
+  background: #194622;
+}
+
+.lib-add-btn.added {
+  background: #edf7ef;
+  color: #236f33;
+  border-color: #badcbe;
+}
+
+/* Modal Guide */
+.library-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 32, 16, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.library-modal-dialog {
+  width: 100%;
+  max-width: 540px;
+  background: #ffffff;
+  border: 1px solid #dce8dd;
+  border-radius: 20px;
+  box-shadow: 0 18px 45px rgba(10, 32, 15, 0.22);
+  overflow: hidden;
+}
+
+.modal-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  background: #f8faf8;
+  border-bottom: 1px solid #eef4ee;
+}
+
+.modal-top-bar h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #17381f;
+}
+
+.botanical-sub {
+  font-size: 11px;
+  font-style: italic;
+  color: #697f6e;
+}
+
+.modal-close-ico {
+  border: none;
+  background: transparent;
+  color: #7b8f80;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.modal-guide-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.guide-hero-img-wrap {
+  width: 100%;
+  height: 180px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f2f7f2;
+}
+
+.guide-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.guide-badge-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.guide-category-tag {
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: #eaf6ec;
+  color: #216731;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.guide-difficulty-tag {
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: #e9f4fd;
+  color: #1c75b2;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.guide-overview {
+  margin: 0;
+  font-size: 12px;
+  color: #556c59;
+  line-height: 1.5;
+}
+
+.guide-vital-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 10px 14px;
+  background: #f8faf8;
+  border: 1px solid #e7eee8;
+  border-radius: 12px;
+  font-size: 11px;
+}
+
+.guide-vital-specs span {
+  display: block;
+  font-size: 9px;
+  color: #768a7a;
+}
+
+.guide-vital-specs strong {
+  display: block;
+  font-size: 11px;
+  color: #16361d;
+}
+
+.guide-expert-tip {
+  padding: 10px 14px;
+  background: #fbfdf9;
+  border-left: 3px solid #2e7d32;
+  border-radius: 0 10px 10px 0;
+}
+
+.guide-expert-tip strong {
+  display: block;
+  font-size: 11px;
+  color: #235e2e;
+  margin-bottom: 2px;
+}
+
+.guide-expert-tip p {
+  margin: 0;
+  font-size: 11px;
+  color: #576d5b;
+  line-height: 1.4;
+}
+
+.guide-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.guide-add-garden-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #1b5327;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.guide-diagnose-btn {
+  padding: 10px 16px;
+  border: 1px solid #cfe2d3;
+  border-radius: 10px;
+  background: #f2f8f3;
+  color: #1f5e2d;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (min-width: 1441px) {
+  .plant-library-page {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 28px 36px 55px;
+  }
+}
+
+@media (max-width: 768px) {
+  .plant-library-page {
+    padding: 16px 14px 40px;
+  }
+  .library-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .library-search-box {
+    max-width: 100%;
+  }
+  .library-filters-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .library-catalog-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

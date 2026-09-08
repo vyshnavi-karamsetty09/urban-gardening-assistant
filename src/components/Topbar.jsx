@@ -4,17 +4,19 @@ import "./Topbar.css";
 
 const PAGE_META = {
   dashboard: { title: "Dashboard", icon: "⌂", subtitle: "Overview & Daily Care" },
-  environment: { title: "Environment Setup", icon: "☀", subtitle: "Sunlight, Climate & Space" },
+  environment: { title: "Smart Recommendations", icon: "✦", subtitle: "Weather, Environment & Plant Matching" },
   mygarden: { title: "My Garden", icon: "🌿", subtitle: "Plants & Health Status" },
-  recommendations: { title: "Smart Recommendations", icon: "✦", subtitle: "Personalized Plant Suggestions" },
+  library: { title: "Plant Library", icon: "📖", subtitle: "Botanical Encyclopedia & Care Guides" },
+  recommendations: { title: "Smart Recommendations", icon: "✦", subtitle: "Weather, Environment & Plant Matching" },
   diseasedetection: { title: "Disease Detection", icon: "🔍", subtitle: "AI Scanner & Treatment Hub" },
   disease: { title: "Disease Detection", icon: "🔍", subtitle: "AI Scanner & Treatment Hub" },
   health: { title: "Plant Health", icon: "♡", subtitle: "Diagnosis & Symptoms" },
   scheduler: { title: "Care Scheduler", icon: "✓", subtitle: "Daily Watering & Tasks" },
   assistant: { title: "Garden Assistant", icon: "🤖", subtitle: "Offline Gardening Helper" },
+  settings: { title: "Settings & Preferences", icon: "⚙", subtitle: "Profile, Microclimate & Garden Data" },
 };
 
-function Topbar({ activePage = "dashboard", onPageChange, onLogout }) {
+function Topbar({ activePage = "dashboard", onPageChange, onLogout, onToggleSidebar }) {
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -32,8 +34,8 @@ function Topbar({ activePage = "dashboard", onPageChange, onLogout }) {
       return null;
     }
   })();
-  const userName = user?.name || "Gardener";
-  const userEmail = user?.email || "gardener@urban.io";
+  const userName = user?.name || "Dattu";
+  const userEmail = user?.email || "dattu@gardenguide.io";
 
   // Notifications
   const [notifications, setNotifications] = useState([
@@ -96,21 +98,15 @@ function Topbar({ activePage = "dashboard", onPageChange, onLogout }) {
     );
     setIsNotifOpen(false);
     if (onPageChange && notif.page) {
-      onPageChange(notif.page, notif.payload || null);
+      onPageChange(notif.page, notif.payload);
     }
   };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    const query = searchQuery.trim();
-    if (!query) return;
-
-    // Direct search to Disease Detection if disease or symptom related, else My Garden
-    const isDiseaseQuery = /leaf|spot|rot|blight|mildew|mite|aphid|yellow|pest|fungus|disease|curl|wilt/i.test(query);
-    if (isDiseaseQuery && onPageChange) {
-      onPageChange("diseasedetection", { symptom: query });
-    } else if (onPageChange) {
-      onPageChange("mygarden");
+    if (!searchQuery.trim()) return;
+    if (onPageChange) {
+      onPageChange("library");
     }
     setIsSearchFocused(false);
   };
@@ -123,8 +119,20 @@ function Topbar({ activePage = "dashboard", onPageChange, onLogout }) {
 
   return (
     <header className="topbar" role="banner">
-      {/* LEFT: Page Breadcrumb & Title */}
+      {/* LEFT: Mobile Menu Button & Breadcrumb */}
       <div className="topbar-left">
+        <button
+          type="button"
+          className="topbar-menu-btn"
+          onClick={onToggleSidebar}
+          aria-label="Open navigation menu"
+          title="Open menu"
+        >
+          <span className="menu-btn-bar"></span>
+          <span className="menu-btn-bar"></span>
+          <span className="menu-btn-bar"></span>
+        </button>
+
         <div className="topbar-breadcrumb">
           <button
             type="button"
@@ -151,8 +159,8 @@ function Topbar({ activePage = "dashboard", onPageChange, onLogout }) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => setIsSearchFocused(true)}
-            placeholder="Search diseases, plants, symptoms..."
-            aria-label="Search diseases, plants, or symptoms"
+            placeholder="Search plants, care tips, diseases..."
+            aria-label="Search plants, care tips, diseases..."
           />
           {searchQuery && (
             <button
@@ -227,7 +235,7 @@ function Topbar({ activePage = "dashboard", onPageChange, onLogout }) {
           <span className="weather-icon">☀️</span>
           <div className="weather-info">
             <span className="weather-temp">28°C</span>
-            <span className="weather-label">Optimal</span>
+            <span className="weather-label">Hyderabad</span>
           </div>
         </div>
 
@@ -255,7 +263,7 @@ function Topbar({ activePage = "dashboard", onPageChange, onLogout }) {
             aria-label="Garden Notifications"
             aria-expanded={isNotifOpen}
           >
-            <span className="notification-icon">🔔</span>
+            <span className={`notification-icon ${unreadCount > 0 ? "bell-active" : ""}`}>🔔</span>
             {unreadCount > 0 && (
               <span className="notification-count" aria-label={`${unreadCount} unread notifications`}>
                 {unreadCount}
@@ -325,10 +333,10 @@ function Topbar({ activePage = "dashboard", onPageChange, onLogout }) {
             aria-label="User profile menu"
             aria-expanded={isProfileOpen}
           >
-            <span className="profile-avatar">🌱</span>
+            <span className="profile-avatar">👨‍🌾</span>
             <div className="profile-user-info">
-              <span className="profile-name">{userName}</span>
-              <span className="profile-status">Gardener</span>
+              <span className="profile-name">Hello, {userName}</span>
+              <span className="profile-status">Plant Lover</span>
             </div>
             <span className="profile-arrow">{isProfileOpen ? "▴" : "▾"}</span>
           </button>
@@ -379,10 +387,10 @@ function Topbar({ activePage = "dashboard", onPageChange, onLogout }) {
                   className="profile-menu-item"
                   onClick={() => {
                     setIsProfileOpen(false);
-                    if (onPageChange) onPageChange("environment");
+                    if (onPageChange) onPageChange("settings");
                   }}
                 >
-                  <span>⚙️</span> Garden Environment Settings
+                  <span>⚙️</span> Settings & Profile
                 </button>
               </div>
 

@@ -239,13 +239,32 @@
   position: relative;
 }
 
+.landing-page .hero-image::before {
+  content: "";
+  position: absolute;
+  inset: -15px;
+  background: radial-gradient(circle, rgba(52, 115, 78, 0.22), transparent 70%);
+  filter: blur(24px);
+  z-index: 0;
+  border-radius: 40px;
+  pointer-events: none;
+}
+
 .landing-page .hero-image img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 28px;
   display: block;
   box-shadow: 0 20px 45px rgba(30, 55, 39, 0.18);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.landing-page .hero-image:hover img {
+  transform: scale(1.02);
+  box-shadow: 0 28px 60px rgba(30, 55, 39, 0.24);
 }
 
 .landing-page .badge {
@@ -336,28 +355,36 @@
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 18px;
-  padding: 20px;
-  box-shadow: 0 3px 12px rgba(30, 55, 39, 0.04);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  padding: 22px;
+  box-shadow: 0 4px 14px rgba(30, 55, 39, 0.05);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .landing-page .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(30, 55, 39, 0.09);
+  transform: translateY(-8px);
+  border-color: rgba(52, 115, 78, 0.4);
+  box-shadow: 0 16px 36px rgba(30, 55, 39, 0.12);
 }
 
 .landing-page .icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
   background: var(--secondary);
   color: var(--leaf);
   display: grid;
   place-items: center;
-  margin-bottom: 15px;
-  font-size: 20px;
+  margin-bottom: 16px;
+  font-size: 22px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+.landing-page .card:hover .icon {
+  transform: scale(1.12) rotate(-5deg);
+  background: #d6ebd7;
 }
 
 .landing-page .card h3 {

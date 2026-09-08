@@ -205,17 +205,19 @@
 .dropzone-area {
   display: block;
   border: 2px dashed #b7cebb;
-  border-radius: 12px;
+  border-radius: 14px;
   background: #fbfdfb;
-  padding: 40px 20px;
+  padding: 42px 20px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dropzone-area:hover {
   border-color: #2e7d32;
   background: #f0f7f1;
+  transform: scale(1.01);
+  box-shadow: 0 8px 24px rgba(46, 125, 50, 0.08);
 }
 
 .file-input-hidden {
@@ -229,8 +231,13 @@
 }
 
 .dropzone-icon {
-  font-size: 42px;
-  margin-bottom: 10px;
+  font-size: 44px;
+  margin-bottom: 12px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropzone-area:hover .dropzone-icon {
+  transform: scale(1.15) rotate(-4deg);
 }
 
 .dropzone-content strong {
@@ -542,6 +549,7 @@
   flex-direction: column;
   gap: 16px;
   margin-top: 14px;
+  animation: fadeInScale 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .report-header {
@@ -583,6 +591,7 @@
   border-radius: 10px;
   padding: 8px 14px;
   flex-shrink: 0;
+  animation: pulseGlow 2.5s infinite ease-out;
 }
 
 .confidence-badge strong {
@@ -2352,9 +2361,17 @@
   }
 }
 
+@media (min-width: 1441px) {
+  .disease-detection-page {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 28px 36px 55px;
+  }
+}
+
 @media (max-width: 600px) {
   .disease-detection-page {
-    padding: 20px 16px 35px;
+    padding: 16px 14px 40px;
   }
 
   .diag-nav-top {

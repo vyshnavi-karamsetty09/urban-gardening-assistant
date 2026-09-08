@@ -1,1088 +1,1039 @@
 /* =========================================
-   SMART RECOMMENDATIONS
+   SMART RECOMMENDATIONS & ENVIRONMENT PAGE
+   Unified Botanical AI Engine & Microclimate
    ========================================= */
 
-.recommendations-page {
+.smart-rec-page {
   width: 100%;
-  max-width: 1200px;
-
-  margin: 0 auto;
-
-  padding: 28px 40px 50px;
-
+  min-height: 100vh;
+  padding: 24px 30px 50px;
+  background: #f2f7f2;
+  color: #15381f;
   box-sizing: border-box;
 }
 
-
 /* =========================================
-   HEADER
+   1. HERO BANNER
    ========================================= */
 
-.recommendations-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-
-  gap: 30px;
-
-  margin-bottom: 28px;
-}
-
-.recommendations-eyebrow {
-  margin: 0 0 6px;
-
-  color: #718775;
-
-  font-size: 10px;
-  font-weight: 700;
-
-  letter-spacing: 1.4px;
-}
-
-.recommendations-header h1 {
-  margin: 0;
-
-  color: #19351f;
-
-  font-size: 30px;
-  line-height: 1.2;
-
-  font-weight: 700;
-
-  letter-spacing: -0.5px;
-}
-
-.recommendations-header h1 span {
-  color: #3b8b4a;
-
-  font-size: 25px;
-
-  margin-left: 3px;
-}
-
-.recommendations-subtitle {
-  margin: 8px 0 0;
-
-  color: #718174;
-
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.environment-status {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 7px;
-
-  flex-shrink: 0;
-
-  padding: 8px 12px;
-
-  border: 1px solid #d4e8d7;
-
-  border-radius: 20px;
-
-  background: #f1f9f2;
-
-  color: #327241;
-
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.status-check {
-  width: 18px;
-  height: 18px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: #d9efdc;
-
-  font-size: 10px;
-}
-
-
-/* =========================================
-   GENERAL EYEBROW
-   ========================================= */
-
-.card-eyebrow {
-  margin: 0 0 5px;
-
-  color: #7b8b7e;
-
-  font-size: 9px;
-  font-weight: 700;
-
-  letter-spacing: 1px;
-}
-
-
-/* =========================================
-   PROFILE CARD
-   ========================================= */
-
-.profile-card {
-  padding: 22px;
-
-  background: #ffffff;
-
-  border: 1px solid #e2ebe3;
-
-  border-radius: 17px;
-
-  box-sizing: border-box;
-
+.smart-rec-banner {
+  position: relative;
+  min-height: 145px;
+  border-radius: 18px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   margin-bottom: 20px;
-
-  box-shadow:
-    0 2px 8px rgba(31, 45, 32, 0.025);
+  box-shadow: 0 8px 24px rgba(12, 38, 17, 0.12);
+  overflow: hidden;
 }
 
-.profile-header {
+.banner-glass-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 255, 255, 0.88) 50%,
+    rgba(255, 255, 255, 0.45) 80%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+
+.banner-content-inner {
+  position: relative;
+  z-index: 2;
+  padding: 22px 30px;
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   gap: 20px;
-
-  margin-bottom: 20px;
 }
 
-.profile-heading {
+.banner-titles {
   min-width: 0;
 }
 
-.profile-heading h2 {
-  margin: 0;
-
-  color: #19351f;
-
-  font-size: 19px;
-  line-height: 1.3;
-
-  font-weight: 700;
+.banner-eyebrow {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  color: #2b743a;
+  text-transform: uppercase;
+  margin-bottom: 4px;
 }
 
-.profile-heading > p:last-child {
-  margin: 4px 0 0;
+.banner-heading {
+  margin: 0;
+  color: #14381e;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
 
-  color: #7a897e;
+.banner-heading span {
+  color: #2e8b46;
+  font-size: 24px;
+  margin-left: 4px;
+}
 
-  font-size: 11px;
+.banner-desc {
+  margin: 6px 0 0;
+  color: #5d7563;
+  font-size: 13px;
+  max-width: 620px;
   line-height: 1.45;
 }
 
-.update-environment-btn {
-  display: inline-flex;
-
+.banner-weather-badge {
+  display: flex;
   align-items: center;
-  justify-content: center;
-
-  gap: 7px;
-
+  gap: 12px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #d8e8da;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
   flex-shrink: 0;
-
-  min-width: 145px;
-
-  padding: 10px 14px;
-
-  border: 1px solid #d5e4d7;
-
-  border-radius: 9px;
-
-  background: #f8fbf8;
-
-  color: #2d6b3a;
-
-  font-size: 11px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.2s ease;
 }
 
-.update-environment-btn:hover {
-  background: #edf6ee;
-
-  border-color: #c8ddca;
-
-  transform: translateY(-1px);
+.weather-badge-icon {
+  font-size: 26px;
 }
 
-.update-environment-btn span {
+.weather-badge-info strong {
+  display: block;
   font-size: 13px;
+  font-weight: 700;
+  color: #14381e;
 }
 
+.weather-badge-info span {
+  display: block;
+  font-size: 10.5px;
+  color: #637c68;
+  margin-top: 2px;
+}
 
 /* =========================================
-   ENVIRONMENT GRID
+   2. UNIFIED TAB SWITCHER
    ========================================= */
 
-.environment-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
-
-  gap: 10px;
-}
-
-.environment-item {
-  min-width: 0;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-
-  min-height: 62px;
-
-  padding: 10px;
-
-  box-sizing: border-box;
-
-  border: 1px solid #e5ece6;
-
-  border-radius: 11px;
-
-  background: #fbfdfb;
-}
-
-.environment-item-icon {
-  width: 34px;
-  height: 34px;
-
-  flex-shrink: 0;
-
+.smart-tab-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
-  border-radius: 9px;
+.smart-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 20px;
+  background: #ffffff;
+  border: 1px solid #dce8dd;
+  border-radius: 14px;
+  color: #4b6651;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
 
-  background: #edf6ee;
+.smart-tab-btn:hover {
+  background: #eef7f0;
+  color: #163e1f;
+  border-color: #c8decb;
+}
 
+.smart-tab-btn.active {
+  background: #184422;
+  color: #ffffff;
+  border-color: #184422;
+  box-shadow: 0 4px 14px rgba(24, 68, 34, 0.25);
+}
+
+.tab-ico {
+  font-size: 15px;
+}
+
+.tab-counter {
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.smart-tab-btn:not(.active) .tab-counter {
+  background: #edf7ef;
+  color: #1b5327;
+}
+
+.tab-status-pill {
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.smart-tab-btn:not(.active) .tab-status-pill {
+  background: #edf7ef;
+  color: #216d33;
+}
+
+/* =========================================
+   3. TAB 1: AI PLANT MATCHES
+   ========================================= */
+
+/* Snapshot Strip */
+.env-snapshot-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid #dfe9e1;
+  border-radius: 16px;
+  padding: 12px 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.snapshot-chips {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.snapshot-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #f7faf7;
+  border: 1px solid #e5ede6;
+  border-radius: 10px;
+}
+
+.chip-ico {
   font-size: 16px;
 }
 
-.environment-item-content {
-  min-width: 0;
+.snapshot-chip small {
+  display: block;
+  font-size: 9px;
+  color: #7b8f80;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
 
+.snapshot-chip strong {
+  display: block;
+  font-size: 11.5px;
+  color: #16361d;
+  font-weight: 700;
+}
+
+.modify-env-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid #d5e5d7;
+  border-radius: 10px;
+  background: #f1f8f2;
+  color: #1f5e2d;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.modify-env-btn:hover {
+  background: #1f5e2d;
+  color: #ffffff;
+  border-color: #1f5e2d;
+}
+
+/* Filter Controls */
+.matches-filter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.rec-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  min-width: 280px;
+  padding: 0 14px;
+  background: #ffffff;
+  border: 1px solid #dce7dd;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+
+.rec-search-box:focus-within {
+  border-color: #216731;
+  box-shadow: 0 0 0 3px rgba(33, 103, 49, 0.12);
+}
+
+.rec-search-ico {
+  font-size: 14px;
+  color: #7a8e80;
+}
+
+.rec-search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 12px;
+  color: #16361d;
+}
+
+.search-clear-btn {
+  border: none;
+  background: transparent;
+  color: #92a496;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.rec-category-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rec-cat-btn {
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1px solid #dce8dd;
+  background: #ffffff;
+  color: #3b5641;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.rec-cat-btn:hover {
+  background: #edf7ef;
+  color: #163d1e;
+}
+
+.rec-cat-btn.active {
+  background: #173f20;
+  color: #ffffff;
+  border-color: #173f20;
+}
+
+/* Recommendations Grid */
+.recommendations-real-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.rec-plant-card {
+  background: #ffffff;
+  border: 1px solid #dfe9e0;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(18, 45, 22, 0.05);
   display: flex;
   flex-direction: column;
-
-  gap: 3px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.environment-item-content span {
-  color: #849187;
-
-  font-size: 9px;
-
-  line-height: 1.2;
+.rec-plant-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(18, 45, 22, 0.1);
+  border-color: #bcdac1;
 }
 
-.environment-item-content strong {
+.rec-card-media {
+  position: relative;
+  width: 100%;
+  height: 155px;
+  background: #eef5f0;
   overflow: hidden;
-
-  color: #29412f;
-
-  font-size: 11px;
-  font-weight: 700;
-
-  line-height: 1.2;
-
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-
-/* =========================================
-   MAIN ACTION
-   ========================================= */
-
-.recommendation-action {
-  display: flex;
-
-  align-items: center;
-
-  gap: 17px;
-
-  padding: 20px 22px;
-
-  margin-bottom: 20px;
-
-  background: linear-gradient(
-    135deg,
-    #eff8f0 0%,
-    #f8fbf7 100%
-  );
-
-  border: 1px solid #d7e8d9;
-
-  border-radius: 16px;
-
-  box-sizing: border-box;
+.rec-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-.action-icon {
-  width: 48px;
-  height: 48px;
+.rec-plant-card:hover .rec-card-img {
+  transform: scale(1.06);
+}
 
-  flex-shrink: 0;
-
+.rec-badges-overlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  border-radius: 13px;
-
-  background: #dcefdc;
-
-  color: #2f743b;
-
-  font-size: 22px;
+  justify-content: space-between;
+  gap: 8px;
 }
 
-.action-content {
-  flex: 1;
-
-  min-width: 0;
-}
-
-.action-content h2 {
-  margin: 0 0 5px;
-
-  color: #24452b;
-
-  font-size: 16px;
-  line-height: 1.3;
-
-  font-weight: 700;
-}
-
-.action-content > p:last-child {
-  max-width: 650px;
-
-  margin: 0;
-
-  color: #6c7b70;
-
-  font-size: 11px;
-
-  line-height: 1.5;
-}
-
-.get-recommendations-btn {
-  display: inline-flex;
-
-  align-items: center;
-  justify-content: center;
-
-  flex-shrink: 0;
-
-  min-width: 200px;
-
-  padding: 11px 16px;
-
-  border: none;
-
-  border-radius: 9px;
-
-  background: #2d713b;
-
-  color: #ffffff;
-
-  font-size: 11px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease,
-    opacity 0.2s ease;
-}
-
-.get-recommendations-btn:hover:not(:disabled) {
-  background: #245f31;
-
-  transform: translateY(-1px);
-}
-
-.get-recommendations-btn:disabled {
-  cursor: wait;
-
-  opacity: 0.65;
-}
-
-
-/* =========================================
-   ERROR
-   ========================================= */
-
-.recommendation-error {
-  display: flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 13px 15px;
-
-  margin-bottom: 20px;
-
-  border: 1px solid #f0d5bc;
-
+.match-score-badge {
+  padding: 4px 9px;
   border-radius: 12px;
-
-  background: #fff8f1;
-
-  box-sizing: border-box;
+  font-size: 10px;
+  font-weight: 800;
+  background: #1a5626;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.error-icon {
-  width: 30px;
-  height: 30px;
+.cat-pill-badge {
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
 
-  flex-shrink: 0;
+.cat-pill-badge.vegetables {
+  color: #b91c1c;
+}
 
+.cat-pill-badge.flowers {
+  color: #be185d;
+}
+
+.cat-pill-badge.herbs {
+  color: #15803d;
+}
+
+.cat-pill-badge.succulents {
+  color: #047857;
+}
+
+.rec-card-body {
+  padding: 14px 16px 16px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 9px;
-
-  background: #fff0df;
-
-  color: #b66a2b;
-
-  font-size: 14px;
-}
-
-.recommendation-error > div:nth-child(2) {
+  flex-direction: column;
   flex: 1;
-
-  min-width: 0;
 }
 
-.recommendation-error strong {
+.rec-name-block {
+  margin-bottom: 8px;
+}
+
+.rec-plant-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #15371c;
+}
+
+.rec-botanical-name {
   display: block;
-
-  margin-bottom: 2px;
-
-  color: #8c5124;
-
-  font-size: 11px;
+  font-size: 10.5px;
+  font-style: italic;
+  color: #728c77;
+  margin-top: 1px;
 }
 
-.recommendation-error p {
-  margin: 0;
-
-  color: #a06d47;
-
-  font-size: 10px;
-
-  line-height: 1.4;
-}
-
-.retry-btn {
-  flex-shrink: 0;
-
-  padding: 8px 12px;
-
-  border: 1px solid #e5c9ae;
-
-  border-radius: 8px;
-
-  background: #ffffff;
-
-  color: #9b5c2c;
-
-  font-size: 10px;
-  font-weight: 700;
-
-  cursor: pointer;
-}
-
-.retry-btn:hover {
-  background: #fff4e8;
-}
-
-
-/* =========================================
-   RESULTS
-   ========================================= */
-
-.results-section {
-  margin-bottom: 20px;
-}
-
-.results-header {
+.rec-match-reason {
   display: flex;
-
-  align-items: flex-end;
-
-  justify-content: space-between;
-
-  gap: 20px;
-
-  margin-bottom: 14px;
-}
-
-.results-header h2 {
-  margin: 0;
-
-  color: #19351f;
-
-  font-size: 19px;
-
-  font-weight: 700;
-}
-
-.results-header > div > p:last-child {
-  margin: 5px 0 0;
-
-  color: #7a897e;
-
-  font-size: 11px;
-}
-
-.results-count {
-  flex-shrink: 0;
-
-  padding: 6px 10px;
-
-  border-radius: 20px;
-
-  background: #eef6ef;
-
-  color: #47704f;
-
-  font-size: 10px;
-  font-weight: 700;
-}
-
-
-/* =========================================
-   RECOMMENDATION GRID
-   ========================================= */
-
-.recommendation-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
-
-  gap: 14px;
-}
-
-.recommendation-card {
-  overflow: hidden;
-
-  background: #ffffff;
-
-  border: 1px solid #e2ebe3;
-
-  border-radius: 15px;
-
-  box-shadow:
-    0 2px 8px rgba(31, 45, 32, 0.025);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.recommendation-card:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 8px 20px rgba(35, 69, 42, 0.07);
-}
-
-.recommendation-plant-icon {
-  height: 105px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: #f0f7f0;
-
-  font-size: 45px;
-}
-
-.recommendation-card-body {
-  padding: 15px;
-}
-
-.recommendation-card-top {
-  display: flex;
-
   align-items: flex-start;
-  justify-content: space-between;
-
-  gap: 10px;
-
+  gap: 6px;
+  background: #f4faf5;
+  border: 1px solid #d9edd9;
+  border-radius: 10px;
+  padding: 7px 9px;
   margin-bottom: 12px;
 }
 
-.recommendation-card-top h3 {
-  margin: 0 0 3px;
-
-  color: #29412f;
-
-  font-size: 14px;
-  font-weight: 700;
+.reason-spark {
+  font-size: 12px;
+  line-height: 1.2;
 }
 
-.recommendation-card-top p {
+.rec-match-reason p {
   margin: 0;
-
-  color: #849187;
-
-  font-size: 10px;
+  font-size: 10.5px;
+  color: #2d5a35;
+  line-height: 1.35;
+  font-weight: 500;
 }
 
-.difficulty-badge {
-  flex-shrink: 0;
-
-  padding: 5px 7px;
-
-  border-radius: 20px;
-
-  background: #edf7ef;
-
-  color: #347342;
-
-  font-size: 9px;
-  font-weight: 700;
-}
-
-.plant-requirements {
+.rec-specs-chips {
   display: flex;
-
   flex-wrap: wrap;
-
   gap: 6px;
-
   margin-bottom: 14px;
 }
 
-.plant-requirements span {
-  padding: 6px 7px;
-
-  border-radius: 7px;
-
+.spec-chip {
+  padding: 4px 8px;
   background: #f7faf7;
-
-  color: #657569;
-
-  font-size: 9px;
-}
-
-.add-plant-result-btn {
-  width: 100%;
-
-  padding: 9px;
-
-  border: 1px solid #d8e5da;
-
+  border: 1px solid #e3ede4;
   border-radius: 8px;
-
-  background: #f8fbf8;
-
-  color: #2e6b3a;
-
   font-size: 10px;
+  color: #4b6650;
+  font-weight: 600;
+}
+
+.spec-chip.difficulty {
+  background: #ebf7ec;
+  color: #1e6d32;
+  border-color: #cbebcc;
+}
+
+.rec-card-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f2f7f2;
+}
+
+.add-to-garden-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #1a4d25;
+  color: #ffffff;
+  font-size: 11px;
   font-weight: 700;
-
   cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-.add-plant-result-btn:hover {
-  background: #edf6ee;
-
-  border-color: #c8ddca;
+.add-to-garden-btn:hover {
+  background: #113819;
+  transform: translateY(-1px);
 }
 
+.in-garden-status {
+  flex: 1;
+  text-align: center;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: #edf7ef;
+  color: #216d33;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid #d2ebd6;
+}
+
+.rec-view-guide-btn {
+  padding: 7px 10px;
+  border: 1px solid #d5e5d7;
+  border-radius: 10px;
+  background: #f6faf6;
+  color: #276636;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.rec-view-guide-btn:hover {
+  background: #eaf4eb;
+}
 
 /* =========================================
-   NO RESULTS
+   4. TAB 2: WEATHER & ENVIRONMENT SETUP
    ========================================= */
 
-.no-results-card {
-  padding: 30px;
-
-  margin-bottom: 20px;
-
-  text-align: center;
-
-  background: #ffffff;
-
-  border: 1px solid #e2ebe3;
-
-  border-radius: 16px;
+.weather-env-view-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.no-results-icon {
-  width: 48px;
-  height: 48px;
+/* Live Weather Card */
+.live-weather-card {
+  background: #ffffff;
+  border: 1px solid #dfe9e0;
+  border-radius: 18px;
+  padding: 22px 24px;
+  box-shadow: 0 4px 16px rgba(18, 45, 22, 0.04);
+}
 
+.weather-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.weather-kicker {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #2b743a;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.weather-card-header h2 {
+  margin: 3px 0 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #14381e;
+}
+
+.weather-card-header p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #667e6c;
+}
+
+.weather-condition-tag {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: #fef8e7;
+  border: 1px solid #fae7b2;
+  color: #8a6108;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.weather-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.weather-metric-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #fbfdfb;
+  border: 1px solid #e3ece4;
+  border-radius: 14px;
+}
+
+.metric-box-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  margin: 0 auto 10px;
-
-  border-radius: 13px;
-
-  background: #eef6ef;
-
-  font-size: 23px;
+  font-size: 18px;
+  flex-shrink: 0;
 }
 
-.no-results-card h2 {
-  margin: 0 0 6px;
-
-  color: #29412f;
-
-  font-size: 16px;
+.metric-box-icon.yellow {
+  background: #fef8e7;
 }
 
-.no-results-card p {
-  max-width: 520px;
-
-  margin: 0 auto 15px;
-
-  color: #7a897e;
-
-  font-size: 11px;
-
-  line-height: 1.5;
+.metric-box-icon.blue {
+  background: #e9f4fd;
 }
 
-.secondary-action-btn {
-  padding: 9px 14px;
+.metric-box-icon.green {
+  background: #ebf8ed;
+}
 
-  border: 1px solid #d5e4d7;
+.metric-box-icon.mint {
+  background: #ebf8f2;
+}
 
-  border-radius: 9px;
+.metric-val {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: #15371c;
+}
 
-  background: #f8fbf8;
-
-  color: #2d6b3a;
-
+.weather-metric-box small {
+  display: block;
   font-size: 10px;
-  font-weight: 700;
-
-  cursor: pointer;
+  color: #6e8473;
+  margin-top: 1px;
 }
 
-.secondary-action-btn:hover {
-  background: #edf6ee;
+.weather-advice-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #f0f9f2;
+  border: 1px solid #d4ebd6;
+  border-radius: 12px;
 }
 
-
-/* =========================================
-   WHY SECTION
-   ========================================= */
-
-.why-section {
-  padding: 20px;
-
-  background: #ffffff;
-
-  border: 1px solid #e2ebe3;
-
-  border-radius: 16px;
+.advice-ico {
+  font-size: 16px;
+  flex-shrink: 0;
 }
 
-.why-header {
-  margin-bottom: 15px;
-}
-
-.why-header h2 {
+.weather-advice-banner p {
   margin: 0;
-
-  color: #29412f;
-
-  font-size: 17px;
-}
-
-.why-header > p:last-child {
-  margin: 5px 0 0;
-
-  color: #7b897e;
-
-  font-size: 11px;
-
+  font-size: 11.5px;
+  color: #24572e;
   line-height: 1.45;
 }
 
-.why-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, minmax(0, 1fr));
-
-  gap: 10px;
-}
-
-.why-item {
-  display: flex;
-
-  align-items: flex-start;
-
-  gap: 9px;
-
-  padding: 11px;
-
-  border-radius: 10px;
-
-  background: #f8fbf8;
-
-  border: 1px solid #e8eee8;
-}
-
-.why-icon {
-  width: 30px;
-  height: 30px;
-
-  flex-shrink: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 8px;
-
-  background: #eaf4eb;
-
-  font-size: 14px;
-}
-
-.why-item h3 {
-  margin: 0 0 3px;
-
-  color: #38513d;
-
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.why-item p {
-  margin: 0;
-
-  color: #849087;
-
-  font-size: 9px;
-
-  line-height: 1.4;
-}
-
-
-/* =========================================
-   SETUP EMPTY STATE
-   ========================================= */
-
-.setup-empty-card {
-  display: flex;
-
-  align-items: center;
-
-  gap: 20px;
-
-  padding: 28px;
-
+/* Environment Configurator Card */
+.env-configurator-card {
   background: #ffffff;
-
-  border: 1px solid #e2ebe3;
-
-  border-radius: 17px;
-
-  box-shadow:
-    0 2px 8px rgba(31, 45, 32, 0.025);
+  border: 1px solid #dfe9e0;
+  border-radius: 18px;
+  padding: 24px 26px;
+  box-shadow: 0 4px 16px rgba(18, 45, 22, 0.04);
 }
 
-.setup-empty-icon {
-  width: 58px;
-  height: 58px;
+.config-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #eef4ee;
+}
 
-  flex-shrink: 0;
+.config-card-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #14381e;
+}
 
+.config-card-header p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #667e6c;
+}
+
+.save-env-top-btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #1b5327;
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-env-top-btn:hover {
+  background: #123d1b;
+}
+
+.config-group {
+  margin-bottom: 20px;
+}
+
+.config-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1d4624;
+  margin-bottom: 10px;
+}
+
+.pincode-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 420px;
+}
+
+.config-text-input {
+  flex: 1;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid #dce7dd;
+  border-radius: 10px;
+  background: #fdfefd;
+  font-size: 13px;
+  color: #15371c;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.config-text-input:focus {
+  border-color: #216731;
+  box-shadow: 0 0 0 3px rgba(33, 103, 49, 0.12);
+  background: #ffffff;
+}
+
+.pincode-badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #eef8f0;
+  border: 1px solid #d3ebd6;
+  color: #216d33;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Options Selection Grid */
+.options-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.options-selection-grid.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.env-opt-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: #ffffff;
+  border: 1.5px solid #dce7dd;
+  border-radius: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.env-opt-card:hover {
+  background: #f8fbf8;
+  border-color: #b7d6bd;
+  transform: translateY(-2px);
+}
+
+.env-opt-card.selected {
+  background: #f1f8f2;
+  border-color: #216731;
+  box-shadow: 0 4px 12px rgba(33, 103, 49, 0.12);
+}
+
+.opt-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #216731;
+  color: #ffffff;
+  font-size: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border-radius: 15px;
-
-  background: #eaf5eb;
-
-  font-size: 28px;
 }
 
-.setup-empty-content h2 {
-  margin: 0 0 5px;
-
-  color: #29412f;
-
-  font-size: 18px;
+.opt-ico {
+  font-size: 24px;
+  margin-bottom: 8px;
 }
 
-.setup-empty-content > p:not(.card-eyebrow) {
-  max-width: 650px;
-
-  margin: 0 0 15px;
-
-  color: #758378;
-
-  font-size: 11px;
-
-  line-height: 1.5;
+.opt-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #14381e;
+  margin-bottom: 3px;
 }
 
-.primary-action-btn {
-  padding: 10px 16px;
+.opt-desc {
+  display: block;
+  font-size: 10.5px;
+  color: #6a8270;
+  line-height: 1.35;
+}
 
-  border: none;
+/* Dropdowns Triple Grid */
+.dropdowns-triple-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
 
-  border-radius: 9px;
+.dropdown-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 
-  background: #2d713b;
-
-  color: white;
-
+.dropdown-box label {
   font-size: 11px;
   font-weight: 700;
+  color: #3b5641;
+}
 
+.dropdown-box select {
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #dce7dd;
+  border-radius: 10px;
+  background: #ffffff;
+  font-size: 12px;
+  color: #16321b;
+  outline: none;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.primary-action-btn:hover {
-  background: #245f31;
+.dropdown-box select:focus {
+  border-color: #216731;
+  box-shadow: 0 0 0 3px rgba(33, 103, 49, 0.12);
 }
 
+/* Config Footer */
+.config-footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eef4ee;
+}
+
+.save-and-generate-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  background: #184422;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(24, 68, 34, 0.25);
+  transition: all 0.2s ease;
+}
+
+.save-and-generate-btn:hover {
+  background: #113419;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(24, 68, 34, 0.35);
+}
 
 /* =========================================
-   RESPONSIVE
+   5. FLOATING TOAST
    ========================================= */
 
-@media (max-width: 1050px) {
+.rec-floating-toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: #143d1c;
+  color: #ffffff;
+  padding: 12px 22px;
+  border-radius: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 28px rgba(12, 40, 16, 0.3);
+  z-index: 2000;
+  font-size: 12px;
+  font-weight: 700;
+}
 
-  .recommendations-page {
-    padding: 26px 28px 45px;
-  }
+.toast-ico {
+  font-size: 16px;
+}
 
-  .environment-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
+/* =========================================
+   6. RESPONSIVE DESIGN (MULTI-DISPLAY)
+   ========================================= */
 
-  .recommendation-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
-  }
-
-  .why-grid {
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr));
+@media (min-width: 1441px) {
+  .smart-rec-page {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 28px 36px 55px;
   }
 }
 
-
-@media (max-width: 800px) {
-
-  .recommendations-header {
-    align-items: flex-start;
-
-    flex-direction: column;
+@media (max-width: 1100px) {
+  .recommendations-real-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .profile-header {
-    align-items: flex-start;
-
-    flex-direction: column;
+  .weather-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .update-environment-btn {
-    width: 100%;
-  }
-
-  .recommendation-action {
-    align-items: flex-start;
-
-    flex-direction: column;
-  }
-
-  .get-recommendations-btn {
-    width: 100%;
-  }
-
-  .setup-empty-card {
-    align-items: flex-start;
-
-    flex-direction: column;
+  .options-selection-grid.cols-4 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-
-@media (max-width: 600px) {
-
-  .recommendations-page {
-    padding: 22px 18px 35px;
+@media (max-width: 768px) {
+  .smart-rec-page {
+    padding: 16px 14px 45px;
   }
 
-  .recommendations-header h1 {
-    font-size: 25px;
+  .smart-tab-bar {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .environment-grid {
-    grid-template-columns: 1fr;
+  .smart-tab-btn {
+    justify-content: center;
   }
 
-  .recommendation-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .why-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .profile-card {
-    padding: 17px;
-  }
-
-  .recommendation-action {
-    padding: 18px;
-  }
-
-  .recommendation-error {
+  .banner-content-inner {
+    flex-direction: column;
     align-items: flex-start;
-
-    flex-wrap: wrap;
   }
 
-  .retry-btn {
-    margin-left: 42px;
+  .recommendations-real-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .options-selection-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .options-selection-grid.cols-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .dropdowns-triple-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .weather-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rec-floating-toast {
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    justify-content: center;
   }
 }
