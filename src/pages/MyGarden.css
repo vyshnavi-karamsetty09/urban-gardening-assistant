@@ -1521,6 +1521,504 @@
 }
 
 /* =========================================
+   GROWTH, IN GARDEN & HARVEST TRACKING STYLES
+   ========================================= */
+
+.metric-icon-circle.harvest-gold {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.garden-metric-card.harvest-metric-card {
+  cursor: pointer;
+  border-color: #fde68a;
+  background: #fffdf5;
+  transition: all 0.2s ease;
+}
+
+.garden-metric-card.harvest-metric-card:hover {
+  transform: translateY(-2px);
+  border-color: #f59e0b;
+  box-shadow: 0 6px 18px rgba(217, 119, 6, 0.12);
+}
+
+.filter-tab.harvest-tab {
+  background: #fffbeb;
+  color: #92400e;
+  border-color: #fde68a;
+}
+
+.filter-tab.harvest-tab:hover {
+  background: #fef3c7;
+  color: #78350f;
+}
+
+.filter-tab.harvest-tab.active {
+  background: #d97706;
+  color: #ffffff;
+  border-color: #d97706;
+}
+
+.card-media-badges {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  z-index: 2;
+}
+
+.plant-card-badge.ready-badge {
+  position: static;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.15);
+  animation: pulse-harvest-badge 2s infinite ease-in-out;
+}
+
+@keyframes pulse-harvest-badge {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.plant-card.card-harvest-ready {
+  border-color: #fcd34d;
+  box-shadow: 0 4px 16px rgba(217, 119, 6, 0.08);
+}
+
+/* Growth & In Garden Tracker on Card */
+.card-growth-tracker {
+  background: #f8faf8;
+  border: 1px solid #e1ebe2;
+  border-radius: 12px;
+  padding: 8px 10px;
+  margin: 6px 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.growth-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.growth-stat-pill {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e8efe9;
+  border-radius: 8px;
+  padding: 4px 6px;
+}
+
+.growth-stat-pill .stat-label {
+  font-size: 8.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  color: #698270;
+  font-weight: 600;
+}
+
+.growth-stat-pill .stat-value {
+  font-size: 11px;
+  color: #163c1e;
+  font-weight: 700;
+  margin-top: 1px;
+  white-space: nowrap;
+}
+
+.harvest-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-radius: 8px;
+  font-size: 10px;
+  line-height: 1.25;
+}
+
+.harvest-status-bar.growing {
+  background: #edf7ef;
+  color: #24582f;
+  border: 1px solid #d4ebd7;
+}
+
+.harvest-status-bar.ready {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+  font-weight: 600;
+}
+
+.harvest-status-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.harvest-status-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.harvest-status-text strong {
+  color: #153e1e;
+}
+
+.harvest-status-bar.ready .harvest-status-text strong {
+  color: #b45309;
+}
+
+.harvest-status-text small {
+  color: #58755e;
+  font-size: 9px;
+}
+
+.harvest-ready-highlight {
+  color: #b45309;
+  font-weight: 800;
+}
+
+.growth-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.growth-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9.5px;
+  color: #55725b;
+}
+
+.growth-stage-name {
+  font-weight: 600;
+}
+
+.growth-pct-val {
+  font-weight: 700;
+  color: #173d1f;
+}
+
+.growth-progress-track {
+  width: 100%;
+  height: 5px;
+  background: #e3ede5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.growth-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.growth-progress-fill.ready {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.moisture-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9.5px;
+  color: #637c68;
+  margin-bottom: 3px;
+}
+
+.moisture-val {
+  font-weight: 700;
+  color: #1c4424;
+}
+
+/* Insight harvest */
+.insight-item.harvest-insight {
+  background: #fffdf5;
+  border-left: 3px solid #f59e0b;
+}
+
+.insight-icon.amber {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* Detail Modal Growth Section */
+.garden-modal-dialog.plant-detail-modal {
+  max-width: min(660px, 95vw);
+}
+
+.detail-modal-badges {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+  z-index: 2;
+}
+
+.detail-growth-section {
+  background: #f8faf8;
+  border: 1px solid #d9e7db;
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-growth-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.growth-header-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.growth-head-ico {
+  font-size: 16px;
+}
+
+.growth-head-text {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #14381c;
+}
+
+.growth-stage-pill {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 9.5px;
+  font-weight: 700;
+  background: #e6f4ea;
+  color: #137333;
+  border: 1px solid #ceead6;
+}
+
+.growth-stage-pill.ready {
+  background: #fef3c7;
+  color: #b45309;
+  border-color: #fde68a;
+}
+
+.modal-growth-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.modal-growth-stat-card {
+  background: #ffffff;
+  border: 1px solid #e1ebe2;
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-growth-stat-card.harvest-ready {
+  background: #fffdf5;
+  border-color: #fde68a;
+}
+
+.stat-card-title {
+  font-size: 9px;
+  color: #69826e;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.stat-card-main {
+  font-size: 12px;
+  color: #13391b;
+  font-weight: 800;
+  margin: 2px 0 1px;
+}
+
+.modal-growth-stat-card.harvest-ready .stat-card-main {
+  color: #b45309;
+}
+
+.stat-card-hint {
+  font-size: 8.5px;
+  color: #79917e;
+  line-height: 1.2;
+}
+
+/* 4-Stage Stepper */
+.modal-milestone-stepper {
+  position: relative;
+  padding: 10px 4px 6px;
+}
+
+.stepper-track-bg {
+  position: absolute;
+  top: 22px;
+  left: 24px;
+  right: 24px;
+  height: 4px;
+  background: #e2ede4;
+  border-radius: 2px;
+  z-index: 1;
+}
+
+.stepper-track-bar {
+  height: 100%;
+  background: #10b981;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.stepper-track-bar.ready {
+  background: #f59e0b;
+}
+
+.stepper-points-flex {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.stepper-point {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 68px;
+}
+
+.point-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #d1e2d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  margin-bottom: 4px;
+  transition: all 0.2s ease;
+}
+
+.stepper-point.completed .point-dot {
+  border-color: #10b981;
+  background: #ecfdf5;
+}
+
+.stepper-point.ready .point-dot {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.point-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #3b5a41;
+  line-height: 1.15;
+}
+
+.point-day {
+  font-size: 8px;
+  color: #7b9481;
+  margin-top: 1px;
+}
+
+/* Harvest Advice Box */
+.modal-harvest-advice-box {
+  background: #fffdf5;
+  border: 1px solid #fef08a;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.advice-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.advice-header-row strong {
+  font-size: 10.5px;
+  color: #854d0e;
+}
+
+.ready-accent-tag {
+  padding: 1px 6px;
+  border-radius: 8px;
+  background: #fef08a;
+  color: #713f12;
+  font-size: 8.5px;
+  font-weight: 700;
+}
+
+.advice-desc-text {
+  margin: 0;
+  font-size: 10px;
+  color: #713f12;
+  line-height: 1.4;
+}
+
+.harvest-morning-tip {
+  font-size: 9px;
+  color: #854d0e;
+  font-style: italic;
+}
+
+/* Planted Date Adjuster */
+.modal-planted-date-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed #dce7dd;
+  font-size: 10.5px;
+  color: #4b6651;
+}
+
+.modal-date-input {
+  padding: 4px 8px;
+  border: 1px solid #ccdcd0;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 10.5px;
+  color: #173c1f;
+  outline: none;
+}
+
+.modal-date-input:focus {
+  border-color: #216731;
+}
+
+/* =========================================
    RESPONSIVE DESIGN (MULTI-DISPLAY)
    ========================================= */
 

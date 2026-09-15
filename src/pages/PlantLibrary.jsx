@@ -37,6 +37,7 @@ function PlantLibrary({ onPageChange }) {
       const newPlant = {
         id: Date.now(),
         name: plant.name,
+        botanicalName: plant.botanicalName,
         type: plant.category.slice(0, -1), // e.g. Herb, Vegetable
         emoji: plant.category === "Flowers" ? "🌹" : plant.category === "Succulents" ? "🌵" : "🌿",
         status: "Healthy",
@@ -45,6 +46,12 @@ function PlantLibrary({ onPageChange }) {
         water: plant.water.split(" ")[0],
         watered: "Watered Today",
         moisture: 85,
+        plantedDate: new Date().toISOString().split("T")[0],
+        growthDays: plant.growthDays || 60,
+        growthTime: plant.growthTime || `${plant.growthDays || 60} days`,
+        harvestAdvice: plant.harvestAdvice || "Harvest when mature.",
+        harvestType: plant.harvestType || "continuous",
+        image: plant.image,
       };
       savePlants([...saved, newPlant]);
     }

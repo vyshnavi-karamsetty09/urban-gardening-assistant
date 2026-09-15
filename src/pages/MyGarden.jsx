@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { STORAGE_KEYS, getSavedPlants, savePlants, defaultPlants } from "../utils";
-import { LIBRARY_PLANTS, getPlantImage } from "../plantData";
+import { STORAGE_KEYS, getSavedPlants, savePlants, defaultPlants, getPlantGrowthInfo } from "../utils";
+import { LIBRARY_PLANTS, getPlantImage, getPlantGrowthMeta } from "../plantData";
 import PageHeaderBanner from "../components/PageHeaderBanner";
 import "./MyGarden.css";
 
@@ -32,6 +32,8 @@ function MyGarden({ onPageChange }) {
   const [formType, setFormType] = useState("Herb");
   const [formSunlight, setFormSunlight] = useState("4–6 hrs");
   const [formWater, setFormWater] = useState("Daily");
+  const [formPlantedDate, setFormPlantedDate] = useState(() => new Date().toISOString().split("T")[0]);
+  const [formGrowthDays, setFormGrowthDays] = useState("30");
 
   // Care tasks state
   const [careTasks, setCareTasks] = useState([
@@ -56,10 +58,17 @@ function MyGarden({ onPageChange }) {
   })();
   const userName = user?.name || "Dattu";
 
+  // Calculate Ready to Harvest
+  const readyToHarvestCount = plants.filter((p) => getPlantGrowthInfo(p).isReady).length;
+
   // Filter Plants
   const filteredPlants = plants.filter((plant) => {
     if (filter === "Healthy") return plant.statusType === "healthy";
     if (filter === "Needs Water") return plant.statusType === "warning";
+    if (filter === "Ready to Harvest") {
+      const g = getPlantGrowthInfo(plant);
+      return g.isReady;
+    }
     return true;
   });
 
@@ -119,6 +128,11 @@ function MyGarden({ onPageChange }) {
       image: libPlant.image,
       description: libPlant.description,
       careTips: libPlant.careTips,
+      plantedDate: new Date().toISOString().split("T")[0],
+      growthDays: libPlant.growthDays || 60,
+      growthTime: libPlant.growthTime || `${libPlant.growthDays || 60} days`,
+      harvestAdvice: libPlant.harvestAdvice || "Harvest when fully matured.",
+      harvestType: libPlant.harvestType || "continuous",
     };
 
     const updated = [newPlant, ...plants];
@@ -133,6 +147,9 @@ function MyGarden({ onPageChange }) {
     e.preventDefault();
     const name = formName.trim();
     if (!name) return;
+
+    const meta = getPlantGrowthMeta(name, formType);
+    const growthDays = Number(formGrowthDays) || meta.growthDays || 60;
 
     const newPlant = {
       id: Date.now(),
@@ -153,6 +170,11 @@ function MyGarden({ onPageChange }) {
       watered: "Watered Today",
       moisture: 80,
       image: getPlantImage(name),
+      plantedDate: formPlantedDate || new Date().toISOString().split("T")[0],
+      growthDays,
+      growthTime: `${growthDays} days`,
+      harvestAdvice: meta.harvestAdvice,
+      harvestType: meta.harvestType,
     };
 
     const updated = [newPlant, ...plants];
@@ -162,6 +184,21 @@ function MyGarden({ onPageChange }) {
     setShowAddForm(false);
     setToastMsg(`🌿 "${name}" added to your garden!`);
     setTimeout(() => setToastMsg(null), 3500);
+  };
+
+  // Update Planted Date Handler
+  const handleUpdatePlantedDate = (plantId, newDate) => {
+    if (!newDate) return;
+    const updated = plants.map((p) =>
+      p.id === plantId ? { ...p, plantedDate: newDate } : p
+    );
+    setPlants(updated);
+    savePlants(updated);
+    if (selectedPlant && selectedPlant.id === plantId) {
+      setSelectedPlant((prev) => (prev ? { ...prev, plantedDate: newDate } : null));
+    }
+    setToastMsg(`📅 Planted date updated!`);
+    setTimeout(() => setToastMsg(null), 2500);
   };
 
   // Water Plant Handler
@@ -308,12 +345,24 @@ function MyGarden({ onPageChange }) {
           </div>
         </div>
 
-        {/* Quote Card */}
-        <div className="garden-metric-card quote-metric slow-popup animate-slow-pop" style={{ animationDelay: "240ms" }}>
-          <div className="quote-metric-icon">🌿</div>
-          <p className="quote-metric-text">
-            "A well-cared garden brings peace to your mind."
-          </p>
+        {/* Harvest Ready Metric Card */}
+        <div
+          className="garden-metric-card harvest-metric-card slow-popup animate-slow-pop"
+          style={{ animationDelay: "240ms" }}
+          onClick={() => setFilter("Ready to Harvest")}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && setFilter("Ready to Harvest")}
+          title="Click to view plants ready to harvest"
+        >
+          <div className="metric-icon-circle harvest-gold">
+            <span>🧺</span>
+          </div>
+          <div className="metric-text-group">
+            <strong className="metric-big-num">{readyToHarvestCount}</strong>
+            <span className="metric-sub">Ready to Harvest</span>
+          </div>
+          <div className="metric-sprout-art">🌾</div>
         </div>
       </section>
 
@@ -352,6 +401,13 @@ function MyGarden({ onPageChange }) {
               >
                 Needs Water
               </button>
+              <button
+                type="button"
+                className={`filter-tab harvest-tab ${filter === "Ready to Harvest" ? "active" : ""}`}
+                onClick={() => setFilter("Ready to Harvest")}
+              >
+                🧺 Ready to Harvest ({readyToHarvestCount})
+              </button>
             </div>
           </div>
 
@@ -360,17 +416,25 @@ function MyGarden({ onPageChange }) {
             {filteredPlants.map((plant) => {
               const plantImg = plant.image || getPlantImage(plant.name);
               const isWarning = plant.statusType === "warning";
+              const growth = getPlantGrowthInfo(plant);
 
               return (
                 <article
                   key={plant.id}
-                  className="plant-card slow-popup animate-slow-pop"
+                  className={`plant-card slow-popup animate-slow-pop ${growth.isReady ? "card-harvest-ready" : ""}`}
                 >
                   <div className="plant-card-media">
                     <img src={plantImg} alt={plant.name} className="plant-card-img" />
-                    <span className={`plant-card-badge ${isWarning ? "warning" : "healthy"}`}>
-                      ● {isWarning ? "Needs Water" : "Healthy"}
-                    </span>
+                    <div className="card-media-badges">
+                      <span className={`plant-card-badge ${isWarning ? "warning" : "healthy"}`}>
+                        ● {isWarning ? "Needs Water" : "Healthy"}
+                      </span>
+                      {growth.isReady && (
+                        <span className="plant-card-badge ready-badge">
+                          🧺 Ready to Harvest
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <div className="plant-card-body">
@@ -391,7 +455,53 @@ function MyGarden({ onPageChange }) {
                       </span>
                     </div>
 
+                    {/* Growth, In Garden & Harvest Tracker Block */}
+                    <div className="card-growth-tracker">
+                      <div className="growth-stats-grid">
+                        <div className="growth-stat-pill" title={`Planted on ${growth.plantedDateFormatted}`}>
+                          <span className="stat-label">In Garden:</span>
+                          <strong className="stat-value">🌱 {growth.daysInGarden} days</strong>
+                        </div>
+                        <div className="growth-stat-pill" title={`Full cycle: ${growth.growthTime}`}>
+                          <span className="stat-label">Needs to Grow:</span>
+                          <strong className="stat-value">⏳ {growth.growthDays} days</strong>
+                        </div>
+                      </div>
+
+                      {/* Harvest Status Line */}
+                      <div className={`harvest-status-bar ${growth.isReady ? "ready" : "growing"}`}>
+                        <span className="harvest-status-icon">{growth.isReady ? "🧺" : "🌿"}</span>
+                        <div className="harvest-status-text">
+                          {growth.isReady ? (
+                            <strong className="harvest-ready-highlight">Ready for Harvest!</strong>
+                          ) : (
+                            <span>
+                              Harvest in <strong>{growth.daysToHarvest} days</strong> <small>({growth.harvestDateStr})</small>
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Growth Progress Bar */}
+                      <div className="growth-progress-wrap">
+                        <div className="growth-progress-labels">
+                          <span className="growth-stage-name">{growth.harvestStage}</span>
+                          <span className="growth-pct-val">{growth.progressPct}%</span>
+                        </div>
+                        <div className="growth-progress-track">
+                          <div
+                            className={`growth-progress-fill ${growth.isReady ? "ready" : ""}`}
+                            style={{ width: `${growth.progressPct}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
                     {/* Moisture Progress Bar */}
+                    <div className="moisture-meta-row">
+                      <span className="moisture-label">Soil Moisture</span>
+                      <span className="moisture-val">{plant.moisture || (isWarning ? 30 : 80)}%</span>
+                    </div>
                     <div className="moisture-track">
                       <div
                         className={`moisture-fill ${isWarning ? "warning" : "healthy"}`}
@@ -454,7 +564,7 @@ function MyGarden({ onPageChange }) {
                           className="card-view-btn slow-pop-btn"
                           onClick={() => setSelectedPlant(plant)}
                         >
-                          View →
+                          View Details →
                         </button>
                       </div>
                     </div>
@@ -470,6 +580,23 @@ function MyGarden({ onPageChange }) {
           <h2 className="insights-heading">📈 Garden Insights</h2>
 
           <div className="insights-list">
+            {/* Harvest Insight */}
+            <div className="insight-item harvest-insight">
+              <div className="insight-icon amber">🧺</div>
+              <div className="insight-info">
+                <strong>
+                  {readyToHarvestCount > 0
+                    ? `${readyToHarvestCount} plant${readyToHarvestCount !== 1 ? "s" : ""} ready to harvest!`
+                    : "Harvest season approaching"}
+                </strong>
+                <small>
+                  {readyToHarvestCount > 0
+                    ? "Fresh produce ready for picking"
+                    : "Check harvest countdowns below"}
+                </small>
+              </div>
+            </div>
+
             {/* Insight 1 */}
             <div className="insight-item">
               <div className="insight-icon green">🌱</div>
@@ -497,15 +624,6 @@ function MyGarden({ onPageChange }) {
               <div className="insight-info">
                 <strong>Good sunlight conditions</strong>
                 <small>Perfect for plant growth</small>
-              </div>
-            </div>
-
-            {/* Insight 4 */}
-            <div className="insight-item">
-              <div className="insight-icon mint">🌿</div>
-              <div className="insight-info">
-                <strong>Keep adding more plants</strong>
-                <small>A greener space awaits!</small>
               </div>
             </div>
           </div>
@@ -754,6 +872,7 @@ function MyGarden({ onPageChange }) {
                           <div className="picker-specs-compact">
                             <span>☀️ {libPlant.sunlight.split(" ")[0]}</span>
                             <span>💧 {libPlant.water.split(" ")[0]}</span>
+                            <span>⏳ {libPlant.growthTime || `${libPlant.growthDays || 60} days`}</span>
                           </div>
 
                           <div className="picker-card-footer">
@@ -795,7 +914,15 @@ function MyGarden({ onPageChange }) {
                   <select
                     id="plant-type"
                     value={formType}
-                    onChange={(e) => setFormType(e.target.value)}
+                    onChange={(e) => {
+                      const newType = e.target.value;
+                      setFormType(newType);
+                      if (newType === "Herb") setFormGrowthDays("30");
+                      else if (newType === "Vegetable") setFormGrowthDays("75");
+                      else if (newType === "Flower") setFormGrowthDays("50");
+                      else if (newType === "Succulent") setFormGrowthDays("75");
+                      else setFormGrowthDays("60");
+                    }}
                   >
                     <option value="Herb">Herb</option>
                     <option value="Vegetable">Vegetable</option>
@@ -803,6 +930,34 @@ function MyGarden({ onPageChange }) {
                     <option value="Succulent">Succulent</option>
                     <option value="Indoor Plant">Indoor Plant</option>
                   </select>
+                </div>
+
+                <div className="form-row-2">
+                  <div className="form-group">
+                    <label htmlFor="plant-planted-date">Planted Date</label>
+                    <input
+                      id="plant-planted-date"
+                      type="date"
+                      max={new Date().toISOString().split("T")[0]}
+                      value={formPlantedDate}
+                      onChange={(e) => setFormPlantedDate(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="plant-growth-days">Days Needed to Grow</label>
+                    <input
+                      id="plant-growth-days"
+                      type="number"
+                      min="5"
+                      max="365"
+                      value={formGrowthDays}
+                      onChange={(e) => setFormGrowthDays(e.target.value)}
+                      placeholder="e.g. 60"
+                      required
+                    />
+                  </div>
                 </div>
 
                 <div className="form-row-2">
@@ -855,77 +1010,187 @@ function MyGarden({ onPageChange }) {
       {/* =========================================
           VIEW PLANT DETAILS MODAL
           ========================================= */}
-      {selectedPlant && (
-        <div className="garden-modal-backdrop" onClick={() => setSelectedPlant(null)}>
-          <div
-            className="garden-modal-dialog plant-detail-modal slow-popup"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="garden-modal-header">
-              <div>
-                <h3>{selectedPlant.name}</h3>
-                {selectedPlant.botanicalName && (
-                  <small className="detail-botanical-sub">{selectedPlant.botanicalName}</small>
-                )}
-              </div>
-              <button
-                type="button"
-                className="modal-close-btn"
-                onClick={() => setSelectedPlant(null)}
-                aria-label="Close modal"
-              >
-                ✕
-              </button>
-            </div>
+      {selectedPlant && (() => {
+        const selectedGrowth = getPlantGrowthInfo(selectedPlant);
 
-            <div className="plant-detail-body">
-              <div className="plant-detail-img-wrap">
-                <img
-                  src={selectedPlant.image || getPlantImage(selectedPlant.name)}
-                  alt={selectedPlant.name}
-                  className="plant-detail-hero-img"
-                />
-                <span
-                  className={`plant-card-badge ${
-                    selectedPlant.statusType === "warning" ? "warning" : "healthy"
-                  }`}
+        return (
+          <div className="garden-modal-backdrop" onClick={() => setSelectedPlant(null)}>
+            <div
+              className="garden-modal-dialog plant-detail-modal slow-popup"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="garden-modal-header">
+                <div>
+                  <h3>{selectedPlant.name}</h3>
+                  {selectedPlant.botanicalName && (
+                    <small className="detail-botanical-sub">{selectedPlant.botanicalName}</small>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  className="modal-close-btn"
+                  onClick={() => setSelectedPlant(null)}
+                  aria-label="Close modal"
                 >
-                  ● {selectedPlant.status}
-                </span>
+                  ✕
+                </button>
               </div>
 
-              <div className="plant-detail-meta">
-                <div className="meta-badge-tag">{selectedPlant.type}</div>
-
-                {selectedPlant.description && (
-                  <p className="detail-desc-snippet">{selectedPlant.description}</p>
-                )}
-
-                <div className="detail-specs-grid">
-                  <div>
-                    <span>Sunlight:</span>
-                    <strong>{selectedPlant.sunlight}</strong>
-                  </div>
-                  <div>
-                    <span>Watering:</span>
-                    <strong>{selectedPlant.water}</strong>
-                  </div>
-                  <div>
-                    <span>Last Watered:</span>
-                    <strong>{selectedPlant.watered}</strong>
-                  </div>
-                  <div>
-                    <span>Moisture Level:</span>
-                    <strong>{selectedPlant.moisture || 80}% (Optimal)</strong>
+              <div className="plant-detail-body">
+                <div className="plant-detail-img-wrap">
+                  <img
+                    src={selectedPlant.image || getPlantImage(selectedPlant.name)}
+                    alt={selectedPlant.name}
+                    className="plant-detail-hero-img"
+                  />
+                  <div className="detail-modal-badges">
+                    <span
+                      className={`plant-card-badge ${
+                        selectedPlant.statusType === "warning" ? "warning" : "healthy"
+                      }`}
+                    >
+                      ● {selectedPlant.status}
+                    </span>
+                    {selectedGrowth.isReady && (
+                      <span className="plant-card-badge ready-badge">
+                        🧺 Ready to Harvest
+                      </span>
+                    )}
                   </div>
                 </div>
 
-                {selectedPlant.careTips && (
-                  <div className="detail-care-tip-box">
-                    <strong>💡 Growing Advice:</strong>
-                    <p>{selectedPlant.careTips}</p>
+                <div className="plant-detail-meta">
+                  <div className="meta-badge-tag">{selectedPlant.type}</div>
+
+                  {selectedPlant.description && (
+                    <p className="detail-desc-snippet">{selectedPlant.description}</p>
+                  )}
+
+                  {/* Growth & Harvesting Journey Section */}
+                  <div className="detail-growth-section">
+                    <div className="detail-growth-header">
+                      <div className="growth-header-title-wrap">
+                        <span className="growth-head-ico">🌱</span>
+                        <h4 className="growth-head-text">Growth & Harvesting Journey</h4>
+                      </div>
+                      <span className={`growth-stage-pill ${selectedGrowth.isReady ? "ready" : ""}`}>
+                        {selectedGrowth.harvestStage}
+                      </span>
+                    </div>
+
+                    {/* 3 Stats Grid */}
+                    <div className="modal-growth-stats-row">
+                      <div className="modal-growth-stat-card">
+                        <span className="stat-card-title">In Garden</span>
+                        <strong className="stat-card-main">🌱 {selectedGrowth.daysInGarden} Days</strong>
+                        <small className="stat-card-hint">Planted {selectedGrowth.plantedDateFormatted}</small>
+                      </div>
+
+                      <div className="modal-growth-stat-card">
+                        <span className="stat-card-title">Needs to Grow</span>
+                        <strong className="stat-card-main">⏳ {selectedGrowth.growthDays} Days</strong>
+                        <small className="stat-card-hint">Cycle: {selectedGrowth.growthTime}</small>
+                      </div>
+
+                      <div className={`modal-growth-stat-card ${selectedGrowth.isReady ? "harvest-ready" : ""}`}>
+                        <span className="stat-card-title">Harvest Window</span>
+                        <strong className="stat-card-main">
+                          {selectedGrowth.isReady ? "Ready Now! 🧺" : `In ${selectedGrowth.daysToHarvest} Days`}
+                        </strong>
+                        <small className="stat-card-hint">
+                          {selectedGrowth.isReady ? "Window is open" : `Est. ${selectedGrowth.harvestDateStr}`}
+                        </small>
+                      </div>
+                    </div>
+
+                    {/* 4-Stage Stepper Progress Track */}
+                    <div className="modal-milestone-stepper">
+                      <div className="stepper-track-bg">
+                        <div
+                          className={`stepper-track-bar ${selectedGrowth.isReady ? "ready" : ""}`}
+                          style={{ width: `${selectedGrowth.progressPct}%` }}
+                        />
+                      </div>
+                      <div className="stepper-points-flex">
+                        <div className={`stepper-point ${selectedGrowth.progressPct >= 5 ? "completed" : ""}`}>
+                          <div className="point-dot">🌱</div>
+                          <span className="point-label">Sprout</span>
+                          <span className="point-day">Day 0</span>
+                        </div>
+                        <div className={`stepper-point ${selectedGrowth.progressPct >= 35 ? "completed" : ""}`}>
+                          <div className="point-dot">🌿</div>
+                          <span className="point-label">Vegetative</span>
+                          <span className="point-day">~Day {Math.round(selectedGrowth.growthDays * 0.35)}</span>
+                        </div>
+                        <div className={`stepper-point ${selectedGrowth.progressPct >= 70 ? "completed" : ""}`}>
+                          <div className="point-dot">🌸</div>
+                          <span className="point-label">Fruiting / Bud</span>
+                          <span className="point-day">~Day {Math.round(selectedGrowth.growthDays * 0.7)}</span>
+                        </div>
+                        <div className={`stepper-point ${selectedGrowth.isReady ? "completed ready" : ""}`}>
+                          <div className="point-dot">🧺</div>
+                          <span className="point-label">Harvest</span>
+                          <span className="point-day">Day {selectedGrowth.growthDays}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Harvesting Advice Box */}
+                    <div className="modal-harvest-advice-box">
+                      <div className="advice-header-row">
+                        <strong>🧺 Harvesting Advice & Signs of Ripeness:</strong>
+                        {selectedGrowth.isReady && (
+                          <span className="ready-accent-tag">Ready for Picking!</span>
+                        )}
+                      </div>
+                      <p className="advice-desc-text">{selectedGrowth.harvestAdvice}</p>
+                      <span className="harvest-morning-tip">
+                        💡 Best practice: Harvest in the morning hours before midday sun evaporates natural oils and moisture.
+                      </span>
+                    </div>
+
+                    {/* Planted Date Adjuster */}
+                    <div className="modal-planted-date-row">
+                      <label htmlFor="modal-date-picker">
+                        📅 <span>Date Planted in Garden:</span>
+                      </label>
+                      <input
+                        id="modal-date-picker"
+                        type="date"
+                        max={new Date().toISOString().split("T")[0]}
+                        value={selectedPlant.plantedDate || ""}
+                        onChange={(e) => handleUpdatePlantedDate(selectedPlant.id, e.target.value)}
+                        className="modal-date-input"
+                        title="Change date if you planted this on a different day"
+                      />
+                    </div>
                   </div>
-                )}
+
+                  <div className="detail-specs-grid">
+                    <div>
+                      <span>Sunlight:</span>
+                      <strong>{selectedPlant.sunlight}</strong>
+                    </div>
+                    <div>
+                      <span>Watering:</span>
+                      <strong>{selectedPlant.water}</strong>
+                    </div>
+                    <div>
+                      <span>Last Watered:</span>
+                      <strong>{selectedPlant.watered}</strong>
+                    </div>
+                    <div>
+                      <span>Moisture Level:</span>
+                      <strong>{selectedPlant.moisture || 80}% (Optimal)</strong>
+                    </div>
+                  </div>
+
+                  {selectedPlant.careTips && (
+                    <div className="detail-care-tip-box">
+                      <strong>💡 Growing Advice:</strong>
+                      <p>{selectedPlant.careTips}</p>
+                    </div>
+                  )}
 
                 <div className="detail-modal-actions">
                   <button
@@ -963,7 +1228,8 @@ function MyGarden({ onPageChange }) {
             </div>
           </div>
         </div>
-      )}
+        );
+      })()}
     </main>
   );
 }

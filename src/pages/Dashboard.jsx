@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { STORAGE_KEYS, getSavedPlants, getSavedTasks, saveTasks, savePlants } from "../utils";
-import PageHeaderBanner from "../components/PageHeaderBanner";
 import "./Dashboard.css";
 
 import basilPotImg from "../assets/basil-pot.jpg";
@@ -16,41 +15,86 @@ const RECOMMENDED_PLANTS = [
     id: "basil",
     name: "Basil (Tulsi)",
     badge: "Easy to Grow",
-    description: "Purifies air, repels insects and perfect for home gardens.",
-    sunlight: "Needs 4-6 hours sunlight",
-    water: "Water 2-3 times/week",
-    season: "Best season: All year",
+    matchBadge: "Best Match",
+    tagline: "Purifies Air • Boosts Immunity • Fragrant Leaves",
+    description: "Perfect for your climate. Helps purify air, keeps insects away and is widely used in home remedies.",
+    quote: {
+      line1: "Small plant",
+      line2: "Big freshness",
+    },
+    sunlight: "4–6 hrs",
+    water: "Moderate",
+    idealFor: "Balcony / Indoor",
+    season: "All year round",
     image: basilPotImg,
   },
   {
     id: "mint",
     name: "Fresh Mint",
     badge: "Fast Growing",
-    description: "Aromatic herb great for teas, garnishing and pest deterrence.",
-    sunlight: "Needs 3-5 hours sunlight",
-    water: "Water 3-4 times/week",
-    season: "Best season: Spring & Summer",
+    matchBadge: "High Yield",
+    tagline: "Cooling Aroma • Rapid Growth • Natural Deterrent",
+    description: "Thrives in containers with moist soil. Ideal for refreshing drinks, herbal garnishes and pest deterrence.",
+    quote: {
+      line1: "Cool scent",
+      line2: "Everyday fresh",
+    },
+    sunlight: "3–5 hrs",
+    water: "Frequent",
+    idealFor: "Windowsill / Pots",
+    season: "Spring & Summer",
     image: plantMintImg,
   },
   {
     id: "aloe",
     name: "Aloe Vera",
-    badge: "Low Maintenance",
-    description: "Healing succulent that thrives in warm sunny balcony spots.",
-    sunlight: "Needs 4-6 hours sunlight",
-    water: "Water once every 7 days",
-    season: "Best season: All year",
+    badge: "Low Care",
+    matchBadge: "Top Resilient",
+    tagline: "Skin Soothing • Air Purifying • Drought Tolerant",
+    description: "Remarkably hardy succulent that demands minimal watering while supplying fresh medicinal gel whenever needed.",
+    quote: {
+      line1: "Ancient healer",
+      line2: "Zero hassle",
+    },
+    sunlight: "4–6 hrs",
+    water: "Every 7–10 days",
+    idealFor: "Sunny Railing",
+    season: "All year round",
     image: plantAloeImg,
   },
   {
     id: "tomato",
     name: "Cherry Tomato",
     badge: "High Yield",
-    description: "Rewarding container crop producing sweet juicy cherry tomatoes.",
-    sunlight: "Needs 6-8 hours direct sun",
-    water: "Water daily in mornings",
-    season: "Best season: Warm months",
+    matchBadge: "Favorite Crop",
+    tagline: "Sweet Flavor • Container Friendly • Abundant Harvest",
+    description: "Rewarding container crop producing clusters of juicy red cherry tomatoes with warm direct sunlight.",
+    quote: {
+      line1: "Sweet harvest",
+      line2: "From your balcony",
+    },
+    sunlight: "6–8 hrs",
+    water: "Daily",
+    idealFor: "Terrace / Planters",
+    season: "Warm Months",
     image: plantTomatoImg,
+  },
+  {
+    id: "curry",
+    name: "Curry Leaf",
+    badge: "Aromatic",
+    matchBadge: "Kitchen Essential",
+    tagline: "Rich Aroma • Culinary Staple • Perennial Bush",
+    description: "A cherished aromatic staple for urban home gardens. Provides fresh flavorful leaves for daily cooking year-round.",
+    quote: {
+      line1: "Rich aroma",
+      line2: "Homegrown daily",
+    },
+    sunlight: "5–6 hrs",
+    water: "Alternate Days",
+    idealFor: "Medium Pots",
+    season: "All year round",
+    image: plantCurryImg,
   },
 ];
 
@@ -90,6 +134,9 @@ function Dashboard({ onPageChange }) {
   const [recIndex, setRecIndex] = useState(0);
   const [tipIndex, setTipIndex] = useState(0);
   const [addedRecs, setAddedRecs] = useState({});
+  const [taskFilter, setTaskFilter] = useState("all"); // "all" | "pending" | "completed"
+  const [gardenCategory, setGardenCategory] = useState("all"); // "all" | "vegetables" | "herbs"
+  const [detailPlant, setDetailPlant] = useState(null);
 
   useEffect(() => {
     saveTasks(tasks);
@@ -98,6 +145,18 @@ function Dashboard({ onPageChange }) {
   useEffect(() => {
     savePlants(plants);
   }, [plants]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setDetailPlant(null);
+      }
+    };
+    if (detailPlant) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [detailPlant]);
 
   // Session user
   const user = (() => {
@@ -137,7 +196,6 @@ function Dashboard({ onPageChange }) {
      RECOMMENDATIONS CAROUSEL
      ========================================= */
   const activeRec = RECOMMENDED_PLANTS[recIndex];
-  const isCurrentRecAdded = addedRecs[activeRec.id];
 
   const handlePrevRecommendation = () => {
     setRecIndex((prev) => (prev === 0 ? RECOMMENDED_PLANTS.length - 1 : prev - 1));
@@ -147,37 +205,59 @@ function Dashboard({ onPageChange }) {
     setRecIndex((prev) => (prev === RECOMMENDED_PLANTS.length - 1 ? 0 : prev + 1));
   };
 
-  const handleAddActiveRec = () => {
-    if (isCurrentRecAdded) {
+  const handleAddActiveRec = (targetPlant = activeRec) => {
+    if (addedRecs[targetPlant.id]) {
       goToMyGarden();
       return;
     }
     const newPlant = {
       id: Date.now(),
-      name: activeRec.name,
+      name: targetPlant.name,
       type: "Herb",
       emoji: "🌿",
       status: "Healthy",
       statusType: "healthy",
-      sunlight: activeRec.sunlight,
-      water: activeRec.water,
+      sunlight: targetPlant.sunlight,
+      water: targetPlant.water,
       watered: "Today",
+      plantedDate: new Date().toISOString().split("T")[0],
     };
     setPlants((prev) => [...prev, newPlant]);
-    setAddedRecs((prev) => ({ ...prev, [activeRec.id]: true }));
+    setAddedRecs((prev) => ({ ...prev, [targetPlant.id]: true }));
   };
 
   /* =========================================
      GARDEN PLANTS LIST (BOTTOM ROW)
      ========================================= */
-  const gardenPlantsDisplay = [
-    { id: 1, name: "Tomato", status: "Healthy", statusType: "healthy", image: plantTomatoImg },
-    { id: 2, name: "Mint", status: "Healthy", statusType: "healthy", image: plantMintImg },
-    { id: 3, name: "Aloe Vera", status: "Growing", statusType: "growing", image: plantAloeImg },
-    { id: 4, name: "Curry Leaf", status: "Healthy", statusType: "healthy", image: plantCurryImg },
+  const fallbackPlants = [
+    { id: 1, name: "Tomato", type: "Vegetable", status: "Healthy", statusType: "healthy", image: plantTomatoImg },
+    { id: 2, name: "Mint", type: "Herb", status: "Healthy", statusType: "healthy", image: plantMintImg },
+    { id: 3, name: "Aloe Vera", type: "Succulent", status: "Growing", statusType: "growing", image: plantAloeImg },
+    { id: 4, name: "Curry Leaf", type: "Herb", status: "Healthy", statusType: "healthy", image: plantCurryImg },
   ];
 
+  const allGardenPlants = plants && plants.length > 0 ? plants : fallbackPlants;
+
+  const displayedGardenPlants = allGardenPlants.filter((plant) => {
+    if (gardenCategory === "all") return true;
+    const type = (plant.type || "").toLowerCase();
+    const name = (plant.name || "").toLowerCase();
+    if (gardenCategory === "vegetables") {
+      return type.includes("veg") || name.includes("tomato") || name.includes("chilli") || name.includes("pepper");
+    }
+    if (gardenCategory === "herbs") {
+      return type.includes("herb") || name.includes("mint") || name.includes("basil") || name.includes("curry") || name.includes("coriander");
+    }
+    return true;
+  });
+
   const pendingTasks = tasks.filter((t) => !t.completed).length;
+  const completedTasks = tasks.filter((t) => t.completed).length;
+  const filteredTasks = tasks.filter((t) => {
+    if (taskFilter === "pending") return !t.completed;
+    if (taskFilter === "completed") return t.completed;
+    return true;
+  });
   const totalPlants = Math.max(5, plants.length);
   const activeTip = CARE_TIPS[tipIndex];
 
@@ -189,15 +269,22 @@ function Dashboard({ onPageChange }) {
       {/* =========================================
           1. HERO BANNER
           ========================================= */}
-      <PageHeaderBanner
-        eyebrow="URBAN BALCONY INTELLIGENCE & DAILY OVERVIEW"
-        title={`${timeGreeting}, ${userName}!`}
-        titleAccent="👋"
-        subtitle="Your garden is a step closer to a greener tomorrow. Track growth, watering schedules, and microclimate."
-        badgeIcon="⛅"
-        badgeTitle="28°C • Sunny & Clear"
-        badgeSubtitle={`📍 500081 • Balcony • ${totalPlants} Plants Active`}
-      />
+      <section className="dash-hero-banner slow-popup animate-slow-pop">
+        <div className="dash-hero-content">
+          <div className="dash-hero-badge">
+            <span className="dash-hero-sprout">🌱</span>
+          </div>
+          <div className="dash-hero-text">
+            <h1 className="dash-hero-title">{timeGreeting || "Good Evening"}, {userName}! 👋</h1>
+            <p className="dash-hero-sub">Your garden is a step closer to a greener tomorrow.</p>
+          </div>
+        </div>
+        <div className="dash-hero-quote-card">
+          <span className="quote-mark">“</span>
+          <p className="quote-text">Plants make people happier.</p>
+          <span className="quote-mark">”</span> 🌿
+        </div>
+      </section>
 
       {/* =========================================
           2. METRIC CARDS (4 TOP STATS)
@@ -281,135 +368,253 @@ function Dashboard({ onPageChange }) {
       </section>
 
       {/* =========================================
-          3. MIDDLE ROW (3 COLUMNS)
+          3. FEATURED RECOMMENDATION (TOP BANNER)
+          ========================================= */}
+      <section className="dash-recommended-top slow-popup animate-slow-pop" style={{ animationDelay: "280ms" }}>
+        <div className="panel-header rec-banner-header">
+          <div>
+            <div className="rec-top-eyebrow">
+              <span className="rec-sparkle">✦</span>
+              <span>FEATURED RECOMMENDATION • TAILORED FOR YOUR SETUP</span>
+            </div>
+            <h2 className="panel-title">Recommended for You</h2>
+            <p className="panel-subtitle">Based on your location, season and garden conditions.</p>
+          </div>
+          <button type="button" className="panel-link-btn" onClick={goToRecommendations}>
+            View All Recommendations →
+          </button>
+        </div>
+
+        {/* Featured Card */}
+        <div className="rec-featured-banner">
+          {/* Left Arrow */}
+          <button
+            type="button"
+            className="rec-nav-arrow-btn prev"
+            onClick={handlePrevRecommendation}
+            aria-label="Previous recommendation"
+          >
+            ‹
+          </button>
+
+          {/* Banner Content Layout: Photo on left, Details on right */}
+          <div className="rec-banner-card-body">
+            {/* Plant Photo with Best Match Badge & Italic Quote */}
+            <div
+              className="rec-banner-photo-wrap"
+              onClick={() => setDetailPlant(activeRec)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setDetailPlant(activeRec)}
+              aria-label={`View full details for ${activeRec.name}`}
+            >
+              <div className="rec-best-match-pill">
+                <span className="match-crown">👑</span>
+                <span>{activeRec.matchBadge || "Best Match"}</span>
+              </div>
+
+              <img src={activeRec.image} alt={activeRec.name} className="rec-banner-img" />
+
+              {activeRec.quote && (
+                <div className="rec-banner-quote">
+                  <span className="quote-plain">{activeRec.quote.line1}</span>
+                  <span className="quote-italic">{activeRec.quote.line2}</span>
+                </div>
+              )}
+            </div>
+
+            {/* Plant Details on Right */}
+            <div className="rec-banner-info-wrap">
+              <div className="rec-banner-title-row">
+                <h3 className="rec-banner-plant-name">{activeRec.name}</h3>
+                <span className="rec-banner-growth-badge">
+                  <span className="badge-sprout">🌱</span>
+                  <span>{activeRec.badge}</span>
+                </span>
+              </div>
+
+              <div className="rec-banner-tagline">{activeRec.tagline}</div>
+
+              <p className="rec-banner-desc">{activeRec.description}</p>
+
+              {/* 3 Specs with subtle vertical dividers */}
+              <div className="rec-banner-specs-row">
+                <div className="rec-banner-spec-col">
+                  <span className="spec-icon">☀️</span>
+                  <div className="spec-meta">
+                    <span className="spec-label">Sunlight</span>
+                    <strong className="spec-val">{activeRec.sunlight}</strong>
+                  </div>
+                </div>
+
+                <div className="rec-banner-spec-divider" />
+
+                <div className="rec-banner-spec-col">
+                  <span className="spec-icon">💧</span>
+                  <div className="spec-meta">
+                    <span className="spec-label">Water</span>
+                    <strong className="spec-val">{activeRec.water}</strong>
+                  </div>
+                </div>
+
+                <div className="rec-banner-spec-divider" />
+
+                <div className="rec-banner-spec-col">
+                  <span className="spec-icon">🪴</span>
+                  <div className="spec-meta">
+                    <span className="spec-label">Ideal For</span>
+                    <strong className="spec-val">{activeRec.idealFor}</strong>
+                  </div>
+                </div>
+              </div>
+
+              {/* View Details Button */}
+              <div className="rec-banner-cta-row">
+                <button
+                  type="button"
+                  className="rec-banner-cta-btn slow-pop-btn"
+                  onClick={() => setDetailPlant(activeRec)}
+                >
+                  <span className="cta-sprout">🌱</span>
+                  <span>View Details</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            type="button"
+            className="rec-nav-arrow-btn next"
+            onClick={handleNextRecommendation}
+            aria-label="Next recommendation"
+          >
+            ›
+          </button>
+        </div>
+
+        {/* 5 Pagination Dots directly beneath the banner */}
+        <div className="rec-banner-dots-row">
+          {RECOMMENDED_PLANTS.map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              className={`rec-banner-dot ${recIndex === idx ? "active" : ""}`}
+              onClick={() => setRecIndex(idx)}
+              aria-label={`Select recommendation ${idx + 1}`}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* =========================================
+          4. MIDDLE ROW (2 COLUMNS: TASKS & WEATHER)
           ========================================= */}
       <section className="dash-middle-grid">
-        {/* Col 1: Recommended for You */}
-        <article className="dash-panel recommended-panel slow-popup animate-slow-pop" style={{ animationDelay: "300ms" }}>
-          <div className="panel-header">
-            <div>
-              <h2 className="panel-title">Recommended for You</h2>
-              <p className="panel-subtitle">Based on your location, season and garden conditions.</p>
-            </div>
-            <button type="button" className="panel-link-btn" onClick={goToRecommendations}>
-              View All
-            </button>
-          </div>
-
-          <div className="recommended-body">
-            <div className="rec-image-carousel">
-              <button
-                type="button"
-                className="rec-nav-arrow prev"
-                onClick={handlePrevRecommendation}
-                aria-label="Previous recommended plant"
-              >
-                ‹
-              </button>
-              <img src={activeRec.image} alt={activeRec.name} className="rec-plant-img" />
-              <button
-                type="button"
-                className="rec-nav-arrow next"
-                onClick={handleNextRecommendation}
-                aria-label="Next recommended plant"
-              >
-                ›
-              </button>
-              <div className="rec-dots">
-                {RECOMMENDED_PLANTS.map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    className={`rec-dot ${recIndex === idx ? "active" : ""}`}
-                    onClick={() => setRecIndex(idx)}
-                    aria-label={`Select recommendation ${idx + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="rec-info-col">
-              <div className="rec-title-row">
-                <h3 className="rec-plant-name">{activeRec.name}</h3>
-                <span className="rec-badge">{activeRec.badge}</span>
-              </div>
-              <p className="rec-description">{activeRec.description}</p>
-              <ul className="rec-specs-list">
-                <li>
-                  <span className="spec-icon">☀️</span> {activeRec.sunlight}
-                </li>
-                <li>
-                  <span className="spec-icon">💧</span> {activeRec.water}
-                </li>
-                <li>
-                  <span className="spec-icon">🌱</span> {activeRec.season}
-                </li>
-              </ul>
-              <button
-                type="button"
-                className="rec-add-btn slow-pop-btn"
-                onClick={handleAddActiveRec}
-              >
-                {isCurrentRecAdded ? "Added to My Garden ✓" : "Add to My Garden +"}
-              </button>
-            </div>
-          </div>
-        </article>
-
-        {/* Col 2: Today's Tasks */}
+        {/* Col 1: Today's Tasks */}
         <article className="dash-panel tasks-panel slow-popup animate-slow-pop" style={{ animationDelay: "360ms" }}>
           <div className="panel-header">
-            <h2 className="panel-title">Today's Tasks</h2>
+            <div>
+              <h2 className="panel-title">Today's Tasks</h2>
+              <span className="panel-subtitle">{pendingTasks} pending tasks</span>
+            </div>
             <button
               type="button"
               className="panel-link-btn"
               onClick={() => onPageChange && onPageChange("scheduler")}
             >
-              View All
+              View All →
+            </button>
+          </div>
+
+          {/* Tasks Category Navbar */}
+          <div className="tasks-navbar" role="tablist" aria-label="Task category filter">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={taskFilter === "all"}
+              className={`tasks-nav-tab ${taskFilter === "all" ? "active" : ""}`}
+              onClick={() => setTaskFilter("all")}
+            >
+              <span>All</span>
+              <span className="tab-badge">{tasks.length}</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={taskFilter === "pending"}
+              className={`tasks-nav-tab ${taskFilter === "pending" ? "active" : ""}`}
+              onClick={() => setTaskFilter("pending")}
+            >
+              <span>Pending</span>
+              <span className="tab-badge">{pendingTasks}</span>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={taskFilter === "completed"}
+              className={`tasks-nav-tab ${taskFilter === "completed" ? "active" : ""}`}
+              onClick={() => setTaskFilter("completed")}
+            >
+              <span>Done</span>
+              <span className="tab-badge">{completedTasks}</span>
             </button>
           </div>
 
           <div className="tasks-scroll-list">
-            {tasks.map((task) => {
-              const iconColor =
-                task.type === "water"
-                  ? "water"
-                  : task.type === "fertilizer"
-                  ? "fertilizer"
-                  : task.type === "prune"
-                  ? "prune"
-                  : "moisture";
+            {filteredTasks.length === 0 ? (
+              <div className="tasks-empty-state">
+                <span className="empty-icon">
+                  {taskFilter === "completed" ? "📋" : "🎉"}
+                </span>
+                <p className="empty-text">
+                  {taskFilter === "completed"
+                    ? "No completed tasks yet. Check them off as you complete care routines!"
+                    : "All tasks completed! Your garden is thriving today."}
+                </p>
+              </div>
+            ) : (
+              filteredTasks.map((task) => {
+                const iconColor =
+                  task.type === "water"
+                    ? "water"
+                    : task.type === "fertilizer"
+                    ? "fertilizer"
+                    : task.type === "prune"
+                    ? "prune"
+                    : "moisture";
 
-              return (
-                <div
-                  key={task.id}
-                  className={`task-row slow-popup ${task.completed ? "completed" : ""}`}
-                  onClick={() => toggleTask(task.id)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => e.key === "Enter" && toggleTask(task.id)}
-                >
-                  <div className={`task-row-icon ${iconColor}`}>
-                    <span>{task.icon || (task.type === "water" ? "💧" : task.type === "fertilizer" ? "🌱" : "✂️")}</span>
+                return (
+                  <div
+                    key={task.id}
+                    className={`task-row slow-popup ${task.completed ? "completed" : ""}`}
+                    onClick={() => toggleTask(task.id)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === "Enter" && toggleTask(task.id)}
+                  >
+                    <div className={`task-row-icon ${iconColor}`}>
+                      <span>{task.icon || (task.type === "water" ? "💧" : task.type === "fertilizer" ? "🌱" : "✂️")}</span>
+                    </div>
+                    <div className="task-row-details">
+                      <strong className="task-row-title">{task.title}</strong>
+                      <span className="task-row-sub">{task.description}</span>
+                    </div>
+                    <span className="task-row-time">{task.time}</span>
+                    <input
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        toggleTask(task.id);
+                      }}
+                      className="task-row-check"
+                      aria-label={`Mark task ${task.title} as completed`}
+                    />
                   </div>
-                  <div className="task-row-details">
-                    <strong className="task-row-title">{task.title}</strong>
-                    <span className="task-row-sub">{task.description}</span>
-                  </div>
-                  <span className="task-row-time">{task.time}</span>
-                  <input
-                    type="checkbox"
-                    checked={task.completed}
-                    onChange={(e) => {
-                      e.stopPropagation();
-                      toggleTask(task.id);
-                    }}
-                    className="task-row-check"
-                    aria-label={`Mark task ${task.title} as completed`}
-                  />
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </article>
 
@@ -487,14 +692,47 @@ function Dashboard({ onPageChange }) {
         {/* Col 1: Your Garden */}
         <article className="dash-panel your-garden-panel slow-popup animate-slow-pop" style={{ animationDelay: "480ms" }}>
           <div className="panel-header">
-            <h2 className="panel-title">Your Garden</h2>
+            <div>
+              <h2 className="panel-title">Your Garden</h2>
+            </div>
             <button type="button" className="panel-link-btn" onClick={goToMyGarden}>
               View Garden →
             </button>
           </div>
 
+          {/* Garden Category Navbar */}
+          <div className="garden-navbar" role="tablist" aria-label="Garden plant categories">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={gardenCategory === "all"}
+              className={`garden-nav-tab ${gardenCategory === "all" ? "active" : ""}`}
+              onClick={() => setGardenCategory("all")}
+            >
+              All
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={gardenCategory === "vegetables"}
+              className={`garden-nav-tab ${gardenCategory === "vegetables" ? "active" : ""}`}
+              onClick={() => setGardenCategory("vegetables")}
+            >
+              Vegetables
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={gardenCategory === "herbs"}
+              className={`garden-nav-tab ${gardenCategory === "herbs" ? "active" : ""}`}
+              onClick={() => setGardenCategory("herbs")}
+            >
+              Herbs
+            </button>
+          </div>
+
           <div className="garden-cards-row">
-            {gardenPlantsDisplay.map((plant) => (
+            {displayedGardenPlants.slice(0, 4).map((plant) => (
               <div
                 key={plant.id}
                 className="garden-plant-thumb-card slow-popup"
@@ -507,8 +745,8 @@ function Dashboard({ onPageChange }) {
                   <img src={plant.image} alt={plant.name} className="plant-thumb-img" />
                 </div>
                 <strong className="plant-thumb-name">{plant.name}</strong>
-                <span className={`plant-status-badge ${plant.statusType}`}>
-                  {plant.status}
+                <span className={`plant-status-badge ${plant.statusType || "healthy"}`}>
+                  {plant.status || "Healthy"}
                 </span>
               </div>
             ))}
@@ -632,6 +870,88 @@ function Dashboard({ onPageChange }) {
           </div>
         </article>
       </section>
+
+      {/* =========================================
+          RECOMMENDED PLANT DETAILS MODAL
+          ========================================= */}
+      {detailPlant && (
+        <div
+          className="rec-modal-backdrop"
+          onClick={() => setDetailPlant(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="rec-modal-dialog slow-popup"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="rec-modal-header">
+              <div className="rec-modal-title-wrap">
+                <h3 className="rec-modal-title">{detailPlant.name}</h3>
+                <span className="rec-modal-badge">{detailPlant.badge}</span>
+              </div>
+              <button
+                type="button"
+                className="rec-modal-close-btn"
+                onClick={() => setDetailPlant(null)}
+                aria-label="Close details modal"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="rec-modal-body">
+              <div className="rec-modal-hero">
+                <img src={detailPlant.image} alt={detailPlant.name} />
+              </div>
+
+              <div className="rec-modal-meta-row">
+                <span className="rec-modal-match-pill">🌿 98% Climate Match</span>
+                <span className="rec-modal-season-pill">🌱 {detailPlant.season}</span>
+              </div>
+
+              <p className="rec-modal-desc">{detailPlant.description}</p>
+
+              <div className="rec-modal-specs-grid">
+                <div className="rec-modal-spec-card">
+                  <span className="rec-modal-spec-label">☀️ Sunlight</span>
+                  <span className="rec-modal-spec-val">{detailPlant.sunlight}</span>
+                </div>
+                <div className="rec-modal-spec-card">
+                  <span className="rec-modal-spec-label">💧 Watering</span>
+                  <span className="rec-modal-spec-val">{detailPlant.water}</span>
+                </div>
+                <div className="rec-modal-spec-card">
+                  <span className="rec-modal-spec-label">🌱 Growth Cycle</span>
+                  <span className="rec-modal-spec-val">45 - 60 Days</span>
+                </div>
+              </div>
+
+              <div className="rec-modal-footer">
+                <button
+                  type="button"
+                  className="rec-modal-cancel-btn"
+                  onClick={() => setDetailPlant(null)}
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  className="rec-modal-add-btn slow-pop-btn"
+                  onClick={() => {
+                    handleAddActiveRec(detailPlant);
+                    if (addedRecs[detailPlant.id]) {
+                      setDetailPlant(null);
+                    }
+                  }}
+                >
+                  {addedRecs[detailPlant.id] ? "In Your Garden ✓" : "+ Add to My Garden"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

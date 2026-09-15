@@ -40,6 +40,9 @@ export const LIBRARY_PLANTS = [
     temp: "20–32°C",
     soil: "Well-draining, rich loamy",
     growthTime: "60–85 days",
+    growthDays: 75,
+    harvestAdvice: "Harvest when tomatoes turn uniformly rich red and feel slightly tender to gentle touch. Snip with short stem attached.",
+    harvestType: "single",
     image: PLANT_REAL_IMAGES.tomato,
     description: "Rewarding container vegetable producing clusters of sweet, juicy red tomatoes in sunny balconies and gardens.",
     careTips: "Support heavy fruiting branches with trellises or garden stakes. Water near roots to prevent leaf blight.",
@@ -55,6 +58,9 @@ export const LIBRARY_PLANTS = [
     temp: "22–34°C",
     soil: "Compost-rich, moist loam",
     growthTime: "70–90 days",
+    growthDays: 80,
+    harvestAdvice: "Cut with shears when peppers reach firm full size and turn deep glossy green, red, or yellow. Leave short stalk intact.",
+    harvestType: "single",
     image: PLANT_REAL_IMAGES.bellPepper,
     description: "Vibrant sweet peppers that thrive in pots on sunny terraces, providing crunchy, colorful red, green, and yellow harvests.",
     careTips: "Ensure regular watering during flowering and fruit setting. Fertilize with organic compost every two weeks.",
@@ -70,6 +76,9 @@ export const LIBRARY_PLANTS = [
     temp: "15–26°C",
     soil: "Loose, nutrient-dense soil",
     growthTime: "30–40 days",
+    growthDays: 35,
+    harvestAdvice: "Harvest outer mature leaves near base, allowing inner tender hearts to keep producing fresh flushes.",
+    harvestType: "continuous",
     image: PLANT_REAL_IMAGES.spinach,
     description: "Fast-growing leafy superfood with tender crinkly dark-green leaves packed with iron and vitamins. Thrives in shallow window boxes.",
     careTips: "Harvest outer leaves continuously to encourage new flushes. Avoid hot midday sun to prevent premature bolting.",
@@ -85,6 +94,9 @@ export const LIBRARY_PLANTS = [
     temp: "22–32°C",
     soil: "Rich, fertile, well-draining",
     growthTime: "50–65 days",
+    growthDays: 55,
+    harvestAdvice: "Pick when 6-8 inches long, firm and uniformly green before they turn yellow or over-seed.",
+    harvestType: "single",
     image: PLANT_REAL_IMAGES.cucumber,
     description: "Crisp and refreshing vining vegetable producing long straight green cucumbers along balcony trellises.",
     careTips: "Provide a vertical net or trellis to keep fruit off the soil, resulting in cleaner, straighter cucumbers.",
@@ -100,6 +112,9 @@ export const LIBRARY_PLANTS = [
     temp: "20–35°C",
     soil: "Light, well-drained loamy",
     growthTime: "60–75 days",
+    growthDays: 65,
+    harvestAdvice: "Clip green chilies using scissors when firm and crisp, or leave longer on plant for hot red peppers.",
+    harvestType: "single",
     image: PLANT_REAL_IMAGES.chilli,
     description: "Prolific spicy chili pepper plant yielding abundant slender green pods on sunny balconies and container gardens.",
     careTips: "Allow soil surface to dry slightly between waterings to encourage pungent flavor and abundant flowering.",
@@ -116,7 +131,10 @@ export const LIBRARY_PLANTS = [
     water: "Daily during blooming",
     temp: "18–28°C",
     soil: "Rich, well-aerated with compost",
-    growthTime: "Perennial",
+    growthTime: "45–60 days",
+    growthDays: 50,
+    harvestAdvice: "Cut early morning at 45° angle when outer petals begin loosening. Regular deadheading triggers continuous blooms.",
+    harvestType: "repeat-bloom",
     image: PLANT_REAL_IMAGES.rose,
     description: "Timeless classic flowering plant bringing vibrant red blooms, delicate fragrance, and beauty to balconies and patios.",
     careTips: "Deadhead spent blossoms promptly to stimulate flush blooming cycles. Prune dead or crisscrossed canes annually.",
@@ -132,6 +150,9 @@ export const LIBRARY_PLANTS = [
     temp: "18–35°C",
     soil: "Standard potting mix",
     growthTime: "45–60 days",
+    growthDays: 50,
+    harvestAdvice: "Pluck full blooming flower heads right above the stem junction for festive decor or natural insect repelling.",
+    harvestType: "repeat-bloom",
     image: PLANT_REAL_IMAGES.marigold,
     description: "Cheery golden-orange flowers beloved in festive celebrations and natural companion planting to repel garden pests.",
     careTips: "Drought-tolerant once established. Pinch back young growing tips early on to induce bushier branching and more buds.",
@@ -147,6 +168,9 @@ export const LIBRARY_PLANTS = [
     temp: "21–35°C",
     soil: "Nutrient-rich, well-drained",
     growthTime: "55–70 days",
+    growthDays: 60,
+    harvestAdvice: "Harvest flower heads when petals start drooping and back of seedhead turns golden brownish-yellow.",
+    harvestType: "single",
     image: PLANT_REAL_IMAGES.sunflower,
     description: "Radiant golden-yellow blooms that track the sun throughout the day, attracting honeybees and cheerful terrace vibes.",
     careTips: "Ensure deep watering so the taproot develops strongly in pots at least 10–12 inches deep.",
@@ -161,7 +185,10 @@ export const LIBRARY_PLANTS = [
     water: "Daily in summer",
     temp: "20–35°C",
     soil: "Well-draining, slightly acidic",
-    growthTime: "Perennial shrub",
+    growthTime: "50–65 days",
+    growthDays: 55,
+    harvestAdvice: "Harvest vibrant blooms in the morning when fully open for edible hibiscus tea or botanical beauty.",
+    harvestType: "repeat-bloom",
     image: PLANT_REAL_IMAGES.hibiscus,
     description: "Stunning large tropical crimson-red blossoms with prominent golden stamens that bring a resort-like floral ambiance.",
     careTips: "Thrives with potassium-rich organic fertilizers. Spray with neem oil occasionally to guard against whiteflies and aphids.",
@@ -176,7 +203,10 @@ export const LIBRARY_PLANTS = [
     water: "2–3 times/week",
     temp: "20–32°C",
     soil: "Loamy, well-draining",
-    growthTime: "Perennial climber",
+    growthTime: "45–60 days",
+    growthDays: 50,
+    harvestAdvice: "Pick tightly closed or slightly unfurled white flower buds at dusk when their aroma peaks.",
+    harvestType: "repeat-bloom",
     image: PLANT_REAL_IMAGES.jasmine,
     description: "Intensely fragrant star-shaped pristine white blossoms that perfume the evening air and make relaxing botanical teas.",
     careTips: "Prune lightly after blooming cycles to stimulate fresh flowering lateral shoots for the next season.",
@@ -191,7 +221,10 @@ export const LIBRARY_PLANTS = [
     water: "Once a week (Drought tolerant)",
     temp: "15–28°C",
     soil: "Gritty, alkaline, free-draining",
-    growthTime: "Perennial",
+    growthTime: "70–90 days",
+    growthDays: 75,
+    harvestAdvice: "Snip flower spikes just as lower third of flower buds begin opening; hang upside down in dry shade.",
+    harvestType: "repeat-bloom",
     image: PLANT_REAL_IMAGES.lavender,
     description: "Aromatic soothing purple flower spikes known for calming essential oils, natural sleep aid, and pollinator attraction.",
     careTips: "Never overwater lavender. Ensure the container has ample drainage holes and gritty potting gravel.",
@@ -209,6 +242,9 @@ export const LIBRARY_PLANTS = [
     temp: "20–35°C",
     soil: "Well-drained porous soil",
     growthTime: "30–45 days",
+    growthDays: 35,
+    harvestAdvice: "Pinch top 2-3 leaf pairs above a node regularly. Stimulates continuous bushiness and fresh medicinal leaves.",
+    harvestType: "continuous",
     image: PLANT_REAL_IMAGES.basil,
     description: "Revered medicinal and aromatic herb known for its therapeutic qualities, stress-relieving aroma, and air-purifying prowess.",
     careTips: "Pinch off flowering seed tips to encourage bushy, dense foliage instead of leggy flowering stems.",
@@ -224,6 +260,9 @@ export const LIBRARY_PLANTS = [
     temp: "15–30°C",
     soil: "Moist, fertile potting mix",
     growthTime: "20–30 days",
+    growthDays: 25,
+    harvestAdvice: "Cut sprigs with scissors 1 inch above soil level. Fresh shoots regenerate rapidly within 10–14 days.",
+    harvestType: "continuous",
     image: PLANT_REAL_IMAGES.mint,
     description: "Fast-spreading, refreshingly aromatic herb ideal for teas, chutneys, cooling beverages, and natural pest deterrence.",
     careTips: "Grows vigorously via runners. Best planted in isolated containers so its aggressive roots do not overtake other pots.",
@@ -238,7 +277,10 @@ export const LIBRARY_PLANTS = [
     water: "Daily in summer",
     temp: "20–35°C",
     soil: "Rich, slightly acidic loam",
-    growthTime: "Perennial shrub",
+    growthTime: "40–60 days",
+    growthDays: 45,
+    harvestAdvice: "Snip entire compound leaflets at stem base with scissors. Regular pruning keeps plant bushy and aromatic.",
+    harvestType: "continuous",
     image: PLANT_REAL_IMAGES.curry,
     description: "Essential culinary shrub across Indian cooking, producing highly fragrant compound leaves packed with antioxidants.",
     careTips: "Feed once a month with sour buttermilk diluted in water or organic compost for glossy, emerald-green leaf flushes.",
@@ -254,6 +296,9 @@ export const LIBRARY_PLANTS = [
     temp: "15–25°C",
     soil: "Moist, light, well-drained",
     growthTime: "25–35 days",
+    growthDays: 30,
+    harvestAdvice: "Harvest outer lower leaves individually, or snip entire stems at soil line before flowering shoots appear.",
+    harvestType: "continuous",
     image: PLANT_REAL_IMAGES.coriander,
     description: "Fresh essential culinary herb with delicate citrusy green serrated leaves, quick to harvest from container window boxes.",
     careTips: "Keep in partial shade during peak hot afternoons to delay seed bolting and yield multiple fresh cuttings.",
@@ -270,7 +315,10 @@ export const LIBRARY_PLANTS = [
     water: "Once every 7–10 days",
     temp: "15–35°C",
     soil: "Cactus / gritty succulent mix",
-    growthTime: "Perennial",
+    growthTime: "60–90 days",
+    growthDays: 75,
+    harvestAdvice: "Slice thick, fleshy bottom outer leaves flush with trunk using a clean sharp knife; harvest clear soothing gel.",
+    harvestType: "continuous",
     image: PLANT_REAL_IMAGES.aloe,
     description: "Tough, drought-hardy succulent with thick fleshy spiky leaves loaded with soothing medicinal gel for skin hydration and burns.",
     careTips: "Sensitive to overwatering. Always let the potting soil dry out completely between watering sessions.",
@@ -285,7 +333,10 @@ export const LIBRARY_PLANTS = [
     water: "Once every 2–3 weeks",
     temp: "15–35°C",
     soil: "Free-draining gritty cactus mix",
-    growthTime: "Perennial",
+    growthTime: "75–90 days",
+    growthDays: 80,
+    harvestAdvice: "Propagate mature healthy leaves by cutting a clean 3-4 inch section and rooting in potting mix.",
+    harvestType: "continuous",
     image: PLANT_REAL_IMAGES.snakePlant,
     description: "Indestructible air-purifying architectural houseplant with upright sword-shaped leaves with yellow margins. Tolerates low light and drought.",
     careTips: "Water only when soil is completely dry to prevent rhizome rot. Tolerates almost any lighting condition from dim corners to bright sun.",
@@ -346,4 +397,63 @@ export const getPlantImage = (name = "") => {
     return PLANT_REAL_IMAGES.curry;
   }
   return PLANT_REAL_IMAGES.tomato;
+};
+
+export const getPlantGrowthMeta = (name = "", type = "") => {
+  const lower = name.toLowerCase();
+  const match = LIBRARY_PLANTS.find(
+    (p) =>
+      p.id.toLowerCase() === lower ||
+      p.name.toLowerCase() === lower ||
+      lower.includes(p.name.toLowerCase().split(" ")[0].toLowerCase())
+  );
+  if (match) {
+    return {
+      growthDays: match.growthDays,
+      growthTime: match.growthTime,
+      harvestAdvice: match.harvestAdvice,
+      harvestType: match.harvestType,
+    };
+  }
+
+  // Category & heuristic fallbacks for custom plants
+  const t = (type || "").toLowerCase();
+  if (t.includes("veg") || lower.includes("veg") || lower.includes("fruit")) {
+    return {
+      growthDays: 70,
+      growthTime: "60–80 days",
+      harvestAdvice: "Harvest when vegetables are firm, full-sized, and vibrantly colored.",
+      harvestType: "single",
+    };
+  }
+  if (t.includes("herb") || lower.includes("herb")) {
+    return {
+      growthDays: 30,
+      growthTime: "25–35 days",
+      harvestAdvice: "Pinch top healthy leaf clusters regularly for continuous flushes.",
+      harvestType: "continuous",
+    };
+  }
+  if (t.includes("flower") || lower.includes("flower")) {
+    return {
+      growthDays: 50,
+      growthTime: "45–60 days",
+      harvestAdvice: "Cut blossoms in early morning when buds start unfurling.",
+      harvestType: "repeat-bloom",
+    };
+  }
+  if (t.includes("succulent")) {
+    return {
+      growthDays: 75,
+      growthTime: "60–90 days",
+      harvestAdvice: "Trim outer mature bottom leaves cleanly near the soil base.",
+      harvestType: "continuous",
+    };
+  }
+  return {
+    growthDays: 60,
+    growthTime: "50–70 days",
+    harvestAdvice: "Harvest when plant reaches healthy mature foliage.",
+    harvestType: "continuous",
+  };
 };

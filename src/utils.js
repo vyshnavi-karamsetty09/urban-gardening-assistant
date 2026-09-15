@@ -1,4 +1,4 @@
-import { getPlantImage } from "./plantData";
+import { getPlantImage, getPlantGrowthMeta } from "./plantData";
 
 export const STORAGE_KEYS = {
   session: "gardenGuideSession",
@@ -8,13 +8,121 @@ export const STORAGE_KEYS = {
   tasks: "gardenGuideTasks",
 };
 
+export function getPastDate(daysAgo) {
+  const d = new Date();
+  d.setDate(d.getDate() - daysAgo);
+  return d.toISOString().split("T")[0];
+}
+
 export const defaultPlants = [
-  { id: 1, name: "Tomato", type: "Vegetable", emoji: "🍅", status: "Healthy", statusType: "healthy", sunlight: "6–8 hrs", water: "Daily", watered: "Watered Today", moisture: 80, image: getPlantImage("Tomato") },
-  { id: 2, name: "Mint", type: "Herb", emoji: "🌿", status: "Healthy", statusType: "healthy", sunlight: "4–6 hrs", water: "Daily", watered: "Watered Today", moisture: 85, image: getPlantImage("Mint") },
-  { id: 3, name: "Rose", type: "Flower", emoji: "🌹", status: "Needs Water", statusType: "warning", sunlight: "6–8 hrs", water: "Daily", watered: "Water last: 2 days ago", moisture: 30, image: getPlantImage("Rose") },
-  { id: 4, name: "Basil (Tulsi)", type: "Herb", emoji: "🌱", status: "Healthy", statusType: "healthy", sunlight: "4–6 hrs", water: "2–3 times/wk", watered: "Watered Today", moisture: 75, image: getPlantImage("Basil") },
-  { id: 5, name: "Aloe Vera", type: "Succulent", emoji: "🌵", status: "Healthy", statusType: "healthy", sunlight: "4–6 hrs", water: "1–2 times/week", watered: "Watered Yesterday", moisture: 90, image: getPlantImage("Aloe Vera") },
-  { id: 6, name: "Curry Leaf", type: "Herb", emoji: "🍃", status: "Healthy", statusType: "healthy", sunlight: "6–8 hrs", water: "Daily", watered: "Watered Today", moisture: 70, image: getPlantImage("Curry Leaf") },
+  {
+    id: 1,
+    name: "Tomato",
+    type: "Vegetable",
+    emoji: "🍅",
+    status: "Healthy",
+    statusType: "healthy",
+    sunlight: "6–8 hrs",
+    water: "Daily",
+    watered: "Watered Today",
+    moisture: 80,
+    plantedDate: getPastDate(38),
+    growthDays: 75,
+    growthTime: "60–85 days",
+    harvestAdvice: "Harvest when tomatoes turn uniformly rich red and yield slightly to a gentle squeeze.",
+    harvestType: "single",
+    image: getPlantImage("Tomato"),
+  },
+  {
+    id: 2,
+    name: "Mint",
+    type: "Herb",
+    emoji: "🌿",
+    status: "Healthy",
+    statusType: "healthy",
+    sunlight: "4–6 hrs",
+    water: "Daily",
+    watered: "Watered Today",
+    moisture: 85,
+    plantedDate: getPastDate(20),
+    growthDays: 25,
+    growthTime: "20–30 days",
+    harvestAdvice: "Snip sprigs 1 inch above soil level. Fresh shoots regenerate rapidly within 10–14 days.",
+    harvestType: "continuous",
+    image: getPlantImage("Mint"),
+  },
+  {
+    id: 3,
+    name: "Rose",
+    type: "Flower",
+    emoji: "🌹",
+    status: "Needs Water",
+    statusType: "warning",
+    sunlight: "6–8 hrs",
+    water: "Daily",
+    watered: "Water last: 2 days ago",
+    moisture: 30,
+    plantedDate: getPastDate(42),
+    growthDays: 50,
+    growthTime: "45–60 days",
+    harvestAdvice: "Cut flower stems early morning at 45° angle when outer petals begin loosening.",
+    harvestType: "repeat-bloom",
+    image: getPlantImage("Rose"),
+  },
+  {
+    id: 4,
+    name: "Basil (Tulsi)",
+    type: "Herb",
+    emoji: "🌱",
+    status: "Healthy",
+    statusType: "healthy",
+    sunlight: "4–6 hrs",
+    water: "2–3 times/wk",
+    watered: "Watered Today",
+    moisture: 75,
+    plantedDate: getPastDate(28),
+    growthDays: 35,
+    growthTime: "30–45 days",
+    harvestAdvice: "Pinch top 2-3 leaf pairs regularly. Stimulates continuous bushiness and fresh medicinal leaves.",
+    harvestType: "continuous",
+    image: getPlantImage("Basil"),
+  },
+  {
+    id: 5,
+    name: "Aloe Vera",
+    type: "Succulent",
+    emoji: "🌵",
+    status: "Healthy",
+    statusType: "healthy",
+    sunlight: "4–6 hrs",
+    water: "1–2 times/week",
+    watered: "Watered Yesterday",
+    moisture: 90,
+    plantedDate: getPastDate(65),
+    growthDays: 75,
+    growthTime: "60–90 days",
+    harvestAdvice: "Slice thick, fleshy bottom outer leaves flush with trunk using a clean sharp knife for soothing gel.",
+    harvestType: "continuous",
+    image: getPlantImage("Aloe Vera"),
+  },
+  {
+    id: 6,
+    name: "Curry Leaf",
+    type: "Herb",
+    emoji: "🍃",
+    status: "Healthy",
+    statusType: "healthy",
+    sunlight: "6–8 hrs",
+    water: "Daily",
+    watered: "Watered Today",
+    moisture: 70,
+    plantedDate: getPastDate(42),
+    growthDays: 45,
+    growthTime: "40–60 days",
+    harvestAdvice: "Snip entire compound leaflets at stem base. Regular pruning keeps shrub bushy and aromatic.",
+    harvestType: "continuous",
+    image: getPlantImage("Curry Leaf"),
+  },
 ];
 
 export const defaultTasks = [
@@ -162,13 +270,133 @@ export function writeStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
+export function getPlantGrowthInfo(plant) {
+  if (!plant) {
+    return {
+      daysInGarden: 0,
+      growthDays: 60,
+      growthTime: "60 days",
+      daysToHarvest: 30,
+      progressPct: 50,
+      harvestDateStr: "In 30 days",
+      plantedDateFormatted: "Recently",
+      harvestAdvice: "Harvest when fully grown.",
+      harvestType: "continuous",
+      isReady: false,
+      harvestStage: "Vegetative Growth",
+      stageColor: "#2563eb",
+    };
+  }
+
+  const meta = getPlantGrowthMeta(plant.name || "", plant.type || "");
+  const growthDays = Number(plant.growthDays) || meta.growthDays || 60;
+  const growthTime = plant.growthTime || meta.growthTime || `${growthDays} days`;
+  const harvestAdvice = plant.harvestAdvice || meta.harvestAdvice || "Harvest when plant reaches maturity.";
+  const harvestType = plant.harvestType || meta.harvestType || "continuous";
+
+  // Calculate days in garden
+  let daysInGarden = 0;
+  if (plant.plantedDate) {
+    const plantedMs = new Date(plant.plantedDate).getTime();
+    if (!isNaN(plantedMs)) {
+      const diffMs = Date.now() - plantedMs;
+      daysInGarden = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+    }
+  } else if (typeof plant.daysPlanted === "number") {
+    daysInGarden = plant.daysPlanted;
+  } else {
+    daysInGarden = Math.min(growthDays - 5, (Number(plant.id || 1) % 30) + 15);
+  }
+
+  const daysToHarvest = Math.max(0, growthDays - daysInGarden);
+  const progressPct = Math.min(100, Math.max(5, Math.round((daysInGarden / growthDays) * 100)));
+
+  const harvestDate = new Date();
+  harvestDate.setDate(harvestDate.getDate() + daysToHarvest);
+  const harvestDateStr = harvestDate.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  let plantedDateFormatted = "Recently";
+  if (plant.plantedDate) {
+    const pDate = new Date(plant.plantedDate);
+    if (!isNaN(pDate.getTime())) {
+      plantedDateFormatted = pDate.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+    }
+  } else {
+    const pDate = new Date();
+    pDate.setDate(pDate.getDate() - daysInGarden);
+    plantedDateFormatted = pDate.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  }
+
+  const isReady = daysInGarden >= growthDays || daysToHarvest <= 0;
+
+  let harvestStage = "Sprout / Seedling";
+  let stageColor = "#16a34a"; // green
+  if (isReady) {
+    harvestStage = "Ready for Harvest! 🧺";
+    stageColor = "#ea580c";
+  } else if (progressPct >= 70) {
+    harvestStage = "Budding / Fruiting";
+    stageColor = "#d97706";
+  } else if (progressPct >= 30) {
+    harvestStage = "Vegetative Growth";
+    stageColor = "#2563eb";
+  } else {
+    harvestStage = "Sprout / Seedling";
+    stageColor = "#16a34a";
+  }
+
+  return {
+    daysInGarden,
+    growthDays,
+    growthTime,
+    daysToHarvest,
+    progressPct,
+    harvestDateStr,
+    plantedDateFormatted,
+    harvestAdvice,
+    harvestType,
+    isReady,
+    harvestStage,
+    stageColor,
+  };
+}
+
 export function getSavedPlants() {
   const plants = readStorage(STORAGE_KEYS.plants, defaultPlants);
-  if (Array.isArray(plants)) {
-    return plants.map((p) => ({
-      ...p,
-      image: p.image && !p.image.includes("blob:") ? p.image : getPlantImage(p.name),
-    }));
+  if (Array.isArray(plants) && plants.length > 0) {
+    return plants.map((p, idx) => {
+      const meta = getPlantGrowthMeta(p.name || "", p.type || "");
+      const def = defaultPlants.find(
+        (dp) => dp.id === p.id || dp.name.toLowerCase() === (p.name || "").toLowerCase()
+      );
+      const growthDays = Number(p.growthDays) || def?.growthDays || meta.growthDays || 60;
+      const growthTime = p.growthTime || def?.growthTime || meta.growthTime || `${growthDays} days`;
+      const plantedDate = p.plantedDate || def?.plantedDate || getPastDate(Math.min(growthDays - 5, 20 + ((idx * 7) % 35)));
+      const harvestAdvice = p.harvestAdvice || def?.harvestAdvice || meta.harvestAdvice || "Harvest when mature.";
+      const harvestType = p.harvestType || def?.harvestType || meta.harvestType || "continuous";
+
+      return {
+        ...p,
+        image: p.image && !p.image.includes("blob:") ? p.image : getPlantImage(p.name),
+        plantedDate,
+        growthDays,
+        growthTime,
+        harvestAdvice,
+        harvestType,
+      };
+    });
   }
   return defaultPlants;
 }
