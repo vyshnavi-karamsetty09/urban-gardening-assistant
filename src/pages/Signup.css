@@ -1,0 +1,88 @@
+@import "./Login.css";
+
+/* Additional Signup specific tweaks */
+.auth-terms-note {
+  font-size: 11px;
+  color: #7b8c80;
+  line-height: 1.4;
+  margin-top: 6px;
+}
+/* Keep the desktop signup experience compact like the login page. */
+@media (min-width: 1041px) {
+  .auth-signup-page {
+    overflow: hidden;
+  }
+
+  .auth-signup-page .auth-card-col {
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .auth-signup-page .auth-card {
+    max-height: calc(100vh - 20px);
+    padding: 18px 34px;
+    overflow: hidden;
+  }
+
+  .auth-signup-page .auth-card-header {
+    margin-bottom: 8px;
+  }
+
+  .auth-signup-page .auth-card-header h2 {
+    font-size: 24px;
+  }
+
+  .auth-signup-page .auth-card-header p {
+    margin-top: 2px;
+  }
+
+  .auth-signup-page .auth-form {
+    gap: 5px;
+  }
+
+  .auth-signup-page .auth-input-group {
+    gap: 3px;
+    margin-bottom: 0;
+  }
+
+  .auth-signup-page .auth-input-group label {
+    font-size: 10.5px;
+    margin-bottom: 2px;
+  }
+
+  .auth-signup-page .auth-field-wrapper,
+  .auth-signup-page .auth-field-input {
+    min-height: 36px;
+    height: 36px;
+  }
+
+  .auth-signup-page .auth-signup-checkboxes {
+    gap: 5px;
+    margin: 2px 0 8px;
+  }
+
+  .auth-signup-page .auth-signup-checkboxes .auth-checkbox-label {
+    font-size: 10.5px;
+    line-height: 1.25;
+  }
+
+  .auth-signup-page .auth-primary-btn,
+  .auth-signup-page .auth-google-btn {
+    height: 40px;
+  }
+
+  .auth-signup-page .auth-or-separator {
+    margin: 8px 0;
+  }
+
+  .auth-signup-page .auth-switch-prompt {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .auth-signup-page {
+    overflow-x: hidden;
+  }
+}
+
