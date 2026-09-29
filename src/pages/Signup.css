@@ -1,9 +1,0 @@
-@import "./Login.css";
-
-/* Additional Signup specific tweaks */
-.auth-terms-note {
-  font-size: 11px;
-  color: #7b8c80;
-  line-height: 1.4;
-  margin-top: 6px;
-}
