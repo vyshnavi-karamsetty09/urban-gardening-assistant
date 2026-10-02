@@ -21,9 +21,61 @@ router.post("/analyze-location", requireAuth, async (req, res) => {
 
   const profile = analyzePincode(pincode);
 
+  /*
+   * Guarantee regional sunlight and rainfall values for
+   * zone-estimated pincodes as well as curated pincodes.
+   */
+  const fallbackByZone = {
+    "1": {
+      sunlight: "High Light",
+      rainfall: "Low / Scanty",
+    },
+    "2": {
+      sunlight: "High Light",
+      rainfall: "Moderate",
+    },
+    "3": {
+      sunlight: "Full Sun",
+      rainfall: "Low / Scanty",
+    },
+    "4": {
+      sunlight: "High Light",
+      rainfall: "Moderate",
+    },
+    "5": {
+      sunlight: "High Light",
+      rainfall: "Moderate",
+    },
+    "6": {
+      sunlight: "High Light",
+      rainfall: "High / Abundant",
+    },
+    "7": {
+      sunlight: "High Light",
+      rainfall: "High / Abundant",
+    },
+    "8": {
+      sunlight: "High Light",
+      rainfall: "Moderate",
+    },
+    "9": {
+      sunlight: "High Light",
+      rainfall: "Moderate",
+    },
+  };
+
+  const zoneFallback =
+    fallbackByZone[pincode[0]] || fallbackByZone["5"];
+
+  const safeProfile = {
+    ...profile,
+    sunlight: profile.sunlight || zoneFallback.sunlight,
+    rainfall: profile.rainfall || zoneFallback.rainfall,
+  };
+
   return res.json({
     profile: {
-      ...profile,
+      ...safeProfile,
       pincode,
       source: profile.matched
         ? "curated pincode mapping"
@@ -45,7 +97,7 @@ const parseRange = (value) => {
     .replace(/–/g, "-");
 
   const match = text.match(
-    /(-?\d+(?:\.\d+)?)\s*-\s*(-?\d+(?:\.\d+)?)/
+    /(-?\d+(?:\.\d+)?)\s*-\s*(-?\d+(?:\.\d+)?)/g
   );
 
   if (!match) return null;
@@ -63,6 +115,68 @@ const parseFirstNumber = (value) => {
 
 const clamp = (value, min = 0, max = 100) =>
   Math.min(max, Math.max(min, value));
+
+function getCompatibilityGate(plant, env, profile) {
+  const effective = { ...profile, ...env };
+  const reasons = [];
+
+  if (effective.sunlight) {
+    const sunlightScore = scoreSunlight(
+      plant,
+      effective.sunlight
+    );
+
+    if (sunlightScore <= 35) {
+      reasons.push("sunlight mismatch");
+    }
+  }
+
+  if (effective.space) {
+    const spaceScore = scoreSpace(
+      plant,
+      effective.space
+    );
+
+    if (spaceScore <= 30) {
+      reasons.push("space mismatch");
+    }
+  }
+
+  if (effective.watering) {
+    const wateringScore = scoreWatering(
+      plant,
+      effective.watering
+    );
+
+    if (wateringScore <= 30) {
+      reasons.push("watering mismatch");
+    }
+  }
+
+  if (effective.temperature || effective.numericTemp) {
+    const temperatureScore = scoreTemperature(
+      plant,
+      effective
+    );
+
+    if (temperatureScore <= 25) {
+      reasons.push("temperature mismatch");
+    }
+  }
+
+  if (effective.medium || effective.soil) {
+    const soilScore = scoreSoil(plant, effective);
+
+    if (soilScore <= 25) {
+      reasons.push("soil / growing medium mismatch");
+    }
+  }
+
+  return {
+    blocked: reasons.length > 0,
+    reasons: [...new Set(reasons)],
+  };
+}
 
 /* =========================================================
    SUNLIGHT MATCHING
@@ -84,24 +198,36 @@ function scoreSunlight(plant, requestedSunlight) {
     plantSun.includes("partial") ||
     plantSun.includes("morning");
 
+  /*
+   * CRITICAL: Check for FULL or DIRECT sun explicitly.
+   * "indirect" contains "direct" as a substring, so we must
+   * check for "indirect" FIRST and exclude it.
+   * "bright" alone (e.g., "bright light") is not Full Sun.
+   */
   const hasFull =
-    plantSun.includes("full") ||
-    plantSun.includes("direct") ||
-    plantSun.includes("bright");
+    !plantSun.includes("indirect") &&
+    (plantSun.includes("full sun") ||
+      plantSun.includes(" full") ||
+      (plantSun.includes("direct") &&
+        !plantSun.includes("indirect")));
+
+  const hasBright =
+    plantSun.includes("bright") &&
+    !plantSun.includes("indirect");
 
   if (desired.includes("full")) {
     if (hasFull || (plantRange && plantRange.min >= 5)) return 100;
-    if (plantRange && plantRange.max >= 6) return 88;
     if (hasPartial) return 58;
     if (hasLow) return 30;
+    if (hasBright) return 60;
     return 55;
   }
 
   if (desired.includes("high")) {
     if (hasFull || (plantRange && plantRange.min >= 5)) return 100;
-    if (plantRange && plantRange.max >= 6) return 90;
     if (hasPartial) return 60;
     if (hasLow) return 30;
+    if (hasBright) return 70;
     return 55;
   }
 
@@ -116,6 +242,7 @@ function scoreSunlight(plant, requestedSunlight) {
     if (plantRange && plantRange.max >= 4) return 82;
     if (hasFull) return 58;
     if (hasLow && plantMax != null && plantMax >= 2) return 55;
+    if (hasBright) return 75;
 
     return 50;
   }
@@ -135,6 +262,7 @@ function scoreSunlight(plant, requestedSunlight) {
 
   if (hasPartial) return 55;
   if (hasFull) return 35;
+  if (hasBright) return 50;
 
   return 50;
 }
@@ -534,50 +662,7 @@ function scoreLocation(plant, location) {
   return 75;
 }
 
-/* =========================================================
-   SEASON
-   NOTE:
-   Plant model currently has no seasons field.
-   We therefore use season only as a very small signal through
-   the plant's temperature compatibility.
-   ========================================================= */
 
-function scoreSeason(plant, environment) {
-  const season = normalize(environment.season);
-
-  if (!season || season === "all year") {
-    return 80;
-  }
-
-  const plantRange = parseRange(plant.temp);
-
-  if (!plantRange) return 70;
-
-  if (season === "summer") {
-    if (plantRange.max >= 30) return 95;
-    if (plantRange.max >= 26) return 82;
-    return 55;
-  }
-
-  if (season === "winter") {
-    if (plantRange.min <= 20) return 95;
-    if (plantRange.min <= 24) return 82;
-    return 55;
-  }
-
-  if (season === "monsoon") {
-    if (
-      plant.wateringNeed === "High" ||
-      normalize(plant.soil).includes("moist")
-    ) {
-      return 90;
-    }
-
-    return 72;
-  }
-
-  return 75;
-}
 
 /* =========================================================
    FINAL PLANT SCORING
@@ -703,15 +788,6 @@ function scorePlant(plant, env, profile) {
       reason: null,
     },
 
-    {
-      key: "season",
-      score: scoreSeason(
-        plant,
-        effective
-      ),
-      weight: 1,
-      reason: null,
-    },
   ];
 
   const weightedTotal = components.reduce(
@@ -787,9 +863,7 @@ router.post("/", requireAuth, async (req, res) => {
     const pincode = String(env.pincode || "")
       .replace(/\D/g, "");
 
-    const hasProfile =
-      env.configured === true ||
-      pincode.length === 6;
+    const hasProfile = env.configured === true;
 
     if (!hasProfile) {
       return res.json({
@@ -810,16 +884,16 @@ router.post("/", requireAuth, async (req, res) => {
       pincode.length === 6
         ? analyzePincode(pincode)
         : {
-            climate: "",
-            sunlight: "",
-            temperature: "",
-            humidity: "",
-            matched: false,
-            label: env.locationLabel || "",
-            city: "",
-            state: "",
-          };
-
+          climate: "",
+          sunlight: "",
+          temperature: "",
+          humidity: "",
+          rainfall: "",
+          matched: false,
+          label: env.locationLabel || "",
+          city: "",
+          state: "",
+  };
     const stored = await Plant.find().lean();
 
     /*
@@ -834,6 +908,12 @@ router.post("/", requireAuth, async (req, res) => {
 
     const recommendations = plants
       .map((plant) => {
+        const compatibility = getCompatibilityGate(
+          plant,
+          env,
+          profile
+        );
+
         const { score, reasons } = scorePlant(
           plant,
           env,
@@ -863,8 +943,14 @@ router.post("/", requireAuth, async (req, res) => {
                   profile.climate ||
                   "regional"
                 } conditions.`,
+
+          /*
+           * Block plants with major environment mismatches.
+           */
+          _blocked: compatibility.blocked,
         };
       })
+      .filter((plant) => !plant._blocked)
       .sort(
         (a, b) => b.matchScore - a.matchScore
       )
