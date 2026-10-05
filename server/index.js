@@ -61,5 +61,5 @@ try {
   console.warn("The server will continue operating in resilient mode.");
 }
 
-app.listen(PORT, () => console.log(`Garden Guide API listening on port ${PORT}`));
+app.listen(PORT, "0.0.0.0", () => {  console.log(`Garden Guide API listening on port ${PORT}`);});
 
