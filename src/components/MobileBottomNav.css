@@ -64,7 +64,7 @@
 }
 
 .mobile-nav-btn.active {
-  color: #ffffff;
+  color: var(--surface-raised);
 }
 
 .mobile-nav-btn.active .mobile-nav-icon {

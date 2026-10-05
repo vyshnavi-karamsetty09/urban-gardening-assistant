@@ -2,7 +2,7 @@
 
 /* =========================================
    GLOBAL STYLES
-   Urban Gardening Assistant
+   Garden Guide — original visual system
    ========================================= */
 
 :root {
@@ -12,12 +12,17 @@
 
   --background: #f5f8f3;
   --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-subtle: #f5f8f3;
+  --surface-hover: #f0f6f1;
 
   --text-primary: #19351f;
   --text-secondary: #35533c;
   --text-muted: #4e6654;
 
   --border: #e3ebe4;
+  --border-strong: #c9dacb;
+  --focus-ring: rgba(46, 125, 50, 0.18);
 
   --success: #2e7d3f;
   --success-bg: #edf7ef;
@@ -25,7 +30,16 @@
   --warning: #b86b29;
   --warning-bg: #fff4e7;
 
+  --danger: #c62828;
+  --danger-bg: #fff0f0;
+
   --shadow: 0 8px 24px rgba(35, 69, 42, 0.07);
+
+  /* One shared Garden Guide sidebar palette, used in both themes. */
+  --sidebar-bg-start: #14241b;
+  --sidebar-bg-end: #0e1913;
+  --sidebar-active: #28583b;
+  --sidebar-hover: rgba(174, 211, 184, 0.09);
 
   font-family:
     "Plus Jakarta Sans",
@@ -43,8 +57,36 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+[data-theme="dark"] {
+  --primary: #4caf50;
+  --primary-dark: #388e3c;
+  --primary-light: #1b2e20;
 
-/* RESET */
+  --background: #0f1712;
+  --surface: #162519;
+  --surface-raised: #1c2d20;
+  --surface-subtle: #132017;
+  --surface-hover: #223727;
+
+  --text-primary: #e6f0e7;
+  --text-secondary: #b7ceb9;
+  --text-muted: #89a48b;
+
+  --border: #253928;
+  --border-strong: #2a4330;
+  --focus-ring: rgba(129, 199, 132, 0.18);
+
+  --success: #66bb6a;
+  --success-bg: #1c3320;
+
+  --warning: #ffa726;
+  --warning-bg: #332616;
+
+  --danger: #ef5350;
+  --danger-bg: #351719;
+
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
 
 * {
   box-sizing: border-box;
@@ -58,7 +100,6 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-
   background: var(--background);
   color: var(--text-primary);
 }
@@ -79,9 +120,6 @@ a {
   text-decoration: none;
 }
 
-
-/* ROOT */
-
 #root {
   width: 100%;
   min-height: 100vh;
@@ -89,9 +127,6 @@ a {
   padding: 0;
   text-align: left;
 }
-
-
-/* TYPOGRAPHY */
 
 h1,
 h2,
@@ -108,16 +143,15 @@ h4 {
   color: var(--text-primary);
 }
 
-
-/* TEXT SELECTION */
-
 ::selection {
   background: #dcefdc;
   color: #19351f;
 }
 
-
-/* SCROLLBAR */
+[data-theme="dark"] ::selection {
+  background: #254a2b;
+  color: #ffffff;
+}
 
 ::-webkit-scrollbar {
   width: 7px;
@@ -137,8 +171,13 @@ h4 {
   background: #aebfb1;
 }
 
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #2a4030;
+}
 
-/* RESPONSIVE */
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #38533d;
+}
 
 @media (max-width: 768px) {
   body {

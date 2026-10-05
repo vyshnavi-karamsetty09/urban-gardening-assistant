@@ -276,10 +276,10 @@
 
 /* Glassmorphism Surface Token */
 .glass-card {
-  background: rgba(255, 255, 255, 0.88);
+  background: var(--surface);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(220, 235, 222, 0.75);
+  border: 1px solid var(--border);
 }
 
 /* Shimmer Button Effect */

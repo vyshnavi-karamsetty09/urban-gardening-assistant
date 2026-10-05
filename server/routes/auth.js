@@ -56,6 +56,18 @@ function serializeUser(user) {
     role: user.role || "user",
     bio: user.bio || "",
     gardenUpdates: Boolean(user.gardenUpdates),
+    notificationPreferences: {
+      morningWatering: user.notificationPreferences?.morningWatering !== false,
+      weatherAlerts: user.notificationPreferences?.weatherAlerts !== false,
+      diseaseWarnings: user.notificationPreferences?.diseaseWarnings !== false,
+      aiRecommendations: user.notificationPreferences?.aiRecommendations !== false,
+    },
+    preferences: {
+      tempUnit: user.preferences?.tempUnit || "Celsius (°C)",
+      measurementUnit: user.preferences?.measurementUnit || "Metric (cm / m)",
+      autoWaterLogging: user.preferences?.autoWaterLogging !== false,
+      theme: user.preferences?.theme === "dark" ? "dark" : "light",
+    },
   };
 }
 
@@ -87,10 +99,24 @@ router.post("/register", async (req, res) => {
     const token = signToken(user);
     return res.status(201).json({ token, user: serializeUser(user) });
   } catch (error) {
-    console.error("register", error);
-    if (error?.code === 11000) return res.status(409).json({ message: "An account with this email already exists." });
-    return res.status(500).json({ message: "Unable to create the account right now." });
+  console.error("register", error);
+
+  if (error?.code === 11000) {
+    return res.status(409).json({
+      message: "An account with this email already exists.",
+    });
   }
+
+  return res.status(500).json({
+    message: "Unable to create the account right now.",
+    debug: {
+      name: error?.name || "UnknownError",
+      code: error?.code ?? null,
+      message: String(error?.message || "Unknown registration error")
+        .replace(/mongodb(\+srv)?:\/\/[^ ]+/gi, "[REDACTED_MONGODB_URI]"),
+    },
+  });
+}
 });
 
 router.post("/login", async (req, res) => {
@@ -139,12 +165,24 @@ router.post("/demo-account", async (_req, res) => {
 });
 
 router.get("/me", requireAuth, async (req, res) => {
+  res.set("Cache-Control", "no-store");
   return res.json({ user: serializeUser(req.user) });
 });
 
 router.put("/profile", requireAuth, async (req, res) => {
   try {
-    const { name, firstName, lastName, email, phone, role, bio, gardenUpdates } = req.body || {};
+    const {
+      name,
+      firstName,
+      lastName,
+      email,
+      phone,
+      role,
+      bio,
+      gardenUpdates,
+      notificationPreferences,
+      preferences,
+    } = req.body || {};
     if (email && email.trim().toLowerCase() !== req.user.email) {
       const taken = await User.findOne({ email: email.trim().toLowerCase(), _id: { $ne: req.user._id } });
       if (taken) return res.status(409).json({ message: "That email is already in use." });
@@ -154,12 +192,51 @@ router.put("/profile", requireAuth, async (req, res) => {
     if (firstName !== undefined) user.firstName = String(firstName).trim();
     if (lastName !== undefined) user.lastName = String(lastName).trim();
     if (name !== undefined) user.name = String(name).trim();
-    else user.name = `${user.firstName} ${user.lastName}`.trim();
+    else if (firstName !== undefined || lastName !== undefined) {
+      user.name = `${user.firstName} ${user.lastName}`.trim();
+    }
     if (email !== undefined) user.email = String(email).trim().toLowerCase();
     if (phone !== undefined) user.phone = String(phone).trim();
     if (role !== undefined && req.user.role === "admin") user.role = role === "admin" ? "admin" : "user";
     if (bio !== undefined) user.bio = String(bio);
     if (gardenUpdates !== undefined) user.gardenUpdates = Boolean(gardenUpdates);
+
+    if (notificationPreferences && typeof notificationPreferences === "object") {
+      const currentNotifications = user.notificationPreferences || {};
+      user.notificationPreferences = {
+        morningWatering: notificationPreferences.morningWatering !== undefined
+          ? notificationPreferences.morningWatering !== false
+          : currentNotifications.morningWatering !== false,
+        weatherAlerts: notificationPreferences.weatherAlerts !== undefined
+          ? notificationPreferences.weatherAlerts !== false
+          : currentNotifications.weatherAlerts !== false,
+        diseaseWarnings: notificationPreferences.diseaseWarnings !== undefined
+          ? notificationPreferences.diseaseWarnings !== false
+          : currentNotifications.diseaseWarnings !== false,
+        aiRecommendations: notificationPreferences.aiRecommendations !== undefined
+          ? notificationPreferences.aiRecommendations !== false
+          : currentNotifications.aiRecommendations !== false,
+      };
+    }
+
+    if (preferences && typeof preferences === "object") {
+      const currentPreferences = user.preferences || {};
+      user.preferences = {
+        tempUnit: preferences.tempUnit !== undefined
+          ? (preferences.tempUnit === "Fahrenheit (°F)" ? "Fahrenheit (°F)" : "Celsius (°C)")
+          : (currentPreferences.tempUnit || "Celsius (°C)"),
+        measurementUnit: preferences.measurementUnit !== undefined
+          ? (preferences.measurementUnit === "Imperial (in / ft)" ? "Imperial (in / ft)" : "Metric (cm / m)")
+          : (currentPreferences.measurementUnit || "Metric (cm / m)"),
+        autoWaterLogging: preferences.autoWaterLogging !== undefined
+          ? preferences.autoWaterLogging !== false
+          : currentPreferences.autoWaterLogging !== false,
+        theme: preferences.theme !== undefined
+          ? (preferences.theme === "dark" ? "dark" : "light")
+          : (currentPreferences.theme || "light"),
+      };
+    }
+
     await user.save();
 
     return res.json({ user: serializeUser(user), token: signToken(user) });

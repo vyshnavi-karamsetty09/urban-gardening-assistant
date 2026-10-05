@@ -7,7 +7,7 @@
   width: 100%;
   min-height: 100vh;
   padding: 24px 30px 50px;
-  background: #f2f7f2;
+  background: var(--surface-subtle);
   color: #15381f;
   box-sizing: border-box;
 }
@@ -93,7 +93,7 @@
   align-items: center;
   gap: 12px;
   padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--surface-raised);
   border: 1px solid #d8e8da;
   border-radius: 14px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
@@ -134,7 +134,7 @@
   align-items: center;
   gap: 9px;
   padding: 10px 20px;
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1px solid #dce8dd;
   border-radius: 14px;
   color: #4b6651;
@@ -146,14 +146,14 @@
 }
 
 .smart-tab-btn:hover {
-  background: #eef7f0;
+  background: var(--surface-subtle);
   color: #163e1f;
   border-color: #c8decb;
 }
 
 .smart-tab-btn.active {
   background: #184422;
-  color: #ffffff;
+  color: var(--surface-raised);
   border-color: #184422;
   box-shadow: 0 4px 14px rgba(24, 68, 34, 0.25);
 }
@@ -166,13 +166,13 @@
   padding: 2px 8px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 11px;
   font-weight: 800;
 }
 
 .smart-tab-btn:not(.active) .tab-counter {
-  background: #edf7ef;
+  background: var(--success-bg);
   color: #1b5327;
 }
 
@@ -180,13 +180,13 @@
   padding: 2px 8px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 10px;
   font-weight: 700;
 }
 
 .smart-tab-btn:not(.active) .tab-status-pill {
-  background: #edf7ef;
+  background: var(--success-bg);
   color: #216d33;
 }
 
@@ -200,7 +200,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1px solid #dfe9e1;
   border-radius: 16px;
   padding: 12px 18px;
@@ -221,7 +221,7 @@
   align-items: center;
   gap: 8px;
   padding: 6px 12px;
-  background: #f7faf7;
+  background: var(--surface-subtle);
   border: 1px solid #e5ede6;
   border-radius: 10px;
 }
@@ -263,7 +263,7 @@
 
 .modify-env-btn:hover {
   background: #1f5e2d;
-  color: #ffffff;
+  color: var(--surface-raised);
   border-color: #1f5e2d;
 }
 
@@ -284,7 +284,7 @@
   height: 40px;
   min-width: 280px;
   padding: 0 14px;
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1px solid #dce7dd;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
@@ -329,7 +329,7 @@
   padding: 7px 16px;
   border-radius: 20px;
   border: 1px solid #dce8dd;
-  background: #ffffff;
+  background: var(--surface-raised);
   color: #3b5641;
   font-size: 11.5px;
   font-weight: 600;
@@ -338,13 +338,13 @@
 }
 
 .rec-cat-btn:hover {
-  background: #edf7ef;
+  background: var(--success-bg);
   color: #163d1e;
 }
 
 .rec-cat-btn.active {
   background: #173f20;
-  color: #ffffff;
+  color: var(--surface-raised);
   border-color: #173f20;
 }
 
@@ -356,7 +356,7 @@
 }
 
 .rec-plant-card {
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1px solid #dfe9e0;
   border-radius: 18px;
   overflow: hidden;
@@ -408,7 +408,7 @@
   font-size: 10px;
   font-weight: 800;
   background: #1a5626;
-  color: #ffffff;
+  color: var(--surface-raised);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -498,7 +498,7 @@
 
 .spec-chip {
   padding: 4px 8px;
-  background: #f7faf7;
+  background: var(--surface-subtle);
   border: 1px solid #e3ede4;
   border-radius: 8px;
   font-size: 10px;
@@ -539,7 +539,7 @@
   align-items: center;
   gap: 8px;
   padding-top: 8px;
-  border-top: 1px solid #f2f7f2;
+  border-top: 1px solid var(--surface-subtle);
 }
 
 .add-to-garden-btn {
@@ -548,7 +548,7 @@
   border: none;
   border-radius: 10px;
   background: #1a4d25;
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
@@ -565,7 +565,7 @@
   text-align: center;
   padding: 7px 10px;
   border-radius: 10px;
-  background: #edf7ef;
+  background: var(--success-bg);
   color: #216d33;
   font-size: 11px;
   font-weight: 700;
@@ -576,7 +576,7 @@
   padding: 7px 10px;
   border: 1px solid #d5e5d7;
   border-radius: 10px;
-  background: #f6faf6;
+  background: var(--surface-subtle);
   color: #276636;
   font-size: 11px;
   font-weight: 600;
@@ -600,7 +600,7 @@
 
 /* Environment Profile Card */
 .live-weather-card {
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1px solid #dfe9e0;
   border-radius: 18px;
   padding: 20px 22px;
@@ -638,7 +638,7 @@
 .weather-banner-content {
   position: relative;
   z-index: 2;
-  color: #ffffff;
+  color: var(--surface-raised);
   max-width: 600px;
 }
 
@@ -662,7 +662,7 @@
   margin: 0;
   font-size: 18px;
   font-weight: 800;
-  color: #ffffff;
+  color: var(--surface-raised);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
@@ -670,7 +670,7 @@
   margin: 4px 0 0;
   font-size: 12px;
   line-height: 1.45;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--surface-raised);
 }
 
 /* Dynamic Environment Visual Showcase Card */
@@ -678,7 +678,7 @@
   display: grid;
   grid-template-columns: 360px 1fr;
   gap: 24px;
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1px solid #dfe9e0;
   border-radius: 20px;
   padding: 20px;
@@ -720,7 +720,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--surface-raised);
   color: #14381e;
   font-size: 11.5px;
   font-weight: 700;
@@ -767,7 +767,7 @@
   gap: 5px;
   padding: 4px 10px;
   border-radius: 8px;
-  background: #f0f7f1;
+  background: var(--surface-subtle);
   border: 1px solid #d5ebd7;
   color: #184b23;
   font-size: 11px;
@@ -828,7 +828,7 @@
 .weather-condition-tag {
   padding: 6px 14px;
   border-radius: 20px;
-  background: #fef8e7;
+  background: var(--warning-bg);
   border: 1px solid #fae7b2;
   color: #8a6108;
   font-size: 11px;
@@ -847,7 +847,7 @@
   align-items: center;
   gap: 12px;
   padding: 12px 14px;
-  background: #fbfdfb;
+  background: var(--surface-subtle);
   border: 1px solid #e3ece4;
   border-radius: 14px;
 }
@@ -864,19 +864,19 @@
 }
 
 .metric-box-icon.yellow {
-  background: #fef8e7;
+  background: var(--warning-bg);
 }
 
 .metric-box-icon.blue {
-  background: #e9f4fd;
+  background: var(--surface-subtle);
 }
 
 .metric-box-icon.green {
-  background: #ebf8ed;
+  background: var(--success-bg);
 }
 
 .metric-box-icon.mint {
-  background: #ebf8f2;
+  background: var(--success-bg);
 }
 
 .metric-val {
@@ -917,7 +917,7 @@
 
 /* Environment Configurator Card */
 .env-configurator-card {
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1px solid #dfe9e0;
   border-radius: 18px;
   padding: 24px 26px;
@@ -952,7 +952,7 @@
   border: none;
   border-radius: 10px;
   background: #1b5327;
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 11.5px;
   font-weight: 700;
   cursor: pointer;
@@ -998,7 +998,7 @@
 .config-text-input:focus {
   border-color: #216731;
   box-shadow: 0 0 0 3px rgba(33, 103, 49, 0.12);
-  background: #ffffff;
+  background: var(--surface-raised);
 }
 
 .pincode-badge {
@@ -1029,7 +1029,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 14px 16px;
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1.5px solid #dce7dd;
   border-radius: 14px;
   cursor: pointer;
@@ -1057,7 +1057,7 @@
   height: 20px;
   border-radius: 50%;
   background: #216731;
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 11px;
   display: flex;
   align-items: center;
@@ -1087,7 +1087,7 @@
 /* Photo Location Options */
 .env-opt-photo-card {
   position: relative;
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1.5px solid #dce8dd;
   border-radius: 16px;
   overflow: hidden;
@@ -1119,7 +1119,7 @@
   width: 24px;
   height: 24px;
   background: #2e8b46;
-  color: #ffffff;
+  color: var(--surface-raised);
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -1152,7 +1152,7 @@
   position: absolute;
   bottom: 8px;
   left: 10px;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--surface-raised);
   backdrop-filter: blur(4px);
   padding: 3px 7px;
   border-radius: 8px;
@@ -1200,7 +1200,7 @@
   padding: 0 12px;
   border: 1px solid #dce7dd;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--surface-raised);
   font-size: 12px;
   color: #16321b;
   outline: none;
@@ -1227,7 +1227,7 @@
   border: none;
   border-radius: 12px;
   background: #184422;
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 13px;
   font-weight: 800;
   cursor: pointer;
@@ -1250,7 +1250,7 @@
   bottom: 28px;
   right: 28px;
   background: #143d1c;
-  color: #ffffff;
+  color: var(--surface-raised);
   padding: 12px 22px;
   border-radius: 30px;
   display: inline-flex;
@@ -1347,7 +1347,7 @@
 /* Numeric Microclimate Fine-Tuning & Validation Styling */
 .numeric-microclimate-subpanel {
   margin-top: 18px;
-  background: #f6faf6;
+  background: var(--surface-subtle);
   border: 1px solid #d7ebd9;
   border-radius: 14px;
   padding: 16px 18px;
@@ -1408,7 +1408,7 @@
   padding: 10px 42px 10px 14px;
   border: 1.5px solid #c9ddcd;
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--surface-raised);
   color: #1a4223;
   font-size: 14px;
   font-weight: 600;
@@ -1444,3 +1444,201 @@
   align-items: center;
   gap: 4px;
 }
+
+/* Pincode detection and regional profile */
+.pincode-detected-note {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 8px;
+  max-width: 720px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: #5f7565;
+}
+
+.pincode-detected-note strong {
+  color: #234d2d;
+  font-weight: 700;
+}
+
+.pincode-detected-note span {
+  color: #718477;
+}
+
+.regional-profile-card {
+  margin-top: 12px;
+  margin-bottom: 22px;
+  padding: 16px 18px;
+  background: #f7fbf7;
+  border: 1px solid #d9e9db;
+  border-radius: 14px;
+}
+
+.regional-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.regional-profile-kicker {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: #4d7956;
+}
+
+.regional-profile-header strong {
+  display: block;
+  font-size: 13px;
+  color: #173b1f;
+}
+
+.regional-profile-source {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: var(--primary-light);
+  border: 1px solid #cfe3d1;
+  color: #2c6837;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.regional-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.regional-profile-item {
+  padding: 10px 11px;
+  background: var(--surface-raised);
+  border: 1px solid #e3ece4;
+  border-radius: 10px;
+}
+
+.regional-profile-item span {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 9px;
+  color: #718477;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.regional-profile-item strong {
+  display: block;
+  font-size: 11.5px;
+  color: #214b29;
+}
+
+@media (max-width: 900px) {
+  .regional-profile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .regional-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .regional-profile-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+.regional-profile-optional-note,
+.optional-field-hint {
+  display: inline-block;
+  margin-left: 7px;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.regional-profile-optional-note {
+  margin-left: 0;
+  margin-top: 3px;
+}
+
+/* V9 recommendation cards follow the Plant Library card hierarchy: image → name → description → compact metadata → actions. */
+.rec-card-description {
+  margin: 0 0 9px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+.rec-card-quick-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.rec-card-quick-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+  font-size: 9.5px;
+  font-weight: 700;
+}
+html[data-theme="dark"] .rec-card-description { color: var(--text-secondary) !important; }
+html[data-theme="dark"] .rec-card-quick-meta span {
+  background: var(--surface-subtle) !important;
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+html[data-theme="dark"] .rec-view-guide-btn {
+  background: var(--surface-raised) !important;
+  border-color: var(--border-strong) !important;
+  color: var(--text-primary) !important;
+}
+html[data-theme="dark"] .rec-view-guide-btn:hover {
+  background: var(--surface-hover) !important;
+  color: var(--text-primary) !important;
+}
+@media (max-width: 900px) {
+  .recommendations-real-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .recommendations-real-grid { grid-template-columns: 1fr; gap: 14px; }
+  .rec-card-footer { flex-wrap: wrap; }
+  .rec-view-guide-btn, .add-to-garden-btn, .in-garden-status { flex: 1 1 100%; }
+}
+
+
+/* Keep recommendation cards visually consistent with Plant Library */
+.rec-library-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+.rec-library-specs > div { display:flex; align-items:center; gap:8px; min-width:0; }
+.rec-library-specs span { flex:0 0 auto; font-size:12px; }
+.rec-library-specs small { display:block; font-size:9px; color:var(--text-secondary); font-weight:600; }
+.rec-library-specs strong { display:block; font-size:10px; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+@media (max-width: 640px) { .rec-library-specs { grid-template-columns:1fr; } }
+html[data-theme="dark"] .rec-plant-card { background: var(--surface-raised); border-color: var(--border); }
+html[data-theme="dark"] .rec-plant-name { color: var(--text-primary) !important; }
+html[data-theme="dark"] .rec-botanical-name { color: var(--text-secondary) !important; }
+html[data-theme="dark"] .rec-match-reason { background: var(--surface-subtle); border-color: var(--border); }
+html[data-theme="dark"] .rec-match-reason p { color: var(--text-secondary) !important; }
+html[data-theme="dark"] .rec-library-specs { background: var(--surface-subtle); border-color: var(--border); }
+html[data-theme="dark"] .rec-library-specs small { color: var(--text-secondary); }
+html[data-theme="dark"] .rec-library-specs strong { color: var(--text-primary); }

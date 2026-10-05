@@ -6,8 +6,8 @@
   width: 100%;
   min-height: 100vh;
   padding: 28px 34px 45px;
-  background: #f6faf6;
-  color: #173b20;
+  background: var(--background);
+  color: var(--text-primary);
   box-sizing: border-box;
 }
 
@@ -39,7 +39,7 @@
 
 .detection-heading h1 {
   margin: 0;
-  color: #123d20;
+  color: var(--text-primary);
   font-size: 31px;
   line-height: 1.15;
   font-weight: 700;
@@ -48,7 +48,7 @@
 
 .detection-heading p {
   margin: 7px 0 0;
-  color: #65766a;
+  color: var(--text-secondary);
   font-size: 13px;
   line-height: 1.5;
   max-width: 760px;
@@ -66,7 +66,7 @@
   border-radius: 9px;
   padding: 10px 18px;
   background: #2e7d32;
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
@@ -90,7 +90,7 @@
   border: 1px solid #c9d8cb;
   border-radius: 9px;
   padding: 9px 15px;
-  background: #ffffff;
+  background: var(--surface);
   color: #2e7036;
   font-size: 11px;
   font-weight: 600;
@@ -99,7 +99,7 @@
 }
 
 .secondary-btn:hover {
-  background: #edf6ee;
+  background: var(--primary-light);
   border-color: #92b895;
 }
 
@@ -134,20 +134,20 @@
 }
 
 .tab-btn:hover {
-  color: #173b20;
+  color: var(--text-primary);
   background: rgba(255, 255, 255, 0.5);
 }
 
 .tab-btn.active {
-  background: #ffffff;
-  color: #123d20;
+  background: var(--surface);
+  color: var(--text-primary);
   box-shadow: 0 2px 8px rgba(28, 64, 34, 0.08);
 }
 
 .tab-count {
   font-size: 10px;
   background: #2e7d32;
-  color: #ffffff;
+  color: var(--surface-raised);
   padding: 2px 6px;
   border-radius: 10px;
   font-weight: 700;
@@ -165,8 +165,8 @@
 }
 
 .scanner-card {
-  background: #ffffff;
-  border: 1px solid #dce7dd;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 22px;
   box-shadow: 0 4px 14px rgba(34, 72, 41, 0.035);
@@ -183,7 +183,7 @@
 .result-card h3 {
   margin: 0;
   font-size: 17px;
-  color: #15381f;
+  color: var(--text-primary);
   font-weight: 700;
 }
 
@@ -204,9 +204,9 @@
 
 .dropzone-area {
   display: block;
-  border: 2px dashed #b7cebb;
+  border: 2px dashed var(--border);
   border-radius: 14px;
-  background: #fbfdfb;
+  background: var(--surface);
   padding: 42px 20px;
   text-align: center;
   cursor: pointer;
@@ -215,7 +215,7 @@
 
 .dropzone-area:hover {
   border-color: #2e7d32;
-  background: #f0f7f1;
+  background: var(--surface-subtle);
   transform: scale(1.01);
   box-shadow: 0 8px 24px rgba(46, 125, 50, 0.08);
 }
@@ -242,13 +242,13 @@
 
 .dropzone-content strong {
   font-size: 15px;
-  color: #1a3c22;
+  color: var(--text-primary);
   margin-bottom: 4px;
 }
 
 .dropzone-content p {
   margin: 0 0 16px;
-  color: #6d7d70;
+  color: var(--text-secondary);
   font-size: 11px;
 }
 
@@ -371,13 +371,13 @@
   color: #4a634e;
   font-weight: 600;
   cursor: pointer;
-  background: #ffffff;
+  background: var(--surface);
   transition: all 0.15s ease;
   white-space: nowrap;
 }
 
 .change-photo-btn:hover {
-  background: #edf6ee;
+  background: var(--primary-light);
 }
 
 /* Sample cases with Leaf Thumbnails */
@@ -407,7 +407,7 @@
   border: 1px solid #d8e5d9;
   border-radius: 10px;
   padding: 8px;
-  background: #fbfdfb;
+  background: var(--surface);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -434,7 +434,7 @@
   border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;
-  border: 1px solid #cfe0d1;
+  border: 1px solid var(--border);
   background: #e8eee8;
 }
 
@@ -575,7 +575,7 @@
 .report-header h2 {
   margin: 0 0 3px;
   font-size: 20px;
-  color: #123d20;
+  color: var(--text-primary);
 }
 
 .common-subtitle {
@@ -614,7 +614,7 @@
   display: grid;
   grid-template-columns: 140px minmax(0, 1fr);
   gap: 14px;
-  background: #f0f7f1;
+  background: var(--surface-subtle);
   border: 1px solid #badfbe;
   border-radius: 12px;
   padding: 12px;
@@ -665,7 +665,7 @@
 }
 
 .visual-symptom-tag {
-  background: #ffffff;
+  background: var(--surface);
   border: 1px solid #cde3d1;
   color: #1e4d28;
   font-size: 9px;
@@ -690,7 +690,7 @@
 }
 
 .meta-stat {
-  background: #fbfdfb;
+  background: var(--surface);
   border: 1px solid #e2ebe3;
   border-radius: 8px;
   padding: 10px 12px;
@@ -728,7 +728,7 @@
 }
 
 .severity-tag.severe {
-  background: #fee2e2;
+  background: var(--danger-bg);
   color: #991b1b;
 }
 
@@ -757,7 +757,7 @@
    ========================================= */
 
 .treatment-protocol-card {
-  background: #ffffff;
+  background: var(--surface);
   border: 2px solid #2e7d32;
   border-radius: 14px;
   padding: 18px;
@@ -779,7 +779,7 @@
 .treatment-protocol-tag {
   display: inline-block;
   background: #2e7d32;
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.8px;
@@ -802,7 +802,7 @@
 }
 
 .treatment-priority-badge {
-  background: #fef2f2;
+  background: var(--danger-bg);
   border: 1px solid #fca5a5;
   color: #b91c1c;
   font-size: 10px;
@@ -831,7 +831,7 @@
 
 .step-num {
   background: #173d1e;
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 9px;
   font-weight: 800;
   padding: 2px 7px;
@@ -854,7 +854,7 @@
 
 /* Step 1: Emergency */
 .treatment-step-card.step-emergency {
-  background: #fff9f5;
+  background: var(--danger-bg);
   border-color: #fdba74;
   border-left: 5px solid #ea580c;
 }
@@ -901,7 +901,7 @@
 .remedy-highlight-pill {
   margin-top: 8px;
   display: inline-block;
-  background: #ffffff;
+  background: var(--surface);
   border: 1px solid #86efac;
   padding: 4px 10px;
   border-radius: 20px;
@@ -912,7 +912,7 @@
 
 /* Step 3: Chemical */
 .treatment-step-card.step-chemical {
-  background: #f8fafc;
+  background: var(--surface-subtle);
   border-color: #cbd5e1;
   border-left: 4px solid #64748b;
 }
@@ -931,7 +931,7 @@
 
 /* Step 4: Prevention */
 .treatment-step-card.step-prevention {
-  background: #f0fdf4;
+  background: var(--success-bg);
   border-color: #bbf7d0;
   border-left: 4px solid #16a34a;
 }
@@ -954,7 +954,7 @@
   margin-top: 6px;
   padding: 14px 16px;
   border-radius: 11px;
-  background: #edf7ef;
+  background: var(--success-bg);
   border: 1px solid #b6deb9;
 }
 
@@ -993,7 +993,7 @@
   padding: 7px 11px;
   border-radius: 7px;
   border: 1px solid #bad6bd;
-  background: #ffffff;
+  background: var(--surface);
   font-size: 11px;
   font-weight: 600;
   color: #1d3e23;
@@ -1009,7 +1009,7 @@
   margin-top: 10px;
   padding: 9px 12px;
   border-radius: 7px;
-  background: #dcfce7;
+  background: var(--success-bg);
   color: #166534;
   font-size: 11px;
   line-height: 1.4;
@@ -1037,8 +1037,8 @@
   overflow-y: auto;
   overscroll-behavior: contain;
 
-  background: #ffffff;
-  border: 1px solid #dce7dd;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 18px;
   box-shadow: 0 4px 14px rgba(34, 72, 41, 0.035);
@@ -1099,12 +1099,12 @@
   margin: 0;
   font-size: 16px;
   font-weight: 800;
-  color: #123d20;
+  color: var(--text-primary);
 }
 
 .symptom-counter-badge {
   padding: 2px 7px;
-  background: #eef6ef;
+  background: var(--surface-hover);
   color: #1e5a2c;
   font-size: 10px;
   font-weight: 700;
@@ -1134,14 +1134,14 @@
   height: 34px;
   padding: 0 10px;
   margin-bottom: 10px;
-  background: #fbfdfb;
+  background: var(--surface);
   border: 1px solid #dbe7dc;
   border-radius: 17px;
   transition: all 0.2s ease;
 }
 
 .symptom-search-box:focus-within {
-  background: #ffffff;
+  background: var(--surface);
   border-color: #2e7d32;
   box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
 }
@@ -1200,7 +1200,7 @@
   padding: 5px 9px;
   border: 1px solid #dbe7dc;
   border-radius: 14px;
-  background: #fbfdfb;
+  background: var(--surface);
   color: #435e47;
   font-size: 10px;
   font-weight: 600;
@@ -1210,13 +1210,13 @@
 }
 
 .symptom-nav-tab:hover {
-  background: #eef6ef;
+  background: var(--surface-hover);
   color: #1b4b25;
 }
 
 .symptom-nav-tab.active {
   background: #255f32;
-  color: #ffffff;
+  color: var(--surface-raised);
   border-color: #255f32;
   box-shadow: 0 2px 4px rgba(37, 95, 50, 0.2);
 }
@@ -1252,9 +1252,9 @@
   flex-direction: column;
   gap: 6px;
   padding: 10px;
-  border: 1px solid #dce7dd;
+  border: 1px solid var(--border);
   border-radius: 10px;
-  background: #fbfdfb;
+  background: var(--surface);
   text-align: left;
   cursor: pointer;
   transition: all 0.18s ease;
@@ -1268,7 +1268,7 @@
 }
 
 .preset-card.applied {
-  background: #eaf5eb;
+  background: var(--primary-light);
   border-color: #2e7d32;
 }
 
@@ -1310,7 +1310,7 @@
 
 .preset-card.applied .preset-badge {
   background: #2e7d32;
-  color: #ffffff;
+  color: var(--surface-raised);
 }
 
 .preset-symptoms {
@@ -1322,7 +1322,7 @@
 .preset-tag {
   font-size: 9px;
   padding: 2px 6px;
-  background: #ffffff;
+  background: var(--surface);
   border: 1px solid #e1ebe2;
   border-radius: 6px;
   color: #4b6b50;
@@ -1331,7 +1331,7 @@
 .empty-symptoms-state {
   padding: 14px 10px;
   text-align: center;
-  background: #f8faf8;
+  background: var(--surface-subtle);
   border-radius: 8px;
   border: 1px dashed #dbe7dc;
   display: flex;
@@ -1379,7 +1379,7 @@
   border: 1px solid #d6e2d8;
   border-radius: 20px;
   padding: 5px 11px;
-  background: #fbfdfb;
+  background: var(--surface);
   color: #435e47;
   font-size: 10px;
   font-weight: 600;
@@ -1388,23 +1388,23 @@
 }
 
 .chip-btn:hover {
-  background: #eef6ef;
+  background: var(--surface-hover);
 }
 
 .chip-btn.active {
   background: #2e7d32;
-  color: #ffffff;
+  color: var(--surface-raised);
   border-color: #2e7d32;
 }
 
 .wizard-select {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #d4e0d6;
+  border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 11px;
-  color: #1b3d22;
-  background: #fbfdfb;
+  color: var(--text-primary);
+  background: var(--surface);
   outline: none;
 }
 
@@ -1418,7 +1418,7 @@
   border: 1px solid #e1ebe2;
   border-radius: 8px;
   padding: 8px 10px;
-  background: #fbfdfb;
+  background: var(--surface);
   text-align: left;
   cursor: pointer;
   display: flex;
@@ -1435,7 +1435,7 @@
 }
 
 .symptom-toggle.selected {
-  background: #eaf5eb;
+  background: var(--primary-light);
   border-color: #2e7d32;
   color: #13421b;
   font-weight: 600;
@@ -1456,7 +1456,7 @@
 
 .symptom-toggle.selected .checkbox-dot {
   background: #2e7d32;
-  color: #ffffff;
+  color: var(--surface-raised);
 }
 
 /* =========================================
@@ -1480,9 +1480,9 @@
   z-index: 15;
   flex-shrink: 0;
 
-  background: rgba(255, 255, 255, 0.98);
+  background: var(--surface-raised);
   backdrop-filter: blur(8px);
-  border: 1px solid #dce7dd;
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 14px 18px;
   margin-bottom: 12px;
@@ -1549,7 +1549,7 @@
   margin: 0;
   font-size: 19px;
   font-weight: 800;
-  color: #123d20;
+  color: var(--text-primary);
   letter-spacing: -0.3px;
 }
 
@@ -1557,7 +1557,7 @@
   display: inline-flex;
   align-items: center;
   padding: 3px 9px;
-  background: #eef6ef;
+  background: var(--surface-hover);
   color: #1e5a2c;
   font-size: 11px;
   font-weight: 700;
@@ -1578,14 +1578,14 @@
   align-items: center;
   height: 36px;
   padding: 0 10px;
-  background: #f8faf8;
+  background: var(--surface-subtle);
   border: 1px solid #dbe7dc;
   border-radius: 18px;
   transition: all 0.2s ease;
 }
 
 .diag-search-box:focus-within {
-  background: #ffffff;
+  background: var(--surface);
   border-color: #2e7d32;
   box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
 }
@@ -1601,7 +1601,7 @@
   background: transparent;
   outline: none;
   font-size: 11px;
-  color: #1a3c22;
+  color: var(--text-primary);
   width: 140px;
 }
 
@@ -1633,8 +1633,8 @@
   padding: 0 10px;
   border: 1px solid #dbe7dc;
   border-radius: 10px;
-  background: #f8faf8;
-  color: #173b20;
+  background: var(--surface-subtle);
+  color: var(--text-primary);
   font-size: 11px;
   font-weight: 600;
   outline: none;
@@ -1652,7 +1652,7 @@
   align-items: center;
   border: 1px solid #dbe7dc;
   border-radius: 10px;
-  background: #f8faf8;
+  background: var(--surface-subtle);
   padding: 2px;
 }
 
@@ -1670,7 +1670,7 @@
 
 .diag-view-btn.active {
   background: #2e7d32;
-  color: #ffffff;
+  color: var(--surface-raised);
   box-shadow: 0 2px 4px rgba(46, 125, 50, 0.2);
 }
 
@@ -1690,7 +1690,7 @@
   padding: 7px 14px;
   border: 1px solid #dbe7dc;
   border-radius: 20px;
-  background: #fbfdfb;
+  background: var(--surface);
   color: #3b5a40;
   font-size: 12px;
   font-weight: 600;
@@ -1700,14 +1700,14 @@
 }
 
 .diag-tab-btn:hover {
-  background: #eef6ef;
+  background: var(--surface-hover);
   border-color: #b7d5bb;
   color: #174823;
 }
 
 .diag-tab-btn.active {
   background: #1e5a2c;
-  color: #ffffff;
+  color: var(--surface-raised);
   border-color: #1e5a2c;
   box-shadow: 0 2px 6px rgba(30, 90, 44, 0.25);
 }
@@ -1722,7 +1722,7 @@
 
 .diag-tab-btn.active .diag-tab-count {
   background: rgba(255, 255, 255, 0.25);
-  color: #ffffff;
+  color: var(--surface-raised);
 }
 
 /* Active Symptoms Bar */
@@ -1756,7 +1756,7 @@
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
-  background: #eaf5ec;
+  background: var(--primary-light);
   border: 1px solid #b8dabf;
   border-radius: 14px;
   color: #1e5a2c;
@@ -1767,7 +1767,7 @@
 }
 
 .active-sym-tag:hover {
-  background: #fee2e2;
+  background: var(--danger-bg);
   border-color: #fca5a5;
   color: #991b1b;
 }
@@ -1826,8 +1826,8 @@
 }
 
 .match-card {
-  background: #ffffff;
-  border: 1px solid #dce7dd;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 3px 12px rgba(34, 72, 41, 0.03);
@@ -1895,7 +1895,7 @@
 .match-card-header h4 {
   margin: 0 0 2px;
   font-size: 15px;
-  color: #123d20;
+  color: var(--text-primary);
 }
 
 .match-alias {
@@ -1910,7 +1910,7 @@
 }
 
 .symptoms-tags .tag {
-  background: #f1f6f2;
+  background: var(--surface-subtle);
   border: 1px solid #dce5dd;
   color: #546a58;
   font-size: 9px;
@@ -1944,7 +1944,7 @@
 .treatment-tag-pill {
   display: inline-block;
   background: #2e7d32;
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 8px;
   font-weight: 800;
   padding: 2px 6px;
@@ -1970,7 +1970,7 @@
 }
 
 .treatment-row.organic-highlight {
-  background: #ffffff;
+  background: var(--surface);
   border: 1px solid #a3d9a8;
   border-radius: 6px;
   padding: 6px 8px;
@@ -1984,7 +1984,7 @@
   border: 1px solid #bcd5c0;
   border-radius: 7px;
   padding: 7px 12px;
-  background: #ffffff;
+  background: var(--surface);
   color: #2e7036;
   font-size: 10px;
   font-weight: 700;
@@ -1993,7 +1993,7 @@
 }
 
 .outline-sm-btn:hover {
-  background: #edf6ee;
+  background: var(--primary-light);
   border-color: #2e7d32;
 }
 
@@ -2003,8 +2003,8 @@
 }
 
 .no-matches-card {
-  background: #ffffff;
-  border: 1px solid #dce7dd;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 40px;
   text-align: center;
@@ -2017,7 +2017,7 @@
 
 .no-matches-card h4 {
   margin: 10px 0 6px;
-  color: #173b20;
+  color: var(--text-primary);
 }
 
 /* =========================================
@@ -2034,8 +2034,8 @@
 .search-bar {
   display: flex;
   align-items: center;
-  background: #ffffff;
-  border: 1px solid #cfe0d1;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 10px;
   padding: 0 14px;
   height: 44px;
@@ -2051,7 +2051,7 @@
   border: 0;
   outline: none;
   font-size: 12px;
-  color: #173b20;
+  color: var(--text-primary);
 }
 
 .clear-search {
@@ -2072,7 +2072,7 @@
   border: 1px solid #d0dfd2;
   border-radius: 20px;
   padding: 6px 14px;
-  background: #ffffff;
+  background: var(--surface);
   color: #405d44;
   font-size: 11px;
   font-weight: 600;
@@ -2081,12 +2081,12 @@
 }
 
 .cat-pill:hover {
-  background: #edf6ee;
+  background: var(--primary-light);
 }
 
 .cat-pill.active {
   background: #2e7d32;
-  color: #ffffff;
+  color: var(--surface-raised);
   border-color: #2e7d32;
 }
 
@@ -2097,8 +2097,8 @@
 }
 
 .library-card {
-  background: #ffffff;
-  border: 1px solid #dce7dd;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 4px 14px rgba(34, 72, 41, 0.03);
@@ -2196,7 +2196,7 @@
 /* Highlighted Treatment in Library */
 
 .lib-treatment-highlight {
-  background: linear-gradient(180deg, #f0fdf4 0%, #e6f9eb 100%);
+  background: linear-gradient(180deg, var(--success-bg) 0%, #e6f9eb 100%);
   border: 1.5px solid #22c55e;
   border-left: 5px solid #16a34a;
   border-radius: 9px;
@@ -2211,7 +2211,7 @@
 .remedy-badge-pill {
   display: inline-block;
   background: #16a34a;
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 9px;
   font-weight: 800;
   padding: 2px 7px;
@@ -2228,7 +2228,7 @@
 }
 
 .prevention-block {
-  background: #fbfdfb;
+  background: var(--surface);
   padding: 8px 10px;
   border-radius: 7px;
   border: 1px solid #e2ece3;
@@ -2240,7 +2240,7 @@
 
 .prevention-tips-banner {
   margin-top: 36px;
-  background: #ffffff;
+  background: var(--surface);
   border: 1px solid #cce1ce;
   border-left: 6px solid #2e7d32;
   border-radius: 12px;

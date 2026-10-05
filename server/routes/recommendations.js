@@ -875,6 +875,28 @@ router.post("/", requireAuth, async (req, res) => {
       });
     }
 
+    // A boolean flag alone must never create a personalized profile.
+    // Require the core user-entered growing conditions before scoring plants.
+    // Core choices are required. Regional readings are optional because
+    // pincode mapping may legitimately have no curated values.
+    const coreFields = [
+      "location",
+      "space",
+      "sunlight",
+      "medium",
+      "watering",
+      "soilMoisture",
+      "experience",
+    ];
+    const missingCoreFields = coreFields.filter((field) => !String(env[field] || "").trim());
+    if (!/^\d{6}$/.test(pincode) || missingCoreFields.length > 0) {
+      return res.status(422).json({
+        message: "Complete your growing environment before requesting personalized recommendations.",
+        profile: { pincode, configured: false, missingFields: missingCoreFields },
+        recommendations: [],
+      });
+    }
+
     /*
      * Pincode profile provides regional baseline information.
      * Manual environment values from the frontend override it

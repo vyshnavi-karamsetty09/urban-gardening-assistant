@@ -18,9 +18,9 @@
 
   padding: 0 34px;
 
-  background: #f2f7f2;
-  border-bottom: 1px solid #dce8dd;
-  box-shadow: 0 2px 8px rgba(24, 52, 28, 0.03);
+  background: var(--surface-subtle);
+  border-bottom: 0;
+  box-shadow: none;
 
   box-sizing: border-box;
 }
@@ -118,8 +118,8 @@
 
   padding: 0 16px;
 
-  background: #ffffff;
-  border: 1px solid #dce8dd;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
   border-radius: 24px;
   box-shadow: 0 2px 8px rgba(24, 52, 28, 0.04);
 
@@ -130,7 +130,7 @@
 .topbar-search:focus-within {
   border-color: #2e7d32;
   box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
-  background: #ffffff;
+  background: var(--surface-raised);
 }
 
 .search-icon {
@@ -180,7 +180,7 @@
   border: 1px solid #dce8dd;
   border-radius: 4px;
 
-  background: #f8faf8;
+  background: var(--surface-subtle);
   color: #7b8f7f;
 
   font-size: 10px;
@@ -195,7 +195,7 @@
 
   padding: 12px 14px;
 
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1px solid #dce8dd;
   border-radius: 14px;
   box-shadow: 0 10px 25px rgba(22, 48, 25, 0.09);
@@ -234,7 +234,7 @@
 
 .quick-search-tag:hover {
   background: #255730;
-  color: #ffffff;
+  color: var(--surface-raised);
   border-color: #255730;
 }
 
@@ -269,7 +269,7 @@
   border: 1px solid #cfe2d2;
   border-radius: 18px;
 
-  background: #eaf5ec;
+  background: var(--primary-light);
   color: #1f5629;
 
   font-size: 12px;
@@ -281,14 +281,14 @@
 
 .nav-pill:hover {
   background: #235e2e;
-  color: #ffffff;
+  color: var(--surface-raised);
   border-color: #235e2e;
   transform: translateY(-1px);
 }
 
 .nav-pill.active {
   background: #235e2e;
-  color: #ffffff;
+  color: var(--surface-raised);
   border-color: #235e2e;
 }
 
@@ -301,7 +301,8 @@
   position: relative;
 }
 
-.notification-btn {
+.notification-btn,
+.theme-toggle-btn {
   position: relative;
 
   width: 38px;
@@ -316,7 +317,7 @@
   border: 1px solid #dbe8dd;
   border-radius: 50%;
 
-  background: #ffffff;
+  background: var(--surface-raised);
   color: #2d5a35;
 
   cursor: pointer;
@@ -324,15 +325,20 @@
 }
 
 .notification-btn:hover,
-.notification-btn.active {
-  background: #f2f7f2;
+.notification-btn.active,
+.theme-toggle-btn:hover {
+  background: var(--surface-subtle);
   border-color: #2d5a35;
   color: #1e4525;
 }
 
-.notification-icon {
+.notification-icon,
+.theme-toggle-icon {
   font-size: 16px;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .notification-count {
@@ -348,11 +354,11 @@
   align-items: center;
   justify-content: center;
 
-  border: 2px solid #ffffff;
+  border: 2px solid var(--surface-raised);
   border-radius: 10px;
 
   background: #dc2626;
-  color: #ffffff;
+  color: var(--surface-raised);
 
   font-size: 9px;
   font-weight: 800;
@@ -368,7 +374,7 @@
   width: 340px;
   max-width: calc(100vw - 32px);
 
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1px solid #dbe8dd;
   border-radius: 14px;
   box-shadow: 0 12px 30px rgba(23, 50, 27, 0.12);
@@ -395,7 +401,7 @@
   justify-content: space-between;
 
   padding: 12px 14px;
-  background: #f8faf8;
+  background: var(--surface-subtle);
   border-bottom: 1px solid #eef3ee;
 }
 
@@ -412,7 +418,7 @@
 
 .notif-badge {
   padding: 2px 6px;
-  background: #eef6ef;
+  background: var(--surface-hover);
   color: #245f31;
   border-radius: 10px;
   font-size: 10px;
@@ -450,7 +456,7 @@
 
   border: none;
   border-bottom: 1px solid #f1f6f1;
-  background: #ffffff;
+  background: var(--surface-raised);
 
   text-align: left;
   cursor: pointer;
@@ -459,7 +465,7 @@
 }
 
 .notif-item:hover {
-  background: #f6faf6;
+  background: var(--surface-subtle);
 }
 
 .notif-item.unread {
@@ -506,7 +512,7 @@
 
 .notif-footer {
   padding: 10px 14px;
-  background: #f8faf8;
+  background: var(--surface-subtle);
   border-top: 1px solid #eef3ee;
   text-align: center;
 }
@@ -545,7 +551,7 @@
   border: 1px solid #dbe8dd;
   border-radius: 19px;
 
-  background: #ffffff;
+  background: var(--surface-raised);
   color: #1f3f26;
 
   cursor: pointer;
@@ -567,7 +573,7 @@
   justify-content: center;
 
   border-radius: 50%;
-  background: #eef6ef;
+  background: var(--surface-hover);
   font-size: 14px;
   flex-shrink: 0;
 }
@@ -616,7 +622,7 @@
 
   width: 250px;
 
-  background: #ffffff;
+  background: var(--surface-raised);
   border: 1px solid #dbe8dd;
   border-radius: 14px;
   box-shadow: 0 12px 30px rgba(23, 50, 27, 0.12);
@@ -633,7 +639,7 @@
 
   padding: 14px;
 
-  background: #f8faf8;
+  background: var(--surface-subtle);
   border-bottom: 1px solid #eef3ee;
 }
 
@@ -712,7 +718,7 @@
 
 .profile-menu-footer {
   padding: 8px 14px;
-  background: #fbfdfb;
+  background: var(--surface-subtle);
   border-top: 1px solid #eef3ee;
 }
 
@@ -724,10 +730,10 @@
   width: 100%;
   padding: 8px 10px;
 
-  border: 1px solid #fee2e2;
+  border: 1px solid var(--danger-bg);
   border-radius: 8px;
 
-  background: #fef2f2;
+  background: var(--danger-bg);
   color: #b91c1c;
 
   font-size: 12px;
@@ -738,7 +744,7 @@
 }
 
 .profile-logout-btn:hover {
-  background: #fee2e2;
+  background: var(--danger-bg);
   color: #991b1b;
 }
 
@@ -754,7 +760,7 @@
   height: 38px;
   border-radius: 10px;
   border: 1px solid #cfe0d3;
-  background: #ffffff;
+  background: var(--surface-raised);
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
@@ -763,7 +769,7 @@
 }
 
 .topbar-menu-btn:hover {
-  background: #edf7ef;
+  background: var(--success-bg);
   border-color: #a7cca9;
 }
 
@@ -885,3 +891,57 @@
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
   }
 }
+/* Empty notification state */
+.notif-empty {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 22px 18px;
+  text-align: center;
+}
+.notif-empty > span {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--success-bg);
+}
+.notif-empty strong {
+  font-size: 12px;
+  color: #23472a;
+}
+.notif-empty small {
+  max-width: 220px;
+  color: #6c7c70;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+/* Empty notifications: predictable alignment in both themes. */
+.notif-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.notif-empty strong { display: block; margin: 0; }
+.notif-empty small { display: block; margin: 0; }
+
+
+.topbar-search input,
+.topbar-search input[type="search"] {
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.topbar-search { overflow: hidden; }
+
+/* V9: the original topbar has no separator line beneath it. */
+.topbar { border-bottom: 0 !important; box-shadow: none !important; }
+.topbar-search input { background: transparent !important; }

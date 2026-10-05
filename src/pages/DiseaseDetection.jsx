@@ -11,8 +11,9 @@ import spiderMitesImg from "../assets/diseases/spider-mites.jpg";
 import ironChlorosisImg from "../assets/diseases/iron-chlorosis.jpg";
 import bacterialLeafSpotImg from "../assets/diseases/bacterial-leaf-spot.jpg";
 import aphidsImg from "../assets/diseases/aphids.jpg";
-import rootRotImg from "../assets/diseases/root-rot.svg";
-import healthyPlantImg from "../assets/diseases/healthy-plant.svg";
+import rootRotImg from "../assets/plant-aloe.jpg";
+import healthyPlantImg from "../assets/plant-tomato.jpg";
+import healthyAloeImg from "../assets/plant-aloe.jpg";
 
 // Comprehensive disease knowledge base with disease-specific images and highlighted treatments
 const DISEASES_DATABASE = [
@@ -62,7 +63,7 @@ const DISEASES_DATABASE = [
     symptoms: ["Fine webbing on undersides", "Yellow stippling or pinprick dots", "Bronzed or dry leaves", "Curling leaves"],
     causes: "Hot, dry, and dusty indoor or balcony conditions. Low humidity triggers explosive mite breeding.",
     immediateAction: "🚨 Take plant to sink or balcony and wash leaf undersides with a firm spray of lukewarm water to knock off mites and destroy webbing.",
-    organicTreatment: "🌿 INSECTICIDAL SOAP & NEEM ROTATION:\n• Spray natural insecticidal soap (or 1 tsp mild liquid soap in 1L water) directly onto leaf undersides where mites hide.\n• Alternate with 100% pure neem oil spray every 3 to 4 days for 2 consecutive weeks to disrupt egg hatching cycles.",
+    organicTreatment: "🌿 INSECTICIDAL SOAP & NEEM ROTATION:\n• Spray natural insecticidal soap (or 1 tsp mild liquid soap in 1L water) directly onto leaf undersides where mites hide.\n• Alternate with neem oil spray every 3 to 4 days for 2 consecutive weeks to disrupt egg hatching cycles.",
     chemicalTreatment: "🧪 Apply abamectin or bifenazate miticide for resistant ornamental plant infestations.",
     prevention: "🛡️ Mist plants regularly to maintain 55–65% humidity. Wipe dust off leaves weekly with a damp microfiber cloth.",
     badgeColor: "#dc2626",
@@ -157,18 +158,9 @@ const DISEASES_DATABASE = [
 // Sample test cases for one-click testing with visual leaf thumbnails
 const SAMPLE_TEST_CASES = [
   {
-    title: "Overwatered Root Rot",
-    diseaseId: "root-rot",
-    plant: "Indoor Plant",
-    confidence: 97,
-    icon: "🥀",
-    image: rootRotImg,
-  },
-  {
     title: "Tomato Early Blight",
     diseaseId: "early-blight",
     plant: "Tomato",
-    confidence: 96,
     icon: "🍅",
     image: earlyBlightImg,
   },
@@ -176,7 +168,6 @@ const SAMPLE_TEST_CASES = [
     title: "Rose Powdery Mildew",
     diseaseId: "powdery-mildew",
     plant: "Rose",
-    confidence: 94,
     icon: "🌹",
     image: powderyMildewImg,
   },
@@ -184,7 +175,6 @@ const SAMPLE_TEST_CASES = [
     title: "Mint Spider Mites",
     diseaseId: "spider-mites",
     plant: "Mint",
-    confidence: 92,
     icon: "🌿",
     image: spiderMitesImg,
   },
@@ -192,7 +182,6 @@ const SAMPLE_TEST_CASES = [
     title: "Citrus Iron Yellowing",
     diseaseId: "iron-chlorosis",
     plant: "Citrus",
-    confidence: 95,
     icon: "🍋",
     image: ironChlorosisImg,
   },
@@ -200,25 +189,22 @@ const SAMPLE_TEST_CASES = [
     title: "Tulsi Bacterial Spot",
     diseaseId: "bacterial-leaf-spot",
     plant: "Tulsi",
-    confidence: 89,
     icon: "🌱",
     image: bacterialLeafSpotImg,
   },
   {
     title: "Aphids Infestation",
     diseaseId: "aphids",
-    plant: "Garden Plant",
-    confidence: 93,
+    plant: "Rose / Tomato",
     icon: "🐛",
     image: aphidsImg,
   },
   {
-    title: "Healthy Leaf Check",
+    title: "Healthy Aloe Leaf Check",
     diseaseId: "healthy-plant",
-    plant: "Monstera / Houseplant",
-    confidence: 98,
+    plant: "Aloe Vera",
     icon: "🪴",
-    image: healthyPlantImg,
+    image: healthyAloeImg,
   },
 ];
 
@@ -401,9 +387,10 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
     await new Promise((resolve) => setTimeout(resolve, 700));
 
     try {
-      let matchedDisease;
-      let confidenceScore = 88;
-      let source = "local-fallback";
+      let matchedDisease = null;
+      let confidenceScore = null;
+      let source = "rules";
+      let message = "";
       let apiResult = null;
 
       if (getAuthToken()) {
@@ -431,33 +418,65 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
         if (!matchedDisease) {
           matchedDisease = DISEASES_DATABASE.find((d) => d.id === "healthy-plant") || DISEASES_DATABASE[0];
         }
-        confidenceScore = remote.confidence;
+        confidenceScore = Number.isFinite(Number(remote.confidence)) ? Number(remote.confidence) : null;
         source = remote.source || "ai";
       } else if (selectedCase) {
         matchedDisease = DISEASES_DATABASE.find((d) => d.id === selectedCase.diseaseId);
-        confidenceScore = selectedCase.confidence;
-        source = "sample-case";
+        confidenceScore = null;
+        source = "reference-sample";
+      } else if (selectedSymptoms.length > 0) {
+        const ranked = DISEASES_DATABASE.map((disease) => ({
+          disease,
+          score: selectedSymptoms.reduce((total, symptom) =>
+            total + (disease.symptoms.some((item) => item.toLowerCase().includes(String(symptom).toLowerCase()) || String(symptom).toLowerCase().includes(item.toLowerCase())) ? 1 : 0), 0),
+        })).sort((a, b) => b.score - a.score);
+        if (ranked[0]?.score > 0) {
+          matchedDisease = ranked[0].disease;
+          source = "rules";
+        } else {
+          message = "No strong symptom match was found. Try selecting more specific symptoms or use the configured AI analysis.";
+        }
       } else {
-        const hash = imagePreview.length % Math.max(1, (DISEASES_DATABASE.length - 1));
-        matchedDisease = DISEASES_DATABASE[hash] || DISEASES_DATABASE[0];
-        confidenceScore = 88 + (imagePreview.length % 10);
+        message = "An image was selected, but no diagnosis could be confirmed from the available analysis sources. Add visible symptoms or configure the AI provider for image-based assessment.";
       }
 
       setScanResult({
         disease: matchedDisease,
         confidence: confidenceScore,
         source,
+        message,
         analyzedAt: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       });
     } catch {
-      const hash = imagePreview.length % Math.max(1, (DISEASES_DATABASE.length - 1));
-      const matchedDisease = DISEASES_DATABASE[hash] || DISEASES_DATABASE[0];
-      setScanResult({
-        disease: matchedDisease,
-        confidence: 84,
-        source: "local-fallback",
-        analyzedAt: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-      });
+      if (selectedCase) {
+        setScanResult({
+          disease: DISEASES_DATABASE.find((d) => d.id === selectedCase.diseaseId),
+          confidence: null,
+          source: "reference-sample",
+          message: "",
+          analyzedAt: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        });
+      } else if (selectedSymptoms.length > 0) {
+        const ranked = DISEASES_DATABASE.map((disease) => ({
+          disease,
+          score: selectedSymptoms.reduce((total, symptom) => total + (disease.symptoms.some((item) => item.toLowerCase().includes(String(symptom).toLowerCase()) || String(symptom).toLowerCase().includes(item.toLowerCase())) ? 1 : 0), 0),
+        })).sort((a, b) => b.score - a.score);
+        setScanResult({
+          disease: ranked[0]?.score > 0 ? ranked[0].disease : null,
+          confidence: null,
+          source: "rules",
+          message: ranked[0]?.score > 0 ? "" : "No strong symptom match was found.",
+          analyzedAt: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        });
+      } else {
+        setScanResult({
+          disease: null,
+          confidence: null,
+          source: "rules",
+          message: "The analysis service is unavailable and there are no symptoms to match locally. Try again or use the symptom wizard.",
+          analyzedAt: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        });
+      }
     } finally {
       setIsScanning(false);
       setScanStep(0);
@@ -742,7 +761,7 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
                         <div className="scan-status-badge">
                           {scanStep === 1 && "🔬 Detecting leaf geometry & pigmentation..."}
                           {scanStep === 2 && "🔍 Analyzing lesion texture & fungal patterns..."}
-                          {scanStep === 3 && "⚡ Matching against 50+ plant disease models..."}
+                          {scanStep === 3 && "⚡ Comparing the selected symptoms and image..."}
                         </div>
                       </div>
                     )}
@@ -824,6 +843,7 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
               )}
 
               {scanResult && !isScanning && (
+                scanResult.disease ? (
                 <div className="diagnostic-report">
                   {/* Top Status Header */}
                   <div className="report-header">
@@ -838,10 +858,12 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
                       <p className="common-subtitle">Also known as: <strong>{scanResult.disease.commonName}</strong></p>
                     </div>
 
-                    <div className="confidence-badge">
-                      <strong>{scanResult.confidence}%</strong>
-                      <small>AI Match</small>
-                    </div>
+                    {scanResult.confidence !== null && scanResult.confidence !== undefined && (
+                      <div className="confidence-badge">
+                        <strong>{scanResult.confidence}%</strong>
+                        <small>{scanResult.source === "ai" ? "AI assessment" : scanResult.source === "reference-sample" ? "Reference sample" : "Rule-based assessment"}</small>
+                      </div>
+                    )}
                   </div>
 
                   {/* Disease Image Reference Banner */}
@@ -852,7 +874,7 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
                         alt={scanResult.disease.name}
                         className="report-disease-image"
                       />
-                      <span className="visual-badge">📸 Pathogen Visual Specimen</span>
+                      <span className="visual-badge">📷 Reference Photo</span>
                     </div>
                     <div className="report-visual-info">
                       <h4>Visual Identification Guide:</h4>
@@ -910,8 +932,8 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
                     <div className="treatment-protocol-header">
                       <div>
                         <span className="treatment-protocol-tag">💊 RX CARE PLAN</span>
-                        <h3>Highlighted Treatment Protocol</h3>
-                        <p>Follow these steps immediately to cure the pathogen and revitalize plant vigor.</p>
+                        <h3>Care Response Plan</h3>
+                        <p>Follow these steps to reduce stress, manage the likely problem, and support recovery.</p>
                       </div>
                       <span className="treatment-priority-badge">
                         {scanResult.disease.severity.toLowerCase().includes("severe")
@@ -935,12 +957,12 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
                     <div className="treatment-step-card step-organic highlighted-remedy">
                       <div className="step-badge">
                         <span className="step-num">Step 2</span>
-                        <span className="step-type">🌿 Primary Organic Treatment (Non-Toxic &amp; Safe)</span>
+                        <span className="step-type">🌿 Primary Plant-Care Treatment</span>
                       </div>
                       <div className="step-body">
                         <p className="remedy-highlight-text">{scanResult.disease.organicTreatment}</p>
                         <div className="remedy-highlight-pill">
-                          <span>✓ 100% Safe for balcony herbs, vegetables, indoor pets &amp; pollinators</span>
+                          <span>✓ Use as directed; check plant, household, pet and pollinator precautions</span>
                         </div>
                       </div>
                     </div>
@@ -1007,6 +1029,21 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
                     )}
                   </div>
                 </div>
+                ) : (
+                  <div className="diagnostic-report non-diagnostic-report">
+                    <div className="report-header">
+                      <div>
+                        <span className="category-pill">Analysis status</span>
+                        <h2>Assessment needs more information</h2>
+                        <p className="common-subtitle">{scanResult.message || "No confirmed assessment is available from the current inputs."}</p>
+                      </div>
+                    </div>
+                    <div className="report-section">
+                      <h4>What to do next</h4>
+                      <p>Select clearer symptoms in the symptom wizard, or retry with the AI-enabled analysis when it is configured.</p>
+                    </div>
+                  </div>
+                )
               )}
             </div>
           </div>
@@ -1388,14 +1425,14 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
                           {/* HIGHLIGHTED TREATMENT BOX */}
                           <div className="match-treatment-box">
                             <div className="treatment-tag-header">
-                              <span className="treatment-tag-pill">🌿 HIGHLIGHTED TREATMENT</span>
+                              <span className="treatment-tag-pill">🌿 PRIMARY CARE RESPONSE</span>
                             </div>
                             <div className="treatment-row first-aid">
                               <strong>First Aid:</strong>
                               <p>{disease.immediateAction}</p>
                             </div>
                             <div className="treatment-row organic-highlight">
-                              <strong>Organic Cure:</strong>
+                              <strong>Primary care:</strong>
                               <p>{disease.organicTreatment}</p>
                             </div>
                           </div>
@@ -1407,7 +1444,7 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
                               onClick={() => {
                                 setSelectedCase({
                                   diseaseId: disease.id,
-                                  confidence: disease.matchConfidence,
+                                  confidence: null,
                                   image: disease.image,
                                   title: disease.name,
                                 });
@@ -1512,7 +1549,7 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
                   {/* PROMINENTLY HIGHLIGHTED ORGANIC TREATMENT */}
                   <div className="lib-treatment-highlight">
                     <div className="remedy-badge-row">
-                      <span className="remedy-badge-pill">🌿 Primary Treatment Cure</span>
+                      <span className="remedy-badge-pill">🌿 Primary Care Response</span>
                     </div>
                     <p className="remedy-highlight-text">{disease.organicTreatment}</p>
                   </div>
@@ -1528,7 +1565,7 @@ function DiseaseDetection({ onPageChange, initialSymptom = "" }) {
                     onClick={() => {
                       setSelectedCase({
                         diseaseId: disease.id,
-                        confidence: 95,
+                        confidence: null,
                         image: disease.image,
                         title: disease.name,
                       });

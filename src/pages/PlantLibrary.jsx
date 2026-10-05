@@ -1,15 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getPlantImage, LIBRARY_PLANTS } from "../plantData";
 import { getSavedPlants, savePlants } from "../utils";
 import { gardenApi } from "../api";
-import { LIBRARY_PLANTS } from "../plantData";
 import PageHeaderBanner from "../components/PageHeaderBanner";
+import CareGuideModal from "../components/CareGuideModal";
 import "./PlantLibrary.css";
 
-function PlantLibrary({ onPageChange }) {
+function PlantLibrary({ onPageChange, initialPlantId, initialPlant }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedDifficulty, setSelectedDifficulty] = useState("All");
   const [inspectPlant, setInspectPlant] = useState(null);
+
+  useEffect(() => {
+    if (!initialPlantId && !initialPlant) return;
+
+    const match = LIBRARY_PLANTS.find((plant) => String(plant.id) === String(initialPlantId))
+      || LIBRARY_PLANTS.find((plant) => plant.name.toLowerCase() === String(initialPlant?.name || "").trim().toLowerCase())
+      || LIBRARY_PLANTS.find((plant) => String(initialPlant?.name || "").trim() && plant.name.toLowerCase().includes(String(initialPlant?.name || "").trim().toLowerCase()));
+
+    if (match) {
+      setInspectPlant(match);
+      return;
+    }
+
+    if (initialPlant) {
+      setInspectPlant({
+        ...initialPlant,
+        id: initialPlant.id || initialPlant._id || initialPlant.name,
+        image: initialPlant.image || initialPlant.imageUrl || getPlantImage(initialPlant.name),
+        botanicalName: initialPlant.botanicalName || "",
+        category: initialPlant.category || initialPlant.type || "Plant",
+        difficulty: initialPlant.difficulty || "Not specified",
+        sunlight: initialPlant.sunlight || "Not listed",
+        water: initialPlant.water || "Not listed",
+        soil: initialPlant.soil || initialPlant.medium || "Not listed",
+        temp: initialPlant.temp || initialPlant.temperature || "Not listed",
+        growthTime: initialPlant.growthTime || (initialPlant.growthDays ? `${initialPlant.growthDays} days` : "Not listed"),
+        description: initialPlant.description || "A Garden Guide plant recommendation.",
+        careTips: initialPlant.careTips || "Follow the plant's light, watering and drainage needs and monitor new growth.",
+      });
+    }
+  }, [initialPlantId, initialPlant]);
   const [addedIds, setAddedIds] = useState(() => {
     const saved = getSavedPlants();
     const map = {};
@@ -203,40 +235,6 @@ function PlantLibrary({ onPageChange }) {
 
                 <p className="lib-desc-snippet">{plant.description}</p>
 
-                <div className="lib-specs-grid">
-                  <div className="lib-spec-item">
-                    <span className="spec-ico">☀️</span>
-                    <div>
-                      <small>Sunlight</small>
-                      <strong>{plant.sunlight}</strong>
-                    </div>
-                  </div>
-
-                  <div className="lib-spec-item">
-                    <span className="spec-ico">💧</span>
-                    <div>
-                      <small>Water</small>
-                      <strong>{plant.water}</strong>
-                    </div>
-                  </div>
-
-                  <div className="lib-spec-item">
-                    <span className="spec-ico">🌡️</span>
-                    <div>
-                      <small>Ideal Temp</small>
-                      <strong>{plant.temp}</strong>
-                    </div>
-                  </div>
-
-                  <div className="lib-spec-item">
-                    <span className="spec-ico">⏳</span>
-                    <div>
-                      <small>Growth Cycle</small>
-                      <strong>{plant.growthTime}</strong>
-                    </div>
-                  </div>
-                </div>
-
                 <div className="lib-card-actions">
                   <button
                     type="button"
@@ -260,99 +258,19 @@ function PlantLibrary({ onPageChange }) {
         })}
       </section>
 
-      {/* Inspect Care Guide Modal */}
-      {inspectPlant && (
-        <div className="library-modal-backdrop" onClick={() => setInspectPlant(null)}>
-          <div
-            className="library-modal-dialog slow-popup"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="modal-top-bar">
-              <div>
-                <h2>{inspectPlant.name}</h2>
-                <small className="botanical-sub">{inspectPlant.botanicalName}</small>
-              </div>
-              <button
-                type="button"
-                className="modal-close-ico"
-                onClick={() => setInspectPlant(null)}
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="modal-guide-body">
-              <div className="guide-hero-img-wrap">
-                <img
-                  src={inspectPlant.image}
-                  alt={inspectPlant.name}
-                  className="guide-hero-img"
-                />
-              </div>
-
-              <div className="guide-content-area">
-                <div className="guide-badge-row">
-                  <span className="guide-category-tag">{inspectPlant.category}</span>
-                  <span className="guide-difficulty-tag">{inspectPlant.difficulty} to grow</span>
-                </div>
-
-                <p className="guide-overview">{inspectPlant.description}</p>
-
-                <div className="guide-vital-specs">
-                  <div>
-                    <span>☀️ Sunlight</span>
-                    <strong>{inspectPlant.sunlight}</strong>
-                  </div>
-                  <div>
-                    <span>💧 Watering</span>
-                    <strong>{inspectPlant.water}</strong>
-                  </div>
-                  <div>
-                    <span>🌱 Soil Type</span>
-                    <strong>{inspectPlant.soil}</strong>
-                  </div>
-                  <div>
-                    <span>🌡️ Temperature</span>
-                    <strong>{inspectPlant.temp}</strong>
-                  </div>
-                </div>
-
-                <div className="guide-expert-tip">
-                  <strong>💡 Pro Growing Advice:</strong>
-                  <p>{inspectPlant.careTips}</p>
-                </div>
-
-                <div className="guide-modal-actions">
-                  <button
-                    type="button"
-                    className="guide-add-garden-btn slow-pop-btn"
-                    onClick={() => {
-                      handleAddToGarden(inspectPlant);
-                      if (onPageChange) onPageChange("mygarden");
-                    }}
-                  >
-                    Add to My Garden 🌿
-                  </button>
-                  <button
-                    type="button"
-                    className="guide-diagnose-btn slow-pop-btn"
-                    onClick={() => {
-                      setInspectPlant(null);
-                      if (onPageChange) {
-                        onPageChange("diseasedetection", {
-                          symptom: `${inspectPlant.name} care check`,
-                        });
-                      }
-                    }}
-                  >
-                    🔍 AI Disease Scanner
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <CareGuideModal
+        plant={inspectPlant}
+        onClose={() => setInspectPlant(null)}
+        onAdd={async (plant) => {
+          await handleAddToGarden(plant);
+          setInspectPlant(null);
+        }}
+        onOpenLibrary={(plant) => setInspectPlant(plant)}
+        onDiagnose={(plant) => {
+          setInspectPlant(null);
+          onPageChange?.("diseasedetection", { symptom: `${plant.name} health check` });
+        }}
+      />
     </main>
   );
 }

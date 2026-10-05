@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import PageHeaderBanner from "../components/PageHeaderBanner";
 import { adminApi, getAuthToken } from "../api";
-import { STORAGE_KEYS } from "../utils";
+import { readStorage, STORAGE_KEYS } from "../utils";
 import "./Admin.css";
 
 const EMPTY_PLANT = {
@@ -24,11 +24,7 @@ const EMPTY_PLANT = {
 };
 
 function readSession() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEYS.session) || "null");
-  } catch {
-    return null;
-  }
+  return readStorage(STORAGE_KEYS.session, null);
 }
 
 function Admin({ onPageChange }) {

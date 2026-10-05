@@ -19,6 +19,20 @@
     linear-gradient(90deg, rgba(8, 20, 11, 0.42) 0%, rgba(8, 20, 11, 0.28) 42%, rgba(8, 20, 11, 0.08) 100%),
     url("../assets/auth-bg.jpg") center center / cover no-repeat fixed;
   overflow-x: hidden;
+
+  /* Public authentication pages are always light. */
+  color-scheme: light;
+}
+
+/*
+ * IMPORTANT:
+ * Landing/Login/Signup are public pages and must not inherit the
+ * authenticated dark-theme color scheme. This is intentionally scoped
+ * to .auth-page so it cannot affect Dashboard, Settings, etc.
+ */
+.auth-page,
+.auth-page * {
+  color-scheme: light;
 }
 
 /* Page Layout Grid */
@@ -200,6 +214,7 @@
   width: 100%;
   max-width: 540px;
   background: #f7f9f3;
+  color: #18331d;
   border-radius: 28px;
   padding: 40px 44px;
   box-sizing: border-box;
@@ -480,7 +495,7 @@
   letter-spacing: 0.8px;
 }
 
-/* Google Button */
+/* Demo Account Button */
 .auth-google-btn {
   width: 100%;
   height: 46px;
@@ -509,6 +524,11 @@
 
 .auth-google-btn:active {
   transform: translateY(0) scale(0.98);
+}
+
+.auth-google-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 
 /* Bottom Switch Link */

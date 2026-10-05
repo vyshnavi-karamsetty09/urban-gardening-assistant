@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { LIBRARY_PLANTS, getPlantImage } from "../plantData";
-import { getSavedPlants, savePlants, STORAGE_KEYS } from "../utils";
+import { getSavedPlants, savePlants, STORAGE_KEYS, readStoredEnvironment, writeStorage } from "../utils";
 import {
   environmentApi,
   gardenApi,
@@ -8,6 +8,7 @@ import {
   recommendationApi,
 } from "../api";
 import PageHeaderBanner from "../components/PageHeaderBanner";
+import CareGuideModal from "../components/CareGuideModal";
 import envBalconyImg from "../assets/env-balcony.jpg";
 import envTerraceImg from "../assets/env-terrace.jpg";
 import envIndoorImg from "../assets/env-indoor.jpg";
@@ -138,46 +139,9 @@ const MOISTURE_OPTIONS = [
   },
 ];
 
-const RAINFALL_OPTIONS = [
-  {
-    value: "Low / Scanty",
-    icon: "☀️",
-    desc: "Dry climate or covered / sheltered from rain",
-  },
-  {
-    value: "Moderate",
-    icon: "🌦️",
-    desc: "Average seasonal showers & precipitation",
-  },
-  {
-    value: "High / Abundant",
-    icon: "🌧️",
-    desc: "Heavy monsoon & high rainfall",
-  },
-];
 
-const SEASON_OPTIONS = [
-  {
-    value: "All Year",
-    icon: "🌿",
-    desc: "Year-round planting & evergreen",
-  },
-  {
-    value: "Summer",
-    icon: "☀️",
-    desc: "Warm and bright growing season",
-  },
-  {
-    value: "Monsoon",
-    icon: "🌧️",
-    desc: "Humid rainy growing season",
-  },
-  {
-    value: "Winter",
-    icon: "❄️",
-    desc: "Cool and mild growing season",
-  },
-];
+
+
 
 const EXPERIENCE_OPTIONS = [
   {
@@ -201,6 +165,17 @@ const EXPERIENCE_OPTIONS = [
    EMPTY / UNCONFIGURED ENVIRONMENT
    ========================================================= */
 
+function resolveLibraryPlant(recommendation) {
+  if (!recommendation) return null;
+  const targetName = String(recommendation.name || "").trim().toLowerCase();
+  return (
+    LIBRARY_PLANTS.find((plant) => String(plant.id) === String(recommendation.id)) ||
+    LIBRARY_PLANTS.find((plant) => plant.name.toLowerCase() === targetName) ||
+    LIBRARY_PLANTS.find((plant) => targetName && (plant.name.toLowerCase().includes(targetName) || targetName.includes(plant.name.toLowerCase()))) ||
+    null
+  );
+}
+
 const EMPTY_ENVIRONMENT = {
   pincode: "",
   location: "",
@@ -214,37 +189,12 @@ const EMPTY_ENVIRONMENT = {
   watering: "",
   soilMoisture: "",
   rainfall: "",
-  season: "",
   experience: "",
   numericTemp: "",
   numericHumidity: "",
   locationLabel: "",
   configured: false,
 };
-
-function readStoredEnvironment() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEYS.environment);
-
-    if (!raw) {
-      return { ...EMPTY_ENVIRONMENT };
-    }
-
-    const parsed = JSON.parse(raw);
-
-    if (!parsed || typeof parsed !== "object") {
-      return { ...EMPTY_ENVIRONMENT };
-    }
-
-    return {
-      ...EMPTY_ENVIRONMENT,
-      ...parsed,
-      configured: parsed.configured === true,
-    };
-  } catch {
-    return { ...EMPTY_ENVIRONMENT };
-  }
-}
 
 function SmartRecommendations({
   onPageChange,
@@ -291,12 +241,15 @@ function SmartRecommendations({
     useState([]);
   const [locationSource, setLocationSource] =
     useState("estimated");
+  const [regionalProfile, setRegionalProfile] =
+    useState({});
   const [recommendationLoading, setRecommendationLoading] =
     useState(false);
 
   const [tempError, setTempError] = useState("");
   const [humidityError, setHumidityError] = useState("");
   const [pincodeError, setPincodeError] = useState("");
+  const [guidePlant, setGuidePlant] = useState(null);
 
   /* =========================================================
      LOAD EXISTING GARDEN PLANTS
@@ -360,10 +313,7 @@ function SmartRecommendations({
           setEnvironmentConfigured(true);
 
           try {
-            localStorage.setItem(
-              STORAGE_KEYS.environment,
-              JSON.stringify(mergedEnvironment)
-            );
+            writeStorage(STORAGE_KEYS.environment, mergedEnvironment);
           } catch {
             // Ignore storage failures.
           }
@@ -371,6 +321,24 @@ function SmartRecommendations({
           setLocationSource(
             savedEnvironment.locationConfidence || "estimated"
           );
+
+          if (mergedEnvironment.pincode) {
+            recommendationApi
+              .analyzeLocation(mergedEnvironment.pincode)
+              .then((profileResult) => {
+                if (
+                  !cancelled &&
+                  profileResult?.profile
+                ) {
+                  setRegionalProfile(
+                    profileResult.profile
+                  );
+                }
+              })
+              .catch(() => {
+                // Regional display can remain blank if pincode analysis is unavailable.
+              });
+          }
 
           /*
            * Keep the user's currently requested tab if their
@@ -388,11 +356,7 @@ function SmartRecommendations({
            * New account / unconfigured account:
            * do NOT accept backend defaults as a completed profile.
            */
-          setEnvironment((current) => ({
-            ...EMPTY_ENVIRONMENT,
-            ...current,
-            configured: false,
-          }));
+          setEnvironment({ ...EMPTY_ENVIRONMENT });
 
           setEnvironmentConfigured(false);
           setBackendRecommendations([]);
@@ -531,10 +495,7 @@ function SmartRecommendations({
        * the environment as configured just because a field changed.
        */
       try {
-        localStorage.setItem(
-          STORAGE_KEYS.environment,
-          JSON.stringify(updated)
-        );
+        writeStorage(STORAGE_KEYS.environment, updated);
       } catch {
         // Ignore storage failures.
       }
@@ -571,12 +532,22 @@ function SmartRecommendations({
       .replace(/\D/g, "")
       .slice(0, 6);
 
+    setRegionalProfile({});
+
     setEnvironment((prev) => ({
       ...prev,
       pincode: rawDigits,
-      configured: prev.configured === true,
+      configured: false,
+
+      // A new pincode must be analysed again before saving.
+      temperature: "",
+      climate: "",
+      humidity: "",
+      rainfall: "",
     }));
 
+    setEnvironmentConfigured(false);
+    setBackendRecommendations([]);
     setEnvSaved(false);
 
     if (
@@ -604,39 +575,30 @@ function SmartRecommendations({
         );
 
       if (result?.profile) {
+        setRegionalProfile(result.profile);
+
         setEnvironment((prev) => ({
           ...prev,
           pincode: rawDigits,
 
-          /*
-           * Pincode provides regional baseline information,
-           * but does NOT complete the user's environment setup.
-           */
-          sunlight:
-            result.profile.sunlight ||
-            prev.sunlight ||
-            "",
-          climate:
-            result.profile.climate ||
-            prev.climate ||
-            "",
+          // Regional information comes automatically from the pincode.
           temperature:
-            result.profile.temperature ||
-            prev.temperature ||
-            "",
+            result.profile.temperature || "",
+          climate:
+            result.profile.climate || "",
           humidity:
-            result.profile.humidity ||
-            prev.humidity ||
-            "",
+            result.profile.humidity || "",
+          rainfall:
+            result.profile.rainfall || "",
 
-          /*
-           * Keep the user's garden location choice.
-           */
+          // Keep the user's actual garden sunlight selection.
+          sunlight: prev.sunlight || "",
+
+          // Keep the user's manually selected garden location.
           location: prev.location || "",
+
           locationLabel:
-            result.profile.label ||
-            prev.locationLabel ||
-            "",
+            result.profile.label || "",
 
           configured: false,
         }));
@@ -646,14 +608,14 @@ function SmartRecommendations({
         );
 
         showToast(
-          `📍 Environment estimated for ${
+          `Regional profile estimated for ${
             result.profile.label || "your region"
           }.`
         );
       }
     } catch {
       showToast(
-        "⚠️ Pincode analysis is unavailable. You can continue with manual environment settings."
+        "⚠️ Pincode analysis is unavailable. Please check the pincode before saving."
       );
     }
   };
@@ -717,19 +679,17 @@ function SmartRecommendations({
      ========================================================= */
 
   const handleSaveEnvironment = async () => {
+    // These are the gardener-controlled choices required for recommendations.
+    // Regional temperature, climate, humidity and rainfall are optional enrichments
+    // and must never block a valid environment save.
     const requiredFields = [
-      ["pincode", "Garden pincode"],
+      ["pincode", "Pincode"],
       ["location", "Garden location"],
       ["space", "Growing space"],
       ["sunlight", "Sunlight"],
-      ["temperature", "Temperature"],
-      ["climate", "Climate"],
-      ["humidity", "Humidity"],
       ["medium", "Growing medium"],
       ["watering", "Watering availability"],
       ["soilMoisture", "Soil moisture"],
-      ["rainfall", "Rainfall"],
-      ["season", "Growing season"],
       ["experience", "Gardening experience"],
     ];
 
@@ -758,11 +718,7 @@ function SmartRecommendations({
 
     if (missingFields.length > 0) {
       showToast(
-        `⚠️ Please complete: ${missingFields
-          .slice(0, 3)
-          .join(", ")}${
-          missingFields.length > 3 ? "…" : ""
-        }`
+        `⚠️ Please complete: ${missingFields.join(", ")}`
       );
 
       return;
@@ -784,70 +740,37 @@ function SmartRecommendations({
       configured: true,
     };
 
-    try {
-      localStorage.setItem(
-        STORAGE_KEYS.environment,
-        JSON.stringify(updatedEnvironment)
-      );
+    // Update the UI/cache immediately. A backend outage should not make a
+    // successfully entered environment look like it vanished.
+    setEnvironment(updatedEnvironment);
+    setEnvironmentConfigured(true);
+    setEnvSaved(true);
+    writeStorage(STORAGE_KEYS.environment, updatedEnvironment);
 
-      if (getAuthToken()) {
-        const result = await environmentApi.save(
-          updatedEnvironment
-        );
+    showToast("🌿 Environment settings saved successfully!");
+    setTimeout(() => setEnvSaved(false), 2500);
+    setActiveTab("matches");
 
+    if (getAuthToken()) {
+      try {
+        const result = await environmentApi.save(updatedEnvironment);
         if (result?.environment) {
           const serverEnvironment = {
             ...updatedEnvironment,
             ...result.environment,
             configured: true,
           };
-
           setEnvironment(serverEnvironment);
-
-          try {
-            localStorage.setItem(
-              STORAGE_KEYS.environment,
-              JSON.stringify(serverEnvironment)
-            );
-          } catch {
-            // Ignore storage failures.
-          }
-        } else {
-          setEnvironment(updatedEnvironment);
+          writeStorage(STORAGE_KEYS.environment, serverEnvironment);
         }
-      } else {
-        setEnvironment(updatedEnvironment);
+      } catch {
+        showToast("⚠️ Saved on this device. We’ll sync it when the backend is available.");
       }
-
-      setEnvironmentConfigured(true);
-      setEnvSaved(true);
-
-      showToast(
-        "🌿 Environment settings saved successfully!"
-      );
-
-      setTimeout(
-        () => setEnvSaved(false),
-        2500
-      );
-
-      /*
-       * After configuration, switch to matches.
-       */
-      setActiveTab("matches");
-
-      /*
-       * Immediately generate personalized recommendations.
-       */
-      await requestRecommendations({
-        ...updatedEnvironment,
-        configured: true,
-      });
-    } catch {
-      showToast(
-        "⚠️ Environment was saved locally, but the backend could not be reached."
-      );
     }
+
+    // Generate from exactly the same validated core profile. Optional
+    // regional readings are never required for scoring.
+    await requestRecommendations({ ...updatedEnvironment, configured: true });
   };
 
   /* =========================================================
@@ -960,21 +883,20 @@ function SmartRecommendations({
       ""
     ).toLowerCase();
 
-    const moisture = (
-      environment.soilMoisture || "Moderate"
-    ).toLowerCase();
+    const moisture = String(environment.soilMoisture || "").toLowerCase();
+    const rainfall = String(environment.rainfall || "").toLowerCase();
+    const exp = String(environment.experience || "").toLowerCase();
 
-    const rainfall = (
-      environment.rainfall || "Moderate"
-    ).toLowerCase();
-
-    const season = (
-      environment.season || "All Year"
-    ).toLowerCase();
-
-    const exp = (
-      environment.experience || "Beginner"
-    ).toLowerCase();
+    const requiredForScoring = [
+      environment.location,
+      environment.space,
+      environment.sunlight,
+      environment.medium || environment.soil,
+      environment.watering,
+      environment.soilMoisture,
+      environment.experience,
+    ];
+    if (requiredForScoring.some((value) => !String(value || "").trim())) return [];
 
     const temp = (
       environment.temperature || ""
@@ -1370,39 +1292,7 @@ function SmartRecommendations({
       }
 
       /* -----------------------------------------------------
-         9. SEASON
-         ----------------------------------------------------- */
-
-      if (
-        season === "winter" &&
-        (
-          plant.name.includes("Spinach") ||
-          plant.name.includes("Coriander") ||
-          plant.name.includes("Rose")
-        )
-      ) {
-        score += 4;
-
-        reasons.push(
-          "Optimal seasonal planting window"
-        );
-      } else if (
-        season === "summer" &&
-        (
-          plant.name.includes("Tomato") ||
-          plant.name.includes("Pepper") ||
-          plant.name.includes("Sunflower")
-        )
-      ) {
-        score += 4;
-
-        reasons.push(
-          "Loves summer warmth and direct solar energy"
-        );
-      }
-
-      /* -----------------------------------------------------
-         10. EXPERIENCE
+         9. EXPERIENCE
          ----------------------------------------------------- */
 
       const diff = (
@@ -1623,7 +1513,7 @@ function SmartRecommendations({
         eyebrow="BOTANICAL MATCHING & ENVIRONMENT INTELLIGENCE"
         title="Smart Recommendations"
         titleAccent="✦"
-        subtitle="Personalized plant matches using your pincode-based environment profile, available space, soil, sunlight, climate, moisture, season, and care preferences."
+        subtitle="Personalized plant matches using your pincode-based regional profile, garden space, soil, sunlight, moisture, watering capacity, and care preferences."
         badgeIcon="⛅"
         badgeTitle={
           environmentConfigured
@@ -1725,10 +1615,6 @@ function SmartRecommendations({
             >
               <div className="snapshot-chips">
                 <div className="snapshot-chip">
-                  <span className="chip-ico">
-                    📍
-                  </span>
-
                   <div>
                     <small>Pincode</small>
 
@@ -1739,10 +1625,6 @@ function SmartRecommendations({
                 </div>
 
                 <div className="snapshot-chip">
-                  <span className="chip-ico">
-                    🏡
-                  </span>
-
                   <div>
                     <small>Location</small>
 
@@ -1753,10 +1635,6 @@ function SmartRecommendations({
                 </div>
 
                 <div className="snapshot-chip">
-                  <span className="chip-ico">
-                    📐
-                  </span>
-
                   <div>
                     <small>Growing Space</small>
 
@@ -1767,10 +1645,6 @@ function SmartRecommendations({
                 </div>
 
                 <div className="snapshot-chip">
-                  <span className="chip-ico">
-                    ☀️
-                  </span>
-
                   <div>
                     <small>Sunlight</small>
 
@@ -1781,10 +1655,6 @@ function SmartRecommendations({
                 </div>
 
                 <div className="snapshot-chip">
-                  <span className="chip-ico">
-                    🌱
-                  </span>
-
                   <div>
                     <small>Medium</small>
 
@@ -1795,10 +1665,6 @@ function SmartRecommendations({
                 </div>
 
                 <div className="snapshot-chip">
-                  <span className="chip-ico">
-                    💧
-                  </span>
-
                   <div>
                     <small>Moisture</small>
 
@@ -1809,24 +1675,6 @@ function SmartRecommendations({
                 </div>
 
                 <div className="snapshot-chip">
-                  <span className="chip-ico">
-                    🗓️
-                  </span>
-
-                  <div>
-                    <small>Season</small>
-
-                    <strong>
-                      {environment.season}
-                    </strong>
-                  </div>
-                </div>
-
-                <div className="snapshot-chip">
-                  <span className="chip-ico">
-                    👨‍🌾
-                  </span>
-
                   <div>
                     <small>Experience</small>
 
@@ -2003,58 +1851,6 @@ function SmartRecommendations({
                           </p>
                         </div>
 
-                        <div className="rec-specs-chips">
-                          <span
-                            className="spec-chip"
-                            title="Sunlight Requirement"
-                          >
-                            ☀️{" "}
-                            {
-                              plant.sunlight
-                            }
-                          </span>
-
-                          <span
-                            className="spec-chip"
-                            title="Water Requirement"
-                          >
-                            💧{" "}
-                            {
-                              plant.water
-                            }
-                          </span>
-
-                          <span
-                            className="spec-chip"
-                            title="Temperature Range"
-                          >
-                            🌡️{" "}
-                            {plant.temp}
-                          </span>
-
-                          {plant.soil && (
-                            <span
-                              className="spec-chip"
-                              title="Soil / Growing Medium"
-                            >
-                              🪴{" "}
-                              {
-                                plant.soil
-                              }
-                            </span>
-                          )}
-
-                          <span
-                            className="spec-chip difficulty"
-                            title="Growing Difficulty"
-                          >
-                            🌱{" "}
-                            {
-                              plant.difficulty
-                            }
-                          </span>
-                        </div>
-
                         {plant.careTips && (
                           <div className="rec-care-tips-box">
                             <span className="care-tip-label">
@@ -2092,13 +1888,7 @@ function SmartRecommendations({
                             type="button"
                             className="rec-view-guide-btn"
                             onClick={() => {
-                              if (
-                                onPageChange
-                              ) {
-                                onPageChange(
-                                  "library"
-                                );
-                              }
+                              setGuidePlant(resolveLibraryPlant(plant) || plant);
                             }}
                           >
                             Care Guide →
@@ -2146,7 +1936,7 @@ function SmartRecommendations({
 
                 <p>
                   {environmentConfigured
-                    ? "Your pincode profile provides an estimated regional sunlight and climate baseline for plant matching."
+                    ? "Your pincode profile provides estimated regional climate, temperature, humidity, rainfall, and a regional sunlight baseline. Your garden's actual sunlight is selected separately."
                     : "Complete your environment profile so Garden Guide can create personalized plant recommendations for you."}
                 </p>
               </div>
@@ -2369,7 +2159,7 @@ function SmartRecommendations({
                 </h2>
 
                 <p>
-                  Customize your pincode, space, soil, sunlight, climate, and watering settings to refine plant matches.
+                  Choose your garden conditions and preferences to refine plant matches. Regional climate, temperature, humidity, and rainfall are estimated automatically from your pincode.
                 </p>
               </div>
 
@@ -2393,7 +2183,7 @@ function SmartRecommendations({
                 htmlFor="pincode-input"
                 className="config-label"
               >
-                📍 Garden Location Pincode (India) *
+                Garden Location Pincode (India) *
               </label>
 
               <div className="pincode-input-wrap">
@@ -2439,15 +2229,91 @@ function SmartRecommendations({
 
               {environment.locationLabel &&
                 !pincodeError && (
-                  <div className="pincode-detected-note">
-                    📍 Detected region:{" "}
-                    <strong>
-                      {
-                        environment.locationLabel
-                      }
-                    </strong>{" "}
-                    • sunlight/climate estimated automatically from pincode.
-                  </div>
+                  <>
+                    <div className="pincode-detected-note">
+                      <strong>Region detected:</strong>{" "}
+                      {environment.locationLabel}
+                      <span>
+                        Regional climate, temperature, humidity and rainfall
+                        are optional estimates from your pincode. Your garden's actual
+                        sunlight is selected separately below.
+                      </span>
+                    </div>
+
+                    {(regionalProfile.climate ||
+                      environment.climate ||
+                      regionalProfile.temperature ||
+                      environment.temperature ||
+                      regionalProfile.humidity ||
+                      environment.humidity ||
+                      regionalProfile.rainfall ||
+                      environment.rainfall) && (
+                      <div className="regional-profile-card">
+                        <div className="regional-profile-header">
+                          <div>
+                            <span className="regional-profile-kicker">
+                              REGIONAL PROFILE
+                            </span>
+                            <strong>Estimated from your pincode</strong>
+                            <span className="regional-profile-optional-note">Optional regional context</span>
+                          </div>
+
+                          <span className="regional-profile-source">
+                            {locationSource ===
+                            "curated pincode mapping"
+                              ? "Region Calibrated"
+                              : "Zone Estimate"}
+                          </span>
+                        </div>
+
+                        <div className="regional-profile-grid">
+                          <div className="regional-profile-item">
+                            <span>Climate</span>
+                            <strong>
+                              {regionalProfile.climate ||
+                                environment.climate ||
+                                "Not available"}
+                            </strong>
+                          </div>
+
+                          <div className="regional-profile-item">
+                            <span>Temperature</span>
+                            <strong>
+                              {regionalProfile.temperature ||
+                                environment.temperature ||
+                                "Not available"}
+                            </strong>
+                          </div>
+
+                          <div className="regional-profile-item">
+                            <span>Humidity</span>
+                            <strong>
+                              {regionalProfile.humidity ||
+                                environment.humidity ||
+                                "Not available"}
+                            </strong>
+                          </div>
+
+                          <div className="regional-profile-item">
+                            <span>Rainfall</span>
+                            <strong>
+                              {regionalProfile.rainfall ||
+                                environment.rainfall ||
+                                "Not available"}
+                            </strong>
+                          </div>
+
+                          <div className="regional-profile-item">
+                            <span>Regional Sunlight</span>
+                            <strong>
+                              {regionalProfile.sunlight ||
+                                "Not available"}
+                            </strong>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
             </div>
 
@@ -2491,9 +2357,6 @@ function SmartRecommendations({
                           className="env-opt-thumb"
                         />
 
-                        <span className="env-opt-icon-floating">
-                          {opt.icon}
-                        </span>
                       </div>
 
                       <div className="env-opt-photo-body">
@@ -2547,10 +2410,6 @@ function SmartRecommendations({
                           ✓
                         </span>
                       )}
-
-                      <span className="opt-ico">
-                        {opt.icon}
-                      </span>
 
                       <strong className="opt-title">
                         {opt.value} Space
@@ -2615,132 +2474,155 @@ function SmartRecommendations({
               </div>
             </div>
 
-            {/* 4. Climate / Temperature */}
+            {/* 4. Growing Medium */}
 
             <div className="config-group">
               <span className="config-label">
-                4. Local Climate & Atmospheric Range *
+                4. Growing Medium & Substrate
               </span>
 
-              <div className="dropdowns-triple-grid">
-                <div className="dropdown-box">
-                  <label htmlFor="temp-select">
-                    Temperature Category *
-                  </label>
+              <div className="options-selection-grid cols-4">
+                {MEDIUM_OPTIONS.map(
+                  (opt) => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      className={`env-opt-card ${
+                        environment.medium ===
+                        opt.value
+                          ? "selected"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        handleUpdateField(
+                          "medium",
+                          opt.value
+                        )
+                      }
+                    >
+                      {environment.medium ===
+                        opt.value && (
+                        <span className="opt-check">
+                          ✓
+                        </span>
+                      )}
 
-                  <select
-                    id="temp-select"
-                    value={
-                      environment.temperature
-                    }
-                    onChange={(e) =>
-                      handleUpdateField(
-                        "temperature",
-                        e.target.value
-                      )
-                    }
-                  >
-                    <option value="">
-                      Select temperature
-                    </option>
+                      <strong className="opt-title">
+                        {opt.value}
+                      </strong>
 
-                    <option value="10°C - 20°C">
-                      Cool (10°C – 20°C)
-                    </option>
-
-                    <option value="20°C - 30°C">
-                      Warm (20°C – 30°C)
-                    </option>
-
-                    <option value="30°C - 40°C">
-                      Hot (30°C – 40°C)
-                    </option>
-                  </select>
-                </div>
-
-                <div className="dropdown-box">
-                  <label htmlFor="climate-select">
-                    Climate Type *
-                  </label>
-
-                  <select
-                    id="climate-select"
-                    value={
-                      environment.climate
-                    }
-                    onChange={(e) =>
-                      handleUpdateField(
-                        "climate",
-                        e.target.value
-                      )
-                    }
-                  >
-                    <option value="">
-                      Select climate
-                    </option>
-
-                    <option value="Tropical">
-                      Tropical (Humid & Warm)
-                    </option>
-
-                    <option value="Subtropical">
-                      Subtropical (Mild Winters)
-                    </option>
-
-                    <option value="Arid / Dry">
-                      Arid / Dry (Low Moisture)
-                    </option>
-
-                    <option value="Temperate">
-                      Temperate (Moderate Seasons)
-                    </option>
-                  </select>
-                </div>
-
-                <div className="dropdown-box">
-                  <label htmlFor="humidity-select">
-                    Humidity Level *
-                  </label>
-
-                  <select
-                    id="humidity-select"
-                    value={
-                      environment.humidity
-                    }
-                    onChange={(e) =>
-                      handleUpdateField(
-                        "humidity",
-                        e.target.value
-                      )
-                    }
-                  >
-                    <option value="">
-                      Select humidity
-                    </option>
-
-                    <option value="Low">
-                      Low Humidity (&lt; 40%)
-                    </option>
-
-                    <option value="Medium">
-                      Medium Humidity (40% – 70%)
-                    </option>
-
-                    <option value="High">
-                      High Humidity (&gt; 70%)
-                    </option>
-                  </select>
-                </div>
+                      <span className="opt-desc">
+                        {opt.desc}
+                      </span>
+                    </button>
+                  )
+                )}
               </div>
+            </div>
 
-              {/* Numeric Readings */}
+            {/* 5. Watering */}
+
+            <div className="config-group">
+              <span className="config-label">
+                5. How much time can you give to watering?
+              </span>
+
+              <div className="options-selection-grid cols-3">
+                {WATERING_OPTIONS.map(
+                  (opt) => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      className={`env-opt-card ${
+                        environment.watering ===
+                        opt.value
+                          ? "selected"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        handleUpdateField(
+                          "watering",
+                          opt.value
+                        )
+                      }
+                    >
+                      {environment.watering ===
+                        opt.value && (
+                        <span className="opt-check">
+                          ✓
+                        </span>
+                      )}
+
+                      <strong className="opt-title">
+                        {opt.value} Watering
+                      </strong>
+
+                      <span className="opt-desc">
+                        {opt.desc}
+                      </span>
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
+
+            {/* 6. Soil Moisture */}
+
+            <div className="config-group">
+              <span className="config-label">
+                6. Soil Moisture Condition
+              </span>
+
+              <div className="options-selection-grid cols-3">
+                {MOISTURE_OPTIONS.map(
+                  (opt) => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      className={`env-opt-card ${
+                        environment.soilMoisture ===
+                        opt.value
+                          ? "selected"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        handleUpdateField(
+                          "soilMoisture",
+                          opt.value
+                        )
+                      }
+                    >
+                      {environment.soilMoisture ===
+                        opt.value && (
+                        <span className="opt-check">
+                          ✓
+                        </span>
+                      )}
+
+                      <strong className="opt-title">
+                        {opt.value} Soil
+                      </strong>
+
+                      <span className="opt-desc">
+                        {opt.desc}
+                      </span>
+                    </button>
+                  )
+                )}
+              </div>
+            </div>
+
+            {/* Optional exact ambient readings */}
+
+            <div className="config-group">
+              <span className="config-label">
+                Optional: Exact Ambient Readings
+              </span>
 
               <div className="numeric-microclimate-subpanel">
                 <div className="numeric-panel-heading">
-                  <span>🌡️</span>
-
                   <strong>
-                    Specific Microclimate Readings (Optional Fine-Tuning)
+                    Fine-tune recommendations with your current temperature and humidity
                   </strong>
                 </div>
 
@@ -2795,6 +2677,7 @@ function SmartRecommendations({
                   <div className="numeric-input-box">
                     <label htmlFor="numeric-humidity-input">
                       Exact Relative Humidity (%)
+                      <span className="optional-field-hint">Optional</span>
                       <span className="valid-range-hint">
                         (Allowed: 0% to 100%)
                       </span>
@@ -2842,261 +2725,11 @@ function SmartRecommendations({
               </div>
             </div>
 
-            {/* 5. Growing Medium */}
+            {/* 7. Experience */}
 
             <div className="config-group">
               <span className="config-label">
-                5. Growing Medium & Substrate
-              </span>
-
-              <div className="options-selection-grid cols-4">
-                {MEDIUM_OPTIONS.map(
-                  (opt) => (
-                    <button
-                      key={opt.value}
-                      type="button"
-                      className={`env-opt-card ${
-                        environment.medium ===
-                        opt.value
-                          ? "selected"
-                          : ""
-                      }`}
-                      onClick={() =>
-                        handleUpdateField(
-                          "medium",
-                          opt.value
-                        )
-                      }
-                    >
-                      {environment.medium ===
-                        opt.value && (
-                        <span className="opt-check">
-                          ✓
-                        </span>
-                      )}
-
-                      <span className="opt-ico">
-                        {opt.icon}
-                      </span>
-
-                      <strong className="opt-title">
-                        {opt.value}
-                      </strong>
-
-                      <span className="opt-desc">
-                        {opt.desc}
-                      </span>
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
-
-            {/* 6. Watering */}
-
-            <div className="config-group">
-              <span className="config-label">
-                6. How much time can you give to watering?
-              </span>
-
-              <div className="options-selection-grid cols-3">
-                {WATERING_OPTIONS.map(
-                  (opt) => (
-                    <button
-                      key={opt.value}
-                      type="button"
-                      className={`env-opt-card ${
-                        environment.watering ===
-                        opt.value
-                          ? "selected"
-                          : ""
-                      }`}
-                      onClick={() =>
-                        handleUpdateField(
-                          "watering",
-                          opt.value
-                        )
-                      }
-                    >
-                      {environment.watering ===
-                        opt.value && (
-                        <span className="opt-check">
-                          ✓
-                        </span>
-                      )}
-
-                      <span className="opt-ico">
-                        {opt.icon}
-                      </span>
-
-                      <strong className="opt-title">
-                        {opt.value} Watering
-                      </strong>
-
-                      <span className="opt-desc">
-                        {opt.desc}
-                      </span>
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
-
-            {/* 7. Soil Moisture */}
-
-            <div className="config-group">
-              <span className="config-label">
-                7. Soil Moisture Condition
-              </span>
-
-              <div className="options-selection-grid cols-3">
-                {MOISTURE_OPTIONS.map(
-                  (opt) => (
-                    <button
-                      key={opt.value}
-                      type="button"
-                      className={`env-opt-card ${
-                        environment.soilMoisture ===
-                        opt.value
-                          ? "selected"
-                          : ""
-                      }`}
-                      onClick={() =>
-                        handleUpdateField(
-                          "soilMoisture",
-                          opt.value
-                        )
-                      }
-                    >
-                      {environment.soilMoisture ===
-                        opt.value && (
-                        <span className="opt-check">
-                          ✓
-                        </span>
-                      )}
-
-                      <span className="opt-ico">
-                        {opt.icon}
-                      </span>
-
-                      <strong className="opt-title">
-                        {opt.value} Soil
-                      </strong>
-
-                      <span className="opt-desc">
-                        {opt.desc}
-                      </span>
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
-
-            {/* 8. Rainfall */}
-
-            <div className="config-group">
-              <span className="config-label">
-                8. Rainfall & Water Availability
-              </span>
-
-              <div className="options-selection-grid cols-3">
-                {RAINFALL_OPTIONS.map(
-                  (opt) => (
-                    <button
-                      key={opt.value}
-                      type="button"
-                      className={`env-opt-card ${
-                        environment.rainfall ===
-                        opt.value
-                          ? "selected"
-                          : ""
-                      }`}
-                      onClick={() =>
-                        handleUpdateField(
-                          "rainfall",
-                          opt.value
-                        )
-                      }
-                    >
-                      {environment.rainfall ===
-                        opt.value && (
-                        <span className="opt-check">
-                          ✓
-                        </span>
-                      )}
-
-                      <span className="opt-ico">
-                        {opt.icon}
-                      </span>
-
-                      <strong className="opt-title">
-                        {opt.value}
-                      </strong>
-
-                      <span className="opt-desc">
-                        {opt.desc}
-                      </span>
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
-
-            {/* 9. Season */}
-
-            <div className="config-group">
-              <span className="config-label">
-                9. Target Growing Season
-              </span>
-
-              <div className="options-selection-grid cols-4">
-                {SEASON_OPTIONS.map(
-                  (opt) => (
-                    <button
-                      key={opt.value}
-                      type="button"
-                      className={`env-opt-card ${
-                        environment.season ===
-                        opt.value
-                          ? "selected"
-                          : ""
-                      }`}
-                      onClick={() =>
-                        handleUpdateField(
-                          "season",
-                          opt.value
-                        )
-                      }
-                    >
-                      {environment.season ===
-                        opt.value && (
-                        <span className="opt-check">
-                          ✓
-                        </span>
-                      )}
-
-                      <span className="opt-ico">
-                        {opt.icon}
-                      </span>
-
-                      <strong className="opt-title">
-                        {opt.value}
-                      </strong>
-
-                      <span className="opt-desc">
-                        {opt.desc}
-                      </span>
-                    </button>
-                  )
-                )}
-              </div>
-            </div>
-
-            {/* 10. Experience */}
-
-            <div className="config-group">
-              <span className="config-label">
-                10. Your Gardening Experience
+                7. Your Gardening Experience
               </span>
 
               <div className="options-selection-grid cols-3">
@@ -3125,10 +2758,6 @@ function SmartRecommendations({
                         </span>
                       )}
 
-                      <span className="opt-ico">
-                        {opt.icon}
-                      </span>
-
                       <strong className="opt-title">
                         {opt.value} Level
                       </strong>
@@ -3153,7 +2782,7 @@ function SmartRecommendations({
               >
                 Save & View AI Matches
                 {" "}
-                (✦ {scoredRecommendations.length})
+                (✦ {backendRecommendations.length || scoredRecommendations.length})
                 {" "}
                 →
               </button>
@@ -3161,6 +2790,26 @@ function SmartRecommendations({
           </section>
         </div>
       )}
+
+      <CareGuideModal
+        plant={guidePlant}
+        onClose={() => setGuidePlant(null)}
+        onOpenLibrary={(plant) => {
+          setGuidePlant(null);
+          onPageChange?.("library", { plantId: plant.id, plant });
+        }}
+        onAdd={async (plant) => {
+          const already = savedPlants.some((item) => item.name?.toLowerCase() === plant.name?.toLowerCase());
+          if (!already) {
+            await handleAddToGarden(plant);
+          }
+          setGuidePlant(null);
+        }}
+        onDiagnose={(plant) => {
+          setGuidePlant(null);
+          onPageChange?.("diseasedetection", { symptom: `${plant.name} health check` });
+        }}
+      />
 
       {/* =====================================================
           TOAST

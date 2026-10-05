@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { STORAGE_KEYS, getSavedPlants, savePlants, getPlantGrowthInfo } from "../utils";
+import { STORAGE_KEYS, getSavedPlants, savePlants, getPlantGrowthInfo, readStoredEnvironment, readStorage } from "../utils";
 import { LIBRARY_PLANTS, getPlantImage, getPlantGrowthMeta } from "../plantData";
 import { gardenApi, getAuthToken } from "../api";
 import PageHeaderBanner from "../components/PageHeaderBanner";
+import CareGuideModal from "../components/CareGuideModal";
 import "./MyGarden.css";
 
 import sproutSunbeamImg from "../assets/sprout-sunbeam.jpg";
@@ -38,6 +39,7 @@ function MyGarden({ onPageChange }) {
   const [filter, setFilter] = useState("All");
   const [showAddForm, setShowAddForm] = useState(false);
   const [selectedPlant, setSelectedPlant] = useState(null);
+  const [guidePlant, setGuidePlant] = useState(null);
   const [activeMenuId, setActiveMenuId] = useState(null);
 
   // Add Modal State
@@ -54,28 +56,12 @@ function MyGarden({ onPageChange }) {
   const [formPlantedDate, setFormPlantedDate] = useState(() => new Date().toISOString().split("T")[0]);
   const [formGrowthDays, setFormGrowthDays] = useState("30");
 
-  // Care tasks state
-  const [careTasks, setCareTasks] = useState([
-    { id: 1, title: "Water Rose", plant: "Rose", time: "Today, 5:00 PM", completed: false, icon: "💧" },
-    { id: 2, title: "Check soil moisture", plant: "Tomato, Mint", time: "Today, 6:00 PM", completed: false, icon: "🌱" },
-    { id: 3, title: "Remove dead leaves", plant: "Mint", time: "Today, 7:00 PM", completed: false, icon: "✂️" },
-  ]);
-
-  const toggleCareTask = (id) => {
-    setCareTasks((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t))
-    );
-  };
+ 
 
   // User Name
-  const user = (() => {
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEYS.session) || "null");
-    } catch {
-      return null;
-    }
-  })();
+  const user = readStorage(STORAGE_KEYS.session, null);
   const userName = user?.name || "Gardener";
+  const environment = readStoredEnvironment();
 
   // Calculate Ready to Harvest
   const readyToHarvestCount = plants.filter((p) => getPlantGrowthInfo(p).isReady).length;
@@ -490,74 +476,14 @@ function MyGarden({ onPageChange }) {
                         <span className="plant-botanical-sub">{plant.botanicalName}</span>
                       )}
                       <span className="plant-type">{plant.type}</span>
-                    </div>
-
-                    <div className="plant-specs-row">
-                      <span className="spec-item">
-                        <span className="spec-ico">☀️</span> {plant.sunlight}
-                      </span>
-                      <span className="spec-item">
-                        <span className="spec-ico">💧</span> {plant.water}
-                      </span>
-                    </div>
-
-                    {/* Growth, In Garden & Harvest Tracker Block */}
-                    <div className="card-growth-tracker">
-                      <div className="growth-stats-grid">
-                        <div className="growth-stat-pill" title={`Planted on ${growth.plantedDateFormatted}`}>
-                          <span className="stat-label">In Garden:</span>
-                          <strong className="stat-value">🌱 {growth.daysInGarden} days</strong>
-                        </div>
-                        <div className="growth-stat-pill" title={`Full cycle: ${growth.growthTime}`}>
-                          <span className="stat-label">Needs to Grow:</span>
-                          <strong className="stat-value">⏳ {growth.growthDays} days</strong>
-                        </div>
-                      </div>
-
-                      {/* Harvest Status Line */}
-                      <div className={`harvest-status-bar ${growth.isReady ? "ready" : "growing"}`}>
-                        <span className="harvest-status-icon">{growth.isReady ? "🧺" : "🌿"}</span>
-                        <div className="harvest-status-text">
-                          {growth.isReady ? (
-                            <strong className="harvest-ready-highlight">Ready for Harvest!</strong>
-                          ) : (
-                            <span>
-                              Harvest in <strong>{growth.daysToHarvest} days</strong> <small>({growth.harvestDateStr})</small>
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Growth Progress Bar */}
-                      <div className="growth-progress-wrap">
-                        <div className="growth-progress-labels">
-                          <span className="growth-stage-name">{growth.harvestStage}</span>
-                          <span className="growth-pct-val">{growth.progressPct}%</span>
-                        </div>
-                        <div className="growth-progress-track">
-                          <div
-                            className={`growth-progress-fill ${growth.isReady ? "ready" : ""}`}
-                            style={{ width: `${growth.progressPct}%` }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Moisture Progress Bar */}
-                    <div className="moisture-meta-row">
-                      <span className="moisture-label">Soil Moisture</span>
-                      <span className="moisture-val">{plant.moisture || (isWarning ? 30 : 80)}%</span>
-                    </div>
-                    <div className="moisture-track">
-                      <div
-                        className={`moisture-fill ${isWarning ? "warning" : "healthy"}`}
-                        style={{ width: `${plant.moisture || (isWarning ? 30 : 80)}%` }}
-                      />
+                      {plant.description && (
+                        <p className="plant-card-description">{plant.description}</p>
+                      )}
                     </div>
 
                     <div className="plant-card-footer">
                       <span className="water-status-text">
-                        {plant.watered || "Watered Today"}
+                        {plant.watered || "Ready for care"}
                       </span>
 
                       <div className="card-actions-group">
@@ -608,9 +534,9 @@ function MyGarden({ onPageChange }) {
                         <button
                           type="button"
                           className="card-view-btn slow-pop-btn"
-                          onClick={() => setSelectedPlant(plant)}
+                          onClick={() => setGuidePlant(plant)}
                         >
-                          View Details →
+                          View Care Guide →
                         </button>
                       </div>
                     </div>
@@ -664,12 +590,12 @@ function MyGarden({ onPageChange }) {
               </div>
             </div>
 
-            {/* Insight 3 */}
+            {/* Insight 3: only show configured environment data. */}
             <div className="insight-item">
               <div className="insight-icon yellow">☀️</div>
               <div className="insight-info">
-                <strong>Good sunlight conditions</strong>
-                <small>Perfect for plant growth</small>
+                <strong>{environment.configured ? (environment.sunlight || "Sunlight set") : "Environment not set"}</strong>
+                <small>{environment.configured ? `${environment.location || "Garden"} • real setup data` : "Set up your growing conditions"}</small>
               </div>
             </div>
           </div>
@@ -677,90 +603,52 @@ function MyGarden({ onPageChange }) {
       </section>
 
       {/* =========================================
-          4. BOTTOM ROW (GROWTH, TODAY'S CARE, TIP)
+          4. BOTTOM ROW (REAL GARDEN SNAPSHOT + TIP)
           ========================================= */}
       <section className="garden-bottom-grid">
-        {/* Column 1: Garden Growth Chart */}
-        <article className="bottom-panel growth-panel slow-popup animate-slow-pop" style={{ animationDelay: "360ms" }}>
+        {/* Real data snapshot: no fabricated growth chart. */}
+        <article className="bottom-panel garden-snapshot-panel slow-popup animate-slow-pop" style={{ animationDelay: "360ms" }}>
           <div className="growth-header">
-            <h3 className="bottom-panel-title">Garden Growth</h3>
-            <div className="growth-badge">
-              <span className="growth-dot">●</span>
-              <span>{totalPlants} plants</span>
-              <span className="growth-rate">+50% this month</span>
+            <div>
+              <h3 className="bottom-panel-title">Garden Snapshot</h3>
+              <span className="snapshot-subtitle">Live totals from your saved garden</span>
+            </div>
+            <button type="button" className="view-tips-btn" onClick={() => onPageChange?.("scheduler")}>
+              View care →
+            </button>
+          </div>
+
+          <div className="garden-snapshot-grid">
+            <div className="snapshot-stat">
+              <span className="snapshot-icon">🌱</span>
+              <strong>{totalPlants}</strong>
+              <span>Plants</span>
+            </div>
+            <div className="snapshot-stat">
+              <span className="snapshot-icon">🍃</span>
+              <strong>{healthyPlantsCount}</strong>
+              <span>Healthy</span>
+            </div>
+            <div className="snapshot-stat">
+              <span className="snapshot-icon">💧</span>
+              <strong>{needsWaterCount}</strong>
+              <span>Need water</span>
+            </div>
+            <div className="snapshot-stat">
+              <span className="snapshot-icon">🧺</span>
+              <strong>{readyToHarvestCount}</strong>
+              <span>Harvest ready</span>
             </div>
           </div>
 
-          <div className="growth-chart-wrap">
-            <div className="chart-y-axis">
-              <span>6</span>
-              <span>4</span>
-              <span>2</span>
-              <span>0</span>
-            </div>
-            <div className="chart-bars-area">
-              <div className="chart-col">
-                <div className="chart-bar" style={{ height: "20%" }} />
-                <span className="chart-label">Apr</span>
-              </div>
-              <div className="chart-col">
-                <div className="chart-bar" style={{ height: "35%" }} />
-                <span className="chart-label">May</span>
-              </div>
-              <div className="chart-col">
-                <div className="chart-bar" style={{ height: "45%" }} />
-                <span className="chart-label">Jun</span>
-              </div>
-              <div className="chart-col">
-                <div className="chart-bar" style={{ height: "60%" }} />
-                <span className="chart-label">Jul</span>
-              </div>
-              <div className="chart-col">
-                <div className="chart-bar" style={{ height: "75%" }} />
-                <span className="chart-label">Aug</span>
-              </div>
-              <div className="chart-col current">
-                <div className="chart-bar current-bar" style={{ height: "92%" }} />
-                <span className="chart-label">Sep</span>
+          <div className="snapshot-footer">
+            <div>
+              <span className="snapshot-label">Health</span>
+              <div className="snapshot-progress" aria-label={`${healthyPercentage}% of plants marked healthy`}>
+                <span style={{ width: `${healthyPercentage}%` }} />
               </div>
             </div>
-          </div>
-        </article>
-
-        {/* Column 2: Today's Care */}
-        <article className="bottom-panel care-panel slow-popup animate-slow-pop" style={{ animationDelay: "420ms" }}>
-          <div className="care-header">
-            <h3 className="bottom-panel-title">🌱 Today's Care</h3>
-          </div>
-
-          <div className="care-tasks-list">
-            {careTasks.map((task) => (
-              <div
-                key={task.id}
-                className={`care-task-row ${task.completed ? "completed" : ""}`}
-                onClick={() => toggleCareTask(task.id)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && toggleCareTask(task.id)}
-              >
-                <span className="care-task-icon">{task.icon}</span>
-                <div className="care-task-info">
-                  <strong className="care-task-name">{task.title}</strong>
-                  <span className="care-task-desc">{task.plant}</span>
-                </div>
-                <span className="care-task-time">{task.time}</span>
-                <input
-                  type="checkbox"
-                  checked={task.completed}
-                  onChange={(e) => {
-                    e.stopPropagation();
-                    toggleCareTask(task.id);
-                  }}
-                  className="care-task-checkbox"
-                  aria-label={`Complete task ${task.title}`}
-                />
-              </div>
-            ))}
+            <span className="snapshot-health-value">{totalPlants ? `${healthyPercentage}% healthy` : "Add your first plant"}</span>
           </div>
         </article>
 
@@ -1241,6 +1129,17 @@ function MyGarden({ onPageChange }) {
                 <div className="detail-modal-actions">
                   <button
                     type="button"
+                    className="care-guide-btn slow-pop-btn"
+                    onClick={() => {
+                      setGuidePlant(selectedPlant);
+                      setSelectedPlant(null);
+                    }}
+                  >
+                    📖 View Care Guide
+                  </button>
+
+                  <button
+                    type="button"
                     className="water-now-btn slow-pop-btn"
                     onClick={() => handleWaterPlant(selectedPlant.id)}
                   >
@@ -1276,6 +1175,26 @@ function MyGarden({ onPageChange }) {
         </div>
         );
       })()}
+
+      <CareGuideModal
+        plant={guidePlant}
+        onClose={() => setGuidePlant(null)}
+        onOpenLibrary={(plant) => {
+          setGuidePlant(null);
+          onPageChange?.("library", { plantId: plant.id, plant });
+        }}
+        onDiagnose={(plant) => {
+          setGuidePlant(null);
+          onPageChange?.("diseasedetection", { symptom: `${plant.name} health check` });
+        }}
+        onWater={(plant) => {
+          const target = plants.find((item) =>
+            (item.id || item._id) === (plant.id || plant._id)
+            || item.name?.toLowerCase() === plant.name?.toLowerCase()
+          );
+          if (target) handleWaterPlant(target.id || target._id);
+        }}
+      />
     </main>
   );
 }

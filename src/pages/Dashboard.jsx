@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { STORAGE_KEYS, getSavedPlants, getSavedTasks, saveTasks, savePlants } from "../utils";
+import { STORAGE_KEYS, getSavedPlants, getSavedTasks, saveTasks, savePlants, readStoredEnvironment, readStorage } from "../utils";
 import "./Dashboard.css";
 import { environmentApi, gardenApi, getAuthToken, taskApi } from "../api";
 
@@ -16,9 +16,9 @@ const RECOMMENDED_PLANTS = [
     id: "basil",
     name: "Basil (Tulsi)",
     badge: "Easy to Grow",
-    matchBadge: "Best Match",
+    matchBadge: "Library Pick",
     tagline: "Purifies Air • Boosts Immunity • Fragrant Leaves",
-    description: "Perfect for your climate. Helps purify air, keeps insects away and is widely used in home remedies.",
+    description: "Easy container herb with fragrant leaves and practical uses in everyday home gardening.",
     quote: {
       line1: "Small plant",
       line2: "Big freshness",
@@ -139,23 +139,7 @@ function Dashboard({ onPageChange }) {
   const [taskFilter, setTaskFilter] = useState("all"); // "all" | "pending" | "completed"
   const [gardenCategory, setGardenCategory] = useState("all"); // "all" | "vegetables" | "herbs"
   const [detailPlant, setDetailPlant] = useState(null);
-  const [environment, setEnvironment] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEYS.environment) || "null") || {
-        pincode: "500081",
-        location: "Balcony",
-        space: "Medium",
-        sunlight: "Full Sun",
-        temperature: "20°C - 30°C",
-        climate: "Tropical",
-        humidity: "Medium",
-        watering: "Moderate",
-        medium: "Potting Mix",
-      };
-    } catch {
-      return { pincode: "500081", location: "Balcony", space: "Medium", sunlight: "Full Sun", temperature: "20°C - 30°C", climate: "Tropical", humidity: "Medium", watering: "Moderate", medium: "Potting Mix" };
-    }
-  });
+  const [environment, setEnvironment] = useState(() => readStoredEnvironment());
 
   useEffect(() => {
     let cancelled = false;
@@ -211,13 +195,7 @@ function Dashboard({ onPageChange }) {
   }, [detailPlant]);
 
   // Session user
-  const user = (() => {
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEYS.session) || "null");
-    } catch {
-      return null;
-    }
-  })();
+  const user = readStorage(STORAGE_KEYS.session, null);
   const userName = user?.name || "Gardener";
 
   /* =========================================
@@ -307,14 +285,7 @@ function Dashboard({ onPageChange }) {
   /* =========================================
      GARDEN PLANTS LIST (BOTTOM ROW)
      ========================================= */
-  const fallbackPlants = [
-    { id: 1, name: "Tomato", type: "Vegetable", status: "Healthy", statusType: "healthy", image: plantTomatoImg },
-    { id: 2, name: "Mint", type: "Herb", status: "Healthy", statusType: "healthy", image: plantMintImg },
-    { id: 3, name: "Aloe Vera", type: "Succulent", status: "Growing", statusType: "growing", image: plantAloeImg },
-    { id: 4, name: "Curry Leaf", type: "Herb", status: "Healthy", statusType: "healthy", image: plantCurryImg },
-  ];
-
-  const allGardenPlants = Array.isArray(plants) ? plants : fallbackPlants;
+  const allGardenPlants = Array.isArray(plants) ? plants : [];
   const displayedGardenPlants = allGardenPlants.filter((plant) => {
     if (gardenCategory === "all") return true;
     const type = (plant.type || "").toLowerCase();
@@ -336,6 +307,12 @@ function Dashboard({ onPageChange }) {
     return true;
   });
   const totalPlants = plants.length;
+  const healthyPlants = plants.filter((plant) => (plant.statusType || "").toLowerCase() === "healthy");
+  const healthPercentage = totalPlants ? Math.round((healthyPlants.length / totalPlants) * 100) : 0;
+  const averageMoisture = totalPlants
+    ? Math.round(plants.reduce((sum, plant) => sum + (Number(plant.moisture) || 0), 0) / totalPlants)
+    : null;
+  const moistureLabel = averageMoisture == null ? "Not set" : averageMoisture >= 65 ? "Good" : averageMoisture >= 40 ? "Watch" : "Low";
   const activeTip = CARE_TIPS[tipIndex];
 
   const currentHour = new Date().getHours();
@@ -418,7 +395,7 @@ function Dashboard({ onPageChange }) {
             <span className="metric-icon">💧</span>
           </div>
           <div className="metric-details">
-            <span className="metric-value">Good</span>
+            <span className="metric-value">{environment.configured ? moistureLabel : "Not set"}</span>
             <span className="metric-label">Soil Moisture</span>
           </div>
           <span className="metric-arrow">›</span>
@@ -437,7 +414,7 @@ function Dashboard({ onPageChange }) {
             <span className="metric-icon">💜</span>
           </div>
           <div className="metric-details">
-            <span className="metric-value">Healthy</span>
+            <span className="metric-value">{totalPlants ? `${healthPercentage}%` : "No plants"}</span>
             <span className="metric-label">Plant Health</span>
           </div>
           <span className="metric-arrow">›</span>
@@ -452,10 +429,9 @@ function Dashboard({ onPageChange }) {
           <div>
             <div className="rec-top-eyebrow">
               <span className="rec-sparkle">✦</span>
-              <span>FEATURED RECOMMENDATION • TAILORED FOR YOUR SETUP</span>
+              <span>FEATURED PLANT PICK • SETUP-READY INFO</span>
             </div>
-            <h2 className="panel-title">Recommended for You</h2>
-            <p className="panel-subtitle">Based on your location, season and garden conditions.</p>
+           
           </div>
           <button type="button" className="panel-link-btn" onClick={goToRecommendations}>
             View All Recommendations →
@@ -476,7 +452,7 @@ function Dashboard({ onPageChange }) {
 
           {/* Banner Content Layout: Photo on left, Details on right */}
           <div className="rec-banner-card-body">
-            {/* Plant Photo with Best Match Badge & Italic Quote */}
+            {/* Plant Photo with Library Pick Badge & Italic Quote */}
             <div
               className="rec-banner-photo-wrap"
               onClick={() => setDetailPlant(activeRec)}
@@ -487,7 +463,7 @@ function Dashboard({ onPageChange }) {
             >
               <div className="rec-best-match-pill">
                 <span className="match-crown">👑</span>
-                <span>{activeRec.matchBadge || "Best Match"}</span>
+                <span>{activeRec.matchBadge || "Library Pick"}</span>
               </div>
 
               <img src={activeRec.image} alt={activeRec.name} className="rec-banner-img" />
@@ -513,37 +489,6 @@ function Dashboard({ onPageChange }) {
               <div className="rec-banner-tagline">{activeRec.tagline}</div>
 
               <p className="rec-banner-desc">{activeRec.description}</p>
-
-              {/* 3 Specs with subtle vertical dividers */}
-              <div className="rec-banner-specs-row">
-                <div className="rec-banner-spec-col">
-                  <span className="spec-icon">☀️</span>
-                  <div className="spec-meta">
-                    <span className="spec-label">Sunlight</span>
-                    <strong className="spec-val">{activeRec.sunlight}</strong>
-                  </div>
-                </div>
-
-                <div className="rec-banner-spec-divider" />
-
-                <div className="rec-banner-spec-col">
-                  <span className="spec-icon">💧</span>
-                  <div className="spec-meta">
-                    <span className="spec-label">Water</span>
-                    <strong className="spec-val">{activeRec.water}</strong>
-                  </div>
-                </div>
-
-                <div className="rec-banner-spec-divider" />
-
-                <div className="rec-banner-spec-col">
-                  <span className="spec-icon">🪴</span>
-                  <div className="spec-meta">
-                    <span className="spec-label">Ideal For</span>
-                    <strong className="spec-val">{activeRec.idealFor}</strong>
-                  </div>
-                </div>
-              </div>
 
               {/* View Details Button */}
               <div className="rec-banner-cta-row">
@@ -645,9 +590,11 @@ function Dashboard({ onPageChange }) {
                   {taskFilter === "completed" ? "📋" : "🎉"}
                 </span>
                 <p className="empty-text">
-                  {taskFilter === "completed"
-                    ? "No completed tasks yet. Check them off as you complete care routines!"
-                    : "All tasks completed! Your garden is thriving today."}
+                  {tasks.length === 0
+                    ? "No care tasks yet. Add one or sync tasks from My Garden."
+                    : taskFilter === "completed"
+                    ? "No completed tasks yet. Check them off as you complete care routines."
+                    : "All tasks completed! Your garden is on track today."}
                 </p>
               </div>
             ) : (
@@ -708,22 +655,22 @@ function Dashboard({ onPageChange }) {
               <div className="dark-temp-block">
                 <span className="dark-sun-icon">☀️</span>
                 <div>
-                  <div className="dark-temp-val">{environment.sunlight || "Medium Light"}</div>
-                  <div className="dark-temp-desc">{environment.climate || "Tropical"} climate profile</div>
+                  <div className="dark-temp-val">{environment.sunlight || "Not set"}</div>
+                  <div className="dark-temp-desc">{environment.climate ? `${environment.climate} climate profile` : "Environment not configured"}</div>
                 </div>
               </div>
               <div className="dark-weather-stats">
                 <div className="dark-stat-item">
                   <span className="stat-label">💧 Humidity</span>
-                  <span className="stat-val">{environment.humidity || "Medium"}</span>
+                  <span className="stat-val">{environment.humidity || "Not set"}</span>
                 </div>
                 <div className="dark-stat-item">
                   <span className="stat-label">🌡️ Temperature</span>
-                  <span className="stat-val">{environment.temperature || "20°C - 30°C"}</span>
+                  <span className="stat-val">{environment.temperature || "Not set"}</span>
                 </div>
                 <div className="dark-stat-item">
                   <span className="stat-label">💧 Watering capacity</span>
-                  <span className="stat-val good">{environment.watering || "Moderate"}</span>
+                  <span className="stat-val good">{environment.watering || "Not set"}</span>
                 </div>
               </div>
             </div>
@@ -735,10 +682,12 @@ function Dashboard({ onPageChange }) {
               tabIndex={0}
               onKeyDown={(e) => e.key === "Enter" && onPageChange && onPageChange("environment")}
             >
-              <div className="alert-check-icon">✓</div>
+              <div className={`alert-check-icon ${environment.configured ? "configured" : "setup"}`}>{environment.configured ? "✓" : "＋"}</div>
               <div className="alert-text-block">
-                <strong>Garden profile is ready!</strong>
-                <small>{environment.space || "Medium"} space • {environment.medium || environment.soil || "Potting Mix"} • {environment.watering || "Moderate"} watering</small>
+                <strong>{environment.configured ? "Garden profile is ready" : "Set up your garden profile"}</strong>
+                <small>{environment.configured
+                  ? `${environment.space || "Space not set"} • ${environment.medium || environment.soil || "Growing medium not set"} • ${environment.watering || "Watering not set"}`
+                  : "Add your real growing conditions to unlock personalized plant matches."}</small>
               </div>
               <span className="alert-chevron">›</span>
             </div>
@@ -984,7 +933,7 @@ function Dashboard({ onPageChange }) {
               </div>
 
               <div className="rec-modal-meta-row">
-                <span className="rec-modal-match-pill">🌿 98% Climate Match</span>
+                <span className="rec-modal-match-pill">🌿 Garden Guide pick</span>
                 <span className="rec-modal-season-pill">🌱 {detailPlant.season}</span>
               </div>
 

@@ -16,21 +16,23 @@ import communityRoutes from "./routes/community.js";
 const app = express();
 const PORT = Number(process.env.PORT || 5000);
 
-const allowedOrigins = [
-  process.env.CLIENT_ORIGIN,
-  "http://localhost:5173",
-  "http://127.0.0.1:5173",
-  "http://localhost:4173",
-  "http://127.0.0.1:4173",
-].filter(Boolean);
+const configuredOrigin = String(process.env.CLIENT_ORIGIN || "").trim();
+const allowedOrigins = [configuredOrigin].filter(Boolean);
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin) || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
+
+    if (
+      !origin ||
+      allowedOrigins.includes(origin) ||
+      (process.env.NODE_ENV !== "production" && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin))
+    ) {
       return callback(null, true);
     }
+
     return callback(new Error("Not allowed by CORS"));
   },
+
   credentials: true,
 }));
 app.use(express.json({ limit: "8mb" }));
@@ -59,5 +61,5 @@ try {
   console.warn("The server will continue operating in resilient mode.");
 }
 
-app.listen(PORT, () => console.log(`Garden Guide API running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Garden Guide API listening on port ${PORT}`));
 

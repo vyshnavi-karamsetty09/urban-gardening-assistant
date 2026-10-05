@@ -14,8 +14,8 @@
   flex-direction: column;
   padding: 28px 16px 22px;
   box-sizing: border-box;
-  background: linear-gradient(180deg, #0d2813 0%, #081a0d 100%);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, var(--sidebar-bg-start) 0%, var(--sidebar-bg-end) 100%);
+  border-right: 1px solid rgba(184, 214, 192, 0.12);
   overflow-y: auto;
   z-index: 100;
   color: #ffffff;
@@ -92,7 +92,7 @@
   border: 1px solid transparent;
   border-radius: 12px;
   background: transparent;
-  color: #c4d8c7;
+  color: #bdd0c2;
   cursor: pointer;
   font-family: inherit;
   font-size: 13px;
@@ -103,17 +103,17 @@
 
 /* Hover */
 .sidebar-link:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--sidebar-hover);
   color: #ffffff;
   transform: translateX(4px);
 }
 
 /* Selected page */
 .sidebar-link.active {
-  background: #194825;
+  background: var(--sidebar-active);
   color: #ffffff;
   font-weight: 700;
-  border: 1px solid #286337;
+  border: 1px solid color-mix(in srgb, var(--primary) 44%, transparent);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
@@ -200,7 +200,7 @@
   padding: 10px 14px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--sidebar-hover);
   color: #e1ede3;
   font-family: inherit;
   font-size: 13px;
@@ -296,3 +296,13 @@
   }
 }
 
+
+
+/* Preserve the original sidebar structure; only deepen contrast in Dark Theme. */
+html[data-theme="dark"] .sidebar {
+  background: linear-gradient(180deg, #07140a 0%, #030b05 100%);
+  border-right-color: rgba(145, 207, 153, 0.14);
+}
+html[data-theme="dark"] .sidebar-link { color: #b9cfbc; }
+html[data-theme="dark"] .sidebar-link:hover { background: rgba(116, 190, 126, 0.09); color: #f2fff3; }
+html[data-theme="dark"] .sidebar-link.active { background: #163a1d; border-color: #2a6a35; color: #ffffff; }

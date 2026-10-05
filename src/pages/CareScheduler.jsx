@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getSavedTasks, saveTasks, getSavedPlants, generateTasksFromPlants, defaultTasks } from "../utils";
+import { getSavedTasks, saveTasks, getSavedPlants, generateTasksFromPlants } from "../utils";
 import { getPlantImage } from "../plantData";
 import { taskApi, getAuthToken } from "../api";
 import PageHeaderBanner from "../components/PageHeaderBanner";
@@ -237,20 +237,6 @@ function CareScheduler({ onPageChange }) {
     showToast(`🌿 Calibrated care routine generated for ${plants.length} plants in your garden!`);
   };
 
-  const handleResetDefaults = async () => {
-    setTasks(defaultTasks);
-    if (getAuthToken()) {
-      try {
-        await taskApi.clear();
-        for (const t of defaultTasks) {
-          await taskApi.add(t).catch(() => null);
-        }
-      } catch {
-        // Keep local state if backend fails
-      }
-    }
-    showToast("Reset to standard botanical care tasks.");
-  };
 
   const applyPreset = (preset) => {
     setNewTask((curr) => ({
@@ -412,14 +398,7 @@ function CareScheduler({ onPageChange }) {
           >
             💧 Water All Due
           </button>
-          <button
-            type="button"
-            className="quick-action-pill secondary"
-            onClick={handleResetDefaults}
-            title="Restore curated sample tasks"
-          >
-            🔄 Reset
-          </button>
+
         </div>
       </div>
 
@@ -522,7 +501,7 @@ function CareScheduler({ onPageChange }) {
           </div>
 
           {/* Detailed Task Cards List */}
-          <section className="scheduler-tasks-card">
+          <section className={`scheduler-tasks-card ${filteredTasks.length === 0 ? "is-empty" : ""}`}>
             {filteredTasks.length > 0 ? (
               <div className="scheduler-tasks-list">
                 {filteredTasks.map((task, idx) => {
@@ -694,8 +673,8 @@ function CareScheduler({ onPageChange }) {
             ) : (
               <div className="scheduler-empty">
                 <span>🌿</span>
-                <h3>No tasks match your current filter</h3>
-                <p>Everything in this category is currently completed or clear. Click below to add a new task or sync from your garden!</p>
+                <h3>{tasks.length === 0 ? "No care tasks yet" : "No tasks match this filter"}</h3>
+                <p>{tasks.length === 0 ? "Add a task or sync care from the plants in My Garden." : "This filter is clear. Try another category or add a task."}</p>
                 <div className="empty-actions">
                   <button
                     type="button"

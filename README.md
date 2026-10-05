@@ -43,6 +43,8 @@ The frontend API helper is `src/api.js`. Backend routes live under `server/route
 
 Normal account creation and login are handled by the Express backend. Passwords are hashed with bcrypt and are never stored in plain text. User-specific endpoints require a valid bearer token.
 
+A newly registered account starts with **0 plants, 0 care tasks, no demo notification inbox, and no configured environment**. Starter content is reserved for the explicit demo-account flow. Browser workspace caches are namespaced by account so logging out does not mix one user's garden with another user's data.
+
 An optional **Use Demo Account** button is available for quick demonstrations. It is a local demo account flow, not Google OAuth.
 
 ## MongoDB Setup
@@ -53,7 +55,7 @@ You can use either a local MongoDB instance or a MongoDB Atlas database.
 2. Set `MONGODB_URI` to your MongoDB connection string.
 3. Set a long random `JWT_SECRET`.
 4. Optionally set `ADMIN_EMAIL` and `ADMIN_PASSWORD` for the admin seed.
-5. Optionally configure `AI_API_KEY`, `AI_BASE_URL`, and `AI_MODEL` for AI features.
+5. Optionally configure `AI_API_KEY`, `AI_BASE_URL`, and `AI_MODEL` for open-ended AI features. For Gemini, set `GEMINI_API_KEY`; the server uses Google's OpenAI-compatible endpoint automatically unless you override the base URL/model.
 
 ## Installation
 
@@ -121,7 +123,7 @@ The seed command loads the curated plant catalog and, when `ADMIN_EMAIL` and `AD
 
 ## Recommendation Logic
 
-The recommendation flow accepts a six-digit Indian pincode plus user-selected growing conditions. The backend maps the pincode to a curated regional profile or zone estimate, deriving baseline climate, sunlight, temperature, and humidity. It then combines those values with available space, soil/growing medium, and watering capacity to score plant compatibility.
+Personalized recommendations are available only after the user explicitly saves a complete environment profile. An incomplete or unconfigured profile returns no personalized matches rather than silently using invented defaults. The recommendation flow accepts a six-digit Indian pincode plus user-selected growing conditions. The backend maps the pincode to a curated regional profile or zone estimate, deriving baseline climate, sunlight, temperature, and humidity. It then combines those values with available space, soil/growing medium, and watering capacity to score plant compatibility.
 
 The project uses a curated compatibility algorithm by default. It should not be described as a trained ML recommendation model unless one is added separately.
 
@@ -155,9 +157,12 @@ See `.env.example` for all variables. Never commit a real `.env` file or API key
 Run:
 
 ```bash
+npm run audit
 npm run build
 npm run lint
 ```
+
+`npm run audit` checks the high-risk product rules in source code: new-account emptiness, user-scoped browser storage, environment/recommendation guards, truthful dashboard/disease copy, removal of starter-task reset controls, and production API defaults.
 
 The backend source can also be syntax-checked with:
 

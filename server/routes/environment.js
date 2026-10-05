@@ -16,6 +16,11 @@ const EMPTY_ENVIRONMENT = {
   humidity: "",
   locationConfidence: "",
   locationLabel: "",
+  soilMoisture: "",
+  rainfall: "",
+  experience: "",
+  numericTemp: "",
+  numericHumidity: "",
 };
 
 function serializeEnvironment(doc, configured) {
@@ -34,7 +39,7 @@ router.get("/", requireAuth, async (req, res) => {
     if (!doc) {
       return res.json({ environment: serializeEnvironment(null, false) });
     }
-    return res.json({ environment: serializeEnvironment(doc, true) });
+    return res.json({ environment: serializeEnvironment(doc, doc.configured === true) });
   } catch (error) {
     console.error("environment get", error);
     return res.status(500).json({ message: "Unable to load environment settings." });
@@ -47,9 +52,18 @@ router.put("/", requireAuth, async (req, res) => {
     const safe = {
       ...EMPTY_ENVIRONMENT,
       ...incoming,
+      configured: true,
     };
     safe.pincode = String(safe.pincode || "").replace(/\D/g, "").slice(0, 6);
-    delete safe.configured;
+
+    const required = ["pincode", "location", "space", "sunlight", "medium", "watering", "soilMoisture", "experience"];
+    const missing = required.filter((field) => !String(safe[field] || "").trim());
+    if (!/^\d{6}$/.test(safe.pincode) || missing.length > 0) {
+      return res.status(422).json({
+        message: "Complete the growing environment before saving it.",
+        missingFields: missing,
+      });
+    }
     delete safe._id;
     delete safe.user;
     delete safe.__v;

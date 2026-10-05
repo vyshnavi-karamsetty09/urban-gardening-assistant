@@ -4,7 +4,7 @@
   justify-content: center;
   gap: 7px;
   padding: 8px 15px;
-  background: #ffffff;
+  background: var(--surface-raised);
   color: #1b4e26;
   border: 1.5px solid rgba(46, 125, 50, 0.28);
   border-radius: 10px;
@@ -20,7 +20,7 @@
 }
 
 .back-button:hover {
-  background: #eef6f0;
+  background: var(--surface-hover);
   color: #11381b;
   border-color: #2e7d32;
   transform: translateX(-2px);
@@ -51,7 +51,7 @@
 
 /* Variant for banner or dark backgrounds */
 .back-button.back-button-on-banner {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--surface-raised);
   color: #12381b;
   border: 1.5px solid rgba(27, 78, 38, 0.22);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -59,7 +59,7 @@
 }
 
 .back-button.back-button-on-banner:hover {
-  background: #ffffff;
+  background: var(--surface-raised);
   border-color: #2e7d32;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }

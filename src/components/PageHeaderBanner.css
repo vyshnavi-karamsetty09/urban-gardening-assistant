@@ -20,8 +20,8 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.98) 0%,
-    rgba(255, 255, 255, 0.92) 55%,
+    var(--surface-raised) 0%,
+    var(--surface-raised) 55%,
     rgba(255, 255, 255, 0.72) 82%,
     rgba(255, 255, 255, 0.52) 100%
   );
@@ -148,7 +148,7 @@
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.97) 0%,
-      rgba(255, 255, 255, 0.92) 65%,
+      var(--surface-raised) 65%,
       rgba(255, 255, 255, 0.75) 100%
     );
   }

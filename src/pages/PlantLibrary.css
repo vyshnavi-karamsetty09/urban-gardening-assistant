@@ -7,20 +7,21 @@
   width: 100%;
   min-height: 100vh;
   padding: 22px 28px 45px;
-  background: #f2f7f2;
-  color: #16321b;
+  background: var(--background);
+  color: var(--text-primary);
   box-sizing: border-box;
 }
 
 /* Header */
+
 .library-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   padding: 22px 26px;
-  background: #ffffff;
-  border: 1px solid #dce8dd;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 18px;
   margin-bottom: 18px;
   box-shadow: 0 4px 14px rgba(22, 48, 25, 0.035);
@@ -34,7 +35,7 @@
   display: block;
   font-size: 10px;
   font-weight: 800;
-  color: #2e7d32;
+  color: var(--primary);
   letter-spacing: 1.2px;
   margin-bottom: 4px;
 }
@@ -43,19 +44,20 @@
   margin: 0;
   font-size: 26px;
   font-weight: 800;
-  color: #15381f;
+  color: var(--text-primary);
   letter-spacing: -0.4px;
 }
 
 .library-subtitle {
   margin: 5px 0 0;
   font-size: 12px;
-  color: #627766;
+  color: var(--text-secondary);
   max-width: 600px;
   line-height: 1.4;
 }
 
 /* Search Box */
+
 .library-search-box {
   position: relative;
   width: 100%;
@@ -63,8 +65,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #f6faf6;
-  border: 1px solid #d4e4d7;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 24px;
   padding: 0 14px;
   height: 40px;
@@ -73,14 +75,14 @@
 }
 
 .library-search-box:focus-within {
-  background: #ffffff;
-  border-color: #235e2e;
+  background: var(--surface);
+  border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(35, 94, 46, 0.12);
 }
 
 .library-search-ico {
   font-size: 14px;
-  color: #697d6d;
+  color: var(--text-muted);
 }
 
 .library-search-box input {
@@ -89,14 +91,15 @@
   background: transparent;
   outline: none;
   font-size: 12px;
-  color: #16321b;
+  color: var(--text-primary);
 }
 
 .library-search-box input::placeholder {
-  color: #8c9f90;
+  color: var(--text-muted);
 }
 
 /* Filters Bar */
+
 .library-filters-bar {
   display: flex;
   align-items: center;
@@ -104,8 +107,8 @@
   gap: 16px;
   flex-wrap: wrap;
   padding: 12px 18px;
-  background: #ffffff;
-  border: 1px solid #e1ebe2;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 14px;
   margin-bottom: 20px;
 }
@@ -119,7 +122,7 @@
 .filter-group-label {
   font-size: 11px;
   font-weight: 700;
-  color: #556c59;
+  color: var(--text-secondary);
 }
 
 .filter-pills-row {
@@ -132,9 +135,9 @@
 .library-pill-btn {
   padding: 5px 12px;
   border-radius: 16px;
-  border: 1px solid #dce8dd;
-  background: #fbfdfb;
-  color: #3b5641;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
@@ -142,17 +145,18 @@
 }
 
 .library-pill-btn:hover {
-  background: #eef7f0;
-  color: #1a4d25;
+  background: var(--background);
+  color: var(--text-primary);
 }
 
 .library-pill-btn.active {
-  background: #184824;
-  color: #ffffff;
-  border-color: #184824;
+  background: var(--primary-dark);
+  color: var(--surface-raised);
+  border-color: var(--primary-dark);
 }
 
 /* Catalog Grid */
+
 .library-catalog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -160,8 +164,8 @@
 }
 
 .library-plant-card {
-  background: #ffffff;
-  border: 1px solid #dde7df;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
   display: flex;
@@ -173,7 +177,7 @@
   position: relative;
   width: 100%;
   height: 160px;
-  background: #f3f7f3;
+  background: var(--background);
   overflow: hidden;
 }
 
@@ -200,7 +204,7 @@
 }
 
 .lib-diff-badge.very-easy {
-  background: #ebf8ec;
+  background: var(--success-bg);
   color: #1b6d31;
   border: 1px solid #c8eccd;
 }
@@ -232,20 +236,20 @@
   margin: 0;
   font-size: 17px;
   font-weight: 700;
-  color: #15361d;
+  color: var(--text-primary);
 }
 
 .lib-botanical-name {
   display: block;
   font-size: 10px;
   font-style: italic;
-  color: #435e4a;
+  color: var(--text-secondary);
 }
 
 .lib-desc-snippet {
   margin: 6px 0 12px;
   font-size: 11px;
-  color: #37513d;
+  color: var(--text-secondary);
   line-height: 1.45;
 }
 
@@ -254,8 +258,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   padding: 10px 12px;
-  background: #f7faf7;
-  border: 1px solid #e7eee8;
+  background: var(--background);
+  border: 1px solid var(--border);
   border-radius: 12px;
   margin-bottom: 14px;
 }
@@ -269,14 +273,14 @@
 .lib-spec-item small {
   display: block;
   font-size: 9px;
-  color: #3a5641;
+  color: var(--text-secondary);
   font-weight: 600;
 }
 
 .lib-spec-item strong {
   display: block;
   font-size: 10px;
-  color: #183a20;
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -289,13 +293,15 @@
   margin-top: auto;
 }
 
+/* View Care Guide Button */
+
 .lib-details-btn {
   flex: 1;
   padding: 8px 12px;
-  border: 1px solid #d6e6d8;
+  border: 1px solid var(--border);
   border-radius: 10px;
-  background: #f1f7f2;
-  color: #1c572a;
+  background: var(--surface);
+  color: var(--text-primary);
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
@@ -303,8 +309,9 @@
 }
 
 .lib-details-btn:hover {
-  background: #1c572a;
-  color: #ffffff;
+  background: var(--primary);
+  color: var(--surface-raised);
+  border-color: var(--primary);
 }
 
 .lib-add-btn {
@@ -312,7 +319,7 @@
   border: 1px solid #235e2e;
   border-radius: 10px;
   background: #235e2e;
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
@@ -324,12 +331,13 @@
 }
 
 .lib-add-btn.added {
-  background: #edf7ef;
+  background: var(--success-bg);
   color: #236f33;
   border-color: #badcbe;
 }
 
 /* Modal Guide */
+
 .library-modal-backdrop {
   position: fixed;
   inset: 0;
@@ -345,8 +353,8 @@
 .library-modal-dialog {
   width: 100%;
   max-width: 540px;
-  background: #ffffff;
-  border: 1px solid #dce8dd;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 20px;
   box-shadow: 0 18px 45px rgba(10, 32, 15, 0.22);
   overflow: hidden;
@@ -357,27 +365,27 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 22px;
-  background: #f8faf8;
-  border-bottom: 1px solid #eef4ee;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
 }
 
 .modal-top-bar h2 {
   margin: 0;
   font-size: 18px;
   font-weight: 800;
-  color: #17381f;
+  color: var(--text-primary);
 }
 
 .botanical-sub {
   font-size: 11px;
   font-style: italic;
-  color: #3b5641;
+  color: var(--text-secondary);
 }
 
 .modal-close-ico {
   border: none;
   background: transparent;
-  color: #274b2f;
+  color: var(--text-secondary);
   font-size: 18px;
   cursor: pointer;
   padding: 4px 8px;
@@ -386,8 +394,8 @@
 }
 
 .modal-close-ico:hover {
-  background: #eaf3ea;
-  color: #12381b;
+  background: var(--background);
+  color: var(--text-primary);
 }
 
 .modal-guide-body {
@@ -402,7 +410,7 @@
   height: 180px;
   border-radius: 14px;
   overflow: hidden;
-  background: #f2f7f2;
+  background: var(--background);
 }
 
 .guide-hero-img {
@@ -429,7 +437,7 @@
 .guide-difficulty-tag {
   padding: 3px 8px;
   border-radius: 8px;
-  background: #e9f4fd;
+  background: var(--surface-subtle);
   color: #1c75b2;
   font-size: 10px;
   font-weight: 700;
@@ -438,7 +446,7 @@
 .guide-overview {
   margin: 0;
   font-size: 12px;
-  color: #35503b;
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
@@ -447,8 +455,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   padding: 10px 14px;
-  background: #f8faf8;
-  border: 1px solid #e7eee8;
+  background: var(--background);
+  border: 1px solid var(--border);
   border-radius: 12px;
   font-size: 11px;
 }
@@ -456,34 +464,34 @@
 .guide-vital-specs span {
   display: block;
   font-size: 9px;
-  color: #3d5843;
+  color: var(--text-secondary);
   font-weight: 600;
 }
 
 .guide-vital-specs strong {
   display: block;
   font-size: 11px;
-  color: #16361d;
+  color: var(--text-primary);
 }
 
 .guide-expert-tip {
   padding: 10px 14px;
-  background: #fbfdf9;
-  border-left: 3px solid #2e7d32;
+  background: var(--background);
+  border-left: 3px solid var(--primary);
   border-radius: 0 10px 10px 0;
 }
 
 .guide-expert-tip strong {
   display: block;
   font-size: 11px;
-  color: #235e2e;
+  color: var(--text-primary);
   margin-bottom: 2px;
 }
 
 .guide-expert-tip p {
   margin: 0;
   font-size: 11px;
-  color: #576d5b;
+  color: var(--text-secondary);
   line-height: 1.4;
 }
 
@@ -499,7 +507,7 @@
   border: none;
   border-radius: 10px;
   background: #1b5327;
-  color: #ffffff;
+  color: var(--surface-raised);
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
@@ -528,19 +536,119 @@
   .plant-library-page {
     padding: 16px 14px 40px;
   }
+
   .library-header {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .library-search-box {
     max-width: 100%;
   }
+
   .library-filters-bar {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .library-catalog-grid {
     grid-template-columns: 1fr;
   }
 }
 
+/* Cross-theme/search and care-guide stability fixes */
+.library-search-box input,
+.library-search-box input[type="search"] {
+  background: transparent !important;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.library-search-box {
+  overflow: hidden;
+}
+.library-modal-backdrop {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.library-modal-dialog {
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.guide-vital-specs {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (max-width: 768px) {
+  .library-modal-backdrop { padding: 10px; align-items: flex-start; }
+  .library-modal-dialog { max-height: calc(100dvh - 20px); margin: auto 0; border-radius: 14px; }
+  .modal-guide-body { padding: 14px; }
+  .guide-vital-specs { grid-template-columns: 1fr; }
+  .lib-card-actions { flex-direction: column; align-items: stretch; }
+  .lib-details-btn, .lib-add-btn { width: 100%; }
+}
+
+/* V9 care-guide modal visibility/stacking and mobile reliability. */
+.library-modal-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 5000 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow-y: auto !important;
+  padding: 20px !important;
+  background: rgba(8, 20, 10, 0.62) !important;
+}
+.library-modal-dialog {
+  position: relative !important;
+  z-index: 5001 !important;
+  max-height: min(760px, calc(100dvh - 32px)) !important;
+  overflow-y: auto !important;
+  flex: 0 1 auto;
+}
+html[data-theme="dark"] .library-modal-dialog {
+  background: var(--surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+html[data-theme="dark"] .modal-top-bar { background: var(--surface-subtle) !important; }
+html[data-theme="dark"] .modal-top-bar h2,
+html[data-theme="dark"] .botanical-sub,
+html[data-theme="dark"] .guide-overview,
+html[data-theme="dark"] .guide-vital-specs span,
+html[data-theme="dark"] .guide-vital-specs strong,
+html[data-theme="dark"] .guide-expert-tip,
+html[data-theme="dark"] .guide-expert-tip strong,
+html[data-theme="dark"] .guide-expert-tip p {
+  color: var(--text-primary) !important;
+}
+html[data-theme="dark"] .guide-vital-specs,
+html[data-theme="dark"] .guide-expert-tip {
+  background: var(--surface-subtle) !important;
+  border-color: var(--border) !important;
+}
+html[data-theme="dark"] .modal-close-ico { color: var(--text-secondary) !important; }
+@media (max-width: 768px) {
+  .library-modal-backdrop { padding: 10px !important; align-items: flex-start !important; }
+  .library-modal-dialog { width: 100% !important; max-width: 540px !important; max-height: calc(100dvh - 20px) !important; margin: 10px 0 !important; }
+  .guide-hero-img-wrap { height: 150px; }
+}
+
+
+/* Shared plant care summary used by every plant card */
+.lib-specs-grid {
+  margin-top: 2px;
+}
+.library-care-guide-scroll {
+  max-height: min(78vh, 760px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+@media (max-width: 640px) {
+  .library-care-guide-scroll {
+    max-height: calc(100dvh - 120px);
+    padding: 14px;
+  }
+  .lib-specs-grid { grid-template-columns: 1fr; gap: 7px; }
+}

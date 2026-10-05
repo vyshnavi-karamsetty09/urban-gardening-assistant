@@ -9,8 +9,55 @@ export const STORAGE_KEYS = {
   notificationInbox: "gardenGuideNotificationInbox",
   notificationPrefs: "gardenGuideNotifications",
   preferences: "gardenGuidePreferences",
+  assistantChat: "gardenGuideAssistantChat",
   activeUserId: "gardenGuideActiveUserId",
+  theme: "gardenGuideTheme",
 };
+
+// Workspace data is namespaced by the authenticated user's id. This keeps
+// browser caches isolated without forcing us to wipe the user's data on logout.
+const USER_SCOPED_STORAGE_KEYS = new Set([
+  STORAGE_KEYS.user,
+  STORAGE_KEYS.environment,
+  STORAGE_KEYS.plants,
+  STORAGE_KEYS.tasks,
+  STORAGE_KEYS.notificationInbox,
+  STORAGE_KEYS.notificationPrefs,
+  STORAGE_KEYS.preferences,
+  STORAGE_KEYS.assistantChat,
+]);
+
+export function getActiveUserId() {
+  try {
+    return String(localStorage.getItem(STORAGE_KEYS.activeUserId) || "").trim();
+  } catch {
+    return "";
+  }
+}
+
+export function getUserStorageKey(key, userId = getActiveUserId()) {
+  if (!USER_SCOPED_STORAGE_KEYS.has(key)) return key;
+  const normalizedId = String(userId || "").trim();
+  return normalizedId ? `${key}:${normalizedId}` : null;
+}
+
+function readJsonValue(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw == null ? fallback : JSON.parse(raw);
+  } catch {
+    return fallback;
+  }
+}
+
+function writeJsonValue(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 export const DEMO_ACCOUNT_EMAIL = "demo@gardenguide.local";
 
@@ -70,25 +117,31 @@ export function isEnvironmentConfigured(env) {
 }
 
 export function readStoredEnvironment() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEYS.environment);
-    if (!raw) return { ...EMPTY_ENVIRONMENT };
-    const parsed = JSON.parse(raw);
-    if (!parsed || typeof parsed !== "object") return { ...EMPTY_ENVIRONMENT };
-    if (parsed.configured === true) {
-      return { ...EMPTY_ENVIRONMENT, ...parsed, configured: true };
-    }
-    return { ...EMPTY_ENVIRONMENT };
-  } catch {
+  const parsed = readStorage(STORAGE_KEYS.environment, null);
+  if (!parsed || typeof parsed !== "object" || parsed.configured !== true) {
     return { ...EMPTY_ENVIRONMENT };
   }
+  return { ...EMPTY_ENVIRONMENT, ...parsed, configured: true };
 }
 
 export function markEnvironmentConfigured(env) {
   return { ...EMPTY_ENVIRONMENT, ...env, configured: true };
 }
 
-export function clearClientWorkspace() {
+// Logout clears legacy unscoped keys and transient identity state, but leaves
+// each user's namespaced garden cache intact for the next login.
+export function clearClientWorkspace({ clearSession = false } = {}) {
+  // Remove the currently active account's scoped session first so a later
+  // login cannot inherit stale profile identity from this account.
+  try {
+    const activeUserId = getActiveUserId();
+    const scopedSession = getUserStorageKey(STORAGE_KEYS.session, activeUserId);
+    if (scopedSession) localStorage.removeItem(scopedSession);
+    localStorage.removeItem(STORAGE_KEYS.activeUserId);
+  } catch {
+    // Ignore storage failures.
+  }
+
   [
     STORAGE_KEYS.user,
     STORAGE_KEYS.environment,
@@ -97,17 +150,64 @@ export function clearClientWorkspace() {
     STORAGE_KEYS.notificationInbox,
     STORAGE_KEYS.notificationPrefs,
     STORAGE_KEYS.preferences,
-  ].forEach((key) => localStorage.removeItem(key));
+  ].forEach((key) => {
+    try {
+      localStorage.removeItem(key);
+    } catch {
+      // Ignore storage failures.
+    }
+  });
+
+  if (clearSession) {
+    try {
+      localStorage.removeItem(STORAGE_KEYS.session);
+    } catch {
+      // Remove any legacy unscoped session left by older versions.
+    }
+  }
 }
 
-export function ensureWorkspaceForUser(userId) {
-  const id = userId ? String(userId) : "";
-  const last = localStorage.getItem(STORAGE_KEYS.activeUserId);
-  if (last && id && last !== id) {
-    clearClientWorkspace();
+export function ensureWorkspaceForUser(userOrId) {
+  const id = userOrId && typeof userOrId === "object"
+    ? (userOrId.id || userOrId._id || userOrId.email || "")
+    : userOrId;
+  const normalizedId = id ? String(id) : "";
+  const previousId = getActiveUserId();
+
+  // Migrate legacy browser cache only when we can prove it belonged to the
+  // same active user. Never copy ambiguous data into another account.
+  if (normalizedId && previousId === normalizedId) {
+    [
+      STORAGE_KEYS.user,
+      STORAGE_KEYS.environment,
+      STORAGE_KEYS.plants,
+      STORAGE_KEYS.tasks,
+      STORAGE_KEYS.notificationInbox,
+      STORAGE_KEYS.notificationPrefs,
+      STORAGE_KEYS.preferences,
+      STORAGE_KEYS.assistantChat,
+    ].forEach((key) => {
+      const scopedKey = getUserStorageKey(key, normalizedId);
+      try {
+        if (scopedKey && localStorage.getItem(scopedKey) == null) {
+          const legacy = localStorage.getItem(key);
+          if (legacy != null) {
+            localStorage.setItem(scopedKey, legacy);
+            localStorage.removeItem(key);
+          }
+        }
+      } catch {
+        // Ignore migration failures; the API remains authoritative.
+      }
+    });
   }
-  if (id) localStorage.setItem(STORAGE_KEYS.activeUserId, id);
-  else localStorage.removeItem(STORAGE_KEYS.activeUserId);
+
+  try {
+    if (normalizedId) localStorage.setItem(STORAGE_KEYS.activeUserId, normalizedId);
+    else localStorage.removeItem(STORAGE_KEYS.activeUserId);
+  } catch {
+    // Ignore storage failures.
+  }
 }
 
 export function getNotificationInbox() {
@@ -119,246 +219,6 @@ export function saveNotificationInbox(items) {
   writeStorage(STORAGE_KEYS.notificationInbox, Array.isArray(items) ? items : []);
 }
 
-export function getPastDate(daysAgo) {
-  const d = new Date();
-  d.setDate(d.getDate() - daysAgo);
-  return d.toISOString().split("T")[0];
-}
-
-export const defaultPlants = [
-  {
-    id: 1,
-    name: "Tomato",
-    type: "Vegetable",
-    emoji: "🍅",
-    status: "Healthy",
-    statusType: "healthy",
-    sunlight: "6–8 hrs",
-    water: "Daily",
-    watered: "Watered Today",
-    moisture: 80,
-    plantedDate: getPastDate(38),
-    growthDays: 75,
-    growthTime: "60–85 days",
-    harvestAdvice: "Harvest when tomatoes turn uniformly rich red and yield slightly to a gentle squeeze.",
-    harvestType: "single",
-    image: getPlantImage("Tomato"),
-  },
-  {
-    id: 2,
-    name: "Mint",
-    type: "Herb",
-    emoji: "🌿",
-    status: "Healthy",
-    statusType: "healthy",
-    sunlight: "4–6 hrs",
-    water: "Daily",
-    watered: "Watered Today",
-    moisture: 85,
-    plantedDate: getPastDate(20),
-    growthDays: 25,
-    growthTime: "20–30 days",
-    harvestAdvice: "Snip sprigs 1 inch above soil level. Fresh shoots regenerate rapidly within 10–14 days.",
-    harvestType: "continuous",
-    image: getPlantImage("Mint"),
-  },
-  {
-    id: 3,
-    name: "Rose",
-    type: "Flower",
-    emoji: "🌹",
-    status: "Needs Water",
-    statusType: "warning",
-    sunlight: "6–8 hrs",
-    water: "Daily",
-    watered: "Water last: 2 days ago",
-    moisture: 30,
-    plantedDate: getPastDate(42),
-    growthDays: 50,
-    growthTime: "45–60 days",
-    harvestAdvice: "Cut flower stems early morning at 45° angle when outer petals begin loosening.",
-    harvestType: "repeat-bloom",
-    image: getPlantImage("Rose"),
-  },
-  {
-    id: 4,
-    name: "Basil (Tulsi)",
-    type: "Herb",
-    emoji: "🌱",
-    status: "Healthy",
-    statusType: "healthy",
-    sunlight: "4–6 hrs",
-    water: "2–3 times/wk",
-    watered: "Watered Today",
-    moisture: 75,
-    plantedDate: getPastDate(28),
-    growthDays: 35,
-    growthTime: "30–45 days",
-    harvestAdvice: "Pinch top 2-3 leaf pairs regularly. Stimulates continuous bushiness and fresh medicinal leaves.",
-    harvestType: "continuous",
-    image: getPlantImage("Basil"),
-  },
-  {
-    id: 5,
-    name: "Aloe Vera",
-    type: "Succulent",
-    emoji: "🌵",
-    status: "Healthy",
-    statusType: "healthy",
-    sunlight: "4–6 hrs",
-    water: "1–2 times/week",
-    watered: "Watered Yesterday",
-    moisture: 90,
-    plantedDate: getPastDate(65),
-    growthDays: 75,
-    growthTime: "60–90 days",
-    harvestAdvice: "Slice thick, fleshy bottom outer leaves flush with trunk using a clean sharp knife for soothing gel.",
-    harvestType: "continuous",
-    image: getPlantImage("Aloe Vera"),
-  },
-  {
-    id: 6,
-    name: "Curry Leaf",
-    type: "Herb",
-    emoji: "🍃",
-    status: "Healthy",
-    statusType: "healthy",
-    sunlight: "6–8 hrs",
-    water: "Daily",
-    watered: "Watered Today",
-    moisture: 70,
-    plantedDate: getPastDate(42),
-    growthDays: 45,
-    growthTime: "40–60 days",
-    harvestAdvice: "Snip entire compound leaflets at stem base. Regular pruning keeps shrub bushy and aromatic.",
-    harvestType: "continuous",
-    image: getPlantImage("Curry Leaf"),
-  },
-];
-
-export const defaultTasks = [
-  {
-    id: 1,
-    title: "Deep Root Watering for Tomato",
-    plantName: "Tomato",
-    plantType: "Vegetable",
-    plantEmoji: "🍅",
-    plantImage: getPlantImage("Tomato"),
-    description: "Pour 400ml lukewarm water at the stem base, keeping foliage dry to prevent blight.",
-    time: "07:30 AM",
-    completed: false,
-    type: "water",
-    icon: "💧",
-    iconClass: "water",
-    priority: "High",
-    frequency: "Daily (Morning)",
-    why: "Tomatoes need deep consistent moisture during flowering & fruiting to prevent blossom-end rot and fruit cracking. Wet leaves encourage fungal blight.",
-    how: [
-      "Check top 2 inches of soil: if dry to the touch, water deeply.",
-      "Direct water gently around the stem base; avoid splashing soil onto leaves.",
-      "Stop when water begins trickling out of bottom drainage holes."
-    ],
-    tools: "Narrow-spout watering can, moisture meter or finger test",
-    weatherNote: "Best completed before 9:00 AM before afternoon sun causes rapid evaporation."
-  },
-  {
-    id: 2,
-    title: "Deadheading Spent Blooms on Rose",
-    plantName: "Rose",
-    plantType: "Flower",
-    plantEmoji: "🌹",
-    plantImage: getPlantImage("Rose"),
-    description: "Snip faded flowers 1/4 inch above the first 5-leaflet outward-facing leaf node.",
-    time: "09:00 AM",
-    completed: false,
-    type: "prune",
-    icon: "✂️",
-    iconClass: "prune",
-    priority: "Medium",
-    frequency: "Every 3–4 Days",
-    why: "Removing spent flowers redirects the plant's metabolic energy from seed/hip production back into forming vibrant new flower buds and strong cane growth.",
-    how: [
-      "Sterilize pruning shears with rubbing alcohol or dilute soapy water.",
-      "Locate a healthy leaf node with 5 leaflets that points outward from the bush center.",
-      "Cut at a 45-degree angle slanting away from the bud, roughly 6mm (1/4\") above it."
-    ],
-    tools: "Bypass pruning shears, gardening gloves",
-    weatherNote: "Prune on dry sunny mornings so the cut seals quickly against spores."
-  },
-  {
-    id: 3,
-    title: "Liquid Organic Feed for Mint",
-    plantName: "Mint",
-    plantType: "Herb",
-    plantEmoji: "🌿",
-    plantImage: getPlantImage("Mint"),
-    description: "Apply 1/2 strength seaweed extract or vermicompost tea to stimulate leafy foliage.",
-    time: "10:30 AM",
-    completed: false,
-    type: "fertilizer",
-    icon: "🌱",
-    iconClass: "fertilizer",
-    priority: "Medium",
-    frequency: "Bi-weekly",
-    why: "Mint is a fast-growing vegetative herb. Nitrogen-rich organic liquid feed boosts essential oil production and lush green leaf development without burning tender feeder roots.",
-    how: [
-      "Dilute seaweed or compost tea to half recommended strength (light amber color).",
-      "Moisten the soil lightly with plain water first (never fertilize bone-dry soil).",
-      "Drench the soil evenly around the pot rim."
-    ],
-    tools: "Liquid organic seaweed extract / compost tea, measuring cap",
-    weatherNote: "Avoid midday heat during fertilization to prevent root shock."
-  },
-  {
-    id: 4,
-    title: "Drought & Drainage Check on Aloe Vera",
-    plantName: "Aloe Vera",
-    plantType: "Succulent",
-    plantEmoji: "🌵",
-    plantImage: getPlantImage("Aloe Vera"),
-    description: "Test bottom soil dryness with a wooden skewer. Do NOT water if moisture is detected.",
-    time: "04:30 PM",
-    completed: false,
-    type: "moisture",
-    icon: "🪣",
-    iconClass: "moisture",
-    priority: "Low",
-    frequency: "Once every 10–14 Days",
-    why: "Aloe vera stores abundant gel in its fleshy leaves. Overwatering causes root rot, fungal collar rot, and soft translucent leaves. Soil must dry out 100% between waterings.",
-    how: [
-      "Insert a wooden chopstick or skewer 3 inches deep near the root zone.",
-      "Withdraw the stick: if dry and clean with no soil clinging, it's ready for water.",
-      "If cool or damp, postpone watering for another 4–5 days."
-    ],
-    tools: "Wooden moisture skewer or probe",
-    weatherNote: "Aloes thrive in warm, well-ventilated dry air. Ensure drainage saucer is empty."
-  },
-  {
-    id: 5,
-    title: "Neem Oil Spray & Foliar Inspect on Curry Leaf",
-    plantName: "Curry Leaf",
-    plantType: "Herb",
-    plantEmoji: "🍃",
-    plantImage: getPlantImage("Curry Leaf"),
-    description: "Inspect leaf undersides for psyllids or mites; spray dilute neem oil solution.",
-    time: "05:30 PM",
-    completed: false,
-    type: "prune",
-    icon: "🌿",
-    iconClass: "prune",
-    priority: "High",
-    frequency: "Weekly",
-    why: "Curry leaf shrubs are prone to citrus psyllids and scale insects. Regular inspection and organic neem mist keep leaves pest-free and fragrant for culinary use.",
-    how: [
-      "Mix 5ml cold-pressed neem oil + 2 drops mild dish soap into 1 liter warm water.",
-      "Shake bottle thoroughly to emulsify.",
-      "Spray undersides of leaves and young shoot tips until lightly dripping."
-    ],
-    tools: "Fine-mist spray bottle, cold-pressed organic neem oil",
-    weatherNote: "Apply exclusively in late evening/sunset so sun does not scorch wet oiled leaves."
-  }
-];
-
 export const recommendationPlants = [
   { name: "Snake Plant", type: "Indoor Plant", emoji: "🌿", sunlight: "Low Light", water: "1–2 times/week", difficulty: "Easy", minSun: 0, maxSun: 5, spaces: ["Small", "Medium", "Large"], locations: ["Indoor", "Balcony"], climates: ["Tropical", "Subtropical", "Temperate", "Arid / Dry"] },
   { name: "Tulsi", type: "Herb", emoji: "🌱", sunlight: "High Light", water: "3–4 times/week", difficulty: "Easy", minSun: 4, maxSun: 8, spaces: ["Small", "Medium", "Large"], locations: ["Balcony", "Terrace", "Indoor"], climates: ["Tropical", "Subtropical"] },
@@ -369,16 +229,25 @@ export const recommendationPlants = [
 ];
 
 export function readStorage(key, fallback) {
-  try {
-    const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : fallback;
-  } catch {
-    return fallback;
-  }
+  const scopedKey = getUserStorageKey(key);
+  if (USER_SCOPED_STORAGE_KEYS.has(key) && !scopedKey) return fallback;
+  return readJsonValue(scopedKey || key, fallback);
 }
 
 export function writeStorage(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
+  const scopedKey = getUserStorageKey(key);
+  if (USER_SCOPED_STORAGE_KEYS.has(key) && !scopedKey) return false;
+  return writeJsonValue(scopedKey || key, value);
+}
+
+export function removeStorage(key) {
+  const scopedKey = getUserStorageKey(key);
+  try {
+    localStorage.removeItem(scopedKey || key);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function getPlantGrowthInfo(plant) {
@@ -415,12 +284,12 @@ export function getPlantGrowthInfo(plant) {
     }
   } else if (typeof plant.daysPlanted === "number") {
     daysInGarden = plant.daysPlanted;
-  } else {
-    daysInGarden = Math.min(growthDays - 5, (Number(plant.id || 1) % 30) + 15);
   }
 
   const daysToHarvest = Math.max(0, growthDays - daysInGarden);
-  const progressPct = Math.min(100, Math.max(5, Math.round((daysInGarden / growthDays) * 100)));
+  const progressPct = daysInGarden > 0
+    ? Math.min(100, Math.max(0, Math.round((daysInGarden / growthDays) * 100)))
+    : 0;
 
   const harvestDate = new Date();
   harvestDate.setDate(harvestDate.getDate() + daysToHarvest);
@@ -440,14 +309,6 @@ export function getPlantGrowthInfo(plant) {
         year: "numeric",
       });
     }
-  } else {
-    const pDate = new Date();
-    pDate.setDate(pDate.getDate() - daysInGarden);
-    plantedDateFormatted = pDate.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
   }
 
   const isReady = daysInGarden >= growthDays || daysToHarvest <= 0;
@@ -485,25 +346,16 @@ export function getPlantGrowthInfo(plant) {
 }
 
 export function getSavedPlants() {
-  let plants;
-  try {
-    const raw = localStorage.getItem(STORAGE_KEYS.plants);
-plants = raw === null ? [] : JSON.parse(raw);
-  } catch {
-    plants = [];
-  }
+  const plants = readStorage(STORAGE_KEYS.plants, []);
 
   if (Array.isArray(plants) && plants.length > 0) {
-    return plants.map((p, idx) => {
+    return plants.map((p) => {
       const meta = getPlantGrowthMeta(p.name || "", p.type || "");
-      const def = defaultPlants.find(
-        (dp) => dp.id === p.id || dp.name.toLowerCase() === (p.name || "").toLowerCase()
-      );
-      const growthDays = Number(p.growthDays) || def?.growthDays || meta.growthDays || 60;
-      const growthTime = p.growthTime || def?.growthTime || meta.growthTime || `${growthDays} days`;
-      const plantedDate = p.plantedDate || def?.plantedDate || getPastDate(Math.min(growthDays - 5, 20 + ((idx * 7) % 35)));
-      const harvestAdvice = p.harvestAdvice || def?.harvestAdvice || meta.harvestAdvice || "Harvest when mature.";
-      const harvestType = p.harvestType || def?.harvestType || meta.harvestType || "continuous";
+      const growthDays = Number(p.growthDays) || meta.growthDays || 60;
+      const growthTime = p.growthTime || meta.growthTime || `${growthDays} days`;
+      const plantedDate = p.plantedDate || null;
+      const harvestAdvice = p.harvestAdvice || meta.harvestAdvice || "Harvest when mature.";
+      const harvestType = p.harvestType || meta.harvestType || "continuous";
 
       return {
         ...p,

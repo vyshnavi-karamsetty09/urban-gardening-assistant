@@ -1,0 +1,4059 @@
+/* Dark Mode Compatibility Layer — generated from all page/component CSS. Loaded last. */
+html[data-theme="dark"] {
+  --dark-surface: var(--surface);
+  --dark-surface-2: var(--surface-hover);
+  --dark-surface-3: var(--border-strong);
+  --dark-text: var(--text-primary);
+  --dark-text-soft: var(--text-secondary);
+  --dark-text-muted: var(--text-muted);
+  --dark-border: var(--border);
+  --dark-accent-strong: var(--primary);
+}
+html[data-theme="dark"] .app {
+  background: radial-gradient(circle at 8% 12%, var(--dark-surface-2), transparent 35%),
+              radial-gradient(circle at 92% 85%, var(--dark-surface-2), transparent 45%),
+              var(--background) !important;
+}
+html[data-theme="dark"] .placeholder-page p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] ::selection {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--dark-surface-3) !important;
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-surface-3) !important;
+}
+html[data-theme="dark"] .logout-modal {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .logout-modal-icon {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .logout-modal h2 {
+  color: #9cc7ef !important;
+}
+html[data-theme="dark"] .logout-modal p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .logout-cancel-btn {
+  background: var(--dark-surface) !important;
+  color: #9cc7ef !important;
+}
+html[data-theme="dark"] .btn-shimmer::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--dark-surface),
+    transparent
+  ) !important;
+}
+html[data-theme="dark"] .dash-hero-title {
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .dash-hero-sub {
+  color: #d1ead4 !important;
+}
+html[data-theme="dark"] .dash-hero-quote-card {
+  color: #e6f0e7 !important;
+}
+html[data-theme="dark"] .dash-hero-quote-card .quote-text,
+html[data-theme="dark"] .dash-hero-quote-card .quote-mark {
+  color: #e6f0e7 !important;
+}
+html[data-theme="dark"] .dashboard-page {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .dash-hero-badge {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .dash-hero-quote-card {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .metric-green {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .metric-coral {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .metric-blue {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .metric-purple {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .metric-icon-circle.green {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .metric-icon-circle.coral {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .metric-icon-circle.blue {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .metric-icon-circle.purple {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .metric-value {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .metric-label {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .metric-green .metric-arrow {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .metric-coral .metric-arrow {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .metric-blue .metric-arrow {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .metric-purple .metric-arrow {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .dash-panel {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .panel-title {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .panel-subtitle {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .panel-link-btn {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .panel-link-btn:hover {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .recommended-panel.rec-standalone-top {
+  background: linear-gradient(135deg, var(--dark-surface) 0%, var(--dark-surface) 100%) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-top-eyebrow {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .rec-featured-banner {
+  background: radial-gradient(circle at 3% 50%, var(--dark-surface-2) 0%, transparent 35%),
+              radial-gradient(circle at 97% 50%, var(--dark-surface-2) 0%, transparent 35%),
+              linear-gradient(135deg, var(--dark-surface) 0%, var(--dark-surface) 40%, var(--dark-surface) 60%, var(--dark-surface) 100%) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-nav-arrow-btn {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-nav-arrow-btn:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-banner-plant-name {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-banner-growth-badge {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .rec-banner-tagline {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-banner-desc {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .spec-meta .spec-label {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .spec-meta .spec-val {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-banner-spec-divider {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .rec-banner-dot {
+  background: var(--dark-surface-3) !important;
+}
+html[data-theme="dark"] .rec-modal-dialog {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-modal-header {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .rec-modal-title {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-modal-badge {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .rec-modal-close-btn {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .rec-modal-close-btn:hover {
+  background: var(--dark-surface-2) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-modal-hero {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .rec-modal-match-pill {
+  color: var(--dark-text-soft) !important;
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-modal-season-pill {
+  color: #a9d7ae !important;
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-modal-desc {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .rec-modal-spec-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-modal-spec-label {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .rec-modal-spec-val {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-modal-cancel-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-modal-cancel-btn:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .tasks-nav-tab {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .tasks-nav-tab:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .tasks-nav-tab .tab-badge {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .tasks-nav-tab:not(.active) .tab-badge {
+  background: var(--dark-surface-2) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .tasks-scroll-list::-webkit-scrollbar-track {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .tasks-scroll-list::-webkit-scrollbar-thumb {
+  background: #1e3a24 !important;
+}
+html[data-theme="dark"] .tasks-scroll-list::-webkit-scrollbar-thumb:hover {
+  background: #1e3a24 !important;
+}
+html[data-theme="dark"] .tasks-empty-state {
+  background: var(--dark-surface) !important;
+  border: 1px dashed var(--dark-border) !important;
+}
+html[data-theme="dark"] .tasks-empty-state .empty-text {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .task-row {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .task-row.completed {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .task-row-icon.water {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .task-row-icon.fertilizer {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .task-row-icon.prune {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .task-row-icon.moisture {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .task-row-title {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .task-row-sub {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .task-row-time {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .dark-weather-alert {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .garden-nav-tab {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .garden-nav-tab:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .garden-cards-row::-webkit-scrollbar-track {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .garden-cards-row::-webkit-scrollbar-thumb {
+  background: #1e3a24 !important;
+}
+html[data-theme="dark"] .garden-plant-thumb-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .plant-thumb-name {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .plant-status-badge.healthy {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .plant-status-badge.growing {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .garden-add-card {
+  border: 1.5px dashed var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .garden-add-icon {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .garden-add-label {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .garden-add-card:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .tip-title {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .tip-desc {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .tip-dot {
+  background: #1e3a24 !important;
+}
+html[data-theme="dark"] .quick-action-tile {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .action-tile-icon.green {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .action-tile-icon.coral {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .action-tile-icon.mint {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .action-tile-icon.purple {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .action-tile-text strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .action-tile-text small {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .auth-terms-note {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .detection-eyebrow {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .secondary-btn {
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .secondary-btn:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .detection-nav-tabs {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .tab-btn {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .tab-btn:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .clear-link-btn {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .clear-link-btn:hover {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .dropzone-area:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .dropzone-btn {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .scan-laser-line {
+  background: #1e3a24 !important;
+}
+html[data-theme="dark"] .scan-status-badge {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .change-photo-btn {
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .change-photo-btn:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .sample-title {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .sample-chip {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .sample-chip:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .sample-chip.active {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .sample-chip-img {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .sample-chip-text strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .sample-chip-text small {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .empty-result-placeholder {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .empty-result-placeholder h4 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .tip-box {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .tip-box strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .spinner {
+  border: 4px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .scanning-loading-state h4 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .scanning-loading-state p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .common-subtitle {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .confidence-badge {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .confidence-badge strong {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .confidence-badge small {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .report-visual-banner {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .report-visual-info h4 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .visual-symptom-tag {
+  border: 1px solid var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .visual-caption {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .meta-stat {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .meta-stat span {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .meta-stat strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .severity-tag.mild {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .severity-tag.moderate {
+  background: var(--dark-surface-2) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .severity-tag.severe {
+  background: var(--dark-surface-2) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .report-section {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .report-section h4 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .report-section p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .treatment-protocol-header h3 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .treatment-protocol-header p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .treatment-priority-badge {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .treatment-step-card {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .treatment-step-card.step-emergency {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .step-emergency .step-type {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .step-emergency .step-body p {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .treatment-step-card.step-organic.highlighted-remedy {
+  background: linear-gradient(180deg, var(--dark-surface) 0%, var(--dark-surface) 100%) !important;
+}
+html[data-theme="dark"] .step-organic .step-type {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .remedy-highlight-text {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .remedy-highlight-pill {
+  border: 1px solid var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .treatment-step-card.step-chemical {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .step-chemical .step-type {
+  color: #9cc7ef !important;
+}
+html[data-theme="dark"] .step-chemical .step-body p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .treatment-step-card.step-prevention {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .step-prevention .step-type {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .step-prevention .step-body p {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .integration-action-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .integration-action-card h4 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .integration-action-card p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .plant-select-wrap label {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .plant-select-wrap select {
+  border: 1px solid var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .success-toast {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .wizard-sidebar::-webkit-scrollbar-thumb {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .symptom-nav-eyebrow {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .symptom-counter-badge {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .symptom-reset-btn {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .symptom-reset-btn:hover {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .symptom-search-box {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .symptom-search-icon {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .symptom-search-box input {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .symptom-category-navbar::-webkit-scrollbar-thumb {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .symptom-nav-tab {
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .symptom-nav-tab:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .presets-hint {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .preset-card:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .preset-card.applied {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .preset-info strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .preset-info small {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .preset-badge {
+  background: var(--dark-surface-2) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .preset-tag {
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .empty-symptoms-state {
+  background: var(--dark-surface) !important;
+  border: 1px dashed var(--dark-border) !important;
+}
+html[data-theme="dark"] .empty-symptoms-state small {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .clear-query-link {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .filter-label {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .chip-btn {
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .chip-btn:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .symptom-toggle {
+  border: 1px solid var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .symptom-toggle:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .symptom-toggle.selected {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .checkbox-dot {
+  background: var(--dark-surface-2) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .diagnosis-navbar {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .matches-scroll-pane::-webkit-scrollbar-track {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .matches-scroll-pane::-webkit-scrollbar-thumb {
+  background: #1e3a24 !important;
+}
+html[data-theme="dark"] .matches-scroll-pane::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-surface-3) !important;
+}
+html[data-theme="dark"] .diag-nav-eyebrow {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .diag-count-pill {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .diag-search-box {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .diag-search-icon {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .diag-sort-box {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .diag-sort-box select {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .diag-view-toggle {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .diag-view-btn {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .diag-tab-btn {
+  border: 1px solid var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .diag-tab-btn:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .diag-tab-btn.active .diag-tab-count {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .active-label {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .active-sym-tag {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .active-sym-tag:hover {
+  background: var(--dark-surface-2) !important;
+  border-color: var(--dark-border) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .sym-remove {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .active-sym-tag:hover .sym-remove {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .diag-clear-all-btn {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .match-alias {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .symptoms-tags .tag {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .symptoms-tags .tag.matched {
+  background: var(--dark-surface-2) !important;
+  border-color: var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .match-treatment-box {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .treatment-row strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .treatment-row p {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .treatment-row.organic-highlight {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .treatment-row.organic-highlight strong {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .outline-sm-btn {
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .outline-sm-btn:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .no-matches-card {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .cat-pill {
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .cat-pill:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .library-card h3 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .lib-common-name {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .lib-label {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .lib-section p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .lib-bullet-list {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .lib-treatment-highlight {
+  background: linear-gradient(180deg, var(--dark-surface) 0%, var(--dark-surface) 100%) !important;
+  border: 1.5px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .lib-treatment-highlight .remedy-highlight-text {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .prevention-block {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .prevention-tips-banner {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .banner-content h3 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .banner-tips-grid strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .banner-tips-grid p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .tool-page {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .tool-eyebrow {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .tool-header h1 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .tool-header p:not(.tool-eyebrow) {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .tool-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .assistant-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .tool-card h2 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .tool-card-head p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .scheduler-item {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .scheduler-icon {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .scheduler-item strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .scheduler-item small {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .scheduler-item time {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .health-option {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .health-option strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .health-option.selected {
+  border-color: var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .health-result {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .health-result p:last-child {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .assistant-message.assistant {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .assistant-input input {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .quick-prompts button {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .quick-prompts button:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .landing-page .btn-signin {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .btn-signin {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .landing-page .btn-signin:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .btn-signin:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .hamburger-bar {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .hamburger-bar::before {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .hamburger-bar::after {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .hero-pill-badge {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .landing-page .hero-btn-outline {
+  border: 1.5px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .hero-btn-outline {
+  border: 1.5px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .landing-page .hero-btn-outline:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .hero-btn-outline:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .features-section {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .feature-card {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .feature-card:hover {
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .icon-bg-green {
+  background-color: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .icon-bg-sun {
+  background-color: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .icon-bg-leaf {
+  background-color: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .icon-bg-community {
+  background-color: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .how-it-works-section {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .journey-card-container {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .quote-accent-bar {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .popular-plants-section {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .plant-showcase-card {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .plant-image-wrap {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .plant-difficulty-tag {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .landing-page .btn-view-all-plants {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .btn-view-all-plants {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .landing-page .btn-view-all-plants:hover {
+  background: var(--dark-surface-2) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .btn-view-all-plants:hover {
+  background: var(--dark-surface-2) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .cta-banner-section {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .landing-page .btn-cta-secondary {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .btn-cta-secondary {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .landing-page .btn-cta-secondary:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .btn-cta-secondary:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .banner-overlay {
+  background: linear-gradient(
+    90deg,
+    var(--dark-surface) 0%,
+    var(--dark-surface) 45%,
+    var(--dark-surface) 75%,
+    transparent 100%
+  ) !important;
+}
+html[data-theme="dark"] .banner-title {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .banner-greeting {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .banner-subtitle {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .banner-quote-badge {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .banner-quote-badge span {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .metric-icon-circle.mint {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .metric-big-num {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .metric-sub {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .metric-circle-progress.green .circle {
+  stroke: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .metric-circle-progress.blue .circle {
+  stroke: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .circle-percentage {
+  fill: #a9d7ae !important;
+}
+html[data-theme="dark"] .garden-metric-card.quote-metric {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .quote-metric-text {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .section-count {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .filter-tab:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .plant-card-badge.healthy {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .plant-card-badge.warning {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .plant-botanical-sub {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .plant-type {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .plant-specs-row {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .moisture-track {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .water-status-text {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .action-menu-item.danger {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .action-menu-item.danger:hover {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .insight-icon.green {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .insight-icon.blue {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .insight-icon.yellow {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .insight-icon.mint {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .growth-badge {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .growth-dot {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .growth-rate {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .chart-bar {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .tip-description {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .tab-pill-badge {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .search-ico {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .lib-count-indicator {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .modal-library-grid::-webkit-scrollbar-track {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .modal-library-grid::-webkit-scrollbar-thumb {
+  background: #1e3a24 !important;
+}
+html[data-theme="dark"] .modal-library-grid::-webkit-scrollbar-thumb:hover {
+  background: #1e3a24 !important;
+}
+html[data-theme="dark"] .picker-plant-card:hover {
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .picker-cat-badge {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .picker-cat-badge.vegetables {
+  background: var(--dark-surface) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .picker-cat-badge.flowers {
+  background: var(--dark-surface) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .picker-cat-badge.herbs {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .picker-cat-badge.succulents {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .picker-botanical {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .picker-specs-compact {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .picker-in-garden-tag {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .form-group label {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .meta-badge-tag {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .detail-botanical-sub {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .detail-desc-snippet {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .detail-care-tip-box {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .detail-care-tip-box strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .detail-care-tip-box p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .detail-specs-grid {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .detail-specs-grid strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .diagnose-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .remove-plant-btn {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .metric-icon-circle.harvest-gold {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .garden-metric-card.harvest-metric-card {
+  border-color: var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .garden-metric-card.harvest-metric-card:hover {
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .filter-tab.harvest-tab {
+  background: var(--dark-surface) !important;
+  color: #ffb3ad !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .filter-tab.harvest-tab:hover {
+  background: var(--dark-surface) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .plant-card-badge.ready-badge {
+  background: var(--dark-surface) !important;
+  color: #ffb3ad !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .plant-card.card-harvest-ready {
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .card-growth-tracker {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .growth-stat-pill .stat-label {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .growth-stat-pill .stat-value {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .harvest-status-bar.growing {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .harvest-status-bar.ready {
+  background: var(--dark-surface) !important;
+  color: #ffb3ad !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .harvest-status-text strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .harvest-status-bar.ready .harvest-status-text strong {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .harvest-status-text small {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .harvest-ready-highlight {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .growth-progress-labels {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .growth-pct-val {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .growth-progress-track {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .moisture-meta-row {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .moisture-val {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .insight-item.harvest-insight {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .insight-icon.amber {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .growth-head-text {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .growth-stage-pill {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .growth-stage-pill.ready {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .modal-growth-stat-card.harvest-ready {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .stat-card-title {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .stat-card-main {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .modal-growth-stat-card.harvest-ready .stat-card-main {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .stat-card-hint {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .stepper-track-bg {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .point-dot {
+  background: var(--dark-surface) !important;
+  border: 2px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .stepper-point.completed .point-dot {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .stepper-point.ready .point-dot {
+  border-color: var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .point-label {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .modal-harvest-advice-box {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .advice-header-row strong {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .ready-accent-tag {
+  background: var(--dark-surface-2) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .advice-desc-text {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .harvest-morning-tip {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .modal-planted-date-row {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .settings2-toggle i::after {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .scheduler-toast {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .quick-action-pill {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .progress-card-badge {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .progress-done-badge {
+  background: var(--dark-surface) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .progress-bar-fill::after {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .thumbnail-fallback.water {
+  background: var(--dark-surface-2) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .thumbnail-fallback.fertilizer {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .thumbnail-fallback.prune {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .thumbnail-fallback.moisture {
+  background: var(--dark-surface-2) !important;
+  color: var(--dark-text) !important;
+}
+html[data-theme="dark"] .task-plant-type-pill {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .task-priority-pill.high {
+  background: var(--dark-surface) !important;
+  color: #ffb3ad !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .task-priority-pill.medium {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .task-priority-pill.low {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .task-drawer-toggle {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .scheduler-delete-btn:hover {
+  background: var(--dark-surface-2) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .day-badge {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .mini-task-pill.water {
+  background: var(--dark-surface-2) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .mini-task-pill.fertilizer {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .mini-task-pill.prune {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .mini-task-pill.moisture {
+  background: var(--dark-surface-2) !important;
+  color: var(--dark-text) !important;
+}
+html[data-theme="dark"] .guide-badge {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .community-actions-bar {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .community-search-box {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .community-search-box:focus-within {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .community-search-box .search-icon {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .community-search-box input {
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .category-pill {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .category-pill:hover {
+  border-color: var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .sort-buttons-wrap {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .sort-pill {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .sort-pill.active {
+  background: var(--dark-surface) !important;
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .post-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .author-avatar {
+  background: linear-gradient(135deg, var(--dark-surface), var(--dark-surface-2)) !important;
+  color: var(--dark-text-soft) !important;
+  border: 2px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .author-name {
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .author-role-badge {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .post-category-tag {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .post-plant-tag {
+  background: var(--dark-surface) !important;
+  color: #9cc7ef !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .post-title {
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .post-content-text {
+  color: #9cc7ef !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .post-action-btn {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .post-action-btn:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .post-action-btn.like-btn.liked {
+  background: var(--dark-surface-2) !important;
+  border-color: var(--dark-border) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .post-action-btn.comment-btn.active {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .comments-divider {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .comment-item {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .comment-avatar {
+  background: var(--dark-surface-2) !important;
+  color: var(--dark-text-soft) !important;
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .comment-author {
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .comment-text {
+  color: #9cc7ef !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .comment-input {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .community-side-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .community-side-card h4 {
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .promo-card {
+  background: linear-gradient(135deg, var(--dark-surface), var(--dark-surface)) !important;
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .promo-card p {
+  color: var(--dark-text) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .tag-chip {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .tag-chip:hover {
+  background: var(--dark-surface-2) !important;
+  color: #9cc7ef !important;
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .guidelines-list li {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .community-loading-state {
+  background: var(--dark-surface) !important;
+  border: 1px dashed var(--dark-border) !important;
+}
+html[data-theme="dark"] .community-empty-state {
+  background: var(--dark-surface) !important;
+  border: 1px dashed var(--dark-border) !important;
+}
+html[data-theme="dark"] .community-empty-state h3 {
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .community-empty-state p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .create-post-modal {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .modal-title-wrap h2 {
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .modal-close-btn {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .modal-close-btn:hover {
+  background: var(--dark-surface-2) !important;
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .modal-error-alert {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .form-field label {
+  color: #9cc7ef !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .form-field input {
+  border: 1px solid var(--dark-border) !important;
+  color: #9cc7ef !important;
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .form-field select {
+  border: 1px solid var(--dark-border) !important;
+  color: #9cc7ef !important;
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .form-field textarea {
+  border: 1px solid var(--dark-border) !important;
+  color: #9cc7ef !important;
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .modal-author-note {
+  color: var(--dark-text-soft) !important;
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .btn-modal-cancel {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .btn-modal-cancel:hover {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .community-toast {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .community-page {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .post-card:hover {
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .post-time {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .post-footer-actions {
+  border-top-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .comment-time {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .modal-header {
+  border-bottom-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .char-counter {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .modal-footer {
+  border-top-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .post-question-label {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .answers-section-header strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .answers-section-header span {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .guidelines-list strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .smart-rec-page {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .banner-glass-overlay {
+  background: linear-gradient(
+    90deg,
+    var(--dark-surface) 0%,
+    var(--dark-surface) 50%,
+    var(--dark-surface) 80%,
+    transparent 100%
+  ) !important;
+  background: linear-gradient(
+    90deg,
+    var(--dark-surface) 0%,
+    var(--dark-surface) 55%,
+    var(--dark-surface) 82%,
+    var(--dark-surface) 100%
+  ) !important;
+  background: linear-gradient(
+      180deg,
+      var(--dark-surface) 0%,
+      var(--dark-surface) 65%,
+      var(--dark-surface) 100%
+    ) !important;
+}
+html[data-theme="dark"] .banner-eyebrow {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .banner-heading {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .banner-heading span {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .banner-desc {
+  color: var(--dark-text-soft) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .banner-weather-badge {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .weather-badge-info strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .weather-badge-info span {
+  color: var(--dark-text-soft) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .smart-tab-btn {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .smart-tab-btn:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .tab-counter {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .smart-tab-btn:not(.active) .tab-counter {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .tab-status-pill {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .smart-tab-btn:not(.active) .tab-status-pill {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .env-snapshot-strip {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .snapshot-chip {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .snapshot-chip small {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .snapshot-chip strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .modify-env-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-search-box {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-search-ico {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .rec-search-box input {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-cat-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-cat-btn:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-plant-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-plant-card:hover {
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-card-media {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .cat-pill-badge {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .cat-pill-badge.vegetables {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .cat-pill-badge.flowers {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .cat-pill-badge.herbs {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .cat-pill-badge.succulents {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .rec-plant-name {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .rec-botanical-name {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .rec-match-reason {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-match-reason p {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .spec-chip {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .spec-chip.difficulty {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-care-tips-box {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .care-tip-label {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .in-garden-status {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .rec-view-guide-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .rec-view-guide-btn:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .live-weather-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .weather-banner-badge {
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .env-visual-showcase-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .env-showcase-image-wrap {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .env-showcase-badge {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .env-showcase-tag {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .env-showcase-title {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .env-chip {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .env-showcase-desc {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .env-best-suited {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .env-best-suited strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .weather-kicker {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .weather-card-header h2 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .weather-card-header p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .weather-condition-tag {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .weather-metric-box {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .metric-box-icon.yellow {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .metric-box-icon.blue {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .metric-box-icon.green {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .metric-box-icon.mint {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .metric-val {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .weather-metric-box small {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .weather-advice-banner {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .weather-advice-banner p {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .env-configurator-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .config-card-header h2 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .config-card-header p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .config-label {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .config-text-input {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .config-text-input:focus {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .pincode-badge {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .env-opt-card {
+  background: var(--dark-surface) !important;
+  border: 1.5px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .env-opt-card:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .env-opt-card.selected {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .opt-title {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .opt-desc {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .env-opt-photo-card {
+  background: var(--dark-surface) !important;
+  border: 1.5px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .env-opt-photo-card.selected {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .env-opt-photo-wrap {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .env-opt-icon-floating {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .opt-tagline {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .dropdown-box label {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .dropdown-box select {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .numeric-microclimate-subpanel {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .numeric-panel-heading {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .numeric-input-box label {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .valid-range-hint {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .config-num-input {
+  border: 1.5px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .input-unit-label {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .input-invalid {
+  background-color: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .field-validation-error {
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .pincode-detected-note {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .pincode-detected-note strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .pincode-detected-note span {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .regional-profile-card {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .regional-profile-kicker {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .regional-profile-header strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .regional-profile-source {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .regional-profile-item {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .regional-profile-item span {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .regional-profile-item strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-sprout-divider .divider-line {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .auth-feature-icon-circle {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .auth-card {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .auth-card-header h2 {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-card-divider .card-divider-line {
+  background: var(--dark-surface-3) !important;
+}
+html[data-theme="dark"] .auth-card-divider .card-divider-sprout {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .auth-card-header p {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .auth-input-group label {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-field-icon {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .auth-field-input {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-field-input:focus {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .auth-field-wrapper:focus-within .auth-field-icon {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .auth-eye-btn {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .auth-eye-btn:hover {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-checkbox-label {
+  color: var(--dark-text) !important;
+}
+html[data-theme="dark"] .auth-forgot-link {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-forgot-link:hover {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-signup-checkboxes .auth-checkbox-label {
+  color: var(--dark-text) !important;
+}
+html[data-theme="dark"] .auth-signup-checkboxes a {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-signup-checkboxes span.terms-link {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-or-separator .separator-line {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .auth-google-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-google-btn:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .auth-switch-prompt {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .auth-switch-link {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-switch-link:hover {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .auth-error-banner {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .lib-diff-badge.very-easy {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .lib-diff-badge.easy {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .lib-diff-badge.moderate {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .lib-add-btn.added {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .guide-category-tag {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .guide-difficulty-tag {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .guide-diagnose-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .admin-tab.active {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .admin-toast {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .admin-toast.error {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .admin-danger-btn {
+  background: var(--dark-surface) !important;
+  color: #ffb3ad !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .admin-danger-btn:hover {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .admin-form-card input:focus {
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .admin-form-card select:focus {
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .admin-form-card textarea:focus {
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .admin-search:focus {
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .admin-role-pill.admin {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .back-button {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .back-button:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .back-button:active {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .back-button.back-button-on-banner {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .back-button.back-button-on-banner:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .sidebar-link:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .sidebar-logout {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .sidebar::-webkit-scrollbar-thumb {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .sidebar-mobile-close-btn {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .sidebar-mobile-close-btn:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .topbar {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .breadcrumb-home-link {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .breadcrumb-home-link:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .breadcrumb-current {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .topbar-search {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .topbar-search.focused {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .topbar-search:focus-within {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .search-icon {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .topbar-search input {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .search-clear-btn:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .search-shortcut {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .search-quick-panel {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .quick-search-label {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .quick-search-tag {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .nav-pill {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .notification-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .theme-toggle-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .notification-btn:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .notification-btn.active {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .theme-toggle-btn:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .notification-count {
+  border: 2px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .notif-menu {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .notif-header {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .notif-header-title strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .notif-badge {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .notif-mark-read {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .notif-item {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .notif-item:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .notif-item.unread {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .notif-item-title {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .notif-item-msg {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .notif-footer {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .notif-footer-link {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .profile-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .profile-btn:hover {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .profile-btn.active {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .profile-avatar {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .profile-name {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .profile-status {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .profile-arrow {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .profile-menu {
+  background: var(--dark-surface) !important;
+  border: 1px solid var(--dark-border) !important;
+}
+html[data-theme="dark"] .profile-menu-header {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .profile-menu-avatar {
+  background: var(--dark-surface-2) !important;
+}
+html[data-theme="dark"] .profile-menu-info strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .profile-menu-info small {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .profile-menu-item {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .profile-menu-item:hover {
+  background: var(--dark-surface) !important;
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .profile-menu-footer {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .profile-logout-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .profile-logout-btn:hover {
+  background: var(--dark-surface-2) !important;
+  color: #ffb3ad !important;
+}
+html[data-theme="dark"] .topbar-menu-btn {
+  border: 1px solid var(--dark-border) !important;
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .topbar-menu-btn:hover {
+  background: var(--dark-surface) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .notif-empty > span {
+  background: var(--dark-surface) !important;
+}
+html[data-theme="dark"] .notif-empty strong {
+  color: #a9d7ae !important;
+}
+html[data-theme="dark"] .notif-empty small {
+  color: var(--dark-text-soft) !important;
+}
+
+/* ===================== DETERMINISTIC LAST-MILE DARK MODE ===================== */
+html[data-theme="dark"] {
+  --dark-bg: #0f1712;
+  --dark-surface: #162519;
+  --dark-surface-2: #1c2d20;
+  --dark-surface-3: #223727;
+  --dark-surface-alt: #18281b;
+  --dark-border: #2a4330;
+  --dark-border-soft: #233a28;
+  --dark-text: #e8f3e9;
+  --dark-text-soft: #b7ceb9;
+  --dark-text-muted: #89a48b;
+  --dark-accent: #4caf50;
+  --dark-accent-strong: #388e3c;
+}
+
+html[data-theme="dark"] .page-hero-banner .banner-glass-overlay {
+  background: linear-gradient(90deg, rgba(12, 25, 15, .93), rgba(14, 30, 18, .82) 56%, rgba(14, 30, 18, .58) 100%) !important;
+}
+html[data-theme="dark"] .page-hero-banner .banner-eyebrow { color: #9ed3a3 !important; }
+html[data-theme="dark"] .page-hero-banner .banner-heading { color: var(--dark-text) !important; }
+html[data-theme="dark"] .page-hero-banner .banner-heading span { color: #81c784 !important; }
+html[data-theme="dark"] .page-hero-banner .banner-desc { color: var(--dark-text-soft) !important; }
+html[data-theme="dark"] .page-hero-banner .banner-weather-badge {
+  background: rgba(22, 37, 25, .92) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .page-hero-banner .weather-badge-info strong { color: var(--dark-text) !important; }
+html[data-theme="dark"] .page-hero-banner .weather-badge-info span { color: var(--dark-text-soft) !important; }
+
+/* Every interactive control has a safe dark baseline. Green primary actions are restored below. */
+html[data-theme="dark"] .community-page button,
+html[data-theme="dark"] .scheduler-page button,
+html[data-theme="dark"] .disease-detection-page button,
+html[data-theme="dark"] .smart-rec-page button,
+html[data-theme="dark"] .plant-library-page button,
+html[data-theme="dark"] .my-garden-page button,
+html[data-theme="dark"] .dashboard-page button,
+html[data-theme="dark"] .assistant-page button,
+html[data-theme="dark"] .settings2-page button,
+html[data-theme="dark"] .settings-page button,
+html[data-theme="dark"] .admin-page button {
+  color: var(--dark-text) !important;
+  background-color: var(--dark-surface-2) !important;
+  background-image: none !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .community-page input,
+html[data-theme="dark"] .community-page select,
+html[data-theme="dark"] .community-page textarea,
+html[data-theme="dark"] .scheduler-page input,
+html[data-theme="dark"] .scheduler-page select,
+html[data-theme="dark"] .scheduler-page textarea,
+html[data-theme="dark"] .disease-detection-page input,
+html[data-theme="dark"] .disease-detection-page select,
+html[data-theme="dark"] .disease-detection-page textarea,
+html[data-theme="dark"] .smart-rec-page input,
+html[data-theme="dark"] .smart-rec-page select,
+html[data-theme="dark"] .smart-rec-page textarea,
+html[data-theme="dark"] .my-garden-page input,
+html[data-theme="dark"] .my-garden-page select,
+html[data-theme="dark"] .my-garden-page textarea,
+html[data-theme="dark"] .assistant-page input,
+html[data-theme="dark"] .settings2-page input,
+html[data-theme="dark"] .settings2-page select,
+html[data-theme="dark"] .settings2-page textarea {
+  background: #111c15 !important;
+  color: var(--dark-text) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder { color: var(--dark-text-muted) !important; }
+
+/* Preserve intentionally green/destructive actions instead of flattening every button. */
+html[data-theme="dark"] button[class*="primary"],
+html[data-theme="dark"] button[class*="save"],
+html[data-theme="dark"] button[class*="add"],
+html[data-theme="dark"] button[class*="create"],
+html[data-theme="dark"] button[class*="submit"],
+html[data-theme="dark"] button[class*="complete"],
+html[data-theme="dark"] .scan-run-btn,
+html[data-theme="dark"] .diagnose-btn,
+html[data-theme="dark"] .water-now-btn,
+html[data-theme="dark"] .assistant-send-btn {
+  background: var(--dark-accent-strong) !important;
+  color: #fff !important;
+  border-color: var(--dark-accent-strong) !important;
+}
+html[data-theme="dark"] button[class*="danger"],
+html[data-theme="dark"] .remove-plant-btn,
+html[data-theme="dark"] .scheduler-delete-btn,
+html[data-theme="dark"] .admin-danger-btn {
+  background: #64292a !important;
+  color: #ffd9d5 !important;
+  border-color: #9e4b4c !important;
+}
+
+/* ===================== DISEASE DETECTION ===================== */
+html[data-theme="dark"] .disease-detection-page .report-header,
+html[data-theme="dark"] .disease-detection-page .report-section,
+html[data-theme="dark"] .disease-detection-page .report-visual-banner,
+html[data-theme="dark"] .disease-detection-page .diagnostic-report,
+html[data-theme="dark"] .disease-detection-page .diagnosis-navbar,
+html[data-theme="dark"] .disease-detection-page .dropzone-area,
+html[data-theme="dark"] .disease-detection-page .tip-box,
+html[data-theme="dark"] .disease-detection-page .prevention-tips-banner,
+html[data-theme="dark"] .disease-detection-page .treatment-protocol-card,
+html[data-theme="dark"] .disease-detection-page .treatment-step-card,
+html[data-theme="dark"] .disease-detection-page .library-card,
+html[data-theme="dark"] .disease-detection-page .match-card,
+html[data-theme="dark"] .disease-detection-page .match-treatment-box,
+html[data-theme="dark"] .disease-detection-page .empty-result-placeholder,
+html[data-theme="dark"] .disease-detection-page .empty-symptoms-state,
+html[data-theme="dark"] .disease-detection-page .no-matches-card,
+html[data-theme="dark"] .disease-detection-page .diag-search-box,
+html[data-theme="dark"] .disease-detection-page .diag-sort-box,
+html[data-theme="dark"] .disease-detection-page .diag-view-toggle,
+html[data-theme="dark"] .disease-detection-page .symptom-search-box {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .disease-detection-page .report-visual-banner { background: #18301e !important; }
+html[data-theme="dark"] .disease-detection-page .visual-symptom-tag,
+html[data-theme="dark"] .disease-detection-page .category-pill,
+html[data-theme="dark"] .disease-detection-page .preset-tag,
+html[data-theme="dark"] .disease-detection-page .treatment-priority-badge,
+html[data-theme="dark"] .disease-detection-page .confidence-badge {
+  background: var(--dark-surface-2) !important;
+  color: var(--dark-text-soft) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .disease-detection-page .report-visual-info h4,
+html[data-theme="dark"] .disease-detection-page .report-section h4,
+html[data-theme="dark"] .disease-detection-page .library-card h3,
+html[data-theme="dark"] .disease-detection-page .treatment-step-card h4,
+html[data-theme="dark"] .disease-detection-page .match-card h3,
+html[data-theme="dark"] .disease-detection-page .common-subtitle,
+html[data-theme="dark"] .disease-detection-page .report-section p,
+html[data-theme="dark"] .disease-detection-page .lib-common-name,
+html[data-theme="dark"] .disease-detection-page .visual-caption,
+html[data-theme="dark"] .disease-detection-page .match-card-content,
+html[data-theme="dark"] .disease-detection-page .treatment-row,
+html[data-theme="dark"] .disease-detection-page .remedy-highlight-text {
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .disease-detection-page .report-header h2,
+html[data-theme="dark"] .disease-detection-page .treatment-protocol-card h3,
+html[data-theme="dark"] .disease-detection-page .treatment-step-card strong,
+html[data-theme="dark"] .disease-detection-page .match-card-content strong {
+  color: var(--dark-text) !important;
+}
+
+/* ===================== COMMUNITY ===================== */
+html[data-theme="dark"] .community-page .community-actions-bar,
+html[data-theme="dark"] .community-page .community-search-box,
+html[data-theme="dark"] .community-page .community-filter-row,
+html[data-theme="dark"] .community-page .post-card,
+html[data-theme="dark"] .community-page .community-side-card,
+html[data-theme="dark"] .community-page .community-empty-state,
+html[data-theme="dark"] .community-page .community-loading-state,
+html[data-theme="dark"] .community-page .create-post-modal,
+html[data-theme="dark"] .community-page .comments-drawer,
+html[data-theme="dark"] .community-page .comment-item,
+html[data-theme="dark"] .community-page .comments-empty,
+html[data-theme="dark"] .community-page .form-field,
+html[data-theme="dark"] .community-page .modal-author-note {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .community-page .post-title,
+html[data-theme="dark"] .community-page .author-name,
+html[data-theme="dark"] .community-page .answers-section-header,
+html[data-theme="dark"] .community-page .comment-author,
+html[data-theme="dark"] .community-page .comment-text,
+html[data-theme="dark"] .community-page .post-content-text,
+html[data-theme="dark"] .community-page .guide-bullet,
+html[data-theme="dark"] .community-page .promo-card h3,
+html[data-theme="dark"] .community-page h1,
+html[data-theme="dark"] .community-page h2,
+html[data-theme="dark"] .community-page h3,
+html[data-theme="dark"] .community-page h4 {
+  color: var(--dark-text) !important;
+}
+html[data-theme="dark"] .community-page .post-time,
+html[data-theme="dark"] .community-page .comment-time,
+html[data-theme="dark"] .community-page .author-role-badge,
+html[data-theme="dark"] .community-page .char-counter,
+html[data-theme="dark"] .community-page .modal-author-note {
+  color: var(--dark-text-muted) !important;
+}
+
+/* ===================== CARE SCHEDULER ===================== */
+html[data-theme="dark"] .scheduler-page .scheduler-views-bar,
+html[data-theme="dark"] .scheduler-page .scheduler-progress-card,
+html[data-theme="dark"] .scheduler-page .scheduler-tasks-card,
+html[data-theme="dark"] .scheduler-page .weekly-calendar-section,
+html[data-theme="dark"] .scheduler-page .calendar-header-box,
+html[data-theme="dark"] .scheduler-page .calendar-day-col,
+html[data-theme="dark"] .scheduler-page .scheduler-empty,
+html[data-theme="dark"] .scheduler-page .scheduler-modal,
+html[data-theme="dark"] .scheduler-page .task-drawer-content,
+html[data-theme="dark"] .scheduler-page .guide-card,
+html[data-theme="dark"] .scheduler-page .guides-hero,
+html[data-theme="dark"] .scheduler-page .weather-tip-box,
+html[data-theme="dark"] .scheduler-page .task-card-main-bar,
+html[data-theme="dark"] .scheduler-page .task-understanding-card {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .scheduler-page .task-card-title,
+html[data-theme="dark"] .scheduler-page .task-plant-name,
+html[data-theme="dark"] .scheduler-page .day-name,
+html[data-theme="dark"] .scheduler-page .progress-card-title,
+html[data-theme="dark"] .scheduler-page .guide-card strong,
+html[data-theme="dark"] .scheduler-page h1,
+html[data-theme="dark"] .scheduler-page h2,
+html[data-theme="dark"] .scheduler-page h3,
+html[data-theme="dark"] .scheduler-page h4 { color: var(--dark-text) !important; }
+html[data-theme="dark"] .scheduler-page .task-card-desc,
+html[data-theme="dark"] .scheduler-page .task-card-info,
+html[data-theme="dark"] .scheduler-page .scheduler-task-time,
+html[data-theme="dark"] .scheduler-page .guide-subtitle,
+html[data-theme="dark"] .scheduler-page .step-text { color: var(--dark-text-soft) !important; }
+html[data-theme="dark"] .scheduler-page .scheduler-views-bar .active,
+html[data-theme="dark"] .scheduler-page .views-switch-buttons button.active,
+html[data-theme="dark"] .scheduler-page .scheduler-status-toggle.active {
+  background: #234b2a !important;
+  color: #d8f0da !important;
+  border-color: #4b8f50 !important;
+}
+
+/* ===================== SMART RECOMMENDATIONS ===================== */
+html[data-theme="dark"] .smart-rec-page .env-snapshot-strip,
+html[data-theme="dark"] .smart-rec-page .snapshot-chip,
+html[data-theme="dark"] .smart-rec-page .rec-plant-card,
+html[data-theme="dark"] .smart-rec-page .live-weather-card,
+html[data-theme="dark"] .smart-rec-page .env-visual-showcase-card,
+html[data-theme="dark"] .smart-rec-page .env-configurator-card,
+html[data-theme="dark"] .smart-rec-page .env-opt-card,
+html[data-theme="dark"] .smart-rec-page .env-opt-photo-card,
+html[data-theme="dark"] .smart-rec-page .numeric-microclimate-subpanel,
+html[data-theme="dark"] .smart-rec-page .regional-profile-card,
+html[data-theme="dark"] .smart-rec-page .regional-profile-item,
+html[data-theme="dark"] .smart-rec-page .weather-metric-box,
+html[data-theme="dark"] .smart-rec-page .weather-advice-banner {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .smart-rec-page h1,
+html[data-theme="dark"] .smart-rec-page h2,
+html[data-theme="dark"] .smart-rec-page h3,
+html[data-theme="dark"] .smart-rec-page h4,
+html[data-theme="dark"] .smart-rec-page .rec-plant-name,
+html[data-theme="dark"] .smart-rec-page .config-card-header h3,
+html[data-theme="dark"] .smart-rec-page .regional-profile-item strong { color: var(--dark-text) !important; }
+html[data-theme="dark"] .smart-rec-page .rec-match-reason,
+html[data-theme="dark"] .smart-rec-page .rec-care-tips-box,
+html[data-theme="dark"] .smart-rec-page .config-card-header p,
+html[data-theme="dark"] .smart-rec-page .regional-profile-item span { color: var(--dark-text-soft) !important; }
+html[data-theme="dark"] .smart-rec-page .save-and-generate-btn,
+html[data-theme="dark"] .smart-rec-page .save-env-top-btn,
+html[data-theme="dark"] .smart-rec-page .add-to-garden-btn { background: var(--dark-accent-strong) !important; color: #fff !important; }
+html[data-theme="dark"] .smart-rec-page .in-garden-status,
+html[data-theme="dark"] .smart-rec-page .in-garden-tag {
+  background: #1f4025 !important;
+  color: #c7efca !important;
+  border-color: #4b8f50 !important;
+}
+
+/* ===================== PLANT LIBRARY / MY GARDEN ===================== */
+html[data-theme="dark"] .plant-library-page .library-header,
+html[data-theme="dark"] .plant-library-page .library-filters-bar,
+html[data-theme="dark"] .plant-library-page .library-plant-card,
+html[data-theme="dark"] .plant-library-page .library-modal-dialog,
+html[data-theme="dark"] .plant-library-page .library-card,
+html[data-theme="dark"] .my-garden-page .garden-metric-card,
+html[data-theme="dark"] .my-garden-page .garden-snapshot-panel,
+html[data-theme="dark"] .my-garden-page .garden-plant-thumb-card,
+html[data-theme="dark"] .my-garden-page .plant-detail-modal,
+html[data-theme="dark"] .my-garden-page .add-plant-modal,
+html[data-theme="dark"] .my-garden-page .picker-plant-card {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .plant-library-page h1,
+html[data-theme="dark"] .plant-library-page h2,
+html[data-theme="dark"] .plant-library-page h3,
+html[data-theme="dark"] .plant-library-page h4,
+html[data-theme="dark"] .my-garden-page h1,
+html[data-theme="dark"] .my-garden-page h2,
+html[data-theme="dark"] .my-garden-page h3,
+html[data-theme="dark"] .my-garden-page h4,
+html[data-theme="dark"] .my-garden-page .plant-name,
+html[data-theme="dark"] .my-garden-page .card-title { color: var(--dark-text) !important; }
+html[data-theme="dark"] .plant-library-page .lib-add-btn.added,
+html[data-theme="dark"] .plant-library-page .guide-add-garden-btn.added,
+html[data-theme="dark"] .my-garden-page .picker-add-btn.added,
+html[data-theme="dark"] .my-garden-page .in-garden-tag {
+  background: #1f4025 !important;
+  color: #c7efca !important;
+  border-color: #4b8f50 !important;
+}
+
+/* ===================== ASSISTANT ===================== */
+html[data-theme="dark"] .assistant-page .assistant-chat-card,
+html[data-theme="dark"] .assistant-page .assistant-status-bar,
+html[data-theme="dark"] .assistant-page .quick-prompts-bar,
+html[data-theme="dark"] .assistant-page .message-bubble.assistant,
+html[data-theme="dark"] .assistant-page .quick-prompt-chip,
+html[data-theme="dark"] .assistant-page .clear-chat-btn {
+  background: var(--dark-surface) !important;
+  color: var(--dark-text) !important;
+  border-color: var(--dark-border) !important;
+}
+html[data-theme="dark"] .assistant-page .message-bubble.assistant { color: var(--dark-text) !important; }
+html[data-theme="dark"] .assistant-page .message-bubble.user,
+html[data-theme="dark"] .assistant-page .assistant-send-btn { background: var(--dark-accent-strong) !important; color: #fff !important; }
+html[data-theme="dark"] .assistant-page .assistant-source { color: var(--dark-text-muted) !important; }
+
+/* ===================== EMPTY NOTIFICATIONS ===================== */
+html[data-theme="dark"] .notif-empty {
+  min-height: 150px !important;
+  padding: 24px 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 8px !important;
+  background: var(--dark-surface) !important;
+  color: var(--dark-text-soft) !important;
+}
+html[data-theme="dark"] .notif-empty > span {
+  background: #1f4025 !important;
+  color: #c7efca !important;
+  flex: 0 0 auto;
+}
+html[data-theme="dark"] .notif-empty strong { color: var(--dark-text) !important; }
+html[data-theme="dark"] .notif-empty small { color: var(--dark-text-muted) !important; }
+
+html[data-theme="dark"] .regional-profile-optional-note,
+html[data-theme="dark"] .optional-field-hint {
+  color: var(--dark-text-muted) !important;
+}
+html[data-theme="dark"] .scheduler-tasks-card.is-empty {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] .modal-backdrop,
+html[data-theme="dark"] .modal-backdrop-blur,
+html[data-theme="dark"] .garden-modal-backdrop,
+html[data-theme="dark"] .library-modal-backdrop,
+html[data-theme="dark"] .rec-modal-backdrop,
+html[data-theme="dark"] .settings2-modal-backdrop,
+html[data-theme="dark"] .logout-modal-backdrop {
+  background: rgba(3, 10, 5, .72) !important;
+}
+
+/* =========================================================
+   AUTHORITATIVE DARK THEME INVARIANTS
+   The Garden Guide sidebar keeps its original design in both themes.
+   ========================================================= */
+html[data-theme="dark"] .sidebar {
+  background: linear-gradient(180deg, #0d2813 0%, #081a0d 100%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15) !important;
+}
+html[data-theme="dark"] .sidebar-brand {
+  background: transparent !important;
+  border: none !important;
+}
+html[data-theme="dark"] .brand-title { color: #ffffff !important; }
+html[data-theme="dark"] .brand-subtitle { color: #b0c7b4 !important; }
+html[data-theme="dark"] .sidebar-link {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #c4d8c7 !important;
+}
+html[data-theme="dark"] .sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .sidebar-link.active {
+  background: #194825 !important;
+  border-color: #286337 !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .sidebar-quote { color: #ffffff !important; }
+html[data-theme="dark"] .sidebar-logout {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  color: #e1ede3 !important;
+}
+html[data-theme="dark"] .sidebar-logout:hover {
+  background: rgba(220, 38, 38, 0.22) !important;
+  border-color: rgba(239, 68, 68, 0.45) !important;
+  color: #fca5a5 !important;
+}
+html[data-theme="dark"] .sidebar-mobile-close-btn {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .sidebar-mobile-close-btn:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
+}
+
+/* Never allow accidental light-mode surfaces to render as white controls in dark mode. */
+html[data-theme="dark"] .plant-library-page .lib-add-btn.added,
+html[data-theme="dark"] .plant-library-page .guide-add-garden-btn.added,
+html[data-theme="dark"] .my-garden-page .picker-add-btn.added,
+html[data-theme="dark"] .my-garden-page .in-garden-tag,
+html[data-theme="dark"] .smart-rec-page .in-garden-status,
+html[data-theme="dark"] .smart-rec-page .in-garden-tag {
+  background: #1f4025 !important;
+  border: 1px solid #4b8f50 !important;
+  color: #d7f2d9 !important;
+}
+
+/* Empty notifications are intentionally compact and visually balanced. */
+html[data-theme="dark"] .notif-empty,
+html[data-theme="light"] .notif-empty {
+  min-height: 132px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+html[data-theme="light"] .notif-empty { color: var(--text-secondary); }
+html[data-theme="dark"] .notif-empty {
+  background: var(--surface) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Dark chat: assistant and user bubbles are intentionally distinct and readable. */
+html[data-theme="dark"] .assistant-page .message-bubble.assistant {
+  background: var(--surface) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+html[data-theme="dark"] .assistant-page .message-bubble.user {
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  border-color: var(--primary) !important;
+}
+html[data-theme="dark"] .assistant-page .quick-prompt-chip,
+html[data-theme="dark"] .assistant-page .clear-chat-btn {
+  background: var(--surface-subtle) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+html[data-theme="dark"] .assistant-page .assistant-send-btn {
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  border-color: var(--primary) !important;
+}
+
+/* No light card should leak through on the three page families the user flagged. */
+html[data-theme="dark"] .disease-detection-page .scanner-card,
+html[data-theme="dark"] .disease-detection-page .report-visual-banner,
+html[data-theme="dark"] .disease-detection-page .report-section,
+html[data-theme="dark"] .disease-detection-page .integration-action-card,
+html[data-theme="dark"] .community-page .post-card,
+html[data-theme="dark"] .community-page .community-side-card,
+html[data-theme="dark"] .community-page .community-actions-bar,
+html[data-theme="dark"] .community-page .create-post-modal,
+html[data-theme="dark"] .community-page .comments-drawer,
+html[data-theme="dark"] .scheduler-page .scheduler-tasks-card,
+html[data-theme="dark"] .scheduler-page .scheduler-progress-card,
+html[data-theme="dark"] .scheduler-page .weekly-calendar-section,
+html[data-theme="dark"] .scheduler-page .guide-card {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+html[data-theme="dark"] .disease-detection-page h1,
+html[data-theme="dark"] .disease-detection-page h2,
+html[data-theme="dark"] .disease-detection-page h3,
+html[data-theme="dark"] .disease-detection-page h4,
+html[data-theme="dark"] .community-page h1,
+html[data-theme="dark"] .community-page h2,
+html[data-theme="dark"] .community-page h3,
+html[data-theme="dark"] .community-page h4,
+html[data-theme="dark"] .scheduler-page h1,
+html[data-theme="dark"] .scheduler-page h2,
+html[data-theme="dark"] .scheduler-page h3,
+html[data-theme="dark"] .scheduler-page h4 {
+  color: var(--text-primary) !important;
+}
+
+/* Native select menus inherit the active theme where the browser permits it. */
+html[data-theme="dark"] select,
+html[data-theme="dark"] option {
+  color-scheme: dark;
+}
+
+
+/* =====================================================================
+   DARK THEME FINAL SURFACE SAFETY LAYER
+   Generated from the existing light-theme CSS.
+   This changes only the dark theme; light theme declarations remain intact.
+   The original sidebar and hero design are intentionally excluded.
+   ===================================================================== */
+html[data-theme="dark"] /* ========================================= SELECTION ========================================= */ ::selection {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .logout-modal-icon {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] ::selection {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .back-button:active {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .breadcrumb-home-link:hover {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .search-clear-btn:hover {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .quick-search-tag {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .notif-item.unread {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .profile-btn:hover, .profile-btn.active {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .profile-menu-avatar {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .profile-menu-item:hover {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .banner-weather-badge {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .metric-purple {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .metric-icon-circle.green {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .metric-icon-circle.coral {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .metric-icon-circle.blue {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .metric-icon-circle.purple {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .rec-banner-spec-divider {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .rec-banner-dot {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .rec-modal-badge {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .rec-modal-close-btn:hover {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .rec-modal-season-pill {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .rec-modal-cancel-btn:hover {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .tasks-nav-tab:not(.active) .tab-badge {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .tasks-scroll-list::-webkit-scrollbar-thumb {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .task-row-icon.water {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .task-row-icon.fertilizer {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .task-row-icon.moisture {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .garden-cards-row::-webkit-scrollbar-thumb {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .plant-status-badge.healthy {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .plant-status-badge.growing {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .garden-add-card {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .tip-dot {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .action-tile-icon.green {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .action-tile-icon.mint {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .action-tile-icon.purple {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] /* ========================================= NAVIGATION TABS ========================================= */ .detection-nav-tabs {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .tab-btn:hover {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .dropzone-btn {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .sample-chip:hover {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .sample-chip.active {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .sample-chip-img {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .tip-box {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .confidence-badge {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .severity-tag.mild {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .severity-tag.moderate {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .report-section {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .wizard-sidebar::-webkit-scrollbar-thumb {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .symptom-category-navbar::-webkit-scrollbar-thumb {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .preset-card:hover {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .preset-badge {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .symptom-toggle:hover {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .checkbox-dot {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .matches-scroll-pane::-webkit-scrollbar-track {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .matches-scroll-pane::-webkit-scrollbar-thumb {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .symptoms-tags .tag.matched {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] /* Highlighted Treatment in Wizard */ .match-treatment-box {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .scheduler-icon {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .health-result {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .hamburger-bar {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .hamburger-bar::before, .hamburger-bar::after {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .icon-bg-green {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .icon-bg-sun {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .icon-bg-leaf {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .icon-bg-community {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .plant-image-wrap {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .banner-quote-badge {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] /* Quote Card */ .garden-metric-card.quote-metric {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] /* Moisture Progress Bar */ .moisture-track {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .chart-bar {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .tab-pill-badge {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .modal-library-grid::-webkit-scrollbar-thumb {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .picker-cat-badge.flowers {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .picker-cat-badge.succulents {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .meta-badge-tag {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .detail-care-tip-box {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .garden-metric-card.harvest-metric-card {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .growth-progress-track {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] /* Insight harvest */ .insight-item.harvest-insight {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .growth-stage-pill {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .modal-growth-stat-card.harvest-ready {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .stepper-track-bg {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .stepper-point.completed .point-dot {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] /* Harvest Advice Box */ .modal-harvest-advice-box {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .ready-accent-tag {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .quick-action-pill {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .progress-card-badge {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .progress-bar-fill::after {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .thumbnail-fallback.water {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .thumbnail-fallback.fertilizer {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .thumbnail-fallback.moisture {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .task-drawer-toggle {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .mini-task-pill.water {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .mini-task-pill.fertilizer {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .mini-task-pill.moisture {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .post-plant-tag {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] /* Author */ .author-avatar {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] /* ========================================================= COMMENTS ========================================================= */ .comments-divider {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .promo-card {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .modal-close-btn:hover {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .btn-modal-cancel:hover {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .modify-env-btn {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .rec-card-media {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .cat-pill-badge {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .rec-match-reason {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .spec-chip.difficulty {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .rec-care-tips-box {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .rec-view-guide-btn:hover {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .env-showcase-image-wrap {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .env-best-suited {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .weather-advice-banner {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .config-text-input {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .pincode-badge {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .env-opt-card:hover {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .env-opt-card.selected {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .env-opt-photo-card.selected {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .env-opt-photo-wrap {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .regional-profile-card {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .auth-sprout-divider .divider-line {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .auth-card {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .auth-card-divider .card-divider-line {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .auth-or-separator .separator-line {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .lib-diff-badge.easy {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .lib-diff-badge.moderate {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .guide-category-tag {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .guide-diagnose-btn {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .admin-toast {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .admin-toast.error {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .admin-danger-btn {
+  background: var(--surface) !important;
+}
+html[data-theme="dark"] .admin-danger-btn:hover {
+  background: var(--surface-subtle) !important;
+}
+html[data-theme="dark"] .admin-role-pill.admin {
+  background: var(--surface) !important;
+}
+
+/* Text nodes must never become their own cards/strips. */
+html[data-theme="dark"] .disease-detection-page .report-section p,
+html[data-theme="dark"] .disease-detection-page .treatment-step-card p,
+html[data-theme="dark"] .disease-detection-page .report-visual-info p,
+html[data-theme="dark"] .community-page .post-content-text,
+html[data-theme="dark"] .community-page .comment-text,
+html[data-theme="dark"] .scheduler-page .task-description,
+html[data-theme="dark"] .assistant-page .assistant-source {
+  background: transparent !important;
+}
+
+/* The original sidebar is a fixed dark botanical component in both themes.
+   Never flatten it into the application surface system. */
+html[data-theme="dark"] .sidebar-link:not(.active) {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #c4d8c7 !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .sidebar-link:not(.active):hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+}
+html[data-theme="dark"] .sidebar-link.active {
+  background: #194825 !important;
+  border-color: #286337 !important;
+  color: #ffffff !important;
+}
+
+/* Primary actions stay recognisably Garden Guide green in dark mode. */
+html[data-theme="dark"] .primary-btn,
+html[data-theme="dark"] .save-btn,
+html[data-theme="dark"] .save-env-top-btn,
+html[data-theme="dark"] .save-and-generate-btn,
+html[data-theme="dark"] .add-to-garden-btn:not(.added),
+html[data-theme="dark"] .scan-run-btn,
+html[data-theme="dark"] .diagnose-btn,
+html[data-theme="dark"] .water-now-btn,
+html[data-theme="dark"] .assistant-send-btn {
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  border-color: var(--primary) !important;
+}
+
+/* Positive state actions/tags remain green, never browser-white. */
+html[data-theme="dark"] .in-garden-status,
+html[data-theme="dark"] .in-garden-tag,
+html[data-theme="dark"] .lib-add-btn.added,
+html[data-theme="dark"] .guide-add-garden-btn.added,
+html[data-theme="dark"] .picker-add-btn.added {
+  background: #1f4025 !important;
+  color: #d7f2d9 !important;
+  border-color: #4b8f50 !important;
+}
+
+/* Forms and controls: no white fields in dark mode. */
+html[data-theme="dark"] main input,
+html[data-theme="dark"] main select,
+html[data-theme="dark"] main textarea {
+  color-scheme: dark;
+  background: #111c15 !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-strong) !important;
+}
+html[data-theme="dark"] main input::placeholder,
+html[data-theme="dark"] main textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* Empty notification state is intentional and compact in both themes. */
+html[data-theme="light"] .notif-empty,
+html[data-theme="dark"] .notif-empty {
+  min-height: 132px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+/* Final project-wide semantic dark-theme guardrails. Sidebar intentionally excluded: it keeps the original Garden Guide design. */
+html[data-theme="dark"] .topbar { background: var(--surface-subtle) !important; border-bottom: 0 !important; box-shadow: none !important; color: var(--text-primary) !important; }
+html[data-theme="dark"] .topbar-search,
+html[data-theme="dark"] .library-search-box { background: var(--surface) !important; border-color: var(--border-strong) !important; box-shadow: none !important; }
+html[data-theme="dark"] .topbar-search input,
+html[data-theme="dark"] .library-search-box input { background: transparent !important; color: var(--text-primary) !important; }
+html[data-theme="dark"] .library-filters-bar,
+html[data-theme="dark"] .library-plant-card,
+html[data-theme="dark"] .library-modal-dialog,
+html[data-theme="dark"] .assistant-chat-card { background: var(--surface) !important; color: var(--text-primary) !important; border-color: var(--border) !important; }
+html[data-theme="dark"] .assistant-status-bar,
+html[data-theme="dark"] .quick-prompts-bar,
+html[data-theme="dark"] .assistant-input-area { background: var(--surface-subtle) !important; border-color: var(--border) !important; }
+html[data-theme="dark"] .assistant-messages-list { background-color: var(--background) !important; color: var(--text-primary) !important; }
+html[data-theme="dark"] .message-bubble.assistant,
+html[data-theme="dark"] .quick-prompt-chip,
+html[data-theme="dark"] .clear-chat-btn,
+html[data-theme="dark"] .lib-details-btn { background: var(--surface-raised) !important; color: var(--text-primary) !important; border-color: var(--border-strong) !important; }
+html[data-theme="dark"] .message-bubble.user,
+html[data-theme="dark"] .assistant-send-btn,
+html[data-theme="dark"] .lib-add-btn:not(.added) { background: var(--primary-dark) !important; color: #ffffff !important; border-color: var(--primary) !important; }
+html[data-theme="dark"] .lib-add-btn.added { background: var(--success-bg) !important; color: #bfe8c3 !important; border-color: var(--success) !important; }
+html[data-theme="dark"] .guide-category-tag { background: var(--success-bg) !important; color: #bfe8c3 !important; }
+html[data-theme="dark"] .guide-difficulty-tag,
+html[data-theme="dark"] .guide-vital-specs,
+html[data-theme="dark"] .guide-expert-tip,
+html[data-theme="dark"] .modal-top-bar { background: var(--surface-subtle) !important; color: var(--text-primary) !important; border-color: var(--border) !important; }
+html[data-theme="dark"] .guide-diagnose-btn { background: var(--surface-raised) !important; color: var(--text-primary) !important; border-color: var(--border-strong) !important; }
+html[data-theme="dark"] .guide-add-garden-btn { background: var(--primary-dark) !important; color: #fff !important; }
+
+/* V9 shared control normalization: preserve the original Light Theme while preventing browser/light-rule leakage in Dark Theme. */
+.topbar-search input,
+.topbar-search input[type="search"],
+.library-search-box input,
+.library-search-box input[type="search"],
+.rec-search-box input,
+.rec-search-box input[type="search"] {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+  color-scheme: dark;
+}
+html[data-theme="dark"] .topbar-search input,
+html[data-theme="dark"] .library-search-box input,
+html[data-theme="dark"] .rec-search-box input {
+  color: var(--text-primary) !important;
+  caret-color: var(--primary) !important;
+}
+html[data-theme="dark"] .topbar-search input::placeholder,
+html[data-theme="dark"] .library-search-box input::placeholder,
+html[data-theme="dark"] .rec-search-box input::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* Final project-wide form/control hardening */
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+  background: var(--surface-raised) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-strong) !important;
+}
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+  color: var(--text-muted) !important;
+}
+html[data-theme="dark"] .library-search-box input,
+html[data-theme="dark"] .rec-search-box input,
+html[data-theme="dark"] .topbar-search input {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: var(--text-primary) !important;
+}
+html[data-theme="dark"] .library-search-box,
+html[data-theme="dark"] .rec-search-box,
+html[data-theme="dark"] .topbar-search {
+  background: var(--surface-raised) !important;
+  border-color: var(--border) !important;
+}
+html[data-theme="dark"] .lib-card-body,
+html[data-theme="dark"] .lib-specs-grid,
+html[data-theme="dark"] .library-modal-dialog,
+html[data-theme="dark"] .library-modal-dialog .modal-top-bar {
+  background: var(--surface-raised) !important;
+}
+html[data-theme="dark"] .lib-specs-grid { border-color: var(--border) !important; }
+html[data-theme="dark"] .lib-spec-item small { color: var(--text-secondary) !important; }
+html[data-theme="dark"] .lib-spec-item strong { color: var(--text-primary) !important; }
+html[data-theme="dark"] .lib-add-btn.added {
+  background: var(--success-bg) !important;
+  border-color: var(--border-strong) !important;
+  color: #b7efbc !important;
+}
+html[data-theme="dark"] .snapshot-chip,
+html[data-theme="dark"] .snapshot-chip * { color: var(--text-primary) !important; }
+html[data-theme="dark"] .dash-hero-title { color: #ffffff !important; }
+html[data-theme="dark"] .dash-hero-sub { color: #d8efdb !important; }
+
+/* PCHANGES: dark-theme surface cleanup + settings/metric polish. */
+html[data-theme="dark"] .topbar-search,
+html[data-theme="dark"] .library-search-box,
+html[data-theme="dark"] .rec-search-box,
+html[data-theme="dark"] .community-search-box,
+html[data-theme="dark"] .diag-search-box,
+html[data-theme="dark"] .symptom-search-box,
+html[data-theme="dark"] .search-bar {
+  background: var(--surface-raised) !important;
+  background-image: none !important;
+  border-color: var(--border-strong) !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .topbar-search::before,
+html[data-theme="dark"] .topbar-search::after,
+html[data-theme="dark"] .library-search-box::before,
+html[data-theme="dark"] .library-search-box::after,
+html[data-theme="dark"] .rec-search-box::before,
+html[data-theme="dark"] .rec-search-box::after,
+html[data-theme="dark"] .search-bar::before,
+html[data-theme="dark"] .search-bar::after {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .topbar-search input,
+html[data-theme="dark"] .library-search-box input,
+html[data-theme="dark"] .rec-search-box input,
+html[data-theme="dark"] .community-search-box input,
+html[data-theme="dark"] .diag-search-box input,
+html[data-theme="dark"] .symptom-search-box input,
+html[data-theme="dark"] .search-bar input {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .search-shortcut,
+html[data-theme="dark"] .search-clear-btn,
+html[data-theme="dark"] .quick-search-tag {
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"] .circle-bg {
+  stroke: #31463a !important;
+}
+html[data-theme="dark"] .metric-circle-progress.green .circle {
+  stroke: #72c985 !important;
+}
+html[data-theme="dark"] .metric-circle-progress.blue .circle {
+  stroke: #68b8ee !important;
+}
+html[data-theme="dark"] .circle-percentage {
+  fill: #e1f4e4 !important;
+}
+
+html[data-theme="dark"] .settings2-nav {
+  background: var(--surface) !important;
+  border-color: var(--border-strong) !important;
+}
+html[data-theme="dark"] .settings2-nav-item {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: var(--text-secondary) !important;
+}
+html[data-theme="dark"] .settings2-nav-item:hover {
+  background: #18352a !important;
+  border-color: #315743 !important;
+  color: #edf8ef !important;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .22) !important;
+}
+html[data-theme="dark"] .settings2-nav-item.active {
+  background: #24543d !important;
+  border-color: #3e7959 !important;
+  color: #f2fbf3 !important;
+  box-shadow: inset 3px 0 0 #73bd8c, 0 5px 16px rgba(0, 0, 0, .20) !important;
+}
+html[data-theme="dark"] .settings2-signout {
+  color: #f0a5a5 !important;
+}
+
+html[data-theme="dark"] .sidebar {
+  background: linear-gradient(180deg, #173f30 0%, #102f24 100%) !important;
+  border-right-color: rgba(196, 235, 211, .14) !important;
+}
+html[data-theme="dark"] .sidebar-link:hover {
+  background: rgba(180, 232, 205, .10) !important;
+}
+html[data-theme="dark"] .sidebar-link.active {
+  background: #245640 !important;
+  border-color: #3b7658 !important;
+}
+
+/* PCHANGES: final Assistant visual tuning in dark mode. */
+html[data-theme="dark"] .assistant-status-bar {
+  background: linear-gradient(135deg, #15251c 0%, #1a3024 100%) !important;
+}
+html[data-theme="dark"] .assistant-chat-card {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, .28) !important;
+}
+html[data-theme="dark"] .message-bubble.assistant {
+  background: #18271f !important;
+  border-color: #365143 !important;
+  color: #ebf6ed !important;
+}
+html[data-theme="dark"] .message-bubble.user {
+  background: #2d7545 !important;
+  border-color: #4b9461 !important;
+  color: #ffffff !important;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, .26) !important;
+}
+html[data-theme="dark"] .assistant-message-list li::marker {
+  color: #86cd97 !important;
+}
+html[data-theme="dark"] .assistant-source.ai {
+  color: #8fd39c !important;
+}
+html[data-theme="dark"] .assistant-source {
+  color: #8fa397 !important;
+}
+html[data-theme="dark"] .assistant-input-area {
+  background: #15221b !important;
+}
+html[data-theme="dark"] .assistant-input-area input {
+  background: #1a2b21 !important;
+  border-color: #3a5646 !important;
+  color: #edf7ef !important;
+}
+html[data-theme="dark"] .assistant-input-area input::placeholder {
+  color: #8fa497 !important;
+}
+html[data-theme="dark"] .quick-prompt-chip,
+html[data-theme="dark"] .clear-chat-btn {
+  background: #1a2b21 !important;
+  border-color: #395546 !important;
+  color: #d9e9dc !important;
+}
+html[data-theme="dark"] .quick-prompt-chip:hover:not(:disabled),
+html[data-theme="dark"] .clear-chat-btn:hover {
+  background: #214133 !important;
+  color: #f1fbf3 !important;
+}
+
+
+/* FINAL PCHANGES OVERRIDE: shared sidebar palette; identical in Light and Dark modes. */
+html[data-theme="dark"] .sidebar,
+html[data-theme="light"] .sidebar {
+  background: linear-gradient(180deg, var(--sidebar-bg-start) 0%, var(--sidebar-bg-end) 100%) !important;
+  border-right-color: rgba(190, 231, 205, .12) !important;
+}
+html[data-theme="dark"] .sidebar-link:hover,
+html[data-theme="light"] .sidebar-link:hover {
+  background: var(--sidebar-hover) !important;
+}
+html[data-theme="dark"] .sidebar-link.active,
+html[data-theme="light"] .sidebar-link.active {
+  background: var(--sidebar-active) !important;
+  border-color: color-mix(in srgb, var(--primary) 44%, transparent) !important;
+}
+
+/* Search fields: no browser-injected light rectangles, even for type=search. */
+html[data-theme="dark"] .topbar-search,
+html[data-theme="dark"] .library-search-box,
+html[data-theme="dark"] .rec-search-box,
+html[data-theme="dark"] .community-search-box,
+html[data-theme="dark"] .diag-search-box,
+html[data-theme="dark"] .symptom-search-box,
+html[data-theme="dark"] .search-bar,
+html[data-theme="light"] .topbar-search,
+html[data-theme="light"] .library-search-box,
+html[data-theme="light"] .rec-search-box,
+html[data-theme="light"] .community-search-box,
+html[data-theme="light"] .diag-search-box,
+html[data-theme="light"] .symptom-search-box,
+html[data-theme="light"] .search-bar {
+  background-image: none !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] input[type="search"],
+html[data-theme="dark"] input[type="search"]::-webkit-search-decoration,
+html[data-theme="dark"] input[type="search"]::-webkit-search-results-button,
+html[data-theme="dark"] input[type="search"]::-webkit-search-results-decoration,
+html[data-theme="light"] input[type="search"],
+html[data-theme="light"] input[type="search"]::-webkit-search-decoration,
+html[data-theme="light"] input[type="search"]::-webkit-search-results-button,
+html[data-theme="light"] input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+html[data-theme="dark"] input[type="search"]::-webkit-search-cancel-button,
+html[data-theme="light"] input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+/* Dark My Garden progress rings use a subdued track, never a white light-mode stroke. */
+html[data-theme="dark"] .my-garden-page .circle-bg {
+  stroke: #33473a !important;
+}
+html[data-theme="dark"] .my-garden-page .circle-percentage {
+  fill: #e4f0e6 !important;
+}
+
+
+/* FINAL PCHANGES: unified botanical sidebar palette for the full Settings navigation. */
+html[data-theme="dark"] .settings2-nav,
+html[data-theme="light"] .settings2-nav {
+  background: linear-gradient(180deg, var(--sidebar-bg-start) 0%, var(--sidebar-bg-end) 100%) !important;
+  border-color: rgba(184, 225, 196, .12) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .10) !important;
+}
+html[data-theme="dark"] .settings2-nav-item,
+html[data-theme="light"] .settings2-nav-item {
+  background: rgba(255, 255, 255, .015) !important;
+  border-color: rgba(184, 225, 196, .12) !important;
+  color: #c9dccd !important;
+}
+html[data-theme="dark"] .settings2-nav-item:hover,
+html[data-theme="light"] .settings2-nav-item:hover {
+  background: var(--sidebar-hover) !important;
+  border-color: rgba(184, 225, 196, .24) !important;
+  color: #f3faf4 !important;
+  transform: translateY(-1px);
+}
+html[data-theme="dark"] .settings2-nav-item.active,
+html[data-theme="light"] .settings2-nav-item.active {
+  background: var(--sidebar-active) !important;
+  border-color: rgba(126, 203, 149, .46) !important;
+  color: #f6fff7 !important;
+  box-shadow: inset 3px 0 0 #81cc95, 0 7px 16px rgba(0, 0, 0, .18) !important;
+}
+html[data-theme="dark"] .settings2-nav-item:focus-visible,
+html[data-theme="light"] .settings2-nav-item:focus-visible {
+  outline: 2px solid rgba(129, 203, 149, .68) !important;
+  outline-offset: 2px;
+}
+html[data-theme="dark"] .settings2-signout,
+html[data-theme="light"] .settings2-signout {
+  background: rgba(157, 55, 55, .10) !important;
+  border-color: rgba(224, 113, 113, .18) !important;
+}
+html[data-theme="dark"] .settings2-signout:hover,
+html[data-theme="light"] .settings2-signout:hover {
+  background: rgba(157, 55, 55, .18) !important;
+  border-color: rgba(224, 113, 113, .30) !important;
+}
+
+/* FINAL PCHANGES: search inputs themselves stay transparent inside their themed shells. */
+html[data-theme="dark"] input[type="search"],
+html[data-theme="light"] input[type="search"] {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* FINAL PCHANGES: Settings section UI is intentionally strong enough to read as an interactive control in both themes. */
+html[data-theme="dark"] .settings2-nav-item,
+html[data-theme="light"] .settings2-nav-item {
+  background: var(--surface-subtle) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+html[data-theme="dark"] .settings2-nav-item:hover,
+html[data-theme="light"] .settings2-nav-item:hover {
+  background: var(--surface-hover) !important;
+  border-color: var(--border-strong) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .12) !important;
+}
+html[data-theme="dark"] .settings2-nav-item.active,
+html[data-theme="light"] .settings2-nav-item.active {
+  background: var(--sidebar-active) !important;
+  border-color: var(--primary) !important;
+  color: #f3fff5 !important;
+  box-shadow: inset 3px 0 0 #7fd095, 0 7px 16px rgba(0, 0, 0, .14) !important;
+}
+html[data-theme="dark"] .settings2-nav-item.active .settings2-nav-icon,
+html[data-theme="light"] .settings2-nav-item.active .settings2-nav-icon {
+  color: #d9f5df !important;
+}
+html[data-theme="dark"] .settings2-signout,
+html[data-theme="light"] .settings2-signout {
+  background: color-mix(in srgb, var(--danger-bg) 62%, var(--surface-subtle)) !important;
+  border-color: color-mix(in srgb, var(--danger) 26%, var(--border)) !important;
+  color: var(--danger) !important;
+}
+html[data-theme="dark"] .settings2-signout:hover,
+html[data-theme="light"] .settings2-signout:hover {
+  background: color-mix(in srgb, var(--danger-bg) 78%, var(--surface)) !important;
+  color: var(--danger) !important;
+}
+
+
+/* LAST PCHANGES CASCADE: keep the Settings section rail in the same botanical palette as the application sidebar. */
+html[data-theme="dark"] .settings2-nav,
+html[data-theme="light"] .settings2-nav {
+  background: linear-gradient(180deg, var(--sidebar-bg-start) 0%, var(--sidebar-bg-end) 100%) !important;
+  border-color: rgba(184, 225, 196, .12) !important;
+}
+html[data-theme="dark"] .settings2-nav-item,
+html[data-theme="light"] .settings2-nav-item {
+  background: rgba(255, 255, 255, .015) !important;
+  border-color: rgba(184, 225, 196, .12) !important;
+  color: #c9dccd !important;
+}
+html[data-theme="dark"] .settings2-nav-item:hover,
+html[data-theme="light"] .settings2-nav-item:hover {
+  background: var(--sidebar-hover) !important;
+  border-color: rgba(184, 225, 196, .28) !important;
+  color: #f3faf4 !important;
+}
+html[data-theme="dark"] .settings2-nav-item.active,
+html[data-theme="light"] .settings2-nav-item.active {
+  background: var(--sidebar-active) !important;
+  border-color: rgba(126, 203, 149, .48) !important;
+  color: #f6fff7 !important;
+  box-shadow: inset 3px 0 0 #81cc95, 0 7px 16px rgba(0, 0, 0, .18) !important;
+}
+html[data-theme="dark"] .settings2-nav-item:focus-visible,
+html[data-theme="light"] .settings2-nav-item:focus-visible {
+  outline: 2px solid rgba(129, 203, 149, .68) !important;
+  outline-offset: 2px;
+}
+html[data-theme="dark"] .settings2-signout,
+html[data-theme="light"] .settings2-signout {
+  background: rgba(157, 55, 55, .10) !important;
+  border-color: rgba(224, 113, 113, .20) !important;
+}
+html[data-theme="dark"] .settings2-signout:hover,
+html[data-theme="light"] .settings2-signout:hover {
+  background: rgba(157, 55, 55, .18) !important;
+  border-color: rgba(224, 113, 113, .34) !important;
+}
+
+/* FINAL SETTINGS NAV POLISH: section controls blend into the settings rail;
+   only the active choice gets the botanical accent. */
+html[data-theme="dark"] .settings2-nav-item,
+html[data-theme="light"] .settings2-nav-item {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: var(--text-secondary) !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .settings2-nav-item:hover,
+html[data-theme="light"] .settings2-nav-item:hover {
+  background: var(--surface-hover) !important;
+  border-color: transparent !important;
+  color: var(--text-primary) !important;
+  box-shadow: none !important;
+  transform: none;
+}
+html[data-theme="dark"] .settings2-nav-item.active,
+html[data-theme="light"] .settings2-nav-item.active {
+  background: var(--sidebar-active) !important;
+  border-color: transparent !important;
+  color: #f6fff7 !important;
+  box-shadow: inset 3px 0 0 #81cc95, 0 7px 16px rgba(0, 0, 0, .12) !important;
+}
+html[data-theme="dark"] .settings2-nav-item:focus-visible,
+html[data-theme="light"] .settings2-nav-item:focus-visible {
+  outline: 2px solid var(--primary) !important;
+  outline-offset: -2px;
+}
+html[data-theme="dark"] .settings2-signout,
+html[data-theme="light"] .settings2-signout {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: var(--text-secondary) !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .settings2-signout:hover,
+html[data-theme="light"] .settings2-signout:hover {
+  background: rgba(185, 82, 82, .12) !important;
+  border-color: transparent !important;
+  color: var(--danger) !important;
+  box-shadow: none !important;
+}
+
+/* Latest Settings PCHANGES: keep section controls visually consistent with
+   the main sidebar in both themes; only the selected section receives the
+   stronger botanical accent. */
+html[data-theme="dark"] .settings2-nav-item,
+html[data-theme="light"] .settings2-nav-item {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: var(--text-secondary) !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .settings2-nav-item:hover,
+html[data-theme="light"] .settings2-nav-item:hover {
+  background: var(--sidebar-hover) !important;
+  border-color: transparent !important;
+  color: var(--text-primary) !important;
+  box-shadow: none !important;
+}
+html[data-theme="dark"] .settings2-nav-item.active,
+html[data-theme="light"] .settings2-nav-item.active {
+  background: var(--sidebar-active) !important;
+  border-color: transparent !important;
+  color: #f5fff7 !important;
+  box-shadow: inset 3px 0 0 #7fd095 !important;
+}
+html[data-theme="dark"] .settings2-signout,
+html[data-theme="light"] .settings2-signout {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: var(--text-secondary) !important;
+}
+html[data-theme="dark"] .settings2-signout:hover,
+html[data-theme="light"] .settings2-signout:hover {
+  background: color-mix(in srgb, var(--danger-bg) 45%, transparent) !important;
+  color: var(--danger) !important;
+}

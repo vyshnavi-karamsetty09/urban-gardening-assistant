@@ -90,7 +90,9 @@ export function classifySymptoms(symptoms = []) {
   return {
     diseaseId: best.id,
     diseaseName: best.name,
-    confidence: bestScore > 0 ? Math.min(96, 64 + bestScore * 8) : 58,
+    // Rule matching ranks possible matches; it does not produce a calibrated
+    // probability. Keep confidence empty unless a real AI provider supplies it.
+    confidence: null,
     advice: best.advice,
   };
 }

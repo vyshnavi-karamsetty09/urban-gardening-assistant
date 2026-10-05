@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PageHeaderBanner from "../components/PageHeaderBanner";
 import { communityApi } from "../api";
-import { STORAGE_KEYS } from "../utils";
+import { readStorage, STORAGE_KEYS } from "../utils";
 
 import "./Community.css";
 
@@ -25,18 +25,18 @@ const POPULAR_TAGS = [
   "Snake Plant",
 ];
 
-function Community({ onPageChange }) {
+function Community() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [sortBy, setSortBy] = useState("recent"); // "recent" | "popular"
+  const [sortBy, setSortBy] = useState("recent");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedComments, setExpandedComments] = useState({});
   const [commentInputs, setCommentInputs] = useState({});
   const [toastMsg, setToastMsg] = useState(null);
 
-  // Form state
+  // Question form state
   const [formCategory, setFormCategory] = useState("Balcony Gardens");
   const [formPlantTag, setFormPlantTag] = useState("Tomato");
   const [formTitle, setFormTitle] = useState("");
@@ -45,15 +45,11 @@ function Community({ onPageChange }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Current session user
-  const session = (() => {
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEYS.session) || "null") || {};
-    } catch {
-      return {};
-    }
-  })();
+  const session = readStorage(STORAGE_KEYS.session, {}) || {};
+
   const currentUserName = session?.name || "Gardener";
-  const currentUserEmail = session?.email || "gardener@gardenguide.local";
+  const currentUserEmail =
+    session?.email || "gardener@gardenguide.local";
 
   const showToast = (msg) => {
     setToastMsg(msg);
@@ -62,17 +58,22 @@ function Community({ onPageChange }) {
 
   const loadPosts = async () => {
     setLoading(true);
+
     try {
       const res = await communityApi.list({
         category: selectedCategory === "All" ? "" : selectedCategory,
         q: searchQuery,
         sort: sortBy,
       });
+
       if (res?.posts) {
         setPosts(res.posts);
       }
     } catch (err) {
-      console.warn("Could not load remote community posts, using local cache:", err.message);
+      console.warn(
+        "Could not load remote community posts:",
+        err.message
+      );
     } finally {
       setLoading(false);
     }
@@ -82,26 +83,33 @@ function Community({ onPageChange }) {
     const timer = setTimeout(() => {
       loadPosts();
     }, 250);
+
     return () => clearTimeout(timer);
   }, [selectedCategory, searchQuery, sortBy]);
 
-  // Handle Like
+  // Like / unlike a question
   const handleLike = async (postId) => {
     try {
-      // Optimistic update
       setPosts((prev) =>
         prev.map((p) => {
           if (p._id === postId) {
             const liked = p.likedBy?.includes(currentUserEmail);
+
             const newLikedBy = liked
-              ? (p.likedBy || []).filter((e) => e !== currentUserEmail)
+              ? (p.likedBy || []).filter(
+                  (email) => email !== currentUserEmail
+                )
               : [...(p.likedBy || []), currentUserEmail];
+
             return {
               ...p,
-              likes: liked ? Math.max(0, p.likes - 1) : p.likes + 1,
+              likes: liked
+                ? Math.max(0, p.likes - 1)
+                : p.likes + 1,
               likedBy: newLikedBy,
             };
           }
+
           return p;
         })
       );
@@ -113,7 +121,7 @@ function Community({ onPageChange }) {
     }
   };
 
-  // Toggle comments
+  // Toggle answers section
   const toggleComments = (postId) => {
     setExpandedComments((prev) => ({
       ...prev,
@@ -121,10 +129,12 @@ function Community({ onPageChange }) {
     }));
   };
 
-  // Add Comment
+  // Add answer
   const handleAddComment = async (postId, e) => {
     e.preventDefault();
+
     const text = (commentInputs[postId] || "").trim();
+
     if (!text) return;
 
     try {
@@ -138,30 +148,40 @@ function Community({ onPageChange }) {
           prev.map((p) => (p._id === postId ? res.post : p))
         );
       }
-      setCommentInputs((prev) => ({ ...prev, [postId]: "" }));
-      showToast("💬 Reply posted!");
+
+      setCommentInputs((prev) => ({
+        ...prev,
+        [postId]: "",
+      }));
+
+      showToast("💬 Answer posted!");
     } catch (err) {
-      console.error("Comment failed:", err);
-      showToast("Unable to post comment.");
+      console.error("Answer failed:", err);
+      showToast("Unable to post answer.");
     }
   };
 
-  // Create Post
+  // Ask a new gardening question
   const handleCreatePost = async (e) => {
     e.preventDefault();
     setFormError("");
 
     if (!formTitle.trim() || formTitle.trim().length < 5) {
-      setFormError("Please enter a title of at least 5 characters.");
+      setFormError(
+        "Please enter a question title of at least 5 characters."
+      );
       return;
     }
 
     if (!formContent.trim() || formContent.trim().length < 15) {
-      setFormError("Please describe your question or tip in more detail (at least 15 characters).");
+      setFormError(
+        "Please describe your question or plant problem in more detail (at least 15 characters)."
+      );
       return;
     }
 
     setIsSubmitting(true);
+
     try {
       const res = await communityApi.create({
         title: formTitle.trim(),
@@ -173,13 +193,17 @@ function Community({ onPageChange }) {
 
       if (res?.post) {
         setPosts((prev) => [res.post, ...prev]);
-        showToast("🌿 Post published to Community!");
+
+        showToast("🌿 Question posted to Community!");
+
         setIsModalOpen(false);
         setFormTitle("");
         setFormContent("");
       }
     } catch (err) {
-      setFormError(err.message || "Failed to create post. Please try again.");
+      setFormError(
+        err.message || "Failed to post your question. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -187,48 +211,53 @@ function Community({ onPageChange }) {
 
   const formatTimeAgo = (dateStr) => {
     if (!dateStr) return "recently";
+
     const date = new Date(dateStr);
-    const diffSec = Math.floor((Date.now() - date.getTime()) / 1000);
+    const diffSec = Math.floor(
+      (Date.now() - date.getTime()) / 1000
+    );
+
     if (diffSec < 60) return "just now";
     if (diffSec < 3600) return `${Math.floor(diffSec / 60)}m ago`;
     if (diffSec < 86400) return `${Math.floor(diffSec / 3600)}h ago`;
+
     return `${Math.floor(diffSec / 86400)}d ago`;
   };
 
   return (
     <main className="community-page">
       <PageHeaderBanner
-        showBackButton={true}
-        onPageChange={onPageChange}
-        backFallbackPage="dashboard"
-        eyebrow="URBAN BOTANICAL NETWORK & FORUM"
-        title="Community Hub"
-        titleAccent="👥"
-        subtitle="Connect with fellow urban growers, share plant triumphs, exchange organic solutions, and ask questions."
+        eyebrow="GARDEN GUIDE COMMUNITY Q&A"
+        title="Gardening Q&A"
+        titleAccent="💬"
+        subtitle="Ask gardening questions, describe plant problems, and get practical answers from fellow urban growers."
         badgeIcon="🌱"
-        badgeTitle="50,000+ Active Growers"
-        badgeSubtitle="Balconies • Terraces • Indoor Spaces"
+        badgeTitle="Gardeners Helping Gardeners"
+        badgeSubtitle="Ask • Answer • Grow Together"
       />
 
       <div className="community-container">
-        {/* Main Feed Column */}
+        {/* Main Q&A Column */}
         <section className="community-main">
-          {/* Top Actions Bar */}
+          {/* Search + Ask Question */}
           <div className="community-actions-bar animate-slow-pop">
             <div className="community-search-box">
               <span className="search-icon">🔍</span>
+
               <input
                 type="search"
-                placeholder="Search community tips, questions, plants..."
+                placeholder="Search questions, plants, problems..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                aria-label="Search community posts"
+                aria-label="Search gardening questions"
               />
+
               {searchQuery && (
                 <button
                   type="button"
                   className="search-clear-btn"
                   onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
                 >
                   ✕
                 </button>
@@ -240,19 +269,21 @@ function Community({ onPageChange }) {
               className="create-post-btn slow-pop-btn"
               onClick={() => setIsModalOpen(true)}
             >
-              <span>✍️</span>
-              <span>Share Tip or Question</span>
+              <span>❓</span>
+              <span>Ask a Question</span>
             </button>
           </div>
 
-          {/* Category Filter Pills & Sort Selector */}
+          {/* Category + Sort */}
           <div className="community-filter-row">
             <div className="category-pills-wrap">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
                   type="button"
-                  className={`category-pill ${selectedCategory === cat ? "active" : ""}`}
+                  className={`category-pill ${
+                    selectedCategory === cat ? "active" : ""
+                  }`}
                   onClick={() => setSelectedCategory(cat)}
                 >
                   {cat}
@@ -263,14 +294,19 @@ function Community({ onPageChange }) {
             <div className="sort-buttons-wrap">
               <button
                 type="button"
-                className={`sort-pill ${sortBy === "recent" ? "active" : ""}`}
+                className={`sort-pill ${
+                  sortBy === "recent" ? "active" : ""
+                }`}
                 onClick={() => setSortBy("recent")}
               >
                 🕒 Recent
               </button>
+
               <button
                 type="button"
-                className={`sort-pill ${sortBy === "popular" ? "active" : ""}`}
+                className={`sort-pill ${
+                  sortBy === "popular" ? "active" : ""
+                }`}
                 onClick={() => setSortBy("popular")}
               >
                 🔥 Popular
@@ -278,125 +314,214 @@ function Community({ onPageChange }) {
             </div>
           </div>
 
-          {/* Posts List */}
+          {/* Question Feed */}
           {loading && posts.length === 0 ? (
             <div className="community-loading-state">
               <span className="loading-spinner-sprout">🌱</span>
-              <p>Gathering garden discussions...</p>
+              <p>Gathering gardening questions...</p>
             </div>
           ) : posts.length === 0 ? (
             <div className="community-empty-state">
-              <div className="empty-icon">🪴</div>
-              <h3>No discussions found</h3>
+              <div className="empty-icon">❓</div>
+
+              <h3>No questions found</h3>
+
               <p>
                 {searchQuery
-                  ? `No posts matching "${searchQuery}". Try a different keyword.`
-                  : "Be the first to share a garden tip or question in this topic!"}
+                  ? `No questions matching "${searchQuery}". Try a different keyword.`
+                  : "Be the first to ask a gardening question in this topic!"}
               </p>
+
               <button
                 type="button"
                 className="btn-empty-create"
                 onClick={() => setIsModalOpen(true)}
               >
-                Start a Discussion →
+                Ask a Question →
               </button>
             </div>
           ) : (
             <div className="posts-feed">
               {posts.map((post) => {
-                const isLiked = post.likedBy?.includes(currentUserEmail);
-                const areCommentsOpen = expandedComments[post._id];
-                const commentsCount = post.comments?.length || 0;
+                const isLiked = post.likedBy?.includes(
+                  currentUserEmail
+                );
+
+                const areCommentsOpen =
+                  expandedComments[post._id];
+
+                const commentsCount =
+                  post.comments?.length || 0;
 
                 return (
-                  <article key={post._id} className="post-card fade-in-up">
-                    {/* Post Header */}
+                  <article
+                    key={post._id}
+                    className="post-card fade-in-up"
+                  >
+                    {/* Question Header */}
                     <div className="post-header">
                       <div className="post-author-box">
                         <div className="author-avatar">
-                          {post.author?.avatar || post.author?.name?.slice(0, 1) || "🌿"}
+                          {post.author?.avatar ||
+                            post.author?.name?.slice(0, 1) ||
+                            "🌿"}
                         </div>
+
                         <div className="author-meta">
-                          <strong className="author-name">{post.author?.name || "Gardener"}</strong>
-                          <span className="author-role-badge">{post.author?.role || "Urban Grower"}</span>
+                          <strong className="author-name">
+                            {post.author?.name || "Gardener"}
+                          </strong>
+
+                          <span className="author-role-badge">
+                            {post.author?.role || "Urban Grower"}
+                          </span>
                         </div>
                       </div>
-                      <span className="post-time">{formatTimeAgo(post.createdAt)}</span>
+
+                      <span className="post-time">
+                        Asked {formatTimeAgo(post.createdAt)}
+                      </span>
                     </div>
 
-                    {/* Post Badges */}
+                    {/* Question Label */}
+                    <div className="post-question-label">
+                      QUESTION
+                    </div>
+
+                    {/* Category / Plant */}
                     <div className="post-tags-row">
-                      <span className="post-category-tag">{post.category}</span>
-                      {post.plantTag && post.plantTag !== "General" && (
-                        <span className="post-plant-tag">🌿 {post.plantTag}</span>
-                      )}
+                      <span className="post-category-tag">
+                        {post.category}
+                      </span>
+
+                      {post.plantTag &&
+                        post.plantTag !== "General" && (
+                          <span className="post-plant-tag">
+                            🌿 {post.plantTag}
+                          </span>
+                        )}
                     </div>
 
-                    {/* Post Title & Content */}
-                    <h3 className="post-title">{post.title}</h3>
-                    <p className="post-content-text">{post.content}</p>
+                    {/* Question */}
+                    <h3 className="post-title">
+                      {post.title}
+                    </h3>
 
-                    {/* Post Actions */}
+                    <p className="post-content-text">
+                      {post.content}
+                    </p>
+
+                    {/* Question Actions */}
                     <div className="post-footer-actions">
                       <button
                         type="button"
-                        className={`post-action-btn like-btn ${isLiked ? "liked" : ""}`}
+                        className={`post-action-btn like-btn ${
+                          isLiked ? "liked" : ""
+                        }`}
                         onClick={() => handleLike(post._id)}
-                        aria-label="Like post"
+                        aria-label={
+                          isLiked
+                            ? "Unlike question"
+                            : "Like question"
+                        }
                       >
-                        <span className="action-icon">{isLiked ? "❤️" : "🤍"}</span>
+                        <span className="action-icon">
+                          {isLiked ? "❤️" : "🤍"}
+                        </span>
+
                         <span>{post.likes || 0}</span>
                       </button>
 
                       <button
                         type="button"
-                        className={`post-action-btn comment-btn ${areCommentsOpen ? "active" : ""}`}
-                        onClick={() => toggleComments(post._id)}
-                        aria-label="View comments"
+                        className={`post-action-btn comment-btn ${
+                          areCommentsOpen ? "active" : ""
+                        }`}
+                        onClick={() =>
+                          toggleComments(post._id)
+                        }
+                        aria-label={
+                          areCommentsOpen
+                            ? "Hide answers"
+                            : "View answers"
+                        }
                       >
-                        <span className="action-icon">💬</span>
-                        <span>{commentsCount} {commentsCount === 1 ? "Comment" : "Comments"}</span>
+                        <span className="action-icon">
+                          💬
+                        </span>
+
+                        <span>
+                          {commentsCount}{" "}
+                          {commentsCount === 1
+                            ? "Answer"
+                            : "Answers"}
+                        </span>
                       </button>
                     </div>
 
-                    {/* Comments Drawer */}
+                    {/* Answers */}
                     {areCommentsOpen && (
                       <div className="comments-drawer">
-                        <div className="comments-divider"></div>
+                        <div className="answers-section-header">
+                          <strong>Answers</strong>
 
-                        {/* Existing comments */}
+                          <span>{commentsCount}</span>
+                        </div>
+
+                        <div className="comments-divider" />
+
                         {commentsCount === 0 ? (
                           <div className="comments-empty">
-                            No comments yet. Share your experience or tip!
+                            No answers yet. Be the first to help!
                           </div>
                         ) : (
                           <div className="comments-list">
                             {post.comments.map((c, idx) => (
-                              <div key={c._id || idx} className="comment-item">
+                              <div
+                                key={c._id || idx}
+                                className="comment-item"
+                              >
                                 <div className="comment-avatar">
-                                  {c.author?.slice(0, 1).toUpperCase() || "🧑‍🌾"}
+                                  {c.author
+                                    ?.slice(0, 1)
+                                    .toUpperCase() || "🌱"}
                                 </div>
+
                                 <div className="comment-body">
                                   <div className="comment-header">
-                                    <strong className="comment-author">{c.author}</strong>
-                                    <span className="comment-time">{formatTimeAgo(c.createdAt)}</span>
+                                    <strong className="comment-author">
+                                      {c.author}
+                                    </strong>
+
+                                    <span className="comment-time">
+                                      {formatTimeAgo(
+                                        c.createdAt
+                                      )}
+                                    </span>
                                   </div>
-                                  <p className="comment-text">{c.text}</p>
+
+                                  <p className="comment-text">
+                                    {c.text}
+                                  </p>
                                 </div>
                               </div>
                             ))}
                           </div>
                         )}
 
-                        {/* Add comment input */}
+                        {/* Write an answer */}
                         <form
                           className="add-comment-form"
-                          onSubmit={(e) => handleAddComment(post._id, e)}
+                          onSubmit={(e) =>
+                            handleAddComment(post._id, e)
+                          }
                         >
                           <input
                             type="text"
-                            placeholder="Add a helpful reply or follow-up question..."
-                            value={commentInputs[post._id] || ""}
+                            placeholder="Write an answer or helpful suggestion..."
+                            value={
+                              commentInputs[post._id] || ""
+                            }
                             onChange={(e) =>
                               setCommentInputs((prev) => ({
                                 ...prev,
@@ -404,13 +529,18 @@ function Community({ onPageChange }) {
                               }))
                             }
                             className="comment-input"
+                            aria-label="Write an answer"
                           />
+
                           <button
                             type="submit"
                             className="btn-comment-submit"
-                            disabled={!(commentInputs[post._id] || "").trim()}
+                            disabled={
+                              !(commentInputs[post._id] || "")
+                                .trim()
+                            }
                           >
-                            Reply
+                            Answer
                           </button>
                         </form>
                       </div>
@@ -422,27 +552,33 @@ function Community({ onPageChange }) {
           )}
         </section>
 
-        {/* Sidebar Info Column */}
+        {/* Q&A Sidebar */}
         <aside className="community-sidebar">
-          {/* Quick Share Card */}
+          {/* Ask for Help */}
           <div className="community-side-card promo-card">
-            <div className="side-card-icon">🌿</div>
-            <h4>Have a Garden Victory?</h4>
+            <div className="side-card-icon">❓</div>
+
+            <h4>Need Help With a Plant?</h4>
+
             <p>
-              Did your cherry tomatoes ripen? Did you save a plant from aphids? Share your photos and methods with 50K+ growers.
+              Ask about pests, watering, sunlight, soil,
+              yellow leaves, slow growth, or any other
+              gardening problem.
             </p>
+
             <button
               type="button"
               className="btn-side-share"
               onClick={() => setIsModalOpen(true)}
             >
-              Post Your Story →
+              Ask a Question →
             </button>
           </div>
 
-          {/* Plant Discussion Tags */}
+          {/* Popular Topics */}
           <div className="community-side-card">
-            <h4>🌿 Trending Plant Topics</h4>
+            <h4>🌿 Popular Question Topics</h4>
+
             <div className="tags-cloud">
               {POPULAR_TAGS.map((tag) => (
                 <button
@@ -457,30 +593,50 @@ function Community({ onPageChange }) {
             </div>
           </div>
 
-          {/* Community Guidelines */}
+          {/* Better Answers */}
           <div className="community-side-card guidelines-card">
-            <h4>🛡️ Community Values</h4>
+            <h4>🛡️ How to Get Better Answers</h4>
+
             <ul className="guidelines-list">
               <li>
                 <span className="guide-bullet">🌱</span>
-                <span><strong>Be encouraging:</strong> Every urban grower starts with a single seed.</span>
+
+                <span>
+                  <strong>Describe the plant:</strong> Mention
+                  the plant name and what you are growing it in.
+                </span>
               </li>
+
               <li>
-                <span className="guide-bullet">🍃</span>
-                <span><strong>Eco-friendly solutions:</strong> Prioritize natural & organic remedies whenever possible.</span>
+                <span className="guide-bullet">☀️</span>
+
+                <span>
+                  <strong>Give growing conditions:</strong>{" "}
+                  Mention sunlight, watering, soil, and
+                  container size.
+                </span>
               </li>
+
               <li>
-                <span className="guide-bullet">🏡</span>
-                <span><strong>Share context:</strong> Mention sunlight, container size, and local climate for better answers.</span>
+                <span className="guide-bullet">🔎</span>
+
+                <span>
+                  <strong>Describe the problem:</strong>{" "}
+                  Explain the symptoms and what you have
+                  already tried.
+                </span>
               </li>
             </ul>
           </div>
         </aside>
       </div>
 
-      {/* Create Post Modal */}
+      {/* Create Question Modal */}
       {isModalOpen && (
-        <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
+        <div
+          className="modal-backdrop"
+          onClick={() => setIsModalOpen(false)}
+        >
           <div
             className="create-post-modal"
             role="dialog"
@@ -490,9 +646,13 @@ function Community({ onPageChange }) {
           >
             <div className="modal-header">
               <div className="modal-title-wrap">
-                <span className="modal-icon">✍️</span>
-                <h2 id="modal-title">Share with the Garden Community</h2>
+                <span className="modal-icon">❓</span>
+
+                <h2 id="modal-title">
+                  Ask the Garden Community
+                </h2>
               </div>
+
               <button
                 type="button"
                 className="modal-close-btn"
@@ -503,9 +663,15 @@ function Community({ onPageChange }) {
               </button>
             </div>
 
-            <form onSubmit={handleCreatePost} className="modal-form">
+            <form
+              onSubmit={handleCreatePost}
+              className="modal-form"
+            >
               {formError && (
-                <div className="modal-error-alert" role="alert">
+                <div
+                  className="modal-error-alert"
+                  role="alert"
+                >
                   <span>⚠️</span>
                   <span>{formError}</span>
                 </div>
@@ -513,14 +679,21 @@ function Community({ onPageChange }) {
 
               <div className="form-row-dual">
                 <div className="form-field">
-                  <label htmlFor="post-category">Topic Category *</label>
+                  <label htmlFor="post-category">
+                    Topic Category *
+                  </label>
+
                   <select
                     id="post-category"
                     value={formCategory}
-                    onChange={(e) => setFormCategory(e.target.value)}
+                    onChange={(e) =>
+                      setFormCategory(e.target.value)
+                    }
                     required
                   >
-                    {CATEGORIES.filter((c) => c !== "All").map((cat) => (
+                    {CATEGORIES.filter(
+                      (c) => c !== "All"
+                    ).map((cat) => (
                       <option key={cat} value={cat}>
                         {cat}
                       </option>
@@ -529,13 +702,21 @@ function Community({ onPageChange }) {
                 </div>
 
                 <div className="form-field">
-                  <label htmlFor="post-plant">Related Plant Species</label>
+                  <label htmlFor="post-plant">
+                    Related Plant
+                  </label>
+
                   <select
                     id="post-plant"
                     value={formPlantTag}
-                    onChange={(e) => setFormPlantTag(e.target.value)}
+                    onChange={(e) =>
+                      setFormPlantTag(e.target.value)
+                    }
                   >
-                    <option value="General">General / All Plants</option>
+                    <option value="General">
+                      General / All Plants
+                    </option>
+
                     {POPULAR_TAGS.map((tag) => (
                       <option key={tag} value={tag}>
                         {tag}
@@ -546,34 +727,49 @@ function Community({ onPageChange }) {
               </div>
 
               <div className="form-field">
-                <label htmlFor="post-title">Discussion Title *</label>
+                <label htmlFor="post-title">
+                  Your Question *
+                </label>
+
                 <input
                   id="post-title"
                   type="text"
-                  placeholder="e.g. How I grew sweet cherry tomatoes on my 4th-floor balcony"
+                  placeholder="e.g. Why are my tomato leaves turning yellow?"
                   value={formTitle}
-                  onChange={(e) => setFormTitle(e.target.value)}
+                  onChange={(e) =>
+                    setFormTitle(e.target.value)
+                  }
                   required
                 />
               </div>
 
               <div className="form-field">
                 <div className="label-with-counter">
-                  <label htmlFor="post-content">Your Tip, Story, or Question *</label>
-                  <span className="char-counter">{formContent.length} chars</span>
+                  <label htmlFor="post-content">
+                    Describe Your Problem or Question *
+                  </label>
+
+                  <span className="char-counter">
+                    {formContent.length} chars
+                  </span>
                 </div>
+
                 <textarea
                   id="post-content"
                   rows={5}
-                  placeholder="Share details such as your pot size, sunlight hours, watering schedule, soil mix, or specific symptoms..."
+                  placeholder="Describe your plant, pot size, sunlight, watering schedule, soil mix, symptoms, and what you have already tried..."
                   value={formContent}
-                  onChange={(e) => setFormContent(e.target.value)}
+                  onChange={(e) =>
+                    setFormContent(e.target.value)
+                  }
                   required
                 />
               </div>
 
               <div className="modal-author-note">
-                <span>Posting as: <strong>{currentUserName}</strong> ({currentUserEmail})</span>
+                Posting as:{" "}
+                <strong>{currentUserName}</strong>{" "}
+                ({currentUserEmail})
               </div>
 
               <div className="modal-footer">
@@ -584,12 +780,15 @@ function Community({ onPageChange }) {
                 >
                   Cancel
                 </button>
+
                 <button
                   type="submit"
                   className="btn-modal-submit"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Publishing..." : "Publish Post 🌿"}
+                  {isSubmitting
+                    ? "Posting..."
+                    : "Post Question 🌿"}
                 </button>
               </div>
             </form>
@@ -597,7 +796,7 @@ function Community({ onPageChange }) {
         </div>
       )}
 
-      {/* Floating Toast Notification */}
+      {/* Toast */}
       {toastMsg && (
         <div className="community-toast slow-popup">
           <span>✨</span>

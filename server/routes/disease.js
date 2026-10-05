@@ -69,6 +69,12 @@ router.post("/analyze", requireAuth, async (req, res) => {
       console.warn("disease AI fallback:", error.message);
     }
 
+    if (!result && symptoms.length === 0) {
+      return res.status(422).json({
+        message: "Image-based analysis is not available right now. Add plant symptoms or configure the AI provider for image analysis.",
+      });
+    }
+
     result ||= local;
     const report = await DiseaseReport.create({
       user: req.user._id,
