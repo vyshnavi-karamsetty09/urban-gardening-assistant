@@ -6,10 +6,30 @@ import { requireAuth } from "../middleware/auth.js";
 const router = express.Router();
 
 async function callAIDiagnosis(payload) {
-  const apiKey = process.env.AI_API_KEY;
+  const geminiKey = process.env.GEMINI_API_KEY;
+
+  const apiKey =
+    process.env.AI_API_KEY ||
+    process.env.OPENAI_API_KEY ||
+    process.env.GARDEN_AI_API_KEY ||
+    geminiKey;
+
   if (!apiKey) return null;
-  const baseUrl = (process.env.AI_BASE_URL || "https://api.openai.com/v1").replace(/\/$/, "");
-  const model = process.env.AI_MODEL || "gpt-4o-mini";
+
+  const defaultBaseUrl = geminiKey
+    ? "https://generativelanguage.googleapis.com/v1beta/openai"
+    : "https://api.openai.com/v1";
+
+  const baseUrl = (
+    process.env.AI_BASE_URL ||
+    process.env.OPENAI_BASE_URL ||
+    defaultBaseUrl
+  ).replace(/\/$/, "");
+
+  const model =
+    process.env.AI_MODEL ||
+    process.env.OPENAI_MODEL ||
+    (geminiKey ? "gemini-3.6-flash" : "gpt-4o-mini");
   const prompt = `Analyze these plant symptoms as a cautious gardening assistant. Plant: ${payload.plantName || "unknown"}. Symptoms: ${(payload.symptoms || []).join(", ") || "none provided; inspect the attached leaf image if available"}. Return JSON only with fields diseaseName, confidence (0-100), advice. Do not claim certainty; phrase it as an assessment.`;
   const content = [{ type: "text", text: prompt }];
   if (payload.imageDataUrl && /^data:image\/(png|jpeg|jpg|webp);base64,/i.test(payload.imageDataUrl)) {
