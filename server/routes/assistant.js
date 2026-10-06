@@ -443,10 +443,10 @@ function localAnswer(message, context = {}, conversation = []) {
 
   if (intent === "conversation") {
     if (/^(thanks|thank you|thx|okay|ok|got it|great|nice)[!.?\s]*$/.test(lower)) {
-      return "You’re welcome! 🌿 Ask me about a plant, a gardening problem, or your Garden Guide setup whenever you like.";
+      return "You’re welcome! Ask me about a plant, a gardening problem, or your Garden Guide setup whenever you like.";
     }
     return [
-      "Hi! 🌱 I’m your Garden Guide assistant.",
+      "Hi! I’m your Garden Guide assistant.",
       "You can ask me about planting, watering, sunlight, soil, fertilizer, pests, diseases, pruning, propagation, repotting, seasonal care, harvesting, or the plants saved in your own garden.",
       "You can also ask follow-up questions and I’ll keep track of the current plant/topic when the context is clear.",
     ].join("\n");

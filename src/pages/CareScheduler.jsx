@@ -166,7 +166,7 @@ function CareScheduler({ onPageChange }) {
     try {
       await operation();
     } catch {
-      showToast("⚠️ Task saved locally. Backend sync is currently unavailable.");
+      showToast("Task saved locally. Backend sync is currently unavailable.");
     }
   };
 
@@ -213,7 +213,7 @@ function CareScheduler({ onPageChange }) {
         })
       );
     }
-    showToast(count > 0 ? `💧 Completed all ${count} due watering tasks!` : "All watering tasks were already completed!");
+    showToast(count > 0 ? `Completed all ${count} due watering tasks!` : "All watering tasks were already completed!");
   };
 
   const handleSyncWithGarden = async () => {
@@ -234,7 +234,7 @@ function CareScheduler({ onPageChange }) {
         // Keep local state if backend fails
       }
     }
-    showToast(`🌿 Calibrated care routine generated for ${plants.length} plants in your garden!`);
+    showToast(`Calibrated care routine generated for ${plants.length} plants in your garden!`);
   };
 
 
@@ -289,7 +289,7 @@ function CareScheduler({ onPageChange }) {
         task.id = result.task?.id || task.id;
         task._id = result.task?._id;
       } catch {
-        showToast("⚠️ Task created locally; backend is unavailable.");
+        showToast("Task created locally; backend is unavailable.");
       }
     }
     setTasks((current) => [task, ...current]);

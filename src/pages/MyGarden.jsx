@@ -156,7 +156,7 @@ function MyGarden({ onPageChange }) {
     const updated = [itemToStore, ...plants];
     setPlants(updated);
     savePlants(updated);
-    setToastMsg(`🌿 "${libPlant.name}" added to your garden!`);
+    setToastMsg(`"${libPlant.name}" added to your garden!`);
     setTimeout(() => setToastMsg(null), 3500);
   };
 
@@ -203,7 +203,7 @@ function MyGarden({ onPageChange }) {
     savePlants(updated);
     setFormName("");
     setShowAddForm(false);
-    setToastMsg(`🌿 "${name}" added to your garden!`);
+    setToastMsg(`"${name}" added to your garden!`);
     setTimeout(() => setToastMsg(null), 3500);
   };
 
@@ -220,7 +220,7 @@ function MyGarden({ onPageChange }) {
     if (selectedPlant && (selectedPlant.id === plantId || selectedPlant._id === plantId)) {
       setSelectedPlant((prev) => (prev ? { ...prev, plantedDate: newDate } : null));
     }
-    setToastMsg(`📅 Planted date updated!`);
+    setToastMsg(`Planted date updated!`);
     setTimeout(() => setToastMsg(null), 2500);
   };
 
@@ -549,7 +549,7 @@ function MyGarden({ onPageChange }) {
 
         {/* Right: Garden Insights */}
         <aside className="garden-insights-panel slow-popup animate-slow-pop" style={{ animationDelay: "300ms" }}>
-          <h2 className="insights-heading">📈 Garden Insights</h2>
+          <h2 className="insights-heading">Garden Insights</h2>
 
           <div className="insights-list">
             {/* Harvest Insight */}
@@ -655,7 +655,7 @@ function MyGarden({ onPageChange }) {
         {/* Column 3: Garden Tip */}
         <article className="bottom-panel tip-panel slow-popup animate-slow-pop" style={{ animationDelay: "480ms" }}>
           <div className="tip-header">
-            <h3 className="bottom-panel-title">💡 Garden Tip</h3>
+            <h3 className="bottom-panel-title">Garden Tip</h3>
           </div>
 
           <div className="tip-content-flex">
@@ -685,7 +685,6 @@ function MyGarden({ onPageChange }) {
       {/* Floating Toast Notification */}
       {toastMsg && (
         <div className="garden-floating-toast slow-popup">
-          <span className="toast-icon">✨</span>
           <span className="toast-text">{toastMsg}</span>
         </div>
       )}
@@ -701,7 +700,7 @@ function MyGarden({ onPageChange }) {
           >
             <div className="garden-modal-header">
               <div>
-                <h3 className="modal-title-main">Add Plants to Your Garden 🌱</h3>
+                <h3 className="modal-title-main">Add Plants to Your Garden</h3>
                 <p className="modal-title-sub">
                   Choose from our verified botanical library or enter a custom plant variety.
                 </p>
@@ -932,7 +931,7 @@ function MyGarden({ onPageChange }) {
                     Cancel
                   </button>
                   <button type="submit" className="modal-submit-btn slow-pop-btn">
-                    Add Custom Plant 🌱
+                    Add Custom Plant
                   </button>
                 </div>
               </form>

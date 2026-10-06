@@ -16,7 +16,7 @@ const QUICK_PROMPTS = [
 
 const INITIAL_MESSAGE = {
   role: "assistant",
-  text: "Hi! 🌿 I’m your Garden Guide assistant. Tell me the plant name and what you want to fix, grow, or understand. I can help with watering, light, soil, pests, symptoms, feeding, and harvest care.",
+  text: "Hi! I’m your Garden Guide assistant. Tell me the plant name and what you want to fix, grow, or understand. I can help with watering, light, soil, pests, symptoms, feeding, and harvest care.",
   source: "garden-knowledge",
 };
 
@@ -173,8 +173,8 @@ function GardenAssistant({ onPageChange, userId }) {
           role: "assistant",
           id: `assistant-${Date.now()}`,
           text: instantThanks
-            ? "You’re welcome! 🌿 Tell me what you’re growing or what changed, and we’ll work through it together."
-            : "Hi! 🌱 I’m your Garden Guide assistant. Ask me about a plant, gardening problem, your garden setup, or a follow-up question.",
+            ? "You’re welcome! Tell me what you’re growing or what changed, and we’ll work through it together."
+            : "Hi! I’m your Garden Guide assistant. Ask me about a plant, gardening problem, your garden setup, or a follow-up question.",
           source: "garden-knowledge",
         },
       ]);

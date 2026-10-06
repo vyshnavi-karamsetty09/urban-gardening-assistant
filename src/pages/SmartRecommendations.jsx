@@ -615,7 +615,7 @@ function SmartRecommendations({
       }
     } catch {
       showToast(
-        "⚠️ Pincode analysis is unavailable. Please check the pincode before saving."
+        "Pincode analysis is unavailable. Please check the pincode before saving."
       );
     }
   };
@@ -710,7 +710,7 @@ function SmartRecommendations({
       );
 
       showToast(
-        "⚠️ Please enter a valid 6-digit pincode."
+        "Please enter a valid 6-digit pincode."
       );
 
       return;
@@ -718,7 +718,7 @@ function SmartRecommendations({
 
     if (missingFields.length > 0) {
       showToast(
-        `⚠️ Please complete: ${missingFields.join(", ")}`
+        `Please complete: ${missingFields.join(", ")}`
       );
 
       return;
@@ -726,7 +726,7 @@ function SmartRecommendations({
 
     if (tempError || humidityError) {
       showToast(
-        "⚠️ Please correct the environment values before saving."
+        "Please correct the environment values before saving."
       );
 
       return;
@@ -747,7 +747,7 @@ function SmartRecommendations({
     setEnvSaved(true);
     writeStorage(STORAGE_KEYS.environment, updatedEnvironment);
 
-    showToast("🌿 Environment settings saved successfully!");
+    showToast("Environment settings saved successfully!");
     setTimeout(() => setEnvSaved(false), 2500);
     setActiveTab("matches");
 
@@ -764,7 +764,7 @@ function SmartRecommendations({
           writeStorage(STORAGE_KEYS.environment, serverEnvironment);
         }
       } catch {
-        showToast("⚠️ Saved on this device. We’ll sync it when the backend is available.");
+        showToast("Saved on this device. We’ll sync it when the backend is available.");
       }
     }
 
@@ -1478,7 +1478,7 @@ function SmartRecommendations({
           newGardenPlant;
       } catch {
         showToast(
-          "⚠️ Plant saved locally because the backend is unavailable."
+          "Plant saved locally because the backend is unavailable."
         );
       }
     }
@@ -1492,7 +1492,7 @@ function SmartRecommendations({
     setSavedPlants(updated);
 
     showToast(
-      `🌿 "${plant.name}" added to My Garden!`
+      `"${plant.name}" added to My Garden!`
     );
   };
 
@@ -1551,7 +1551,7 @@ function SmartRecommendations({
               setActiveTab("weather");
 
               showToast(
-                "🌱 Please complete your Environment Setup first."
+                "Please complete your Environment Setup first."
               );
             }
           }}

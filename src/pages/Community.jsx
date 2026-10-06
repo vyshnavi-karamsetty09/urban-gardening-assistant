@@ -154,7 +154,7 @@ function Community() {
         [postId]: "",
       }));
 
-      showToast("💬 Answer posted!");
+      showToast("Answer posted!");
     } catch (err) {
       console.error("Answer failed:", err);
       showToast("Unable to post answer.");
@@ -194,7 +194,7 @@ function Community() {
       if (res?.post) {
         setPosts((prev) => [res.post, ...prev]);
 
-        showToast("🌿 Question posted to Community!");
+        showToast("Question posted to Community!");
 
         setIsModalOpen(false);
         setFormTitle("");

@@ -148,7 +148,7 @@ function environmentSummary(environment = {}) {
 
 function answerForGreeting() {
   return [
-    "Hi! 🌱 I’m your Garden Guide assistant.",
+    "Hi! I’m your Garden Guide assistant.",
     "Tell me the plant and what you want to solve—watering, light, soil, pests, symptoms, feeding, growth, or harvest.",
     "Example: “My mint leaves are turning yellow. What should I check first?”",
   ].join("\n");
@@ -629,7 +629,7 @@ export function getLocalAssistantAnswer(
   }
 
   if (/^(thanks|thank you|thx|okay|ok|got it|great|nice)[!.?\s]*$/i.test(text)) {
-    return "You’re welcome! 🌿 Tell me what you’re growing or what changed, and we’ll work through it together.";
+    return "You’re welcome! Tell me what you’re growing or what changed, and we’ll work through it together.";
   }
 
   if (/\b(what can you help me with|what do you know about gardening|are you a garden ai|what are you)\b/i.test(text)) {

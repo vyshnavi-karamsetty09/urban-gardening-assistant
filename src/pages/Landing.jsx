@@ -205,7 +205,6 @@ function Landing({ onNavigate }) {
         <div className="hero-content-wrapper">
           <div className="hero-left fade-in-up">
             <div className="hero-pill-badge">
-              <span className="pill-leaf-icon">🌱</span>
               <span>Your gardening companion</span>
             </div>
 
@@ -248,7 +247,6 @@ function Landing({ onNavigate }) {
                 <span>Brighter</span>
                 <span>Days</span>
               </div>
-              <div className="wood-plaque-icon">🌿</div>
             </div>
 
             {/* Script Callout Tag */}
@@ -256,7 +254,7 @@ function Landing({ onNavigate }) {
               <div className="script-badge-text">
                 A Greener
                 <br />
-                Tomorrow <span className="script-sprout">🌿</span>
+                Tomorrow
               </div>
               <svg className="script-underline" viewBox="0 0 110 14" fill="none">
                 <path d="M4 11C35 2 75 2 106 9" stroke="rgba(255,255,255,0.75)" strokeWidth="2.2" strokeLinecap="round"/>
@@ -286,7 +284,6 @@ function Landing({ onNavigate }) {
         <div className="section-container">
           <div className="section-header-center fade-in-up">
             <div className="section-tag-eyebrow">
-              <span className="tag-icon">🌿</span>
               <span>EVERYTHING YOU NEED</span>
             </div>
             <h2 className="section-main-heading">
@@ -408,8 +405,7 @@ function Landing({ onNavigate }) {
             {/* Right Content */}
             <div className="journey-details fade-in-up">
               <div className="journey-tag-eyebrow">
-                <span className="tag-icon">🌿</span>
-                <span>HOW IT WORKS</span>
+                  <span>HOW IT WORKS</span>
               </div>
 
               <h2 className="journey-title">
@@ -466,7 +462,6 @@ function Landing({ onNavigate }) {
         <div className="section-container">
           <div className="section-header-center fade-in-up">
             <div className="section-tag-eyebrow">
-              <span className="tag-icon">🌿</span>
               <span>POPULAR PLANTS</span>
             </div>
             <h2 className="section-main-heading">Plants for Every Space</h2>

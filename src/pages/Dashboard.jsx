@@ -329,14 +329,14 @@ function Dashboard({ onPageChange }) {
             <span className="dash-hero-sprout">🌱</span>
           </div>
           <div className="dash-hero-text">
-            <h1 className="dash-hero-title">{timeGreeting || "Good Evening"}, {userName}! 👋</h1>
+            <h1 className="dash-hero-title">{timeGreeting || "Good Evening"}, {userName}!</h1>
             <p className="dash-hero-sub">Your garden is a step closer to a greener tomorrow.</p>
           </div>
         </div>
         <div className="dash-hero-quote-card">
           <span className="quote-mark">“</span>
           <p className="quote-text">Plants make people happier.</p>
-          <span className="quote-mark">”</span> 🌿
+          <span className="quote-mark">”</span>
         </div>
       </section>
 
@@ -699,7 +699,7 @@ function Dashboard({ onPageChange }) {
               <span className="inspire-sprout">🌱</span>
               <p className="inspire-text">
                 Small steps<br />
-                grow big change. 🌿
+                grow big change.
               </p>
             </div>
             <img

@@ -110,12 +110,6 @@
   border-radius: 2px;
 }
 
-.auth-sprout-divider .divider-sprout {
-  font-size: 16px;
-  color: #8bc34a;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-}
-
 /* Tagline */
 .auth-hero-tagline {
   margin: 0 0 34px;
@@ -264,11 +258,6 @@
   flex: 1;
   height: 1px;
   background: #c5d4c7;
-}
-
-.auth-card-divider .card-divider-sprout {
-  font-size: 14px;
-  color: #43874e;
 }
 
 .auth-card-header p {

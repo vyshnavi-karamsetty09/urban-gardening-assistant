@@ -80,7 +80,6 @@ function Login({ onNavigate, onLogin }) {
           {/* Sprout Divider */}
           <div className="auth-sprout-divider">
             <span className="divider-line"></span>
-            <span className="divider-sprout">🌱</span>
             <span className="divider-line"></span>
           </div>
 
@@ -118,7 +117,7 @@ function Login({ onNavigate, onLogin }) {
 
           {/* Cursive Quote */}
           <div className="auth-hero-quote">
-            "A greener tomorrow starts today." <span>🌿</span>
+            "A greener tomorrow starts today."
           </div>
         </section>
 
@@ -161,7 +160,6 @@ function Login({ onNavigate, onLogin }) {
               <h2>Welcome Back</h2>
               <div className="auth-card-divider">
                 <span className="card-divider-line"></span>
-                <span className="card-divider-sprout">🌱</span>
                 <span className="card-divider-line"></span>
               </div>
               <p>Login to access your personalized urban garden</p>
@@ -242,7 +240,6 @@ function Login({ onNavigate, onLogin }) {
                 type="submit"
                 className="auth-primary-btn btn-shimmer"
               >
-                <span>🌱</span>
                 <span>{isSubmitting ? "Signing in…" : "Login to Account"}</span>
               </button>
 
@@ -260,7 +257,6 @@ function Login({ onNavigate, onLogin }) {
                 onClick={handleDemoLogin}
                 disabled={isSubmitting}
               >
-                <span aria-hidden="true">🧪</span>
                 <span>Use Demo Account</span>
               </button>
 
